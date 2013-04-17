@@ -10,7 +10,7 @@ def show_users():
   return render_template('show_users.html', users=users)
 
 @app.route('/add', methods=['POST'])
-def add_entry():
+def add_user():
   if not session.get('logged_in'):
 	abort(401)
   user = User(request.form['firstname'], request.form['lastname'], request.form['email'], request.form['address'])
