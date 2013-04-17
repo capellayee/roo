@@ -17,9 +17,9 @@ def add_user():
   db_session.add(user)
   db_session.commit()
   flash('New entry was succesfully posted')
-  return redirect(url_for('show_entries'))
+  return redirect(url_for('show_users'))
 
-@app.route('/remove/<entryid>')
+@app.route('/remove/<userid>')
 def remove_user(userid):
   if not session.get('logged_in'):
 	abort(401)
