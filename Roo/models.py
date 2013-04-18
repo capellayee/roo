@@ -2,12 +2,6 @@ from sqlalchemy import Table, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship, backref
 from Roo.database import Base
 
-#association table
-bag_users = Table('bag_users', Base.metadata,
-                  Column('bag_id', Integer, ForeignKey('bags.id')), 
-                  Column('user_id', Integer, ForeignKey('users.id'))
-                  )
-
 class Bag(Base):
   __tablename__ = 'bags'
   id = Column(Integer, primary_key=True)
@@ -17,7 +11,7 @@ class Bag(Base):
   network = Column(String(30), unique=False)
 
   #many to many Bag<-->User
-  users = relationship('User', secondary=bag_users, backref='users')
+  users = relationship('User', order_by="User.id", backref='users')
   
   def __init__(self, store=None, threshold=None, amountinbag=None, network=None):
     self.store = store
