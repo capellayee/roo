@@ -10,9 +10,6 @@ class Bag(Base):
   amountinbag = Column(Integer, unique=True)
   network = Column(String(30), unique=False)
 
-  #many to many Bag<-->User
-  users = relationship('User', order_by="User.id", backref='users')
-  
   def __init__(self, store=None, threshold=None, amountinbag=None, network=None):
     self.store = store
     self.threshold = threshold
@@ -29,8 +26,11 @@ class User(Base):
   lastname = Column(String(30), unique=False)
   email = Column(String(40), unique=True)
   address = Column(String(80), unique=False)
-  
-  def __init__(self, firstname=None, lastname=None, email=None, address=None):
+  bag_id = Column(Integer, ForeignKey('bags.id'))
+
+  bag = relationship("Bag", backref=backref('users', order_by=id))
+
+  def __init__(self, firstname=None, lastname=None, email=None, address=None, bag_id=None):
     self.firstname = firstname
     self.lastname = lastname
     self.email = email

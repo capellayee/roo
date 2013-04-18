@@ -30,7 +30,7 @@ class User(Base):
 
   bag = relationship("Bag", backref=backref('users', order_by=id))
 
-  def __init__(self, firstname=None, lastname=None, email=None, address=None):
+  def __init__(self, firstname, lastname=None, email=None, address=None, bag_id=None):
     self.firstname = firstname
     self.lastname = lastname
     self.email = email
