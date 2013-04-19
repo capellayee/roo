@@ -39,6 +39,16 @@ def add_user():
   flash('New entry was succesfully posted')
   return redirect(url_for('show_users'))
 
+@app.route('/newbag', methods=['GET', 'POST'])
+def newbag():
+    if request.method == 'POST':
+        bag = Bag(request.form['store'], request.form['threshold'], request.form['amountinbag'], request.form['network'])
+        db.session.add(bag)
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('form.html')
+
+
 @app.route('/remove/<userid>')
 def remove_user(userid):
   if not session.get('logged_in'):

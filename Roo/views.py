@@ -43,8 +43,8 @@ def add_user():
 def newbag():
     if request.method == 'POST':
         bag = Bag(request.form['store'], request.form['threshold'], request.form['amountinbag'], request.form['network'])
-        db.session.add(bag)
-        db.session.commit()
+        db_session.add(bag)
+        db_session.commit()
         return redirect(url_for('home'))
     return render_template('form.html')
 
