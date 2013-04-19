@@ -26,7 +26,7 @@ def home():
       entries = entries + "threshold: " + str(row.threshold) + "<br>"
       entries = entries + "amount in bag: " + str(row.amountinbag) + "<br>"
       entries = entries + "network: " + row.network + "<br>"
-      entries = entries + "users in bag: " + row.users + '<br><br>'
+      entries = entries + "users in bag: " + str(row.users) + '<br><br>'
 
     return entries
       
@@ -56,7 +56,8 @@ def addtobag(userid):
     if request.method == 'POST':
         bag = Bag.query.filter_by(store = request.form['store']).first()
         bag.amountinbag = bag.amountinbag + int(request.form['amountinbag'])
-        bag.users.append(User.query.filter_by(id = userid).first())
+        user = User.query.filter_by(id = userid).first()
+        bag.users.append(user)
         db_session.commit()
         return redirect(url_for('show_users'))
     return render_template('addtobagform.html')
