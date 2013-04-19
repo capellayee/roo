@@ -16,7 +16,7 @@ def home():
         entries = entries + "first name: " + row.firstname + '<br>'
         entries = entries + "last name: " + row.lastname + '<br>'
         entries = entries + "address: " + row.address + '<br>'
-        entries = entries + "bags involved: " + row.bag + 'br>'
+        entries = entries + "bags involved: " + str(row.bag) + 'br>'
         entries = entries + "email: " + row.email + '<br><br><br>'
     return entries
 
