@@ -17,7 +17,7 @@ class Bag(Base):
     self.network = network
 
   def __repr__(self):
-    '<Bag %r>' % (self.store)
+    return '<Bag %r>' % (self.store)
 
 class User(Base):
   __tablename__ = 'users'
@@ -39,4 +39,4 @@ class User(Base):
     self.address = address
 
   def __repr__(self):
-    '<User %r>' % (self.firstname)
+    return '<User %r>' % (self.firstname)

@@ -16,7 +16,7 @@ def home():
       entries = entries + "first name: " + row.firstname + '<br>'
       entries = entries + "last name: " + row.lastname + '<br>'
       entries = entries + "address: " + row.address + '<br>'
-#      entries = entries + "bags involved: " + str(row.bag) + '<br>'
+      entries = entries + "bags involved: " + row.bag.store + '<br>'
       entries = entries + "email: " + row.email + '<br><br>'
       
     entries = entries + "<br><br><br><br><br>Now, the Bags:<br>"
@@ -26,7 +26,7 @@ def home():
       entries = entries + "threshold: " + str(row.threshold) + "<br>"
       entries = entries + "amount in bag: " + str(row.amountinbag) + "<br>"
       entries = entries + "network: " + row.network + "<br>"
-      entries = entries + "users in bag: " + str(row.users) + '<br><br>'
+      entries = entries + "users in bag: " + row.users[0].firstname + '<br><br>'
 
     return entries
       
