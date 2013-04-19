@@ -23,7 +23,7 @@ def home():
     
     for row in Bag.query.all():
       entries = entries + "store name: " + row.store + "<br>"
-      entries = entries + "theshold: " + row.theshold + "<br>"
+      entries = entries + "threshold: " + row.threshold + "<br>"
       entries = entries + "amount in bag: " + row.amountinbag + "<br>"
       entries = entries + "network: " + row.network + "<br><br>"
 
@@ -45,7 +45,7 @@ def newbag():
         bag = Bag(request.form['store'], request.form['threshold'], request.form['amountinbag'], request.form['network'])
         db_session.add(bag)
         db_session.commit()
-        return redirect(url_for('home'))
+        return redirect(url_for('show_users'))
     return render_template('form.html')
 
 

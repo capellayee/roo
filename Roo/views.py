@@ -23,8 +23,8 @@ def home():
     
     for row in Bag.query.all():
       entries = entries + "store name: " + row.store + "<br>"
-      entries = entries + "threshold: " + row.threshold + "<br>"
-      entries = entries + "amount in bag: " + row.amountinbag + "<br>"
+      entries = entries + "threshold: " + str(row.threshold) + "<br>"
+      entries = entries + "amount in bag: " + str(row.amountinbag) + "<br>"
       entries = entries + "network: " + row.network + "<br><br>"
 
     return entries
