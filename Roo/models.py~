@@ -35,6 +35,7 @@ class User(Base):
     self.firstname = firstname
     self.lastname = lastname
     self.email = email
+    self.password = password
     self.address = address
 
   def __repr__(self):
