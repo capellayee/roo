@@ -16,7 +16,8 @@ def home():
       entries = entries + "first name: " + row.firstname + '<br>'
       entries = entries + "last name: " + row.lastname + '<br>'
       entries = entries + "address: " + row.address + '<br>'
-      entries = entries + "bags involved: " + str(row.bag.store) + '<br>'
+      if row.bag != None:
+        entries = entries + "bags involved: " + str(row.bag.store) + '<br>'
       entries = entries + "email: " + row.email + '<br><br>'
       
     entries = entries + "<br><br><br><br><br>Now, the Bags:<br>"
