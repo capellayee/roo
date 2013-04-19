@@ -25,8 +25,8 @@ def home():
       entries = entries + "store name: " + row.store + "<br>"
       entries = entries + "threshold: " + str(row.threshold) + "<br>"
       entries = entries + "amount in bag: " + str(row.amountinbag) + "<br>"
-      entries = entries + "network: " + row.network + "<br><br>"
-      entries = entries + "users in bag: " + str(row.users) + '<br><br>'
+      entries = entries + "network: " + row.network + "<br>"
+      entries = entries + "users in bag: " + row.users + '<br><br>'
 
     return entries
       
