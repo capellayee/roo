@@ -67,10 +67,11 @@ def login():
   if request.method == 'POST':
 	#if request.form['username'] != app.config['USERNAME']:
         user = request.form['username']
-        if user != query.filter(User.email == username):
+        queriedUser = User.query.filter_by(email == user)
+        if user != queriedUser.email:
 		error = 'Invalid Username'
 #	elif request.form['password'] != app.config['PASSWORD']:
-	elif request.form['password'] != user.password:
+	elif request.form['password'] != queriedUser.password:
                 error = 'Invalid password'
 	else:
 		session['logged_in'] = True
