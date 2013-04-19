@@ -19,9 +19,10 @@ def home():
       entries = entries + "bags involved: " + str(row.bag) + '<br>'
       entries = entries + "email: " + row.email + '<br><br>'
       
-      entries = entries + "<br><br><br><br><br>Now, the Bags:<br>"
-      for row in Bag.query.all():
-        entries = "there is a row <br>"
+    entries = entries + "<br><br><br><br><br>Now, the Bags:<br>"
+    
+    for row in Bag.query.all():
+      entries = "there is a row <br>"
 
     return entries
       
