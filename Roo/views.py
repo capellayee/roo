@@ -56,6 +56,7 @@ def addtobag(userid):
         bag = Bag.query.filter_by(store = request.form['store']).first()
         bag.amountinbag = bag.amountinbag + int(request.form['amountinbag'])
         bag.user = [User.query.filter_by(id = userid)]
+        db_session.commit()
         return redirect(url_for('show_users'))
     return render_template('addtobagform.html')
 
