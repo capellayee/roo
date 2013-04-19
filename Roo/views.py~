@@ -22,7 +22,10 @@ def home():
     entries = entries + "<br><br><br><br><br>Now, the Bags:<br>"
     
     for row in Bag.query.all():
-      entries = "there is a row <br>"
+      entries = entries + "store name: " + row.store + "<br>"
+      entries = entries + "theshold: " + row.theshold + "<br>"
+      entries = entries + "amount in bag: " + row.amountinbag + "<br>"
+      entries = entries + "network: " + row.network + "<br><br>"
 
     return entries
       
