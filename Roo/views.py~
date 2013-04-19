@@ -9,6 +9,16 @@ def show_users():
   users = User.query.all()
   return render_template('show_users.html', users=users)
 
+@app.route('/all')
+def home():
+    entries = ""
+    for row in User.query.all():
+        entries = entries + "first name: " + row.firstname + '<br>'
+        entries = entries + "last name: " + row.lastname + '<br>'
+        entries = entries + "address: " + row.address + '<br>'
+        entries = entries + "email: " + row.email + '<br><br><br>'
+    return entries
+
 @app.route('/add', methods=['POST'])
 def add_user():
   if not session.get('logged_in'):
