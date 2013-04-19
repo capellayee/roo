@@ -67,7 +67,7 @@ def login():
   if request.method == 'POST':
 	#if request.form['username'] != app.config['USERNAME']:
         user = request.form['username']
-        queriedUser = User.query.filter_by(id == user).first()
+        queriedUser = User.query.filter_by(email = user).first()
         if user != queriedUser.email:
 		error = 'Invalid Username'
 #	elif request.form['password'] != app.config['PASSWORD']:
