@@ -19,7 +19,10 @@
   {% endif %}
   <ul class=user>
   {% for user in users %}
-	<li><h2>{{ user.firstname + ' ' + user.lastname}}</h2>{{ user.email|safe }}{{ user.address|safe }}
+	<li><h2>{{ user.firstname + ' ' + user.lastname}}
+	    </h2>
+	    {{ user.email|safe }}<br>
+	    {{ user.address|safe }}<br>
          {% if session.logged_in %}
 		<br><a href='{{ url_for('remove_user', userid=user.id) }}'>X</a>
 	{% endif %}

@@ -54,7 +54,9 @@ def newbag():
 def addtobag(userid):
     if request.method == 'POST':
         bag = Bag.query.filter_by(store = request.form['store']).first()
-        return str(bag.threshold)
+        bag.amountinbag = bag.amountinbag + int(request.form['amountinbag'])
+        bag.user = [User.query.filter_by(id = userid)]
+        return redirect(url_for('show_users'))
     return render_template('addtobagform.html')
 
 @app.route('/remove/<userid>')
