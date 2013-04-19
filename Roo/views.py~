@@ -77,10 +77,10 @@ def login():
 #	elif request.form['password'] != app.config['PASSWORD']:
 	elif request.form['password'] != queriedUser.password:
                 error = 'Invalid password'
-	else:
+	else: # if its a non-admin user but successfully verified
 		session['logged_in'] = True
 		flash('You were logged in')
-		return redirect(url_for('show_users'))
+		return redirect(url_for('form'))
   return render_template('login.html', error=error)
 
 @app.route('/logout')

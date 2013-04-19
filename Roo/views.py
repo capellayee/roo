@@ -80,7 +80,7 @@ def login():
 	else: # if its a non-admin user but successfully verified
 		session['logged_in'] = True
 		flash('You were logged in')
-		return redirect(url_for('form'))
+		return redirect(url_for('newbag'))
   return render_template('login.html', error=error)
 
 @app.route('/logout')
