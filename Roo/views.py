@@ -65,7 +65,11 @@ def remove_user(userid):
 def login():
   error = None
   if request.method == 'POST':
-	#if request.form['username'] != app.config['USERNAME']:
+	if request.form['username'] == app.config['USERNAME']:
+          session['logged_in'] = True
+          flash('You were logged in')
+          return redirect(url_for('show_users'))
+        #if request.form['username'] != app.config['USERNAME']:
         user = request.form['username']
         queriedUser = User.query.filter_by(email = user).first()
         if user != queriedUser.email:
