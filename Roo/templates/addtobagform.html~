@@ -1,6 +1,6 @@
 <html>
 
-<form method="post" action="{{url_for('addtobag', userid=user.id)}}" method="post">
+<form method="post">
 Store name: <input type="text" name="store"><br>
 Amount in bag (integer): <input type="text" name="amountinbag"><br>
 <input type="submit" class="button" value="Add to database"/>
