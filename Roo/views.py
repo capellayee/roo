@@ -13,17 +13,22 @@ def show_users():
 def home():
     entries = ""
     for row in User.query.all():
-        entries = entries + "first name: " + row.firstname + '<br>'
-        entries = entries + "last name: " + row.lastname + '<br>'
-        entries = entries + "address: " + row.address + '<br>'
-        entries = entries + "bags involved: " + str(row.bag) + 'br>'
-        entries = entries + "email: " + row.email + '<br><br><br>'
-    return entries
+      entries = entries + "first name: " + row.firstname + '<br>'
+      entries = entries + "last name: " + row.lastname + '<br>'
+      entries = entries + "address: " + row.address + '<br>'
+      entries = entries + "bags involved: " + str(row.bag) + '<br>'
+      entries = entries + "email: " + row.email + '<br><br>'
+      
+      entries = entries + "<br><br><br><br><br>Now, the Bags:<br>"
+      for row in Bag.query.all():
+        entries = "there is a row <br>"
 
+    return entries
+      
 @app.route('/add', methods=['POST'])
 def add_user():
   if not session.get('logged_in'):
-	abort(401)
+    abort(401)
   user = User(request.form['firstname'], request.form['lastname'], request.form['email'], request.form['address'])
   db_session.add(user)
   db_session.commit()
