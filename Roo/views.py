@@ -39,8 +39,8 @@ def add_user():
   flash('New entry was succesfully posted')
   return redirect(url_for('show_users'))
 
-@app.route('/newbag', methods=['GET', 'POST'])
-def newbag():
+@app.route('/newbag/<userid>', methods=['GET', 'POST'])
+def newbag(userid):
     if request.method == 'POST':
         bag = Bag(request.form['store'], request.form['threshold'], request.form['amountinbag'], request.form['network'])
         db_session.add(bag)
@@ -80,7 +80,7 @@ def login():
 	else: # if its a non-admin user but successfully verified
 		session['logged_in'] = True
 		flash('You were logged in')
-		return redirect(url_for('newbag'))
+		return redirect(url_for('newbag', userid=queriedUser.id))
   return render_template('login.html', error=error)
 
 @app.route('/logout')
