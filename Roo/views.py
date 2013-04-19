@@ -9,6 +9,10 @@ def show_users():
   users = User.query.all()
   return render_template('show_users.html', users=users)
 
+@app.route('/bootstraptest')
+def bootstrap():
+  return render_template('carousel.html')
+
 @app.route('/all')
 def home():
     entries = ""
