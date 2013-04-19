@@ -33,7 +33,7 @@ def home():
 def add_user():
   if not session.get('logged_in'):
     abort(401)
-  user = User(request.form['firstname'], request.form['lastname'], request.form['email'], request.form['address'])
+  user = User(request.form['firstname'], request.form['lastname'], request.form['email'], request.form['password'], request.form['address'])
   db_session.add(user)
   db_session.commit()
   flash('New entry was succesfully posted')

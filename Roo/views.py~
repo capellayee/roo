@@ -65,10 +65,13 @@ def remove_user(userid):
 def login():
   error = None
   if request.method == 'POST':
-	if request.form['username'] != app.config['USERNAME']:
+	#if request.form['username'] != app.config['USERNAME']:
+        user = request.form['username']
+        if user != query.filter(User.email == username):
 		error = 'Invalid Username'
-	elif request.form['password'] != app.config['PASSWORD']:
-		error = 'Invalid password'
+#	elif request.form['password'] != app.config['PASSWORD']:
+	elif request.form['password'] != user.password:
+                error = 'Invalid password'
 	else:
 		session['logged_in'] = True
 		flash('You were logged in')
