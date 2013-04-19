@@ -28,8 +28,8 @@ def home():
       entries = entries + "amount in bag: " + str(row.amountinbag) + "<br>"
       entries = entries + "network: " + row.network + "<br>"
       for row2 in row.users:
-        entries = entries + "user in bag: " + str(row2.firstname) + '<br><br>'
-
+        entries = entries + "user in bag: " + str(row2.firstname) + '<br>'
+      entries = entries + "<br><br>"
     return entries
       
 @app.route('/add', methods=['POST'])
