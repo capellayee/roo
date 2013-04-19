@@ -38,4 +38,3 @@ class User(Base):
 
   def __repr__(self):
     '<User %r>' % (self.firstname)
-
