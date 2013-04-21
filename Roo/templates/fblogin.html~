@@ -1,6 +1,7 @@
 <!doctyp html>
 <title>Roo</title>
 <body>
+Yo whats up
 <div id="fb-root"></div>
 <script>
   // Additional JS functions here
