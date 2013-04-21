@@ -55,8 +55,8 @@ FB.logout(function(response) {
 
 function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me/friends', function(response) {
-        console.log('Good to see you, ' + response.data[0].id + ' yeah');
+    FB.api('/me', function(response) {
+        console.log('Good to see you, ' + response.friends.data[0].id + ' yeah');
     });
 }
 
