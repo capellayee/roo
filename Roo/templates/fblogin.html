@@ -16,14 +16,20 @@
 
     // Additional init code here
 FB.getLoginStatus(function(response) {
+console.log('Welcome!  Fetching your information.... ');
   if (response.status === 'connected') {
+console.log('Welcome!  Fetching your information.... ');
     // connected
   } else if (response.status === 'not_authorized') {
+console.log('Welcome!  Fetching your information.... ');
     // not_authorized
     login();
+console.log('Welcome!  Fetching your information.... ');
   } else {
+console.log('Welcome!  Fetching your information.... ');
     // not_logged_in
     login();
+console.log('Welcome!  Fetching your information.... ');
   }
  });
   };
@@ -31,9 +37,12 @@ FB.getLoginStatus(function(response) {
 function login() {
     FB.login(function(response) {
         if (response.authResponse) {
+console.log('Welcome!  Fetching your information.... ');
 	testAPI();
             // connected
+console.log('Welcome!  Fetching your information.... ');
         } else {
+console.log('Welcome!  Fetching your information.... ');
             // cancelled
         }
     });
