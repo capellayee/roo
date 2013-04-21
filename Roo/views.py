@@ -6,8 +6,9 @@ from flask import Flask, request, session, g, redirect, url_for, \
 
 @app.route('/')
 def show_users():
-  users = User.query.all()
-  return render_template('show_users.html', users=users)
+  return render_template('fblogin.html')
+#  users = User.query.all()
+#  return render_template('show_users.html', users=users)
 
 @app.route('/bootstraptest')
 def bootstrap():
