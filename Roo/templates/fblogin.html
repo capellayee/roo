@@ -8,7 +8,7 @@
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '366391460148417', // App ID
-      channelUrl : '//www.rooprinceton.herokuapps.com/channel.html', // Channel File
+      channelUrl : 'rooprinceton.herokuapps.com/channel.html', // Channel File
       status     : true, // check login status
       cookie     : true, // enable cookies to allow the server to access the session
       xfbml      : true  // parse XFBML
@@ -64,5 +64,8 @@ function testAPI() {
      ref.parentNode.insertBefore(js, ref);
    }(document));
 </script>
+
+<a href="#" onclick="login()"> Login</a>
+
 
 </body>
