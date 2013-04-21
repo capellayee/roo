@@ -1,38 +1,9 @@
 <!doctyp html>
 <title>Roo</title>
 <body>
-Yo whats up
+
 <div id="fb-root"></div>
 <script>
-  // Additional JS functions here
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '366391460148417', // App ID
-      channelUrl : '//www.rooprinceton.herokuapp.com/channel.html', // Channel File
-      status     : true, // check login status
-      cookie     : true, // enable cookies to allow the server to access the session
-      xfbml      : true  // parse XFBML
-    });
-
-    // Additional init code here
-  FB.getLoginStatus(function(response) {
-  if (response.status === 'connected') {
-    // connected
-  console.log('connected');
-  } else if (response.status === 'not_authorized') {
-    // not_authorized
-  console.log('not authorized');
-  login();
-  console.log('not authorized');
-  } else {
-    // not_logged_in
-  console.log('not logged in');
-  login();
-  console.log('not logged in');
-  }
- });
-  };
-
 function login() {
     FB.login(function(response) {
         if (response.authResponse) {
@@ -43,6 +14,30 @@ function login() {
     });
 }
 
+  // Additional JS functions here
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '366391460148417', // App ID
+      channelUrl : '//www.rooprinceton.herokuapps.com/channel.html', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+
+    // Additional init code here
+FB.getLoginStatus(function(response) {
+  if (response.status === 'connected') {
+    // connected
+  } else if (response.status === 'not_authorized') {
+    // not_authorized
+    login();
+  } else {
+    // not_logged_in
+    login();
+  }
+ });
+  };
+
   // Load the SDK Asynchronously
   (function(d){
      var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
@@ -52,4 +47,5 @@ function login() {
      ref.parentNode.insertBefore(js, ref);
    }(document));
 </script>
+
 </body>
