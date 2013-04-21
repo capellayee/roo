@@ -25,7 +25,7 @@ class User(Base):
   firstname = Column(String(30), unique=False)
   lastname = Column(String(30), unique=False)
   email = Column(String(40), unique=True)
-  password = Column(String(40), unique=True)
+  password = Column(String(40), unique=False)
   address = Column(String(80), unique=False)
   bag_id = Column(Integer, ForeignKey('bags.id'))
 

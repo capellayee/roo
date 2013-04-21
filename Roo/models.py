@@ -2,6 +2,8 @@ from sqlalchemy import Table, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship, backref
 from Roo.database import Base
 
+association_table = Table('association', Base.metadata, Column('users_id', Integer, ForeignKey('users.id')), Column('bags_id', Integer, ForeignKey('bags.id')))
+
 class Bag(Base):
   __tablename__ = 'bags'
   id = Column(Integer, primary_key=True)
@@ -29,7 +31,7 @@ class User(Base):
   address = Column(String(80), unique=False)
   bag_id = Column(Integer, ForeignKey('bags.id'))
 
-  bag = relationship("Bag", backref=backref('users', order_by=id))
+  bag = relationship("Bag", secondary=association_table, backref=backref('users', order_by=id))
 
   def __init__(self, firstname=None, lastname=None, email=None, password=None, address=None, bag_id=None):
     self.firstname = firstname
