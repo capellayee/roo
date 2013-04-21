@@ -56,7 +56,7 @@ FB.logout(function(response) {
 function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-        console.log('Good to see you, ' + response.friends.data + ' yeah');
+        console.log('Good to see you, ' + response.friends.data[1].name + ' yeah');
     });
 }
 
@@ -71,6 +71,6 @@ function testAPI() {
 </script>
 
 <a href="#" onclick="login()"> Login</a>
-<a href="#" onclick="logout()"> Login</a>
+<a href="#" onclick="logout()"> Logout</a>
 
 </body>
