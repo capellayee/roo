@@ -4,16 +4,6 @@
 
 <div id="fb-root"></div>
 <script>
-function login() {
-    FB.login(function(response) {
-        if (response.authResponse) {
-            // connected
-        } else {
-            // cancelled
-        }
-    });
-}
-
   // Additional JS functions here
   window.fbAsyncInit = function() {
     FB.init({
@@ -37,6 +27,24 @@ FB.getLoginStatus(function(response) {
   }
  });
   };
+
+function login() {
+    FB.login(function(response) {
+        if (response.authResponse) {
+	testAPI();
+            // connected
+        } else {
+            // cancelled
+        }
+    });
+}
+
+function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+        console.log('Good to see you, ' + response.name + '.');
+    });
+}
 
   // Load the SDK Asynchronously
   (function(d){
