@@ -4,6 +4,10 @@ from Roo.models import User, Bag
 from flask import Flask, request, session, g, redirect, url_for, \
 	abort, render_template, flash
 
+@app.route('/fblogin')
+def fb_login():
+  return render_template('fblogin.html')
+
 @app.route('/')
 def show_users():
   users = User.query.all()

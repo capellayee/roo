@@ -4,11 +4,14 @@ from Roo.models import User, Bag
 from flask import Flask, request, session, g, redirect, url_for, \
 	abort, render_template, flash
 
+@app.route('/fblogin')
+def fb_login():
+  return render_template('fblogin.html', User=User, db_session = db_session)
+
 @app.route('/')
 def show_users():
-  return render_template('fblogin.html')
-#  users = User.query.all()
-#  return render_template('show_users.html', users=users)
+  users = User.query.all()
+  return render_template('show_users.html', users=users)
 
 @app.route('/bootstraptest')
 def bootstrap():

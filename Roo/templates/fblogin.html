@@ -16,20 +16,14 @@
 
     // Additional init code here
 FB.getLoginStatus(function(response) {
-console.log('Welcome!  Fetching your information.... ');
   if (response.status === 'connected') {
-console.log('Welcome!  Fetching your information.... ');
-    // connected
+console.log('You are logged in');
   } else if (response.status === 'not_authorized') {
-console.log('Welcome!  Fetching your information.... ');
-    // not_authorized
+console.log('You are not logged in and have not authorized');
     login();
-console.log('Welcome!  Fetching your information.... ');
   } else {
-console.log('Welcome!  Fetching your information.... ');
-    // not_logged_in
+console.log('You have authorized but not logged in');
     login();
-console.log('Welcome!  Fetching your information.... ');
   }
  });
   };
@@ -37,11 +31,11 @@ console.log('Welcome!  Fetching your information.... ');
 function login() {
     FB.login(function(response) {
         if (response.authResponse) {
-console.log('Welcome!  Fetching your information.... ');
+console.log('You good bro');
 	testAPI();
             // connected
         } else {
-console.log('Welcome!  Fetching your information.... ');
+console.log('Not sure how to handle this');
             // cancelled
         }
     });
@@ -54,9 +48,11 @@ FB.logout(function(response) {
 }
 
 function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me/friends', function(response) {
-        console.log('Good to see you, ' + response.data[0].name + ' yeah');
+    FB.api('/me', function(response) {
+        console.log('Your name is is, ' + response.first_name);
+	{% user = User(response.first_name, response.last_name, "test@email.com", "brian", "Princeton NJ") %}
+  {% db_session.add(user) %}
+  {% db_session.commit() %}
     });
 }
 
@@ -70,7 +66,8 @@ function testAPI() {
    }(document));
 </script>
 
-<a href="#" onclick="login()"> Login</a>
-<a href="#" onclick="logout()"> Logout</a>
+<a href="" onclick="login()"> Login</a>
+<br>
+<a href="" onclick="logout()"> Logout</a>
 
 </body>
