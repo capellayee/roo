@@ -14,9 +14,14 @@ def show_users():
   if not session.get('logged_in'):
     return render_template('facebook_homepage.html')
   else:
-    return facebook.get('/me').data['email']
-#  users = User.query.all()
-#  return render_template('show_users.html', users=users)
+    fbuser = facebook.get('me').data
+    user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], '', '')
+    db_session.add(user)
+    db_session.commit()
+
+@app.route('/main')
+  users = User.query.all()
+  return render_template('show_users.html', users=users)
 
 @app.route('/bootstraptest')
 def bootstrap():
