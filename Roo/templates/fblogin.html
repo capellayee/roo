@@ -50,8 +50,7 @@ FB.logout(function(response) {
 function testAPI() {
     FB.api('/me', function(response) {
         console.log('Your name is is, ' + response.first_name);
-	{% user = User(response.first_name, response.last_name, "test@email.com", "brian", "Princeton NJ") %}
-  {% db_session.add(user) %}
+	{% db_session.add(User(response.first_name, response.last_name, "test@email.com", "brian", "Princeton NJ")) %}
   {% db_session.commit() %}
     });
 }
