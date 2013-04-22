@@ -5,12 +5,8 @@ from flask import Flask, request, session, g, redirect, url_for, \
 	abort, render_template, flash
 from flask_oauth import OAuth
 
-@app.route('/fblogin')
-def fb_login():
-  return render_template('fblogin.html')
-
 @app.route('/')
-def show_users():
+def fblogin():
   if not session.get('logged_in'):
     return render_template('facebook_homepage.html')
   else:
@@ -20,6 +16,7 @@ def show_users():
     db_session.commit()
 
 @app.route('/main')
+def show_users():
   users = User.query.all()
   return render_template('show_users.html', users=users)
 
