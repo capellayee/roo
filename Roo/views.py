@@ -6,7 +6,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
 
 @app.route('/fblogin')
 def fb_login():
-  return render_template('fblogin.html', User=User, db_session = db_session)
+  return render_template('fblogin.html', User=User, db_session=db_session)
 
 @app.route('/')
 def show_users():
