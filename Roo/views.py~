@@ -11,13 +11,7 @@ def fb_login():
 
 @app.route('/')
 def show_users():
-  return """<ul class="nav pull-right">
-    {% if not session.logged_in %}
-    <li><a href="/facebook_login">Login or Signup</a></li>
-    {% else %}
-    <li><a href="/logout">Logout</a></li>
-    {% endif %}
-</ul>"""
+  return render_template('facebook_homepage.html')
 
 #  users = User.query.all()
 #  return render_template('show_users.html', users=users)
