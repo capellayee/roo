@@ -11,7 +11,7 @@ def fb_login():
 
 @app.route('/')
 def show_users():
-  if not session.logged_in:
+  if not session.get('logged_in'):
     return render_template('facebook_homepage.html')
   else:
     return facebook.get('/me').name
