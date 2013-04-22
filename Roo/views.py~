@@ -11,9 +11,11 @@ def fblogin():
     return render_template('facebook_homepage.html')
   else:
     fbuser = facebook.get('me').data
-    user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], '', '')
-    db_session.add(user)
-    db_session.commit()
+    if User.query.filter_by(email = fbuser['email']).first() == None:
+      user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], '', '')
+      db_session.add(user)
+      db_session.commit()
+  return redirect(url_for('show_users'))
 
 @app.route('/main')
 def show_users():
