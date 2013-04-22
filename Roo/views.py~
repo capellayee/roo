@@ -149,7 +149,7 @@ def facebook_login():
 @app.route("/facebook_authorized")
 @facebook.authorized_handler
 def facebook_authorized(resp):
-    next_url = request.args.get('next') or url_for('index')
+    next_url = request.args.get('next') or url_for('show_users')
     if resp is None or 'access_token' not in resp:
         return redirect(next_url)
 
