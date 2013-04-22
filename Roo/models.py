@@ -11,6 +11,7 @@ class Bag(Base):
   threshold = Column(Integer, unique=False)
   amountinbag = Column(Integer, unique=True)
   network = Column(String(30), unique=False)
+  item = relationship("Item", backref="bags")
 
   def __init__(self, store=None, threshold=None, amountinbag=None, network=None):
     self.store = store
@@ -42,3 +43,17 @@ class User(Base):
 
   def __repr__(self):
     return '<User %r>' % (self.firstname)
+
+class Item(Base):
+  __tablename__ = 'items'
+  id = Column(Integer, primary_key=True)
+  url = Column(String(100), unique=False)
+  price = Column(Integer, unique=False)
+  bag_id = Column(Integer, ForeignKey('bags.id'))
+  
+  def __init__(self, url=None, price=None, bag_id=None):
+    self.url = url
+    self.price = price
+    
+  def __repr__(self):
+    return '<Item %r>' % (self.url)
