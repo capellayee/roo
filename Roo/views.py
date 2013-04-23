@@ -64,6 +64,8 @@ def newbag():
         return redirect(url_for('show_users'))
     return render_template('newbagform.html')
 
+@app.route('/newitem', methods
+
 
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])
 def addtobag(userid):

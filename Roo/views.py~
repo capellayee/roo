@@ -88,33 +88,33 @@ def remove_user(userid):
   flash('User with Name:' + user.firstname + ' was removed')
   return redirect(url_for('show_users'))
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-  error = None
-  if request.method == 'POST':
-	if request.form['username'] == app.config['USERNAME']:
-          session['logged_in'] = True
-          flash('You were logged in')
-          return redirect(url_for('show_users'))
-        #if request.form['username'] != app.config['USERNAME']:
-        user = request.form['username']
-        queriedUser = User.query.filter_by(email = user).first()
-        if user != queriedUser.email:
-		error = 'Invalid Username'
-#	elif request.form['password'] != app.config['PASSWORD']:
-	elif request.form['password'] != queriedUser.password:
-                error = 'Invalid password'
-	else: # if its a non-admin user but successfully verified
-		session['logged_in'] = True
-		flash('You were logged in')
-		return redirect(url_for('addtobag', userid=queriedUser.id))
-  return render_template('login.html', error=error)
+#@app.route('/login', methods=['GET', 'POST'])
+#def login():
+#  error = None
+#  if request.method == 'POST':
+#	if request.form['username'] == app.config['USERNAME']:
+#          session['logged_in'] = True
+#          flash('You were logged in')
+#          return redirect(url_for('show_users'))
+#        #if request.form['username'] != app.config['USERNAME']:
+#        user = request.form['username']
+#        queriedUser = User.query.filter_by(email = user).first()
+#        if user != queriedUser.email:
+#		error = 'Invalid Username'
+##	elif request.form['password'] != app.config['PASSWORD']:
+#	elif request.form['password'] != queriedUser.password:
+#                error = 'Invalid password'
+#	else: # if its a non-admin user but successfully verified
+#		session['logged_in'] = True
+#		flash('You were logged in')
+#		return redirect(url_for('addtobag', userid=queriedUser.id))
+#  return render_template('login.html', error=error)
 
-@app.route('/logout')
-def logout():
-  session.pop('logged_in', None)
-  flash('You were logged out')
-  return redirect(url_for('show_users'))
+#@app.route('/logout')
+#def logout():
+#  session.pop('logged_in', None)
+#  flash('You were logged out')
+#  return redirect(url_for('show_users'))
 
 #----------------------------------------
 # facebook authentication
