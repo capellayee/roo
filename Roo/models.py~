@@ -33,7 +33,7 @@ class User(Base):
   bag_id = Column(Integer, ForeignKey('bags.id'))
 
   bag = relationship("Bag", secondary=association_table, backref=backref('users', order_by=id))
-  order = relationship("Order", backref="user")
+  orders = relationship("Order", backref="user")
 
   def __init__(self, firstname=None, lastname=None, email=None, password=None, address=None, bag_id=None):
     self.firstname = firstname
