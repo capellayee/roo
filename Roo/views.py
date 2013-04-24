@@ -30,8 +30,8 @@ def home():
       entries = entries + "address: " + row.address + '<br>'
       for row2 in row.bag:
         entries = entries + "bags involved: " + str(row2.store) + '<br>'
-      for row2 in row.orders:
-        entries = entries + "order: " + str(row2.price) + '<br>'
+#      for row2 in row.orders:
+#        entries = entries + "order: " + str(row2.price) + '<br>'
       entries = entries + "email: " + row.email + '<br><br>'
       
     entries = entries + "<br><br><br><br><br>Now, the Bags:<br>"
@@ -43,8 +43,8 @@ def home():
       entries = entries + "network: " + row.network + "<br>"
       for row2 in row.users:
         entries = entries + "user in bag: " + str(row2.firstname) + '<br>'
-      for row2 in row.orders:
-        entries = entries + "order: " + str(row2.price) + '<br>'
+#      for row2 in row.orders:
+#        entries = entries + "order: " + str(row2.price) + '<br>'
       entries = entries + "<br><br>"
     return entries
       
