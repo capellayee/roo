@@ -184,7 +184,7 @@ def facebook_authorized(resp):
     
     session['userid'] = User.query.filter_by(email = fbuser['email']).first().id
 
-    return redirect(url_for('addtobag'), userid=User.query.filter_by(email = fbuser['email']).first().id)
+    return redirect(url_for('addtobag'), userid="hi")
 
 @app.route("/logout")
 def logout():
