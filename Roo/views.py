@@ -10,7 +10,7 @@ def fblogin():
   if not session.get('logged_in'):
     return render_template('facebook_homepage.html')
   else:
-    return redirect(url_for('show_users'))
+    return redirect(url_for('addtobag'), session['userid'])
 
 @app.route('/main')
 def show_users():
@@ -181,6 +181,8 @@ def facebook_authorized(resp):
       user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], '', '')
       db_session.add(user)
       db_session.commit()
+    
+    session['userid'] = User.query.filter_by(email = fbuser['email']).first().id
 
     return redirect(next_url)
 
