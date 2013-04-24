@@ -5,16 +5,17 @@ from flask import Flask, request, session, g, redirect, url_for, \
 	abort, render_template, flash
 from flask_oauth import OAuth
 
-@app.route('/fblogin')
-def fb_login():
-  return render_template('fblogin.html')
-
 @app.route('/')
+def fblogin():
+  if not session.get('logged_in'):
+    return render_template('facebook_homepage.html')
+  else:
+    return redirect(url_for('show_users'))
+
+@app.route('/main')
 def show_users():
-  return render_template('facebook_homepage.html')
-  user = User.query.count() == 0
-#  users = User.query.all()
-#  return render_template('show_users.html', users=users)
+  users = User.query.all()
+  return render_template('show_users.html', users=users)
 
 @app.route('/bootstraptest')
 def bootstrap():
@@ -63,6 +64,8 @@ def newbag():
         return redirect(url_for('show_users'))
     return render_template('newbagform.html')
 
+@app.route('/newitem', methods
+
 
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])
 def addtobag(userid):
@@ -87,33 +90,37 @@ def remove_user(userid):
   flash('User with Name:' + user.firstname + ' was removed')
   return redirect(url_for('show_users'))
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-  error = None
-  if request.method == 'POST':
-	if request.form['username'] == app.config['USERNAME']:
-          session['logged_in'] = True
-          flash('You were logged in')
-          return redirect(url_for('show_users'))
-        #if request.form['username'] != app.config['USERNAME']:
-        user = request.form['username']
-        queriedUser = User.query.filter_by(email = user).first()
-        if user != queriedUser.email:
-		error = 'Invalid Username'
-#	elif request.form['password'] != app.config['PASSWORD']:
-	elif request.form['password'] != queriedUser.password:
-                error = 'Invalid password'
-	else: # if its a non-admin user but successfully verified
-		session['logged_in'] = True
-		flash('You were logged in')
-		return redirect(url_for('addtobag', userid=queriedUser.id))
-  return render_template('login.html', error=error)
+@app.route('/mybags/<userid>', methods=['GET', 'POST'])
+def mybags(userid):
+  
 
-@app.route('/logout')
-def logout():
-  session.pop('logged_in', None)
-  flash('You were logged out')
-  return redirect(url_for('show_users'))
+#@app.route('/login', methods=['GET', 'POST'])
+#def login():
+#  error = None
+#  if request.method == 'POST':
+#	if request.form['username'] == app.config['USERNAME']:
+#          session['logged_in'] = True
+#          flash('You were logged in')
+#          return redirect(url_for('show_users'))
+#        #if request.form['username'] != app.config['USERNAME']:
+#        user = request.form['username']
+#        queriedUser = User.query.filter_by(email = user).first()
+#        if user != queriedUser.email:
+#		error = 'Invalid Username'
+##	elif request.form['password'] != app.config['PASSWORD']:
+#	elif request.form['password'] != queriedUser.password:
+#                error = 'Invalid password'
+#	else: # if its a non-admin user but successfully verified
+#		session['logged_in'] = True
+#		flash('You were logged in')
+#		return redirect(url_for('addtobag', userid=queriedUser.id))
+#  return render_template('login.html', error=error)
+
+#@app.route('/logout')
+#def logout():
+#  session.pop('logged_in', None)
+#  flash('You were logged out')
+#  return redirect(url_for('show_users'))
 
 #----------------------------------------
 # facebook authentication
@@ -157,6 +164,12 @@ def facebook_authorized(resp):
 
     session['logged_in'] = True
     session['facebook_token'] = (resp['access_token'], '')
+
+    fbuser = facebook.get('me').data
+    if User.query.filter_by(email = fbuser['email']).first() == None:
+      user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], '', '')
+      db_session.add(user)
+      db_session.commit()
 
     return redirect(next_url)
 
