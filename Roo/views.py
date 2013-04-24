@@ -12,10 +12,10 @@ def fblogin():
   else:
     return redirect(url_for('addtobag'), userid=session.get('userid'))
 
-@app.route('/main')
-def show_users():
-  users = User.query.all()
-  return render_template('show_users.html', users=users)
+#@app.route('/main')
+#def show_users():
+#  users = User.query.all()
+#  return render_template('show_users.html', users=users)
 
 @app.route('/bootstraptest')
 def bootstrap():
