@@ -12,10 +12,10 @@ def fblogin():
   else:
     return redirect(url_for('addtobag'), userid=session.get('userid'))
 
-#@app.route('/main')
-#def show_users():
-#  users = User.query.all()
-#  return render_template('show_users.html', users=users)
+@app.route('/main')
+def show_users():
+  users = User.query.all()
+  return render_template('show_users.html', users=users)
 
 @app.route('/bootstraptest')
 def bootstrap():
@@ -169,7 +169,7 @@ def facebook_login():
 @app.route("/facebook_authorized")
 @facebook.authorized_handler
 def facebook_authorized(resp):
-    next_url = request.args.get('next') or url_for('show_users')
+    next_url = request.args.get('next') or url_for('/')
     if resp is None or 'access_token' not in resp:
         return redirect(next_url)
 
@@ -184,7 +184,7 @@ def facebook_authorized(resp):
     
     session['userid'] = User.query.filter_by(email = fbuser['email']).first().id
 
-    return redirect(next_url)
+    return redirect(url_for('/addtobag'), session['userid'])
 
 @app.route("/logout")
 def logout():
