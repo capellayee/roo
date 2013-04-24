@@ -11,7 +11,6 @@ class Bag(Base):
   threshold = Column(Integer, unique=False)
   amountinbag = Column(Integer, unique=True)
   network = Column(String(30), unique=False)
-  orders = relationship("Order", backref="bag")
 
   def __init__(self, store=None, threshold=None, amountinbag=None, network=None):
     self.store = store
@@ -33,7 +32,6 @@ class User(Base):
   bag_id = Column(Integer, ForeignKey('bags.id'))
 
   bag = relationship("Bag", secondary=association_table, backref=backref('users', order_by=id))
-  orders = relationship("Order", backref="user")
 
   def __init__(self, firstname=None, lastname=None, email=None, password=None, address=None, bag_id=None):
     self.firstname = firstname
@@ -52,6 +50,9 @@ class Order(Base):
   price = Column(Integer, unique=False)
   bag_id = Column(Integer, ForeignKey('bags.id'))
   user_id = Column(Integer, ForeignKey('user.id'))
+
+  bag = relationship("Bag", backref=backref('orders', order_by=id))
+  user = relationship("User", backref=backref('orders', order_by=id))
 
   def __init__(self, url=None, price=None, bag_id=None, user_id=None):
     self.url = ""

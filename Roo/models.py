@@ -49,7 +49,7 @@ class Order(Base):
   url = Column(String(200), unique=False)
   price = Column(Integer, unique=False)
   bag_id = Column(Integer, ForeignKey('bags.id'))
-  user_id = Column(Integer, ForeignKey('user.id'))
+  user_id = Column(Integer, ForeignKey('users.id'))
 
   bag = relationship("Bag", backref=backref('orders', order_by=id))
   user = relationship("User", backref=backref('orders', order_by=id))
