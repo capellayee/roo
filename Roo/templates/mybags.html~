@@ -46,7 +46,7 @@
   <body>
 
   <div class="navbar-wrapper">
-      <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+OA      <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
       <div class="container">
 
         <div class="navbar navbar-inverse">
@@ -86,8 +86,6 @@
             {% for bag in user.bags %}
               <div class="span4">
                 <h2>{{bag.store}}</h2>
-                <p>My items: {{ bag.order.url }}<br>
-                Cost of my items: {{ order.price }} <br>
 		Total in {{bag.store}} bag: {{ bag.amountinbag }} <br>
                 Amount needed to ship: {{ bag.threshold - bag.amountinbag }} </p>
                 <p><a class="btn" href="#">Add to bag &raquo;</a></p>
