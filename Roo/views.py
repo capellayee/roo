@@ -14,8 +14,8 @@ def fblogin():
 
 @app.route('/home')
 def home():
-  user = User.query.filter_by(id = session.get('userid'))
-  return render_template('carousel.html', user=user)
+  userid = session.get('userid')
+  return render_template('carousel.html', userid=userid)
 
 @app.route('/all')
 def all():

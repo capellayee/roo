@@ -181,11 +181,6 @@ def facebook_login():
     return facebook.authorize(callback=url_for('facebook_authorized',
         next=request.args.get('next'), _external=True))
 
-#@app.route("/logout")
-#def logout():
-#    pop_login_session()
-#    return redirect(url_for('home'))
-
 @app.route("/facebook_authorized")
 @facebook.authorized_handler
 def facebook_authorized(resp):
@@ -205,4 +200,10 @@ def facebook_authorized(resp):
     
     session['userid'] = User.query.filter_by(email = fbuser['email']).first().id
 
-    return redirect(url_for('home')
+    return redirect(url_for('home'))
+
+@app.route("/logout")
+def logout():
+    pop_login_session()
+    return redirect(url_for('home'))
+
