@@ -46,7 +46,7 @@
   <body>
 
   <div class="navbar-wrapper">
-OA      <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+      <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
       <div class="container">
 
         <div class="navbar navbar-inverse">
@@ -83,7 +83,8 @@ OA      <!-- Wrap the .navbar in .container to center it within the absolutely p
 
           
           <div class="row-fluid">
-            {% for bag in user.bags %}
+            <ul class=bag>
+	    {% for bag in user.bags %}
               <div class="span4">
                 <h2>{{bag.store}}</h2>
 		Total in {{bag.store}} bag: {{ bag.amountinbag }} <br>
@@ -92,9 +93,7 @@ OA      <!-- Wrap the .navbar in .container to center it within the absolutely p
                 <p><a class="btn" href="#">Remove from bag &raquo;</a></p>
               </div><!--/span-->
             {% endfor %}
-          </div><!--/row-->
-        </div><!--/span-->
-      </div><!--/row-->
+            </ul>
 
       <hr>
 
