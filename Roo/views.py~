@@ -84,8 +84,8 @@ def newbag():
 @app.route('/mybags/<userid>')
 def mybags(userid):
   user = User.query.filter_by(id = userid).first()  
-  bags = ""
-  for bag in user.bag:
+  userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
+  for bag in userbags:
     bags = bags + "bags involved: " + str(bag.store) + '<br>'
     bags = bags + "amount in bag: " + str(bag.amountinbag) + '<br>'
     bags = bags + "amount needed to ship: " + str(bag.threshold - bag.amountinbag) + '<br>'

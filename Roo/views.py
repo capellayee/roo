@@ -85,6 +85,7 @@ def newbag():
 def mybags(userid):
   user = User.query.filter_by(id = userid).first()  
   userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
+  bags = ""
   for bag in userbags:
     bags = bags + "bags involved: " + str(bag.store) + '<br>'
     bags = bags + "amount in bag: " + str(bag.amountinbag) + '<br>'
