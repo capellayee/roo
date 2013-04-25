@@ -10,7 +10,7 @@ def fblogin():
   if not session.get('logged_in'):
     return render_template('facebook_homepage.html')
   else:
-    return redirect(url_for('home', userid=session.get('userid')))
+    return redirect(url_for('home'))
 
 @app.route('/home')
 def home():
@@ -202,7 +202,7 @@ def facebook_authorized(resp):
 
     return redirect(url_for('home')
 
-@app.route("/logout")
-def logout():
-    pop_login_session()
-    return redirect(url_for('home'))
+#@app.route("/logout")
+#def logout():
+#    pop_login_session()
+#    return redirect(url_for('home'))
