@@ -1,6 +1,6 @@
 from Roo import app
 from Roo.database import db_session
-from Roo.models import User, Bag
+from Roo.models import User, Bag, Order
 from flask import Flask, request, session, g, redirect, url_for, \
 	abort, render_template, flash
 from flask_oauth import OAuth
@@ -30,8 +30,8 @@ def home():
       entries = entries + "address: " + row.address + '<br>'
       for row2 in row.bag:
         entries = entries + "bags involved: " + str(row2.store) + '<br>'
-#      for row2 in row.orders:
-#        entries = entries + "order: " + str(row2.price) + '<br>'
+      for row2 in row.orders:
+        entries = entries + "order: " + str(row2.price) + '<br>'
       entries = entries + "email: " + row.email + '<br><br>'
       
     entries = entries + "<br><br><br><br><br>Now, the Bags:<br>"
@@ -43,8 +43,8 @@ def home():
       entries = entries + "network: " + row.network + "<br>"
       for row2 in row.users:
         entries = entries + "user in bag: " + str(row2.firstname) + '<br>'
-#      for row2 in row.orders:
-#        entries = entries + "order: " + str(row2.price) + '<br>'
+      for row2 in row.orders:
+        entries = entries + "order: " + str(row2.price) + '<br>'
       entries = entries + "<br><br>"
     return entries
       
@@ -68,18 +68,18 @@ def newbag():
         return redirect(url_for('show_users'))
     return render_template('newbagform.html')
 
-@app.route('/neworder', methods=['GET', 'POST'])
-def neworder():
-  if request.method == 'POST':
-    bag = Bag.query.filter_by(store = request.form['store']).first()
-    user = User.query.filter_by(store = request.form['useremail']).first()
-    order = Order("", request.form['orderamount'])
-    bag.orders.append(order)
-    user.orders.append(order)
-    db_session.add(order)
-    db_session.commit()
-    return redirect(url_for('show_users'))
-  return render_template('neworderform.html')
+#@app.route('/neworder', methods=['GET', 'POST'])
+#def neworder():
+#  if request.method == 'POST':
+#    bag = Bag.query.filter_by(store = request.form['store']).first()
+#    user = User.query.filter_by(store = request.form['useremail']).first()
+#    order = Order("", request.form['orderamount'])
+#    bag.orders.append(order)
+#    user.orders.append(order)
+#    db_session.add(order)
+#    db_session.commit()
+#    return redirect(url_for('show_users'))
+#  return render_template('neworderform.html')
 
 
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])
