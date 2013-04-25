@@ -10,7 +10,7 @@ def fblogin():
   if not session.get('logged_in'):
     return render_template('facebook_homepage.html')
   else:
-    return redirect(url_for('addtobag'), userid=session.get('userid'))
+    return redirect(url_for('addtobag', userid=session.get('userid')))
 
 @app.route('/main')
 def show_users():
