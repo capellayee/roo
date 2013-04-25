@@ -96,7 +96,7 @@ def addtobag(userid):
         user = User.query.filter_by(id = userid).first()
         bag.users.append(user)
         db_session.commit()
-        return redirect(url_for('addtobag'), userid=session.get('userid'))
+        return redirect(url_for('mybags'), userid=session.get('userid'))
         #return redirect(url_for('show_users'))
     return render_template('addtobagform.html')
 
