@@ -21,6 +21,7 @@ def show_users():
 def bootstrap():
   return render_template('carousel.html')
 
+
 @app.route('/all')
 def home():
     entries = ""
@@ -81,6 +82,11 @@ def neworder():
     return redirect(url_for('show_users'))
   return render_template('neworderform.html')
 
+
+@app.route('/mybags/<userid>', methods=['GET', 'POST'])
+def mybags(userid):
+  user = User.query.filter_by(id=userid).first()
+  return render_template('mybags.html')
 
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])
 def addtobag(userid):
@@ -184,7 +190,7 @@ def facebook_authorized(resp):
     
     session['userid'] = User.query.filter_by(email = fbuser['email']).first().id
 
-    return redirect(url_for('addtobag'), userid="hi")
+    return redirect(url_for('addtobag'), userid=User.query.filter_by(email = fbuser['email']).first().id)
 
 @app.route("/logout")
 def logout():
