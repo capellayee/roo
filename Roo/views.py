@@ -90,7 +90,7 @@ def mybags(userid):
     bags = bags + "bags involved: " + str(bag.store) + '<br>'
     bags = bags + "amount in bag: " + str(bag.amountinbag) + '<br>'
     bags = bags + "amount needed to ship: " + str(bag.threshold - bag.amountinbag) + '<br>'
-    userorder = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid).join(Bag.orders, aliased=True).filter_by(id=userid)
+    userorder = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid).join(Bag.orders, aliased=True).filter_by(id=userid).first()
     bags = bags + "my items: " + userorder
   return bags
   #return render_template('mybags.html', user=user)
