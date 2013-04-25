@@ -68,18 +68,18 @@ def newbag():
         return redirect(url_for('show_users'))
     return render_template('newbagform.html')
 
-@app.route('/neworder', methods=['GET', 'POST'])
-def neworder():
-  if request.method == 'POST':
-    bag = Bag.query.filter_by(store = request.form['store']).first()
-    user = User.query.filter_by(store = request.form['useremail']).first()
-    order = Order("", request.form['orderamount'])
-    bag.orders.append(order)
-    user.orders.append(order)
-    db_session.add(order)
-    db_session.commit()
-    return redirect(url_for('show_users'))
-  return render_template('neworderform.html')
+#@app.route('/neworder', methods=['GET', 'POST'])
+#def neworder():
+#  if request.method == 'POST':
+#    bag = Bag.query.filter_by(store = request.form['store']).first()
+#    user = User.query.filter_by(store = request.form['useremail']).first()
+#    order = Order("", request.form['orderamount'])
+#    bag.orders.append(order)
+#    user.orders.append(order)
+#    db_session.add(order)
+#    db_session.commit()
+#    return redirect(url_for('show_users'))
+#  return render_template('neworderform.html')
 
 
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])
