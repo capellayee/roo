@@ -51,8 +51,8 @@ class Order(Base):
   bag_id = Column(Integer, ForeignKey('bags.id'))
   user_id = Column(Integer, ForeignKey('users.id'))
 
-  bag = relationship("Bag", backref=backref('orders', order_by=id))
-  user = relationship("User", backref=backref('orders', order_by=id))
+  bag = relationship("Bag", backref="orders")
+  user = relationship("User", backref="orders")
 
   def __init__(self, url=None, price=None, bag_id=None, user_id=None):
     self.url = ""
