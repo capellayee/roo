@@ -10,16 +10,11 @@ def fblogin():
   if not session.get('logged_in'):
     return render_template('facebook_homepage.html')
   else:
-    return redirect(url_for('addtobag', userid=session.get('userid')))
+    return redirect(url_for('home', userid=session.get('userid')))
 
-@app.route('/main')
-def show_users():
-  users = User.query.all()
-  return render_template('show_users.html', users=users)
-
-@app.route('/bootstraptest')
-def bootstrap():
-  return render_template('carousel.html')
+@app.route('/home')
+def home():
+  return render_template('carousel.html', user=User.query.filter_by(userid=sess.get('userid')).first())
 
 @app.route('/all')
 def home():
