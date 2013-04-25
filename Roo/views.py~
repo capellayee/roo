@@ -17,7 +17,7 @@ def home():
   return render_template('carousel.html', user=User.query.filter_by(userid=sess.get('userid')).first())
 
 @app.route('/all')
-def home():
+def all():
     entries = ""
     for row in User.query.all():
       entries = entries + "first name: " + row.firstname + '<br>'

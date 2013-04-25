@@ -51,7 +51,7 @@ def add_user():
   db_session.add(user)
   db_session.commit()
   flash('New entry was succesfully posted')
-  return redirect(url_for('show_users'))
+  return redirect(url_for('home'))
 
 
 @app.route('/newbag', methods=['GET', 'POST'])
@@ -60,7 +60,7 @@ def newbag():
         bag = Bag(request.form['store'], request.form['threshold'], request.form['amountinbag'], request.form['network'])
         db_session.add(bag)
         db_session.commit()
-        return redirect(url_for('show_users'))
+        return redirect(url_for('home'))
     return render_template('newbagform.html')
 
 #@app.route('/neworder', methods=['GET', 'POST'])
@@ -103,7 +103,7 @@ def addtobag(userid):
         db_session.add(order)
         db_session.commit()
         return redirect(url_for('mybags', userid=userid))
-        #return redirect(url_for('show_users'))
+        #return redirect(url_for('home'))
     return render_template('addtobagform.html')
 
 @app.route('/remove/<userid>')
@@ -116,7 +116,7 @@ def remove_user(userid):
   db_session.delete(user);
   db_session.commit();
   flash('User with Name:' + user.firstname + ' was removed')
-  return redirect(url_for('show_users'))
+  return redirect(url_for('home'))
 
 #@app.route('/login', methods=['GET', 'POST'])
 #def login():
@@ -182,7 +182,7 @@ def facebook_login():
 @app.route("/facebook_authorized")
 @facebook.authorized_handler
 def facebook_authorized(resp):
-    next_url = request.args.get('next') or url_for('show_users')
+    next_url = request.args.get('next') or url_for('home')
     if resp is None or 'access_token' not in resp:
         return redirect(next_url)
 
@@ -203,4 +203,4 @@ def facebook_authorized(resp):
 @app.route("/logout")
 def logout():
     pop_login_session()
-    return redirect(url_for('show_users'))
+    return redirect(url_for('home'))
