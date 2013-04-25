@@ -1,6 +1,6 @@
 from Roo import app
 from Roo.database import db_session
-from Roo.models import User, Bag
+from Roo.models import User, Bag, Order
 from flask import Flask, request, session, g, redirect, url_for, \
 	abort, render_template, flash
 from flask_oauth import OAuth
