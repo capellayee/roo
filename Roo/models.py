@@ -55,8 +55,10 @@ class Order(Base):
   user = relationship("User", backref="orders")
 
   def __init__(self, url=None, price=None, bag_id=None, user_id=None):
-    self.url = ""
+    self.url = url
     self.price = price
+    self.bag_id = bag_id
+    self.user_id = user_id
     
   def __repr__(self):
     return '<Order %r>' % (self.url)
