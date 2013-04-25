@@ -91,7 +91,7 @@ def mybags(userid):
     bags = bags + "amount in bag: " + str(bag.amountinbag) + '<br>'
     bags = bags + "amount needed to ship: " + str(bag.threshold - bag.amountinbag) + '<br>'
     userorder = Order.query.filter_by(bag_id=int(bag.id), user_id=userid).first()
-    bags = bags + "my items: " + userorder
+    bags = bags + "my items: " + str(userorder.url)
   return bags
   #return render_template('mybags.html', user=user)
 
