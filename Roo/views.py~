@@ -13,8 +13,9 @@ def fblogin():
     return redirect(url_for('home', userid=session.get('userid')))
 
 @app.route('/home')
-def home(userid):
-  return render_template('carousel.html', user=User.query.filter_by(id = userid).first())
+def home():
+  user = User.query.filter_by(id = session.get('userid'))
+  return render_template('carousel.html', user=user)
 
 @app.route('/all')
 def all():
@@ -199,7 +200,7 @@ def facebook_authorized(resp):
     
     session['userid'] = User.query.filter_by(email = fbuser['email']).first().id
 
-    return redirect(url_for('home', userid=User.query.filter_by(email = fbuser['email']).first().id))
+    return redirect(url_for('home')
 
 @app.route("/logout")
 def logout():
