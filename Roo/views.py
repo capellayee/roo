@@ -13,8 +13,8 @@ def fblogin():
     return redirect(url_for('home', userid=session.get('userid')))
 
 @app.route('/home')
-def home():
-  return render_template('carousel.html', user=User.query.filter_by(userid=sess.get('userid')).first())
+def home(userid):
+  return render_template('carousel.html', user=User.query.filter_by(id = userid).first())
 
 @app.route('/all')
 def all():
@@ -85,8 +85,9 @@ def mybags(userid):
     bags = bags + "bags involved: " + str(bag.store) + '<br>'
     bags = bags + "amount in bag: " + str(bag.amountinbag) + '<br>'
     bags = bags + "amount needed to ship: " + str(bag.threshold - bag.amountinbag) + '<br>'
-    userorder = Order.query.filter_by(bag_id=int(bag.id), user_id=userid).first()
-    bags = bags + "my items: " + str(userorder.url)
+    userorder = Order.query.filter_by(bag_id=int(bag.id), user_id=userid)
+    for order in userorder:
+      bags = bags + "my items: " + str(order.url) + '<br>'
   return bags
   #return render_template('mybags.html', user=user)
 
@@ -198,7 +199,7 @@ def facebook_authorized(resp):
     
     session['userid'] = User.query.filter_by(email = fbuser['email']).first().id
 
-    return redirect(url_for('addtobag', userid=User.query.filter_by(email = fbuser['email']).first().id))
+    return redirect(url_for('home', userid=User.query.filter_by(email = fbuser['email']).first().id))
 
 @app.route("/logout")
 def logout():
