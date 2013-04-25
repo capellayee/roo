@@ -87,12 +87,13 @@ def mybags(userid):
   userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
   bags = ""
   for bag in userbags:
-    bags = bags + "bags involved: " + str(bag.store) + '<br>'
-    bags = bags + "amount in bag: " + str(bag.amountinbag) + '<br>'
-    bags = bags + "amount needed to ship: " + str(bag.threshold - bag.amountinbag) + '<br>'
+    bags = bags + int(bag.id) + <br>
+    #bags = bags + "bags involved: " + str(bag.store) + '<br>'
+    #bags = bags + "amount in bag: " + str(bag.amountinbag) + '<br>'
+    #bags = bags + "amount needed to ship: " + str(bag.threshold - bag.amountinbag) + '<br>'
     #userorder = Order.query.filter_by(bag_id=int(bag.id), user_id=userid).first()
     #bags = bags + "my items: " + userorder
-  return int(bag.id)
+  return bags
   #return render_template('mybags.html', user=user)
 
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])
