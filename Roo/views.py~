@@ -84,7 +84,7 @@ def newbag():
 @app.route('/mybags/<userid>')
 def mybags(userid):
   user = User.query.filter_by(id = userid).first()
-  return user.bags
+  return user.bag
   #return render_template('mybags.html', user=user)
 
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])
