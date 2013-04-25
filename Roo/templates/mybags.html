@@ -86,10 +86,7 @@
             {% for bag in user.bags %}
               <div class="span4">
                 <h2>{{bag.store}}</h2>
-                {% order = bag.orders.Query.filter_by(id = userid).first() %}
-                <p>My items: {{ order.url }}<br>
-                Cost of my items: {{ order.price }} <br>
-                Total in {{bag.store}} bag: {{ bag.amountinbag }} <br>
+		Total in {{bag.store}} bag: {{ bag.amountinbag }} <br>
                 Amount needed to ship: {{ bag.threshold - bag.amountinbag }} </p>
                 <p><a class="btn" href="#">Add to bag &raquo;</a></p>
                 <p><a class="btn" href="#">Remove from bag &raquo;</a></p>
