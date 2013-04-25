@@ -177,7 +177,8 @@ def facebook_authorized(resp):
     session['facebook_token'] = (resp['access_token'], '')
 
     fbuser = facebook.get('me').data
-    if User.query.filter_by(email = fbuser['email']).first() == None:
+    emailaddress = fbuser['email']
+    if User.query.filter_by(email = emailaddress).first() == None:
       user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], '', '')
       db_session.add(user)
       db_session.commit()
