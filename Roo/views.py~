@@ -90,7 +90,8 @@ def mybags(userid):
     bags = bags + "bags involved: " + str(bag.store) + '<br>'
     bags = bags + "amount in bag: " + str(bag.amountinbag) + '<br>'
     bags = bags + "amount needed to ship: " + str(bag.threshold - bag.amountinbag) + '<br>'
-    bags = bags + "my items: " + bag.orders
+    userorder = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid).join(Bag.orders, aliased=True).filter_by(id=userid)
+    bags = bags + "my items: " + userorder
   return bags
   #return render_template('mybags.html', user=user)
 
@@ -100,7 +101,11 @@ def addtobag(userid):
         bag = Bag.query.filter_by(store = request.form['store']).first()
         bag.amountinbag = bag.amountinbag + int(request.form['amountinbag'])
         user = User.query.filter_by(id = userid).first()
+        # add the user to the bag
         bag.users.append(user)
+        # add the user's order to the bag
+        order = Order(request.form['itemurl'], request.form['price'], bag.id, userid)
+        db_session.add(order)
         db_session.commit()
         return redirect(url_for('mybags', userid=userid))
         #return redirect(url_for('show_users'))

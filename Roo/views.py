@@ -99,7 +99,7 @@ def mybags(userid):
 def addtobag(userid):
     if request.method == 'POST':
         bag = Bag.query.filter_by(store = request.form['store']).first()
-        bag.amountinbag = bag.amountinbag + int(request.form['amountinbag'])
+        bag.amountinbag = bag.amountinbag + int(request.form['price'])
         user = User.query.filter_by(id = userid).first()
         # add the user to the bag
         bag.users.append(user)
