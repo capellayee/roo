@@ -56,10 +56,10 @@ def newbag():
   return render_template('newbagform.html')
 
 # shows all of the relevant information for a store's bag
-@app.route('/bag/<bagid>')
+@app.route('/bag/<bagid>', methods=['GET', 'POST'])
 def bagpage(bagid):
   bag = Bag.query.filter_by(id=bagid).first()
-  baginfo = "Store name: " + str(bag.store) + '<br> Cost for free shipping: ' + str(bag.threshold) + '<br> Amount in bag: ' + str(bag.amountinbag) + '<br> Amount needed to ship: ' + str(bag.threshold -bag.amountinbag) + '<br>'
+  render_template('bagpage.html', bag=bag)
 
 # displays all of the users' bags
 @app.route('/mybags/<userid>')

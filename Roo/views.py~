@@ -18,6 +18,7 @@ def home():
   userid = session.get('userid')
   return render_template('carousel.html', userid=userid)
 
+# a test page for the admin
 @app.route('/all')
 def all():
     entries = ""
@@ -44,40 +45,23 @@ def all():
         entries = entries + "order: " + str(row2.price) + '<br>'
       entries = entries + "<br><br>"
     return entries
-      
-@app.route('/add', methods=['POST'])
-def add_user():
-  if not session.get('logged_in'):
-    abort(401)
-  user = User(request.form['firstname'], request.form['lastname'], request.form['email'], request.form['password'], request.form['address'])
-  db_session.add(user)
-  db_session.commit()
-  flash('New entry was succesfully posted')
-  return redirect(url_for('home'))
-
 
 @app.route('/newbag', methods=['GET', 'POST'])
 def newbag():
-    if request.method == 'POST':
-        bag = Bag(request.form['store'], request.form['threshold'], request.form['amountinbag'], request.form['network'])
-        db_session.add(bag)
-        db_session.commit()
-        return redirect(url_for('home'))
-    return render_template('newbagform.html')
+  if request.method == 'POST':
+    bag = Bag(request.form['store'], request.form['threshold'], 0, request.form['network'])
+    db_session.add(bag)
+    db_session.commit()
+    return redirect(url_for('home'))
+  return render_template('newbagform.html')
 
-#@app.route('/neworder', methods=['GET', 'POST'])
-#def neworder():
-#  if request.method == 'POST':
-#    bag = Bag.query.filter_by(store = request.form['store']).first()
-#    user = User.query.filter_by(store = request.form['useremail']).first()
-#    order = Order("", request.form['orderamount'])
-#    bag.orders.append(order)
-#    user.orders.append(order)
-#    db_session.add(order)
-#    db_session.commit()
-#    return redirect(url_for('show_users'))
-#  return render_template('neworderform.html')
+# shows all of the relevant information for a store's bag
+@app.route('/bag/<bagid>')
+def bagpage(bagid):
+  bag = Bag.query.filter_by(id=bagid).first()
+  baginfo = "Store name: " + str(bag.store) + '<br> Cost for free shipping: ' + str(bag.threshold) + '<br> Amount in bag: ' + str(bag.amountinbag) + '<br> Amount needed to ship: ' + str(bag.threshold -bag.amountinbag) + '<br>'
 
+# displays all of the users' bags
 @app.route('/mybags/<userid>')
 def mybags(userid):
   user = User.query.filter_by(id = userid).first()  
@@ -93,6 +77,7 @@ def mybags(userid):
   return bags
   #return render_template('mybags.html', user=user)
 
+# allows a user to add to a bag
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])
 def addtobag(userid):
     if request.method == 'POST':
@@ -103,51 +88,12 @@ def addtobag(userid):
         bag.users.append(user)
         # add the user's order to the bag
         order = Order(request.form['itemurl'], request.form['price'], bag.id, userid)
+        bag.orders.append(order)
         db_session.add(order)
         db_session.commit()
         return redirect(url_for('mybags', userid=userid))
-        #return redirect(url_for('home'))
     return render_template('addtobagform.html')
 
-@app.route('/remove/<userid>')
-def remove_user(userid):
-  if not session.get('logged_in'):
-	abort(401)
-  
-  user = User.query.filter_by(id = userid).first()
-
-  db_session.delete(user);
-  db_session.commit();
-  flash('User with Name:' + user.firstname + ' was removed')
-  return redirect(url_for('home'))
-
-#@app.route('/login', methods=['GET', 'POST'])
-#def login():
-#  error = None
-#  if request.method == 'POST':
-#	if request.form['username'] == app.config['USERNAME']:
-#          session['logged_in'] = True
-#          flash('You were logged in')
-#          return redirect(url_for('show_users'))
-#        #if request.form['username'] != app.config['USERNAME']:
-#        user = request.form['username']
-#        queriedUser = User.query.filter_by(email = user).first()
-#        if user != queriedUser.email:
-#		error = 'Invalid Username'
-##	elif request.form['password'] != app.config['PASSWORD']:
-#	elif request.form['password'] != queriedUser.password:
-#                error = 'Invalid password'
-#	else: # if its a non-admin user but successfully verified
-#		session['logged_in'] = True
-#		flash('You were logged in')
-#		return redirect(url_for('addtobag', userid=queriedUser.id))
-#  return render_template('login.html', error=error)
-
-#@app.route('/logout')
-#def logout():
-#  session.pop('logged_in', None)
-#  flash('You were logged out')
-#  return redirect(url_for('show_users'))
 
 #----------------------------------------
 # facebook authentication
