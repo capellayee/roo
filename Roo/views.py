@@ -16,11 +16,11 @@ def fblogin():
 def home():
   # store the bagid's for the featured stores on the carousel
   # brooks brothers
-  brooksbrothersid = Bag.query.filter_by(store = 'Brooks Brothers').first()
+  brooksbrothersid = Bag.query.filter_by(store = 'Brooks Brothers').first().id
   # ralph lauren
-  ralphlaurenid = Bag.query.filter_by(store = 'Ralph Lauren').first()
+  ralphlaurenid = Bag.query.filter_by(store = 'Ralph Lauren').first().id
   # j. crew
-  jcrewid = Bag.query.filter_by(store = 'J. Crew').first()
+  jcrewid = Bag.query.filter_by(store = 'J. Crew').first().id
 
   userid = session.get('userid')
   return render_template('carousel.html', userid=userid, brooksbrothersid=brooksbrothersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid)

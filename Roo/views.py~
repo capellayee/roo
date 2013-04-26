@@ -14,9 +14,16 @@ def fblogin():
 
 @app.route('/home')
 def home():
-  
+  # store the bagid's for the featured stores on the carousel
+  # brooks brothers
+  brooksbrothersid = Bag.query.filter_by(store = 'Brooks Brothers').first()
+  # ralph lauren
+  ralphlaurenid = Bag.query.filter_by(store = 'Ralph Lauren').first()
+  # j. crew
+  jcrewid = Bag.query.filter_by(store = 'J. Crew').first()
+
   userid = session.get('userid')
-  return render_template('carousel.html', userid=userid)
+  return render_template('carousel.html', userid=userid, brooksbrothersid=brooksbrothersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid)
 
 # a test page for the admin
 @app.route('/all')
