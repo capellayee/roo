@@ -6,7 +6,7 @@ from flask import Flask
 #configuration
 #DATABASE = '/tmp/flasktest.db'
 DEBUG = True
-#SECRET_KEY = 'development key'
+SECRET_KEY = 'development key'
 #USERNAME = 'admin'
 #PASSWORD = 'default'
 
