@@ -25,6 +25,7 @@ def home():
   userid = session.get('userid')
   allbags = Bag.query.all()
   user = User.query.filter_by(id=userid).first()
+  mybags = []
   for b in user.bag:
     mybags.append(b)
   return render_template('carousel.html', userid=userid, brooksbrothersid=brooksbrothersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags)

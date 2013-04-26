@@ -363,7 +363,6 @@
         <div class="span4">
           <img class="img-circle" data-src="holder.js/140x140">
           <h2>My Bags</h2>
-          <p>list of users bags, if possible </p>
 	{% for bag in mybags %}
           <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
 	{% endfor %}

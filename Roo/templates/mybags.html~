@@ -83,7 +83,8 @@
 
           
           <div class="row-fluid">
-            <!--{% for bag in user.bags %}-->
+            <ul class=bag>
+	    {% for bag in user.bags %}
               <div class="span4">
                 <h2>{{bag.store}}</h2>
 		Total in {{bag.store}} bag: {{ bag.amountinbag }} <br>
@@ -91,10 +92,8 @@
                 <p><a class="btn" href="#">Add to bag &raquo;</a></p>
                 <p><a class="btn" href="#">Remove from bag &raquo;</a></p>
               </div><!--/span-->
-            <!--{% endfor %}-->
-          </div><!--/row-->
-        </div><!--/span-->
-      </div><!--/row-->
+            {% endfor %}
+            </ul>
 
       <hr>
 
@@ -108,19 +107,19 @@
  <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../bootstrap/js/jquery.js"></script>
-    <script src="../bootstrap/js/bootstrap-transition.js"></script>
-    <script src="../bootstrap/js/bootstrap-alert.js"></script>
-    <script src="../bootstrap/js/bootstrap-modal.js"></script>
-    <script src="../bootstrap/js/bootstrap-dropdown.js"></script>
-    <script src="../bootstrap/js/bootstrap-scrollspy.js"></script>
-    <script src="../bootstrap/js/bootstrap-tab.js"></script>
-    <script src="../bootstrap/js/bootstrap-tooltip.js"></script>
-    <script src="../bootstrap/js/bootstrap-popover.js"></script>
-    <script src="../bootstrap/js/bootstrap-button.js"></script>
-    <script src="../bootstrap/js/bootstrap-collapse.js"></script>
-    <script src="../bootstrap/js/bootstrap-carousel.js"></script>
-    <script src="../bootstrap/js/bootstrap-typeahead.js"></script>
 
+    <script src={{url_for('static', filename = "bootstrap/js/jquery.js")}}></script>
+    <script src={{url_for('static', filename = "bootstrap/js/bootstrap-transition.js")}}></script>
+    <script src={{url_for('static', filename = "bootstrap/js/bootstrap-alert.js")}}></script>
+    <script src={{url_for('static', filename = "bootstrap/js/bootstrap-modal.js")}}></script>
+    <script src={{url_for('static', filename = "bootstrap/js/bootstrap-dropdown.js")}}></script>
+    <script src={{url_for('static', filename = "bootstrap/js/bootstrap-scrollspy.js")}}></script>
+    <script src={{url_for('static', filename = "bootstrap/js/bootstrap-tab.js")}}></script>
+    <script src={{url_for('static', filename = "bootstrap/js/bootstrap-tooltip.js")}}></script>
+    <script src={{url_for('static', filename = "bootstrap/js/bootstrap-popover.js")}}></script>
+    <script src={{url_for('static', filename = "bootstrap/js/bootstrap-button.js")}}></script>
+    <script src={{url_for('static', filename = "bootstrap/js/bootstrap-collapse.js")}}></script>
+    <script src={{url_for('static', filename = "bootstrap/js/bootstrap-carousel.js")}}></script>
+    <script src={{url_for('static', filename = "bootstrap/js/bootstrap-typeahead.js")}}></script>
   </body>
 </html>
