@@ -158,14 +158,15 @@ def facebook_authorized(resp):
     session['facebook_token'] = (resp['access_token'], '')
 
     fbuser = facebook.get('me').data
-    if User.query.filter_by(email = fbuser['email']).first() == None:
-      user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], '', '')
-      db_session.add(user)
-      db_session.commit()
-    
-    session['userid'] = User.query.filter_by(email = fbuser['email']).first().id
+    return fbuser['email']
+#    if User.query.filter_by(email = fbuser['email']).first() == None:
+#      user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], '', '')
+#      db_session.add(user)
+#      db_session.commit()
+#    
+#    session['userid'] = User.query.filter_by(email = fbuser['email']).first().id
 
-    return redirect(url_for('home'))
+#    return redirect(url_for('home'))
 
 @app.route("/logout")
 def logout():
