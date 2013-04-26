@@ -322,7 +322,7 @@
             <div class="carousel-caption">
               <h1>Brooks Brothers.</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bag', bag='Brooks Brothers') }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bag', bagid=Bag.query.filter_by(store='Brooks Brothers')) }}'>Add to bag</a>
             </div>
           </div>
         </div>
@@ -332,7 +332,7 @@
             <div class="carousel-caption">
               <h1>Ralph Lauren</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bag', bag='Ralph Lauren') }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bag', bagid=Bag.query.filter_by(store='Ralph Lauren')) }}'>Add to bag</a>
             </div>
           </div>
         </div>
@@ -342,7 +342,7 @@
             <div class="carousel-caption">
               <h1>J. Crew</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bag', bag='J. Crew') }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bag', bagid=Bag.query.filter_by(store='J. Crew')) }}'>Add to bag</a>
             </div>
           </div>
         </div>
