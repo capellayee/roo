@@ -66,6 +66,18 @@ def newbag():
 @app.route('/bag/<bagid>', methods=['GET', 'POST'])
 def bagpage(bagid):
   bag = Bag.query.filter_by(id=bagid).first()
+  if request.method == 'POST':
+    bag.amountinbag = bag.amountinbag + int(request.form['price'])
+    # add the user to the bag
+    user = User.query.filter_by(id=session.get('userid')).first()
+    bag.users.append(user)
+    # add the user's order to the bag
+    order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], bag.id, user.id)
+    bag.orders.append(order)
+    db_session.add(order)
+    db_session.commit()
+    flash("Your purchase has been added")
+    return redirect(url_for('bagpage', bagid=bagid)
   return render_template('bagpage.html', bag=bag)
 
 # displays all of the users' bags
