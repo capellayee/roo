@@ -322,7 +322,7 @@
             <div class="carousel-caption">
               <h1>Brooks Brothers.</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bag', bagid=brooksbrothersid) }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=brooksbrothersid) }}'>Add to bag</a>
             </div>
           </div>
         </div>
