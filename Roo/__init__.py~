@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
-import Flasktest.views
+import Roo.views
 
 @app.teardown_request
 def teardown_request(exception):
