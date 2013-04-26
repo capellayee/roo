@@ -8,8 +8,7 @@ from flask_oauth import OAuth
 @app.route('/')
 def fblogin():
   if not session.get('logged_in'):
-    return "lolz"
-#    return render_template('login.html')
+    return render_template('login.html')
   else:
     return redirect(url_for('home'))
 
