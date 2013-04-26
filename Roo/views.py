@@ -8,12 +8,13 @@ from flask_oauth import OAuth
 @app.route('/')
 def fblogin():
   if not session.get('logged_in'):
-    return render_template('facebook_homepage.html')
+    return render_template('login.html')
   else:
     return redirect(url_for('home'))
 
 @app.route('/home')
 def home():
+  
   userid = session.get('userid')
   return render_template('carousel.html', userid=userid)
 
