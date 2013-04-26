@@ -49,7 +49,7 @@ class Order(Base):
   url = Column(String(200), unique=False)
   price = Column(Integer, unique=False)
   quantity = Column(Integer, unique=False)
-  ship = Column(Boolean, unique=False)
+#  ship = Column(Boolean, unique=False)
 
   bag_id = Column(Integer, ForeignKey('bags.id'))
   user_id = Column(Integer, ForeignKey('users.id'))
@@ -57,11 +57,11 @@ class Order(Base):
   bag = relationship("Bag", backref="orders")
   user = relationship("User", backref="orders")
 
-  def __init__(self, url=None, price=None, quantity=None, ship=None, bag_id=None, user_id=None):
+  def __init__(self, url=None, price=None, quantity=None, bag_id=None, user_id=None):
     self.url = url
     self.price = price
     self.quantity = quantity
-    self.ship = ship
+ #   self.ship = ship
     self.bag_id = bag_id
     self.user_id = user_id
     

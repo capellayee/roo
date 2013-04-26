@@ -66,7 +66,7 @@ def newbag():
 @app.route('/bag/<bagid>', methods=['GET', 'POST'])
 def bagpage(bagid):
   bag = Bag.query.filter_by(id=bagid).first()
-  render_template('bagpage.html', bag=bag)
+  return render_template('bagpage.html', bag=bag)
 
 # displays all of the users' bags
 @app.route('/mybags/<userid>')
