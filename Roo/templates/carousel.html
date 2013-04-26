@@ -365,7 +365,7 @@
           <h2>My Bags</h2>
           <p>list of users bags, if possible </p>
 	{% for bag in mybags %}
-          <p><a class="btn" href='{{ url_for('bagpage', bagid=1) }}'> {{bag.store}} &raquo;</a></p>
+          <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
 	{% endfor %}
         </div><!-- /.span4 -->
         <div class="span4">
@@ -373,7 +373,7 @@
           <h2>All Bags</h2>
           <p>list of all existing bags</p>
 	{% for bag in allbags %}
-          <p><a class="btn" href='{{ url_for('bagpage', bagid=1) }}'> {{bag.store}} &raquo;</a></p>
+          <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
 	{% endfor %}
         </div><!-- /.span4 -->
         <div class="span4">
