@@ -106,7 +106,7 @@ def addtobag(userid):
         # add the user to the bag
         bag.users.append(user)
         # add the user's order to the bag
-        order = Order(request.form['itemurl'], request.form['price'], bag.id, userid)
+        order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], bag.id, userid)
         bag.orders.append(order)
         db_session.add(order)
         db_session.commit()
@@ -158,13 +158,13 @@ def facebook_authorized(resp):
     session['facebook_token'] = (resp['access_token'], '')
 
     fbuser = facebook.get('me').data
+#    return fbuser['email']
     if User.query.filter_by(email = fbuser['email']).first() == None:
       user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], '', '')
       db_session.add(user)
       db_session.commit()
     
     session['userid'] = User.query.filter_by(email = fbuser['email']).first().id
-
     return redirect(url_for('home'))
 
 @app.route("/logout")
