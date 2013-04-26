@@ -72,7 +72,7 @@
     </div><!-- /.navbar-wrapper -->
     <div class="container">
 
-<form class="bs-docs-example">
+<form class="bs-docs-example" method="post">
             <fieldset>
               <legend>{{ bag.store }}</legend>
               <span class="help-block">Purchase needed for free shipping: {{bag.threshold}}</span>
@@ -83,8 +83,8 @@
                 <input type="text" name="itemurl" placeholder="paste url here!">
 	      <label>amount of purchase</label> 
 	        <input  type="text" name="price" placeholder="cost of your purchase?">
-              <label>size</label> <input type="text" placeholder="what size do you want?">
-	            <label>quantity</label> <input type="text" placeholder="how many?">
+              <label>size</label> <input type="text" name="size" placeholder="what size do you want?">
+	            <label>quantity</label> <input type="text" name="quantity" placeholder="how many?">
               <label class="checkbox">
                 <input type="checkbox" name="ship" value="True"> Ship to me?
               </label>
