@@ -332,7 +332,7 @@
             <div class="carousel-caption">
               <h1>Ralph Lauren</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bag', bagid=ralphlaurenid) }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=ralphlaurenid) }}'>Add to bag</a>
             </div>
           </div>
         </div>
@@ -342,7 +342,7 @@
             <div class="carousel-caption">
               <h1>J. Crew</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bag', bagid=jcrewid) }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=jcrewid) }}'>Add to bag</a>
             </div>
           </div>
         </div>
