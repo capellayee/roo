@@ -23,7 +23,9 @@ def home():
   jcrewid = Bag.query.filter_by(store = 'J. Crew').first().id
 
   userid = session.get('userid')
-  return render_template('carousel.html', userid=userid, brooksbrothersid=brooksbrothersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid)
+  allbags = Bag.query.all()
+  mybags = Bag.query.filter_by(User.query.filter_by)
+  return render_template('carousel.html', userid=userid, brooksbrothersid=brooksbrothersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags)
 
 # a test page for the admin
 @app.route('/all')
@@ -170,5 +172,5 @@ def facebook_authorized(resp):
 @app.route("/logout")
 def logout():
     pop_login_session()
-    return redirect(url_for(fblogin))
+    return redirect(url_for('fblogin'))
 

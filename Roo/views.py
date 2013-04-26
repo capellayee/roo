@@ -23,7 +23,11 @@ def home():
   jcrewid = Bag.query.filter_by(store = 'J. Crew').first().id
 
   userid = session.get('userid')
-  return render_template('carousel.html', userid=userid, brooksbrothersid=brooksbrothersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid)
+  allbags = Bag.query.all()
+  user = User.query.filter_by(id=userid).first()
+  for b in user.bag:
+    mybags.append(b)
+  return render_template('carousel.html', userid=userid, brooksbrothersid=brooksbrothersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags)
 
 # a test page for the admin
 @app.route('/all')
