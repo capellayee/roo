@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href={{ url_for('static', filename="bootstrap/css/bootstrap.css") }} rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -28,7 +28,7 @@
         }
       }
     </style>
-    <link href="../bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href={{ url_for('static', filename="bootstrap/css/bootstrap-responsive.css")}} rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -36,11 +36,11 @@
     <![endif]-->
 
     <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href={{url_for('static', filename="static/ico/apple-touch-icon-144-precomposed.png") }}>
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href={{url_for('static', filename="static/ico/apple-touch-icon-114-precomposed.png") }}>
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href={{url_for('static', filename="static/ico/apple-touch-icon-72-precomposed.png") }}>
+                    <link rel="apple-touch-icon-precomposed" href={{url_for('static', filename="static/ico/apple-touch-icon-57-precomposed.png") }}>
+                                   <link rel="shortcut icon" href={{url_for('static', filename="static/ico/favicon.png") }}>
   </head>
 
   <body>
@@ -83,51 +83,15 @@
 
           
           <div class="row-fluid">
-            {% for bag in user.bags %}
+            <!--{% for bag in user.bags %}-->
               <div class="span4">
                 <h2>{{bag.store}}</h2>
-                {% order = bag.orders.Query.filter_by(id = userid).first() %}
-                <p>My items: {{ order.url }}<br>
-                Cost of my items: {{ order.price }} <br>
-                Total in {{bag.store}} bag: {{ bag.amountinbag }} <br>
+		Total in {{bag.store}} bag: {{ bag.amountinbag }} <br>
                 Amount needed to ship: {{ bag.threshold - bag.amountinbag }} </p>
                 <p><a class="btn" href="#">Add to bag &raquo;</a></p>
                 <p><a class="btn" href="#">Remove from bag &raquo;</a></p>
               </div><!--/span-->
-            {% endfor %}
-
-
-
-
-
-
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-          </div><!--/row-->
-          <div class="row-fluid">
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
+            <!--{% endfor %}-->
           </div><!--/row-->
         </div><!--/span-->
       </div><!--/row-->

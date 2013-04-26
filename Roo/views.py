@@ -10,7 +10,7 @@ def fblogin():
   if not session.get('logged_in'):
     return render_template('facebook_homepage.html')
   else:
-    return redirect(url_for('addtobag'), userid=session.get('userid'))
+    return redirect(url_for('addtobag', userid=session.get('userid')))
 
 @app.route('/main')
 def show_users():
@@ -83,16 +83,29 @@ def newbag():
 
 @app.route('/mybags/<userid>')
 def mybags(userid):
-  user = User.query.filter_by(id = userid).first()
-  return render_template('mybags.html', user=user)
+  user = User.query.filter_by(id = userid).first()  
+  userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
+  bags = ""
+  for bag in userbags:
+    bags = bags + "bags involved: " + str(bag.store) + '<br>'
+    bags = bags + "amount in bag: " + str(bag.amountinbag) + '<br>'
+    bags = bags + "amount needed to ship: " + str(bag.threshold - bag.amountinbag) + '<br>'
+    userorder = Order.query.filter_by(bag_id=int(bag.id), user_id=userid).first()
+    bags = bags + "my items: " + str(userorder.url)
+  return bags
+  #return render_template('mybags.html', user=user)
 
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])
 def addtobag(userid):
     if request.method == 'POST':
         bag = Bag.query.filter_by(store = request.form['store']).first()
-        bag.amountinbag = bag.amountinbag + int(request.form['amountinbag'])
+        bag.amountinbag = bag.amountinbag + int(request.form['price'])
         user = User.query.filter_by(id = userid).first()
+        # add the user to the bag
         bag.users.append(user)
+        # add the user's order to the bag
+        order = Order(request.form['itemurl'], request.form['price'], bag.id, userid)
+        db_session.add(order)
         db_session.commit()
         return redirect(url_for('mybags', userid=userid))
         #return redirect(url_for('show_users'))

@@ -7,9 +7,9 @@ association_table = Table('association', Base.metadata, Column('users_id', Integ
 class Bag(Base):
   __tablename__ = 'bags'
   id = Column(Integer, primary_key=True)
-  store = Column(String(30), unique=False)
+  store = Column(String(30), unique=True)
   threshold = Column(Integer, unique=False)
-  amountinbag = Column(Integer, unique=True)
+  amountinbag = Column(Integer, unique=False)
   network = Column(String(30), unique=False)
 
   def __init__(self, store=None, threshold=None, amountinbag=None, network=None):
