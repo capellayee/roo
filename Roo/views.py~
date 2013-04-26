@@ -28,30 +28,30 @@ def home():
 # a test page for the admin
 @app.route('/all')
 def all():
-    entries = ""
-    for row in User.query.all():
-      entries = entries + "first name: " + row.firstname + '<br>'
-      entries = entries + "last name: " + row.lastname + '<br>'
-      entries = entries + "address: " + row.address + '<br>'
-      for row2 in row.bag:
-        entries = entries + "bags involved: " + str(row2.store) + '<br>'
-      for row2 in row.orders:
-        entries = entries + "order: " + str(row2.price) + '<br>'
+  entries = ""
+  for row in User.query.all():
+    entries = entries + "first name: " + row.firstname + '<br>'
+    entries = entries + "last name: " + row.lastname + '<br>'
+    entries = entries + "address: " + row.address + '<br>'
+    for row2 in row.bag:
+      entries = entries + "bags involved: " + str(row2.store) + '<br>'
+    for row2 in row.orders:
+      entries = entries + "order: " + str(row2.price) + '<br>'
       entries = entries + "email: " + row.email + '<br><br>'
       
-    entries = entries + "<br><br><br><br><br>Now, the Bags:<br>"
+  entries = entries + "<br><br><br><br><br>Now, the Bags:<br>"
     
-    for row in Bag.query.all():
-      entries = entries + "store name: " + row.store + "<br>"
-      entries = entries + "threshold: " + str(row.threshold) + "<br>"
-      entries = entries + "amount in bag: " + str(row.amountinbag) + "<br>"
-      entries = entries + "network: " + row.network + "<br>"
-      for row2 in row.users:
-        entries = entries + "user in bag: " + str(row2.firstname) + '<br>'
-      for row2 in row.orders:
-        entries = entries + "order: " + str(row2.price) + '<br>'
-      entries = entries + "<br><br>"
-    return entries
+  for row in Bag.query.all():
+    entries = entries + "store name: " + row.store + "<br>"
+    entries = entries + "threshold: " + str(row.threshold) + "<br>"
+    entries = entries + "amount in bag: " + str(row.amountinbag) + "<br>"
+    entries = entries + "network: " + row.network + "<br>"
+    for row2 in row.users:
+      entries = entries + "user in bag: " + str(row2.firstname) + '<br>'
+    for row2 in row.orders:
+      entries = entries + "order: " + str(row2.price) + '<br>'
+    entries = entries + "<br><br>"
+  return entries
 
 @app.route('/newbag', methods=['GET', 'POST'])
 def newbag():
@@ -77,7 +77,7 @@ def bagpage(bagid):
     db_session.add(order)
     db_session.commit()
     flash("Your purchase has been added")
-    return redirect(url_for('bagpage', bagid=bagid)
+    return redirect(url_for('bagpage', bagid=bagid))
   return render_template('bagpage.html', bag=bag)
 
 # displays all of the users' bags

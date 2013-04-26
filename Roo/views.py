@@ -33,11 +33,11 @@ def all():
     entries = entries + "first name: " + row.firstname + '<br>'
     entries = entries + "last name: " + row.lastname + '<br>'
     entries = entries + "address: " + row.address + '<br>'
+    entries = entries + "email: " + row.email + '<br><br>'
     for row2 in row.bag:
       entries = entries + "bags involved: " + str(row2.store) + '<br>'
     for row2 in row.orders:
       entries = entries + "order: " + str(row2.price) + '<br>'
-      entries = entries + "email: " + row.email + '<br><br>'
       
   entries = entries + "<br><br><br><br><br>Now, the Bags:<br>"
     
