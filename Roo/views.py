@@ -26,9 +26,10 @@ n authenticated.'
 
 @app.route('/email')
 def email():
-  msg = Message("Hello", recipients=["pranav.gokhale.93@gmail.com"])
-  mail.send(msg)
-  return "Hi"
+#  msg = Message("Hello", recipients=["pranav.gokhale.93@gmail.com"])
+#  mail.send(msg)
+#  return "Hi"
+  return app.config['MAIL_SERVER']
 
 
 @app.route('/home')

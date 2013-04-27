@@ -26,7 +26,7 @@ n authenticated.'
 
 @app.route('/email')
 def email():
-  msg = Message("Hello", sender="pgokhale@princeton.edu", recipients=["pranav.gokhale.93@gmail.com"])
+  msg = Message("Hello", recipients=["pranav.gokhale.93@gmail.com"])
   mail.send(msg)
   return "Hi"
 
