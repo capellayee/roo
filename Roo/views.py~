@@ -4,6 +4,8 @@ from Roo.models import User, Bag, Order
 from flask import Flask, request, session, g, redirect, url_for, \
 	abort, render_template, flash
 from flask_oauth import OAuth
+from flaskext.mail import Message
+from Roo import mail
 
 @app.route('/')
 def fblogin():
@@ -11,6 +13,11 @@ def fblogin():
     return render_template('login.html')
   else:
     return redirect(url_for('home'))
+
+@app.route('/email')
+def email():
+  msg = Message("Hello", sender="pgokhale@princeton.edu", recipients=["pranav.gokhale.93@gmail.com"])
+  mail.send(msg)
 
 @app.route('/home')
 def home():
