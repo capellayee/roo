@@ -10,6 +10,13 @@ DEBUG = True
 SECRET_KEY = 'development key'
 #USERNAME = 'admin'
 #PASSWORD = 'default'
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 465
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
+MAIL_USERNAME = 'rooshipping@gmail.com'
+MAIL_PASSWORD = 'kernighan333'
+DEFAULT_MAIL_SENDER = 'rooshipping@gmail.com'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
