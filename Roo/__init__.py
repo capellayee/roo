@@ -2,7 +2,7 @@ from __future__ import with_statement
 from contextlib import closing
 from Roo.database import db_session
 from flask import Flask
-from flaskext.mail import Mail
+from flask.ext.mail import Mail
 
 #configuration
 #DATABASE = '/tmp/flasktest.db'
