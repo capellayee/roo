@@ -1,9 +1,9 @@
 <html>
 <form method="post" action="/newbag" method="post">
 Store name: <input type="text" name="store"><br>
-Threshold (integer): <input type="text" name="threshold"<br>
+Threshold (integer): <input type="text" name="threshold"><br>
 Amount in bag (integer): <input type="text" name="amountinbag"><br>
-Network: <input type="text" name="network"<br>
+Network: <input type="text" name="network"><br>
 <input type="submit" class="button" value="Add to database"/>
 </form>
 </html>

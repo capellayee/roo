@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Carousel Template &middot; Bootstrap</title>
+    <title>Roo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -286,11 +286,10 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="#">Roo</a>
+            <a class="brand" href='{{ url_for('home') }}'>Roo</a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
-                <li class="active"><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href='{{ url_for('logout') }}'>Logout</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
@@ -322,7 +321,7 @@
             <div class="carousel-caption">
               <h1>Brooks Brothers.</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bag', bag='Brooks Brothers') }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=brooksbrothersid) }}'>Add to bag</a>
             </div>
           </div>
         </div>
@@ -332,7 +331,7 @@
             <div class="carousel-caption">
               <h1>Ralph Lauren</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bag', bag='Ralph Lauren') }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=ralphlaurenid) }}'>Add to bag</a>
             </div>
           </div>
         </div>
@@ -342,7 +341,7 @@
             <div class="carousel-caption">
               <h1>J. Crew</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bag', bag='J. Crew') }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=jcrewid) }}'>Add to bag</a>
             </div>
           </div>
         </div>
@@ -365,15 +364,17 @@
           <img class="img-circle" data-src="holder.js/140x140">
           <h2>My Bags</h2>
           <p>list of users bags, if possible </p>
-          <p><a class="btn" href="#">LuluLemon &raquo;</a></p>
-	  <p><a class="btn" href="#">J.Crew    &raquo;</a></p>
+	{% for bag in mybags %}
+          <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
+	{% endfor %}
         </div><!-- /.span4 -->
         <div class="span4">
           <img class="img-circle" data-src="holder.js/140x140">
           <h2>All Bags</h2>
           <p>list of all existing bags</p>
-          <p><a class="btn" href="#">Amazon &raquo;</a></p>
-	  <p><a class="btn" href="#">Ralph Lauren &raquo;</a></p>
+	{% for bag in allbags %}
+          <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
+	{% endfor %}
         </div><!-- /.span4 -->
         <div class="span4">
           <img class="img-circle" data-src="holder.js/140x140">

@@ -14,37 +14,49 @@ def fblogin():
 
 @app.route('/home')
 def home():
-  
+  # store the bagid's for the featured stores on the carousel
+  # brooks brothers
+  brooksbrothersid = Bag.query.filter_by(store = 'Brooks Brothers').first().id
+  # ralph lauren
+  ralphlaurenid = Bag.query.filter_by(store = 'Ralph Lauren').first().id
+  # j. crew
+  jcrewid = Bag.query.filter_by(store = 'J. Crew').first().id
+
   userid = session.get('userid')
-  return render_template('carousel.html', userid=userid)
+  allbags = Bag.query.all()
+  user = User.query.filter_by(id=userid).first()
+  mybags = []
+  for b in user.bag:
+    mybags.append(b)
+  return render_template('carousel.html', userid=userid, brooksbrothersid=brooksbrothersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags)
 
 # a test page for the admin
 @app.route('/all')
 def all():
-    entries = ""
-    for row in User.query.all():
-      entries = entries + "first name: " + row.firstname + '<br>'
-      entries = entries + "last name: " + row.lastname + '<br>'
-      entries = entries + "address: " + row.address + '<br>'
-      for row2 in row.bag:
-        entries = entries + "bags involved: " + str(row2.store) + '<br>'
-      for row2 in row.orders:
-        entries = entries + "order: " + str(row2.price) + '<br>'
-      entries = entries + "email: " + row.email + '<br><br>'
+  entries = ""
+  for row in User.query.all():
+    entries = entries + "first name: " + row.firstname + '<br>'
+    entries = entries + "last name: " + row.lastname + '<br>'
+    entries = entries + "address: " + row.address + '<br>'
+    entries = entries + "email: " + row.email + '<br><br>'
+    for row2 in row.bag:
+      entries = entries + "bags involved: " + str(row2.store) + '<br>'
+    for row2 in row.orders:
+      entries = entries + "order: " + str(row2.price) + '<br>'
       
-    entries = entries + "<br><br><br><br><br>Now, the Bags:<br>"
+  entries = entries + "<br><br><br><br><br>Now, the Bags:<br>"
     
-    for row in Bag.query.all():
-      entries = entries + "store name: " + row.store + "<br>"
-      entries = entries + "threshold: " + str(row.threshold) + "<br>"
-      entries = entries + "amount in bag: " + str(row.amountinbag) + "<br>"
-      entries = entries + "network: " + row.network + "<br>"
-      for row2 in row.users:
-        entries = entries + "user in bag: " + str(row2.firstname) + '<br>'
-      for row2 in row.orders:
-        entries = entries + "order: " + str(row2.price) + '<br>'
-      entries = entries + "<br><br>"
-    return entries
+  for row in Bag.query.all():
+    entries = entries + "store name: " + row.store + "<br>"
+    entries = entries + "threshold: " + str(row.threshold) + "<br>"
+    entries = entries + "amount in bag: " + str(row.amountinbag) + "<br>"
+    entries = entries + "network: " + row.network + "<br>"
+    for row2 in row.users:
+      entries = entries + "user in bag: " + str(row2.firstname) + '<br>'
+    for row2 in row.orders:
+      entries = entries + "order: " + str(row2.price) + '<br>'
+    entries = entries + "<br><br>"
+  return entries
 
 @app.route('/newbag', methods=['GET', 'POST'])
 def newbag():
@@ -56,10 +68,22 @@ def newbag():
   return render_template('newbagform.html')
 
 # shows all of the relevant information for a store's bag
-@app.route('/bag/<bagid>')
+@app.route('/bag/<bagid>', methods=['GET', 'POST'])
 def bagpage(bagid):
   bag = Bag.query.filter_by(id=bagid).first()
-  baginfo = "Store name: " + str(bag.store) + '<br> Cost for free shipping: ' + str(bag.threshold) + '<br> Amount in bag: ' + str(bag.amountinbag) + '<br> Amount needed to ship: ' + str(bag.threshold -bag.amountinbag) + '<br>'
+  if request.method == 'POST':
+    bag.amountinbag = bag.amountinbag + int(request.form['price'])
+    # add the user to the bag
+    user = User.query.filter_by(id=session.get('userid')).first()
+    bag.users.append(user)
+    # add the user's order to the bag
+    order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], bag.id, user.id)
+    bag.orders.append(order)
+    db_session.add(order)
+    db_session.commit()
+    flash("Your purchase has been added")
+    return redirect(url_for('bagpage', bagid=bagid))
+  return render_template('bagpage.html', bag=bag)
 
 # displays all of the users' bags
 @app.route('/mybags/<userid>')
@@ -87,7 +111,7 @@ def addtobag(userid):
         # add the user to the bag
         bag.users.append(user)
         # add the user's order to the bag
-        order = Order(request.form['itemurl'], request.form['price'], bag.id, userid)
+        order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], bag.id, userid)
         bag.orders.append(order)
         db_session.add(order)
         db_session.commit()
@@ -139,18 +163,17 @@ def facebook_authorized(resp):
     session['facebook_token'] = (resp['access_token'], '')
 
     fbuser = facebook.get('me').data
-    emailaddress = fbuser['email']
-    if User.query.filter_by(email = emailaddress).first() == None:
+#    return fbuser['email']
+    if User.query.filter_by(email = fbuser['email']).first() == None:
       user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], '', '')
       db_session.add(user)
       db_session.commit()
     
     session['userid'] = User.query.filter_by(email = fbuser['email']).first().id
-
     return redirect(url_for('home'))
 
 @app.route("/logout")
 def logout():
     pop_login_session()
-    return redirect(url_for('home'))
+    return redirect(url_for('fblogin'))
 
