@@ -2,6 +2,7 @@ from __future__ import with_statement
 from contextlib import closing
 from Roo.database import db_session
 from flask import Flask
+from flaskext.mail import Mail
 
 #configuration
 #DATABASE = '/tmp/flasktest.db'
@@ -13,6 +14,8 @@ SECRET_KEY = 'development key'
 app = Flask(__name__)
 app.config.from_object(__name__)
 #app.config.from_envvar('FLASKR_SETTINGS', silent=True)
+
+mail = Mail(app)
 
 import Roo.views
 
