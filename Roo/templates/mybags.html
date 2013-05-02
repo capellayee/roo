@@ -82,29 +82,23 @@
     </div><!-- /.navbar-wrapper -->
 
           
-          <div class="row-fluid">
+  <div class="row-fluid">
             <ul class=bag>
-	    {% for bag in mybags %}
+	          {% for bag in mybags %}
               <div class="span4">
                 <h2>{{bag.store}}</h2>
-		<p>
 		Total in {{bag.store}} bag: {{ bag.amountinbag }} <br>
-                Amount needed to ship: {{ bag.threshold - bag.amountinbag }} <br>
-		<!--{% for order in userorder %}
-		  {% if order[1] == bag.store %}
-        	    {% for ord in order[0] %}  
-		      My orders:  {{ ord.url  }} <br>
-		    {% endfor %}
-		  {% endif %}
+                Amount needed to ship: {{ bag.threshold - bag.amountinbag }} </p>
+                <br>
+		{% for order in userorders %}
+		My orders:  {{ order.url  }} <br>
 		{% endfor %}
-		store name should be: {{ order[1] }} <br>
-		{% endfor %}-->
-		</p>
                 <p><a class="btn" href="#">Add to bag &raquo;</a></p>
                 <p><a class="btn" href="#">Remove from bag &raquo;</a></p>
               </div><!--/span-->
-            {% endfor %}
+            {% endfor %}x
             </ul>
+
 
       <hr>
 
