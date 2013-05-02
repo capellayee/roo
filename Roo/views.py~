@@ -92,6 +92,7 @@ def newbag():
 @app.route('/bag/<bagid>', methods=['GET', 'POST'])
 def bagpage(bagid):
   bag = Bag.query.filter_by(id=bagid).first()
+  user = User.query.filter_by(id=session.get('userid')).first()
   if request.method == 'POST':
     bag.amountinbag = bag.amountinbag + int(request.form['price'])
     # add the user to the bag
