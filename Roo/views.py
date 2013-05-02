@@ -176,8 +176,7 @@ def pop_login_session():
 
 @app.route("/facebook_login")
 def facebook_login():
-  return facebook.authorize(callback=url_for('facebook_authorized',
-                                             next=request.args.get('next'), _external=True))
+  return facebook.authorize(callback=url_for('facebook_authorized',next=request.args.get('next'), _external=True))
 
 @app.route("/facebook_authorized")
 @facebook.authorized_handler
