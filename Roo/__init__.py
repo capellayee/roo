@@ -13,8 +13,6 @@ SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
 
-#mail = Mail(app)
-
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
@@ -25,6 +23,8 @@ app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = 'rooshipping@gmail.com'
 app.config['MAIL_PASSWORD'] = 'kernighan333'
 app.config['DEFAULT_MAIL_SENDER'] = 'rooshipping@gmail.com'
+
+mail = Mail(app)
 
 import Roo.views
 

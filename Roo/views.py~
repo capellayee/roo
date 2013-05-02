@@ -4,8 +4,8 @@ from Roo.models import User, Bag, Order
 from flask import Flask, request, session, g, redirect, url_for, \
 	abort, render_template, flash
 from flask_oauth import OAuth
-from flask.ext.mail import Message
-from Roo import mail
+#from flask.ext.mail import Message
+#from Roo import mail
 
 @app.route('/')
 def fblogin():
