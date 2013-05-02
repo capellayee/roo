@@ -17,11 +17,11 @@ def fblogin():
 
 @app.route('/cas')
 def cas():
-  C = CASClient()
-#  netid = C.Authenticate()
-  return C.Authenticate()
-#  text = "Content-Type: text/html <br> Hello from the other side, " + str(netid) + '<br> print "Think of this as the main page of your application after ' + str(netid) + '  has been authenticated.'
-#  return text
+  C = CASClient.CASClient()
+  netid = C.Authenticate()
+
+  text = "Content-Type: text/html <br> Hello from the other side, " + str(netid) + '<br> print "Think of this as the main page of your application after ' + str(netid) + '  has been authenticated.'
+  return text
 
 @app.route('/email')
 def email():
