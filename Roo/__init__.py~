@@ -2,7 +2,7 @@ from __future__ import with_statement
 from contextlib import closing
 from Roo.database import db_session
 from flask import Flask
-from flask.ext.mail import Mail
+#from flask.ext.mail import Mail
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -23,7 +23,7 @@ SECRET_KEY = 'development key'
 #app.config['DEFAULT_MAIL_SENDER'] = 'rooshipping@gmail.com'
 
 
-mail = Mail(app)
+#mail = Mail(app)
 
 import Roo.views
 
