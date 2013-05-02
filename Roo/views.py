@@ -24,14 +24,14 @@ n authenticated.'
 
   return text
 
-@app.route('/email')
-def email():
-  text = ""
-  for bag in Bag.query.all():
-    text = text + bag.store
-  msg = Message(text, sender="rooshipping@gmail.com", recipients=["pranav.gokhale.93@gmail.com"])
-  mail.send(msg)
-  return "Hi"
+#@app.route('/email')
+#def email():
+#  text = ""
+#  for bag in Bag.query.all():
+#    text = text + bag.store
+#  msg = Message(text, sender="rooshipping@gmail.com", recipients=["pranav.gokhale.93@gmail.com"])
+#  mail.send(msg)
+#  return "Hi"
 
 
 @app.route('/home')
