@@ -124,7 +124,7 @@ def mybags(userid):
     userorder = Order.query.filter_by(bag_id=int(bag.id), user_id=userid)
 #    for order in userorder:
 #      bags = bags + "my items: " + str(order.url) + '<br>'
-  return render_template('mybags.html', mybags=userbags)
+  return render_template('mybags.html', mybags=userbags, userorder=userorder)
 
 # allows a user to add to a bag
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])
