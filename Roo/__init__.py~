@@ -23,7 +23,7 @@ SECRET_KEY = 'development key'
 #app.config['DEFAULT_MAIL_SENDER'] = 'rooshipping@gmail.com'
 
 
-#mail = Mail(app)
+mail = Mail(app)
 
 import Roo.views
 
