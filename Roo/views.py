@@ -106,6 +106,7 @@ def bagpage(bagid):
    # flash("Your purchase has been added")
    # return redirect(url_for('bagpage', bagid=bagid))
   #return render_template('bagpage.html', bag=bag)
+  return user.id
 
 # displays all of the users' bags
 @app.route('/mybags/<userid>')

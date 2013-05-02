@@ -97,14 +97,15 @@ def bagpage(bagid):
     # add the user to the bag
     user = User.query.filter_by(id=session.get('userid')).first()
     bag.users.append(user)
+    return user.id
     # add the user's order to the bag
-    order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], bag.id, user.id)
-    bag.orders.append(order)
-    db_session.add(order)
-    db_session.commit()
-    flash("Your purchase has been added")
-    return redirect(url_for('bagpage', bagid=bagid))
-  return render_template('bagpage.html', bag=bag)
+   # order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], bag.id, user.id)
+   # bag.orders.append(order)
+   # db_session.add(order)
+   # db_session.commit()
+   # flash("Your purchase has been added")
+   # return redirect(url_for('bagpage', bagid=bagid))
+  #return render_template('bagpage.html', bag=bag)
 
 # displays all of the users' bags
 @app.route('/mybags/<userid>')
