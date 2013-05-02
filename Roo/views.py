@@ -1,4 +1,5 @@
 from Roo import app
+from Roo.CASClient import CASClient
 from Roo.database import db_session
 from Roo.models import User, Bag, Order
 from flask import Flask, request, session, g, redirect, url_for, \

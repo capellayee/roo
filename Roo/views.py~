@@ -115,15 +115,14 @@ def mybags(userid):
 
   user = User.query.filter_by(id = userid).first()  
   userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
-#  bags = ""
-#  for bag in userbags:
-#    bags = bags + "bags involved: " + str(bag.store) + '<br>'
-#    bags = bags + "amount in bag: " + str(bag.amountinbag) + '<br>'
-#    bags = bags + "amount needed to ship: " + str(bag.threshold - bag.amountinbag) + '<br>'
-#    userorder = Order.query.filter_by(bag_id=int(bag.id), user_id=userid)
+  bags = ""
+  for bag in userbags:
+    bags = bags + "bags involved: " + str(bag.store) + '<br>'
+    bags = bags + "amount in bag: " + str(bag.amountinbag) + '<br>'
+    bags = bags + "amount needed to ship: " + str(bag.threshold - bag.amountinbag) + '<br>'
+    userorder = Order.query.filter_by(bag_id=int(bag.id), user_id=userid)
 #    for order in userorder:
 #      bags = bags + "my items: " + str(order.url) + '<br>'
-#  return bags
   return render_template('mybags.html', mybags=userbags)
 
 # allows a user to add to a bag
