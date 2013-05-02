@@ -17,7 +17,7 @@ def fblogin():
 
 @app.route('/cas')
 def cas():
-  C = CASClient.CASClient()
+  C = CASClient()
   netid = C.Authenticate()
 
   text = "Content-Type: text/html <br> Hello from the other side, " + str(netid) + '<br> print "Think of this as the main page of your application after ' + str(netid) + '  has been authenticated.'
@@ -116,15 +116,15 @@ def mybags(userid):
 
   user = User.query.filter_by(id = userid).first()  
   userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
-  bags = ""
+  userorders = []
   for bag in userbags:
-    bags = bags + "bags involved: " + str(bag.store) + '<br>'
-    bags = bags + "amount in bag: " + str(bag.amountinbag) + '<br>'
-    bags = bags + "amount needed to ship: " + str(bag.threshold - bag.amountinbag) + '<br>'
-    userorder = Order.query.filter_by(bag_id=int(bag.id), user_id=userid)
+#    bags = bags + "bags involved: " + str(bag.store) + '<br>'
+#    bags = bags + "amount in bag: " + str(bag.amountinbag) + '<br>'
+#    bags = bags + "amount needed to ship: " + str(bag.threshold - bag.amountinbag) + '<br>'
+    userorders.append(Order.query.filter_by(bag_id=int(bag.id), user_id=userid))
 #    for order in userorder:
 #      bags = bags + "my items: " + str(order.url) + '<br>'
-  return render_template('mybags.html', mybags=userbags, userorder=userorder)
+  return render_template('mybags.html', mybags=userbags, userorder=userorders)
 
 # allows a user to add to a bag
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])
