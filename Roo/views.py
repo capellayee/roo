@@ -109,21 +109,12 @@ def bagpage(bagid):
 # displays all of the users' bags
 @app.route('/mybags/<userid>')
 def mybags(userid):
-#  user = User.query.filter_by(id=userid).first()
-#  mybags = []
-#  for b in user.bag:
-#    mybags.append(b)
-
   user = User.query.filter_by(id = userid).first()  
   userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
   userorders = []
   for bag in userbags:
-#    bags = bags + "bags involved: " + str(bag.store) + '<br>'
-#    bags = bags + "amount in bag: " + str(bag.amountinbag) + '<br>'
-#    bags = bags + "amount needed to ship: " + str(bag.threshold - bag.amountinbag) + '<br>'
-    userorders.append(Order.query.filter_by(bag_id=int(bag.id), user_id=userid))
-#    for order in userorder:
-#      bags = bags + "my items: " + str(order.url) + '<br>'
+    tuple = (Order.query.filter_by(bag_id=int(bag.id), user_id=userid), str(bag.store))
+    userorders.append(tuple)
   return render_template('mybags.html', mybags=userbags, userorder=userorders)
 
 # allows a user to add to a bag
