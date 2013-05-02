@@ -39,8 +39,8 @@ class CASClient:
          ret = re.sub(r'ticket=[^&]*&?', '', ret)
          ret = re.sub(r'\?&?$|&$', '', ret)
          return ret
-         $url = preg_replace('/ticket=[^&]*&?/', '', $url);
-         return preg_replace('/?&?$|&$/', '', $url);
+         #$url = preg_replace('/ticket=[^&]*&?/', '', $url);
+         #return preg_replace('/?&?$|&$/', '', $url);
       return "something is badly wrong"
 
 # https://fed.princeton.edu/cas/
