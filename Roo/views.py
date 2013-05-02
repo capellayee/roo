@@ -116,7 +116,7 @@ def mybags(userid):
   for bag in userbags:
     tuple = (Order.query.filter_by(bag_id=int(bag.id), user_id=userid), str(bag.store))
     userorders.append(tuple)
-  for order in userorders
+  for order in userorders:
     bag = bag + order[1] + '<br>'
   return bags
   
