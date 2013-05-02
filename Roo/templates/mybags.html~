@@ -97,7 +97,7 @@
 		    {% endfor %}
 		  {% endif %}
 		{% endfor %}-->
-		  {{ order[0] }}
+		  {{ order[1] }}
 		{% endfor %}
 		</p>
                 <p><a class="btn" href="#">Add to bag &raquo;</a></p>
