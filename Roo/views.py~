@@ -4,8 +4,8 @@ from Roo.models import User, Bag, Order
 from flask import Flask, request, session, g, redirect, url_for, \
 	abort, render_template, flash
 from flask_oauth import OAuth
-#from flask.ext.mail import Message
-#from Roo import mail
+from flask.ext.mail import Message
+from Roo import mail
 
 @app.route('/')
 def fblogin():
@@ -14,24 +14,22 @@ def fblogin():
   else:
     return redirect(url_for('home'))
 
-#@app.route('/cas')
-#def cas():
-#  C = CASClient.CASClient()
-#  netid = C.Authenticate()
+@app.route('/cas')
+def cas():
+  C = CASClient.CASClient()
+  netid = C.Authenticate()
 
-#  text = "Content-Type: text/html <br> Hello from the other side, " + str(netid) + '<br> print "Think of this as the main page of your application after ' + str(netid) + '  has bee\
-#n authenticated.'
+  text = "Content-Type: text/html <br> Hello from the other side, " + str(netid) + '<br> print "Think of this as the main page of your application after ' + str(netid) + '  has been authenticated.'
+  return text
 
- # return text
-
-#@app.route('/email')
-#def email():
-#  text = ""
-#  for bag in Bag.query.all():
-#    text = text + bag.store
-#  msg = Message(text, sender="rooshipping@gmail.com", recipients=["pranav.gokhale.93@gmail.com"])
-#  mail.send(msg)
-#  return "Hi"
+@app.route('/email')
+def email():
+  text = ""
+  for bag in Bag.query.all():
+    text = text + bag.store
+  msg = Message(text, sender="rooshipping@gmail.com", recipients=["pranav.gokhale.93@gmail.com"])
+  mail.send(msg)
+  return "Hi"
 
 
 @app.route('/home')
