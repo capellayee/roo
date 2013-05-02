@@ -91,17 +91,19 @@
 		Total in {{bag.store}} bag: {{ bag.amountinbag }} <br>
                 Amount needed to ship: {{ bag.threshold - bag.amountinbag }} <br>
 		{% for order in userorder %}
-		  {% if order[1] == str(bag.store) %}
+		 <!-- {% if order[1] == bag.store %}
         	    {% for ord in order[0] %}  
 		      My orders:  {{ ord.url  }} <br>
 		    {% endfor %}
 		  {% endif %}
+		{% endfor %}-->
+		  {{ order[0] }}
 		{% endfor %}
 		</p>
                 <p><a class="btn" href="#">Add to bag &raquo;</a></p>
                 <p><a class="btn" href="#">Remove from bag &raquo;</a></p>
               </div><!--/span-->
-            {% endfor %}x
+            {% endfor %}
             </ul>
 
       <hr>
