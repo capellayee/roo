@@ -87,12 +87,13 @@
 	    {% for bag in mybags %}
               <div class="span4">
                 <h2>{{bag.store}}</h2>
+		<p>
 		Total in {{bag.store}} bag: {{ bag.amountinbag }} <br>
-                Amount needed to ship: {{ bag.threshold - bag.amountinbag }} </p>
-                <br>
+                Amount needed to ship: {{ bag.threshold - bag.amountinbag }} <br>
 		{% for order in userorders %}
 		My orders:  {{ order.url  }} <br>
 		{% endfor %}
+		</p>
                 <p><a class="btn" href="#">Add to bag &raquo;</a></p>
                 <p><a class="btn" href="#">Remove from bag &raquo;</a></p>
               </div><!--/span-->
