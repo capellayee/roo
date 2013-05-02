@@ -168,16 +168,17 @@ facebook = oauth.remote_app('facebook',
 
 @facebook.tokengetter
 def get_facebook_token():
-    return session.get('facebook_token')
+  return session.get('facebook_token')
 
 def pop_login_session():
-    session.pop('logged_in', None)
-    session.pop('facebook_token', None)
+  session.pop('logged_in', None)
+  session.pop('facebook_token', None)
 
 @app.route("/facebook_login")
 def facebook_login():
-    return facebook.authorize(callback=url_for('facebook_authorized',
-        next=request.args.get('next'), _external=True))
+#    return facebook.authorize(callback=url_for('facebook_authorized',
+#        next=request.args.get('next'), _external=True))
+  return 'Hi'
 
 @app.route("/facebook_authorized")
 @facebook.authorized_handler
