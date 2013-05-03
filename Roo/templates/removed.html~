@@ -83,17 +83,8 @@ v
   <div class="row-fluid">
     <div class="container">
       <div class="span4">
-        <h2>Remove the following order?</h2>
-	<h3>{{ order.url }} in {{ bag.store }}<br>
-	<p>
-          Order details:
-	  <ul>
-	    <li>Price: {{ order.price }}</li>
-	    <li>Quantity: {{ order.quantity }}</li>
-	    <li>Size: {{ order.size }}</li>
-	  </ul>
-	</p>
-	<p><a class="btn" href='{{ url_for('removed', orderid=order.id) }}'>Remove this order &raquo;</a></p>
+        <h2>Done!</h2>
+	<h3>Your order has been removed</h3>
       </div><!--/span-->
     
     </div><!--/.container-->
