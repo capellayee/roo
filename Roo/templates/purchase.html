@@ -75,9 +75,12 @@
       <h2>Your orders are:</h2>
       <p>
       {% for order in user.orders %}
-      {{ order.url }} <br>
+        {{ order.url }} <br>
+        <ul>
+	  <li>Price: {{ '%0.2f' % order.price }}</li>
+        </ul>
       {% endfor %}
-      Please pay the total amount below:
+      <h3>Total cost of your orders:</h3> {{ '%0.2f' % total }}
       </p>
 
 
