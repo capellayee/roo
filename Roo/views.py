@@ -24,9 +24,11 @@ def cas():
   C = CASClient()
   netid = C.Authenticate()
   if isinstance(netid, BaseResponse):
-    return netid
-  return "Yo.%s.you are authenticated" % netid
-#return render_template('login.cgi')
+    user = User.query.filter_by(id=userid).first()
+    user.isAuthenticated = True
+    session['logged_in'] = True    
+    return redirect(url_for('home'))
+return "you failed"
 
 @app.route('/email')
 def email():
@@ -205,9 +207,6 @@ def facebook_authorized(resp):
     if resp is None or 'access_token' not in resp:
         return redirect(next_url)
 
-    session['logged_in'] = True
-    session['facebook_token'] = (resp['access_token'], '')
-
     fbuser = facebook.get('me').data
 #    return fbuser['email']
     if User.query.filter_by(email = fbuser['email']).first() == None:
@@ -215,8 +214,15 @@ def facebook_authorized(resp):
       db_session.add(user)
       db_session.commit()
     
-    session['userid'] = User.query.filter_by(email = fbuser['email']).first().id
-    return redirect(url_for('home'))
+    user = User.query.filter_by(email = fbuser['email']).first()
+    session['userid'] = user.id
+    session['facebook_token'] = (resp['access_token'], '')
+
+    if user.isAuthenticated:
+      session['logged_in'] = True
+      return redirect(url_for('home'))
+
+    return redirect(url_for('cas'))
 
 @app.route("/logout")
 def logout():

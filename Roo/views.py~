@@ -24,24 +24,26 @@ def cas():
   C = CASClient()
   netid = C.Authenticate()
   if isinstance(netid, BaseResponse):
-    return netid
-  return "Yo.%s.you are authenticated" % netid
-#return render_template('login.cgi')
+    user = User.query.filter_by(id=userid).first()
+    user.isAuthenticated = True
+    return redirect(url_for('home'))
+return "you failed"
 
 @app.route('/email')
 def email():
-  text = ""
-  for bag in Bag.query.all():
-    text = text + bag.store
-  msg = Message(text, sender="rooshipping@gmail.com", recipients=["pranav.gokhale.93@gmail.com"])
-  msg.body = "Hi! You're bag on Roo is ready to be purchased!"
-  msg.html = """<a href="rooprinceton.herokuapp.com"><b>Please click this link and pay!</b></a>""" 
-  mail.send(msg)
-  return "Hi"
+  with mail.connect() as conn:
+    for user in users:
+      subject = "hello, %s, your purchases on Roo are ready to be ordered" % user.firstname
+      msg = Message(recipients=[user.email], subject=subject, sender="rooshipping@gmail.com")
+      msg.body = "Hi! You're bag on Roo is ready to be purchased!"
+      msg.html = """<a href="rooprinceton.herokuapp.com/purchase/"""+user.id+""""><b>Please click this link and pay!</b></a>""" 
 
-@app.route('/paypal')
-def paypal():
-  return render_template('paypal.html')
+    conn.send(msg)
+
+@app.route('/purchase/<userid>')
+def paypal(userid):
+  user = User.query.filter_by(id=userid).first()
+  return render_template('purchase.html', user=user)
 
 @app.route('/home')
 def home():
@@ -204,9 +206,6 @@ def facebook_authorized(resp):
     if resp is None or 'access_token' not in resp:
         return redirect(next_url)
 
-    session['logged_in'] = True
-    session['facebook_token'] = (resp['access_token'], '')
-
     fbuser = facebook.get('me').data
 #    return fbuser['email']
     if User.query.filter_by(email = fbuser['email']).first() == None:
@@ -214,8 +213,15 @@ def facebook_authorized(resp):
       db_session.add(user)
       db_session.commit()
     
-    session['userid'] = User.query.filter_by(email = fbuser['email']).first().id
-    return redirect(url_for('home'))
+    user = User.query.filter_by(email = fbuser['email']).first()
+    session['userid'] = user.id
+    session['facebook_token'] = (resp['access_token'], '')
+
+    if user.isAuthenticated:
+      session['logged_in'] = True
+      return redirect(url_for('home'))
+
+    return redirect(url_for('cas'))
 
 @app.route("/logout")
 def logout():

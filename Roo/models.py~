@@ -1,4 +1,4 @@
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, Boolean, Double
+from sqlalchemy import Table, Column, Integer, String, ForeignKey, Boolean, Float
 from sqlalchemy.orm import relationship, backref
 from Roo.database import Base
 
@@ -8,8 +8,8 @@ class Bag(Base):
   __tablename__ = 'bags'
   id = Column(Integer, primary_key=True)
   store = Column(String(30), unique=True)
-  threshold = Column(Double, unique=False)
-  amountinbag = Column(Double, unique=False)
+  threshold = Column(Float, unique=False)
+  amountinbag = Column(Float, unique=False)
   network = Column(String(30), unique=False)
 
   def __init__(self, store=None, threshold=None, amountinbag=None, network=None):
@@ -47,7 +47,7 @@ class Order(Base):
   __tablename__ = 'orders'
   id = Column(Integer, primary_key=True)
   url = Column(String(200), unique=False)
-  price = Column(Double, unique=False)
+  price = Column(Float, unique=False)
   quantity = Column(Integer, unique=False)
   size = Column(String(40), unique=False)
 #  ship = Column(Boolean, unique=False)
