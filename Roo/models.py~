@@ -49,7 +49,7 @@ class Order(Base):
   url = Column(String(200), unique=False)
   price = Column(Integer, unique=False)
   quantity = Column(Integer, unique=False)
-  size = Column(String(20), unique=False)
+  size = Column(String(40), unique=False)
 #  ship = Column(Boolean, unique=False)
 
   bag_id = Column(Integer, ForeignKey('bags.id'))
