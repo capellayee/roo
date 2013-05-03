@@ -26,8 +26,9 @@ def cas():
   if isinstance(netid, BaseResponse):
     user = User.query.filter_by(id=session['userid']).first()
     user.isauthenticated = True
-    session['logged_in'] = True    
-    return redirect(url_for('home'))
+    return "wtf"
+#    session['logged_in'] = True    
+#    return redirect(url_for('home'))
   return "you failed"
 
 @app.route('/email')
@@ -221,10 +222,10 @@ def facebook_authorized(resp):
     user = User.query.filter_by(email = fbuser['email']).first()
     session['userid'] = user.id
 
-    if user.isauthenticated:
-      return "failed"
-      session['logged_in'] = True
-      return redirect(url_for('home'))
+#    if user.isauthenticated:
+#      return "failed"
+#      session['logged_in'] = True
+#      return redirect(url_for('home'))
 
     return redirect(url_for('cas'))
 
