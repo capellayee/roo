@@ -18,7 +18,7 @@ class CASClient(object):
      # No valid ticket; redirect the browser to the login page to get one
       login_url = self.cas_url + 'login' \
          + '?service=' + urllib.quote(self.ServiceURL())
-      return redirect('google.com')
+      return redirect(login_url)
 
    def Validate(self, ticket):
       val_url = self.cas_url + "validate" + \
