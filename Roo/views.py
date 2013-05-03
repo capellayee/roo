@@ -210,6 +210,7 @@ def facebook_authorized(resp):
     if resp is None or 'access_token' not in resp:
         return redirect(next_url)
 
+    session['facebook_token'] = (resp['access_token'], '')
     fbuser = facebook.get('me').data
 #    return fbuser['email']
     if User.query.filter_by(email = fbuser['email']).first() == None:
@@ -219,7 +220,6 @@ def facebook_authorized(resp):
     
     user = User.query.filter_by(email = fbuser['email']).first()
     session['userid'] = user.id
-    session['facebook_token'] = (resp['access_token'], '')
 
     if user.isAuthenticated:
       session['logged_in'] = True
