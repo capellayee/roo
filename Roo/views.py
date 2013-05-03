@@ -108,7 +108,7 @@ def bagpage(bagid):
     db_session.add(order)
     db_session.commit()
     flash("Your purchase has been added")
-    return redirect(url_for('bagpage', bagid=bagid))
+    return redirect(url_for('bagpage', bagid=bagid, userid=user.id))
   return render_template('bagpage.html', bag=bag)
 
 
@@ -127,7 +127,7 @@ def mybags(userid):
 #      bags = bags + order.url + '<br>'
 #  return bags
   
-  return render_template('mybags.html', mybags=userbags, userorders=userorders)
+  return render_template('mybags.html', mybags=userbags, userorders=userorders, userid=user.id)
 
 # allows a user to add to a bag
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])

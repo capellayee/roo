@@ -321,7 +321,7 @@
             <div class="carousel-caption">
               <h1>Brooks Brothers.</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=brooksbrothersid, userid=userid) }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=brooksbrothersid) }}'>Add to bag</a>
             </div>
           </div>
         </div>
@@ -331,7 +331,7 @@
             <div class="carousel-caption">
               <h1>Ralph Lauren</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=ralphlaurenid, userid=userid) }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=ralphlaurenid) }}'>Add to bag</a>
             </div>
           </div>
         </div>
@@ -341,7 +341,7 @@
             <div class="carousel-caption">
               <h1>J. Crew</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=jcrewid, userid=userid) }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=jcrewid) }}'>Add to bag</a>
             </div>
           </div>
         </div>
@@ -364,7 +364,7 @@
           <img class="img-circle" data-src="holder.js/140x140">
           <h2>My Bags</h2>
 	{% for bag in mybags %}
-          <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id, userid=userid) }}'> {{bag.store}} &raquo;</a></p>
+          <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
 	{% endfor %}
         </div><!-- /.span4 -->
         <div class="span4">
@@ -372,7 +372,7 @@
           <h2>All Bags</h2>
           <p>list of all existing bags</p>
 	{% for bag in allbags %}
-          <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id, userid=userid) }}'> {{bag.store}} &raquo;</a></p>
+          <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
 	{% endfor %}
         </div><!-- /.span4 -->
         <div class="span4">

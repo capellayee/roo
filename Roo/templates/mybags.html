@@ -61,15 +61,13 @@
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
-                <li class="active"><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#contact">Login</a></li>
+                <li><a href='{{ url_for('logout') }}'>Logout</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Roo<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">My Bags</a></li>
-                    <li><a href="#">My Friend's Bags</a></li>
+                    <li><a href='{{ url_for('mybags', userid=userid) }}'>My Bags</a></li>
                     <li><a href="#">My Networks</a></li>
                   </ul>
                 </li>
@@ -89,18 +87,26 @@
       <div class="span4">
         <h2>{{bag.store}}</h2>
 	<p>
-	Total in {{bag.store}} bag: {{ bag.amountinbag }} <br>
-        Amount needed to ship: {{ bag.threshold - bag.amountinbag }} <br>
-	<!--<ul class=order>-->
+	  <h3>My items:</h3>
 	  {% for orders in userorders %}
 	    {% if orders[1] == bag.store %}
-	      My orders:
 	      {% for order in orders[0] %}
 	        {{ order.url }} <br>
+	        Order details:
+	        <ul>
+		  <li>Price: {{ order.price }}</li>
+		  <li>Quantity: {{ order.quantity }}</li>
+		  <li>Size: {{ order.size }}</li>
+		</ul>
+		<p><a class="btn" href='{{ url_for('removeorder', orderid=order.id) }}'>Remove this order &raquo;</a></p>
 	      {% endfor %}
-	  {% endif %}
+	    {% endif %}
 	  {% endfor %}
-	<!--</ul>-->
+
+	<h3>Total in {{bag.store}} bag:</h3> {{ bag.amountinbag }} <br>
+        <h3>Amount needed to ship:</h3> {{ bag.threshold - bag.amountinbag }} <br>
+	<!--<ul class=order>-->
+	  	<!--</ul>-->
 	</p>
         <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'>Add to bag &raquo;</a></p>
       </div><!--/span-->
