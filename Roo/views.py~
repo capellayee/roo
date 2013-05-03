@@ -129,9 +129,9 @@ def mybags(userid):
 
 # confirmation page for removing an order
 @app.route('/removeorder/<orderid>')
-def removeorder(orderid):
+def removeorder(bagid, orderid):
   order = Order.query.filter_by(id=orderid).first()
-  return render_template('removeorder.html', order=order)
+  return render_template('removeorder.html', order=order, bag=Bag.query.filter_by.first())
 
 # removed order, link back to original page
 @app.route('/removed/<orderid>')
