@@ -33,7 +33,7 @@ def email():
     text = text + bag.store
   msg = Message(text, sender="rooshipping@gmail.com", recipients=["pranav.gokhale.93@gmail.com"])
   msg.body = "Hi! You're bag on Roo is ready to be purchased!"
-  msg.html = "<a href="rooprinceton.herokuapp.com"><b>Please click this link and pay!</b></a>"    
+  msg.html = """<a href="rooprinceton.herokuapp.com"><b>Please click this link and pay!</b></a>""" 
   mail.send(msg)
   return "Hi"
 
