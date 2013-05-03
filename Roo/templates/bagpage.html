@@ -74,8 +74,8 @@
             <fieldset>
               <legend>{{ bag.store }}</legend>
               <span class="help-block">Purchase needed for free shipping: {{bag.threshold}}</span>
-	            <span class="help-block">Current amount in the bag: {{ %.2f % bag.amountinbag}}</span>
-              <span class="help-block">Required amount to ship: {{ %.2f % bag.threshold-bag.amountinbag}}</span>
+	            <span class="help-block">Current amount in the bag: {{ '%0.2f' % bag.amountinbag}}</span>
+              <span class="help-block">Required amount to ship: {{ '%0.2f' % bag.threshold-bag.amountinbag}}</span>
               <label>Add to Bag:</label>
               <label>Store URL</label>
                 <input type="text" name="itemurl" placeholder="paste url here!">
