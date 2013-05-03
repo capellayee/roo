@@ -30,18 +30,19 @@ def cas():
 
 @app.route('/email')
 def email():
-  text = ""
-  for bag in Bag.query.all():
-    text = text + bag.store
-  msg = Message(text, sender="rooshipping@gmail.com", recipients=["pranav.gokhale.93@gmail.com"])
-  msg.body = "Hi! You're bag on Roo is ready to be purchased!"
-  msg.html = """<a href="rooprinceton.herokuapp.com"><b>Please click this link and pay!</b></a>""" 
-  mail.send(msg)
-  return "Hi"
+  with mail.connect() as conn:
+    for user in users:
+      subject = "hello, %s, your purchases on Roo are ready to be ordered" % user.firstname
+      msg = Message(recipients=[user.email], subject=subject, sender="rooshipping@gmail.com")
+      msg.body = "Hi! You're bag on Roo is ready to be purchased!"
+      msg.html = """<a href="rooprinceton.herokuapp.com/purchase/"""+user.id+""""><b>Please click this link and pay!</b></a>""" 
 
-@app.route('/paypal')
-def paypal():
-  return render_template('paypal.html')
+    conn.send(msg)
+
+@app.route('/purchase/<userid>')
+def paypal(userid):
+  user = User.query.filter_by(id=userid).first()
+  return render_template('purchase.html', user=user)
 
 @app.route('/home')
 def home():
