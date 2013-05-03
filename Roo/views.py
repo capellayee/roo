@@ -23,7 +23,7 @@ def cas():
 #  return redirect('https://fed.princeton.edu/cas/')
   C = CASClient()
   netid = C.Authenticate()
-  return str(netid) + " you are authenticated"
+  return netid + " you are authenticated"
   return render_template('login.cgi')
 
 @app.route('/email')
