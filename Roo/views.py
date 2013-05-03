@@ -19,7 +19,7 @@ def fblogin():
 
 @app.route('/cas')
 def cas():
-  return "hi"
+  return render_template('caslogin.html')
 #  return redirect('https://fed.princeton.edu/cas/')
 #  C = CASClient()
 #  netid = C.Authenticate()
