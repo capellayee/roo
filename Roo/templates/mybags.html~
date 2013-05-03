@@ -90,7 +90,7 @@
 	<p>
 	Total in {{bag.store}} bag: {{ bag.amountinbag }} <br>
         Amount needed to ship: {{ bag.threshold - bag.amountinbag }} <br>
-	<ul class=order>
+	<!--<ul class=order>-->
 	  {% for orders in userorders %}
 	    {% if orders[1] == bag.store %}
 	      My orders:
@@ -99,7 +99,7 @@
 	      {% endfor %}
 	  {% endif %}
 	  {% endfor %}
-	</ul>
+	<!--</ul>-->
 	</p>
         <p><a class="btn" href="#">Add to bag &raquo;</a></p>
         <p><a class="btn" href="#">Remove from bag &raquo;</a></p>
