@@ -32,8 +32,9 @@ class User(Base):
   bag_id = Column(Integer, ForeignKey('bags.id'))
 
   bag = relationship("Bag", secondary=association_table, backref=backref('users', order_by=id))
+  isAuthenticated = Column(Boolean, unique=False)
 
-  def __init__(self, firstname=None, lastname=None, email=None, password=None, address=None, bag_id=None):
+  def __init__(self, firstname=None, lastname=None, email=None, password=None, address=None, bag_id=None, isAuthenticated=False):
     self.firstname = firstname
     self.lastname = lastname
     self.email = email

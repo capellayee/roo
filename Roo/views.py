@@ -25,7 +25,7 @@ def cas():
   netid = C.Authenticate()
   if isinstance(netid, BaseResponse):
     user = User.query.filter_by(id=userid).first()
-    user.isAuthenticated = True
+    user.isauthenticated = True
     session['logged_in'] = True    
     return redirect(url_for('home'))
   return "you failed"
@@ -221,7 +221,7 @@ def facebook_authorized(resp):
     user = User.query.filter_by(email = fbuser['email']).first()
     session['userid'] = user.id
 
-    if user.isAuthenticated:
+    if user.isauthenticated:
       session['logged_in'] = True
       return redirect(url_for('home'))
 
