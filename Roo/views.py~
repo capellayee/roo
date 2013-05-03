@@ -26,6 +26,7 @@ def cas():
   if isinstance(netid, BaseResponse):
     user = User.query.filter_by(id=userid).first()
     user.isAuthenticated = True
+    session['logged_in'] = True    
     return redirect(url_for('home'))
 return "you failed"
 
