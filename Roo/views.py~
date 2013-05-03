@@ -133,7 +133,7 @@ def addtobag(userid):
         # add the user to the bag
         bag.users.append(user)
         # add the user's order to the bag
-        order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], bag.id, userid)
+        order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], bag.id, user.id)
         bag.orders.append(order)
         db_session.add(order)
         db_session.commit()
