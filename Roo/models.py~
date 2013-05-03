@@ -12,6 +12,8 @@ class Bag(Base):
   amountinbag = Column(Integer, unique=False)
   network = Column(String(30), unique=False)
 
+  orders = relationship("Order")
+
   def __init__(self, store=None, threshold=None, amountinbag=None, network=None):
     self.store = store
     self.threshold = threshold
@@ -31,6 +33,7 @@ class User(Base):
   address = Column(String(80), unique=False)
   bag_id = Column(Integer, ForeignKey('bags.id'))
 
+  orders = relationship("Order")
   bag = relationship("Bag", secondary=association_table, backref=backref('users', order_by=id))
 
   def __init__(self, firstname=None, lastname=None, email=None, password=None, address=None, bag_id=None):
