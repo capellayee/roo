@@ -98,7 +98,7 @@
 		  <li>Quantity: {{ order.quantity }}</li>
 		  <li>Size: {{ order.size }}</li>
 		</ul>
-		<p><a class="btn" href='{{ url_for('removeorder', orderid=order.id) }}'>Remove this order &raquo;</a></p>
+		<p><a class="btn" href='{{ url_for('removeorder', bagid=bag.id, orderid=order.id) }}'>Remove this order &raquo;</a></p>
 	      {% endfor %}
 	    {% endif %}
 	  {% endfor %}
