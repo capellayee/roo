@@ -40,7 +40,7 @@ class User(Base):
     self.email = email
     self.password = password
     self.address = address
-    self.isauthenticated = false
+    self.isauthenticated = False
 
   def __repr__(self):
     return '<User %r>' % (self.firstname)
