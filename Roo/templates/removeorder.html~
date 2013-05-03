@@ -84,7 +84,7 @@
     <div class="container">
       <div class="span4">
         <h2>Remove the following order?</h2>
-	<h3>{{ order.url }} in {{ bag.store }}<br>
+	<h3>{{ order.url }} in {{ bag.store }}</h3><br>
 	<p>
           Order details:
 	  <ul>

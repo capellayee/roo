@@ -88,7 +88,7 @@
 	<p>
           Order details:
 	  <ul>
-	    <li>Price: {{ order.price }}</li>
+	    <li>Price: {{ '%0.2f' % order.price }}</li>
 	    <li>Quantity: {{ order.quantity }}</li>
 	    <li>Size: {{ order.size }}</li>
 	  </ul>
