@@ -18,7 +18,7 @@ def fblogin():
     return redirect(url_for('home'))
 
 @app.route('/cas')
-def cas(request):
+def cas():
   return redirect('https://fed.princeton.edu/cas/')
 
 #  C = CASClient()

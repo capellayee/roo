@@ -19,21 +19,7 @@ def fblogin():
 
 @app.route('/cas')
 def cas(request):
-  cas_url = "https://fed.princeton.edu/cas/"
-  service_url = 'http://' + urllib.quote(request.META['HTTP_HOST'] + request.META['PATH_INFO'])
-  service_url = re.sub(r'ticket=[^&]*&?', '', service_url)
-  service_url = re.sub(r'\?&?$|&$', '', service_url)
-  if "ticket" in request.GET:
-    val_url = cas_url + "validate?service=" + service_url + '&ticket=' + urllib.quote(request.GET['ticket'])
-    r = urllib.urlopen(val_url).readlines()
-    if len(r) == 2 and re.match("yes", r[0]) != None:
-      request.session['netid'] = r[1].strip()
-      return redirect(url_for('home'))
-    else:
-      return HttpResponse("Failed!")
-  else:
-    login_url = cas_url + 'login?service=' + service_url
-    return redirect(url_for('/'))
+  return redirect('https://fed.princeton.edu/cas/')
 
 #  C = CASClient()
 #  netid = C.Authenticate()
