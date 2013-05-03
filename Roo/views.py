@@ -7,7 +7,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from flask_oauth import OAuth
 from flask.ext.mail import Message
 from Roo import mail
-import urlib, re
+import urllib, re
 
 
 @app.route('/')
