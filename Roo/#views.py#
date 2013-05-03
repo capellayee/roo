@@ -32,6 +32,8 @@ def email():
   for bag in Bag.query.all():
     text = text + bag.store
   msg = Message(text, sender="rooshipping@gmail.com", recipients=["pranav.gokhale.93@gmail.com"])
+  msg.body = "Hi! You're bag on Roo is ready to be purchased!"
+  msg.html = """<a href="rooprinceton.herokuapp.com"><b>Please click this link and pay!</b></a>""" 
   mail.send(msg)
   return "Hi"
 
@@ -109,8 +111,8 @@ def bagpage(bagid):
     db_session.add(order)
     db_session.commit()
     flash("Your purchase has been added")
-    return redirect(url_for('bagpage', bagid=bagid, userid=user.id))
-  return render_template('bagpage.html', bag=bag)
+    return redirect(url_for('bagpage', bagid=bagid))
+  return render_template('bagpage.html', bag=bag, userid=session.get('userid'))
 
 
 # displays all of the users' bags
@@ -127,16 +129,18 @@ def mybags(userid):
 
 # confirmation page for removing an order
 @app.route('/removeorder/<orderid>')
-def removeorder(orderid):
+def removeorder(bagid, orderid):
   order = Order.query.filter_by(id=orderid).first()
-  return render_template('removeorder.html', order=order)
+  return render_template('removeorder.html', order=order, bag=Bag.query.filter_by.first())
 
+# removed order, link back to original page
 @app.route('/removed/<orderid>')
 def removed(orderid):
   order = Order.query.filter_by(id=orderid).first()
   db_session.delete(order)
   db_session.commit()
   return render_template('removed.html', userid=session.get('userid'))
+
 
 # allows a user to add to a bag
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])
