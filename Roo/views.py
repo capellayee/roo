@@ -24,11 +24,12 @@ def cas():
   C = CASClient()
   netid = C.Authenticate()
   if isinstance(netid, BaseResponse):
-    user = User.query.filter_by(id=session['userid']).first()
-    user.isauthenticated = True
-    return "wtf"
+ #   user = User.query.filter_by(id=session['userid']).first()
+ #   user.isauthenticated = True
+#    return "wtf"
 #    session['logged_in'] = True    
-#    return redirect(url_for('home'))
+    return netid
+    return redirect(url_for('home'))
   return "you failed"
 
 @app.route('/email')
