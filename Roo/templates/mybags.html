@@ -102,8 +102,7 @@
 	  {% endfor %}
 	<!--</ul>-->
 	</p>
-        <p><a class="btn" href="#">Add to bag &raquo;</a></p>
-        <p><a class="btn" href="#">Remove from bag &raquo;</a></p>
+        <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'>Add to bag &raquo;</a></p>
       </div><!--/span-->
       {% endfor %}
     </ul>
