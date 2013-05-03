@@ -83,24 +83,29 @@
 
           
   <div class="row-fluid">
-            <ul class=bag>
-	          {% for bag in mybags %}
-              <div class="span4">
-                <h2>{{bag.store}}</h2>
-		Total in {{bag.store}} bag: {{ bag.amountinbag }} <br>
-                Amount needed to ship: {{ bag.threshold - bag.amountinbag }} </p>
-                <br>
-		<ul class=order>
-		  {% for order in userorders %}
-		  My orders:  {{ order[0]  }} <br>
-		  {% endfor %}
-		</ul>
-                <p><a class="btn" href="#">Add to bag &raquo;</a></p>
-                <p><a class="btn" href="#">Remove from bag &raquo;</a></p>
-              </div><!--/span-->
-            {% endfor %}
-            </ul>
-
+    <ul class=bag>
+      {% for bag in mybags %}
+      <div class="span4">
+        <h2>{{bag.store}}</h2>
+	<p>
+	Total in {{bag.store}} bag: {{ bag.amountinbag }} <br>
+        Amount needed to ship: {{ bag.threshold - bag.amountinbag }} <br>
+	<ul class=order>
+	  {% for orders in userorders %}
+	    {% if orders[1] == bag.store %}
+	      My orders:
+	      {% for order in orders[0] %}
+	        {{ order.url }} <br>
+	    {% endif %}
+	  {% endfor %}
+	</ul>
+	</p>
+        <p><a class="btn" href="#">Add to bag &raquo;</a></p>
+        <p><a class="btn" href="#">Remove from bag &raquo;</a></p>
+      </div><!--/span-->
+      {% endfor %}
+    </ul>
+    
 
       <hr>
 

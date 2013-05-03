@@ -117,12 +117,12 @@ def mybags(userid):
   for bag in userbags:
     tuple = (Order.query.filter_by(bag_id=int(bag.id), user_id=userid).all(), str(bag.store))
     userorders.append(tuple)
-  for orders in userorders:
-    for order in orders[0]:
-      bags = bags + order.url + '<br>'
-  return bags
+#  for orders in userorders:
+#    for order in orders[0]:
+#      bags = bags + order.url + '<br>'
+#  return bags
   
-#  return render_template('mybags.html', mybags=userbags, userorder=userorders)
+  return render_template('mybags.html', mybags=userbags, userorders=userorders)
 
 # allows a user to add to a bag
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])
