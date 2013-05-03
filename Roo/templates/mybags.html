@@ -94,7 +94,7 @@
 	        {{ order.url }} <br>
 	        Order details:
 	        <ul>
-		  <li>Price: {{ order.price }}</li>
+		  <li>Price: {{ '%0.2f' % order.price }}</li>
 		  <li>Quantity: {{ order.quantity }}</li>
 		  <li>Size: {{ order.size }}</li>
 		</ul>
@@ -103,8 +103,8 @@
 	    {% endif %}
 	  {% endfor %}
 
-	<h3>Total in {{bag.store}} bag:</h3> {{ bag.amountinbag }} <br>
-        <h3>Amount needed to ship:</h3> {{ bag.threshold - bag.amountinbag }} <br>
+	<h3>Total in {{bag.store}} bag:</h3> {{ '%0.2f' % bag.amountinbag }} <br>
+        <h3>Amount needed to ship:</h3> {{ '%0.2f' % (bag.threshold - bag.amountinbag) }} <br>
 	<!--<ul class=order>-->
 	  	<!--</ul>-->
 	</p>
