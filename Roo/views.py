@@ -28,7 +28,7 @@ def cas():
     user.isAuthenticated = True
     session['logged_in'] = True    
     return redirect(url_for('home'))
-return "you failed"
+  return "you failed"
 
 @app.route('/email')
 def email():

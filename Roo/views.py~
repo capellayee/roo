@@ -7,7 +7,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from flask_oauth import OAuth
 from flask.ext.mail import Message
 from Roo import mail
-import urllib, re
+import time
 from werkzeug.wrappers import BaseResponse
 
 @app.route('/')
@@ -32,14 +32,17 @@ return "you failed"
 
 @app.route('/email')
 def email():
-  with mail.connect() as conn:
-    for user in users:
-      subject = "hello, %s, your purchases on Roo are ready to be ordered" % user.firstname
-      msg = Message(recipients=[user.email], subject=subject, sender="rooshipping@gmail.com")
-      msg.body = "Hi! You're bag on Roo is ready to be purchased!"
-      msg.html = """<a href="rooprinceton.herokuapp.com/purchase/"""+user.id+""""><b>Please click this link and pay!</b></a>""" 
-
-    conn.send(msg)
+  localtime = time.localtime(time.time())
+  dayoftheweek = localtime[6]
+  if dayoftheweek == 4:
+    with mail.connect() as conn:
+      for user in users:
+        subject = "hello, %s, your purchases on Roo are ready to be ordered" % user.firstname
+        msg = Message(recipients=[user.email], subject=subject, sender="rooshipping@gmail.com")
+        msg.body = "Hi! You're bag on Roo is ready to be purchased!"
+        msg.html = """<a href="rooprinceton.herokuapp.com/purchase/"""+user.id+""""><b>Please click this link and pay!</b></a>""" 
+        
+        conn.send(msg)
 
 @app.route('/purchase/<userid>')
 def paypal(userid):
