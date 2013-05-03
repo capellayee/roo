@@ -19,12 +19,12 @@ def fblogin():
 
 @app.route('/cas')
 def cas():
+  return "hi"
 #  return redirect('https://fed.princeton.edu/cas/')
-
 #  C = CASClient()
 #  netid = C.Authenticate()
 #  return str(netid) + "you are authenticated"
-  return render_template('login.cgi')
+#  return render_template('login.cgi')
 
 @app.route('/email')
 def email():
