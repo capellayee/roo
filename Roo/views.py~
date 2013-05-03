@@ -122,7 +122,7 @@ def mybags(userid):
 #      bags = bags + order.url + '<br>'
 #  return bags
   
-  return render_template('mybags.html', mybags=userbags, userorder=userorders)
+  return render_template('mybags.html', mybags=userbags, userorders=userorders)
 
 # allows a user to add to a bag
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])

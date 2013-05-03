@@ -7,6 +7,8 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from flask_oauth import OAuth
 from flask.ext.mail import Message
 from Roo import mail
+import urlib, re
+
 
 @app.route('/')
 def fblogin():
@@ -16,12 +18,28 @@ def fblogin():
     return redirect(url_for('home'))
 
 @app.route('/cas')
-def cas():
-  C = CASClient()
-  netid = C.Authenticate()
+def cas(request):
+  cas_url = "https://fed.princeton.edu/cas/"
+  service_url = 'http://' + urllib.quote(request.META['HTTP_HOST'] + request.META['PATH_INFO'])
+  service_url = re.sub(r'ticket=[^&]*&?', '', service_url)
+  service_url = re.sub(r'\?&?$|&$', '', service_url)
+  if "ticket" in request.GET:
+    val_url = cas_url + "validate?service=" + service_url + '&ticket=' + urllib.quote(request.GET['ticket'])
+    r = urllib.urlopen(val_url).readlines()
+    if len(r) == 2 and re.match("yes", r[0]) != None:
+      request.session['netid'] = r[1].strip()
+      return redirect(url_for('home'))
+    else:
+      return HttpResponse("Failed!")
+  else:
+    login_url = cas_url + 'login?service=' + service_url
+    return redirect(url_for('/'))
 
-  text = "Content-Type: text/html <br> Hello from the other side, " + str(netid) + '<br> print "Think of this as the main page of your application after ' + str(netid) + '  has been authenticated.'
-  return text
+#  C = CASClient()
+#  netid = C.Authenticate()
+
+#  text = "Content-Type: text/html <br> Hello from the other side, " + str(netid) + '<br> print "Think of this as the main page of your application after ' + str(netid) + '  has been authenticated.'
+#  return text
 
 @app.route('/email')
 def email():
