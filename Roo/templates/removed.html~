@@ -1,4 +1,4 @@
-
+v
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -82,36 +82,19 @@
           
   <div class="row-fluid">
     <div class="container">
-    <ul class=bag>
-      {% for bag in mybags %}
       <div class="span4">
-        <h2>{{bag.store}}</h2>
+        <h2>Remove the following order?</h2>
+	<h3>{{ order.url }} in {{ bag.store }}<br>
 	<p>
-	  <h3>My items:</h3>
-	  {% for orders in userorders %}
-	    {% if orders[1] == bag.store %}
-	      {% for order in orders[0] %}
-	        {{ order.url }} <br>
-	        Order details:
-	        <ul>
-		  <li>Price: {{ order.price }}</li>
-		  <li>Quantity: {{ order.quantity }}</li>
-		  <li>Size: {{ order.size }}</li>
-		</ul>
-		<p><a class="btn" href='{{ url_for('removeorder', bagid=bag.id, orderid=order.id) }}'>Remove this order &raquo;</a></p>
-	      {% endfor %}
-	    {% endif %}
-	  {% endfor %}
-
-	<h3>Total in {{bag.store}} bag:</h3> {{ bag.amountinbag }} <br>
-        <h3>Amount needed to ship:</h3> {{ bag.threshold - bag.amountinbag }} <br>
-	<!--<ul class=order>-->
-	  	<!--</ul>-->
+          Order details:
+	  <ul>
+	    <li>Price: {{ order.price }}</li>
+	    <li>Quantity: {{ order.quantity }}</li>
+	    <li>Size: {{ order.size }}</li>
+	  </ul>
 	</p>
-        <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'>Add to bag &raquo;</a></p>
+	<p><a class="btn" href='{{ url_for('removed', orderid=order.id) }}'>Remove this order &raquo;</a></p>
       </div><!--/span-->
-      {% endfor %}
-    </ul>
     
     </div><!--/.container-->
     </div><!--/.fluid-container-->
