@@ -13,6 +13,7 @@ class CASClient:
          netid = self.Validate(form['ticket'].value)
          if netid != None:
             return netid
+      return "no valid ticket"
      # No valid ticket; redirect the browser to the login page to get one
       login_url = self.cas_url + 'login' \
          + '?service=' + urllib.quote(self.ServiceURL())
