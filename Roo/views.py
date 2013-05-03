@@ -36,6 +36,9 @@ def email():
   mail.send(msg)
   return "Hi"
 
+@app.route('/paypal')
+def paypal():
+  return render_template('paypal.html')
 
 @app.route('/home')
 def home():
