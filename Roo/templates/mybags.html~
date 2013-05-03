@@ -97,6 +97,7 @@
 		  <li>Price: {{ order.price }}</li>
 		  <li>Quantity: {{ order.quantity }}</li>
 		  <li>Size: {{ order.size }}</li>
+		  <li>orderid: {{order.id}} bag id: {{bag.id}}</li>
 		</ul>
 		<p><a class="btn" href='{{ url_for('removeorder', bagid=bag.id, orderid=order.id) }}'>Remove this order &raquo;</a></p>
 	      {% endfor %}
