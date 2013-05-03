@@ -138,6 +138,8 @@ def removeorder(orderid):
 @app.route('/removed/<orderid>')
 def removed(orderid):
   order = Order.query.filter_by(id=orderid).first()
+  bag = Bag.query.filter_by(order.bag_id)
+  bag.amountinbag = bag.amountinbag - order.price
   db_session.delete(order)
   db_session.commit()
   return render_template('removed.html', userid=session.get('userid'))
