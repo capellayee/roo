@@ -109,8 +109,8 @@ def bagpage(bagid):
     db_session.add(order)
     db_session.commit()
     flash("Your purchase has been added")
-    return redirect(url_for('bagpage', bagid=bagid, userid=user.id))
-  return render_template('bagpage.html', bag=bag)
+    return redirect(url_for('bagpage', bagid=bagid))
+  return render_template('bagpage.html', bag=bag, userid=session.get('userid'))
 
 
 # displays all of the users' bags
@@ -123,12 +123,22 @@ def mybags(userid):
   for bag in userbags:
     tuple = (Order.query.filter_by(bag_id=int(bag.id), user_id=userid).all(), str(bag.store))
     userorders.append(tuple)
-#  for orders in userorders:
-#    for order in orders[0]:
-#      bags = bags + order.url + '<br>'
-#  return bags
-  
   return render_template('mybags.html', mybags=userbags, userorders=userorders, userid=user.id)
+
+# confirmation page for removing an order
+@app.route('/removeorder/<orderid>')
+def removeorder(orderid):
+  order = Order.query.filter_by(id=orderid).first()
+  return render_template('removeorder.html', order=order)
+
+# removed order, link back to original page
+@app.route('/removed/<orderid>')
+def removed(orderid):
+  order = Order.query.filter_by(id=orderid).first()
+  db_session.delete(order)
+  db_session.commit()
+  return render_template('removed.html', userid=session.get('userid'))
+
 
 # allows a user to add to a bag
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])

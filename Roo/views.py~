@@ -19,20 +19,12 @@ def fblogin():
 
 @app.route('/cas')
 def cas():
-<<<<<<< HEAD
-#  return redirect('https://fed.princeton.edu/cas/')
-
-  C = CASClient()
-  netid = C.Authenticate()
-  return str(netid) + "you are authenticated"
-=======
-  return "hi"
+  return render_template('caslogin.html')
 #  return redirect('https://fed.princeton.edu/cas/')
 #  C = CASClient()
 #  netid = C.Authenticate()
 #  return str(netid) + "you are authenticated"
 #  return render_template('login.cgi')
->>>>>>> f258bd6cb7f0a487302125ca8b6fa0de37def175
 
 @app.route('/email')
 def email():
@@ -118,7 +110,7 @@ def bagpage(bagid):
     db_session.commit()
     flash("Your purchase has been added")
     return redirect(url_for('bagpage', bagid=bagid))
-  return render_template('bagpage.html', bag=bag)
+  return render_template('bagpage.html', bag=bag, userid=session.get('userid'))
 
 
 # displays all of the users' bags
@@ -131,12 +123,7 @@ def mybags(userid):
   for bag in userbags:
     tuple = (Order.query.filter_by(bag_id=int(bag.id), user_id=userid).all(), str(bag.store))
     userorders.append(tuple)
-#  for orders in userorders:
-#    for order in orders[0]:
-#      bags = bags + order.url + '<br>'
-#  return bags
-  
-  return render_template('mybags.html', mybags=userbags, userorders=userorders)
+  return render_template('mybags.html', mybags=userbags, userorders=userorders, userid=user.id)
 
 # allows a user to add to a bag
 @app.route('/addtobag/<userid>', methods=['GET', 'POST'])
