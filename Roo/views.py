@@ -8,7 +8,7 @@ from flask_oauth import OAuth
 from flask.ext.mail import Message
 from Roo import mail
 import urllib, re
-
+from werkzeug.wrappers import BaseResponse
 
 @app.route('/')
 def fblogin():
@@ -23,6 +23,8 @@ def cas():
 #  return redirect('https://fed.princeton.edu/cas/')
   C = CASClient()
   netid = C.Authenticate()
+  if isinstance(netid, BaseResponse):
+    return netid
   return "Yo.%s.you are authenticated" % netid
 #return render_template('login.cgi')
 
