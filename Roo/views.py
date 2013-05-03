@@ -222,6 +222,7 @@ def facebook_authorized(resp):
     session['userid'] = user.id
 
     if user.isauthenticated:
+      return "failed"
       session['logged_in'] = True
       return redirect(url_for('home'))
 
