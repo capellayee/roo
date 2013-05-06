@@ -162,7 +162,7 @@ def bagpage(bagid):
       return redirect(url_for('bagpage', bagid=bagid))
 
 
-    bag.amountinbag = bag.amountinbag + int(request.form['price'])
+    bag.amountinbag = bag.amountinbag + price
     # add the user to the bag
     user = User.query.filter_by(id=session.get('userid')).first()
     bag.users.append(user)
