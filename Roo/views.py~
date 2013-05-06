@@ -14,7 +14,7 @@ from werkzeug.wrappers import BaseResponse
 def casverify():
   C = CASClient()
   n = C.Authenticate()
-  return n
+  return str(n) + "hi"
 
 @app.route('/')
 def fblogin():
