@@ -24,7 +24,7 @@ def cas():
 #  return "hello"
   C = CASClient()
   n = C.Authenticate()
-  return redirect(url_for('home'), thedamnid=n)
+  return redirect(url_for('home', n=n))
   return "hello"
 #  n = netid
 #  user = User.query.filter_by(id=session['userid']).first()

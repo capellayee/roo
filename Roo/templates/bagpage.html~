@@ -86,13 +86,17 @@
 	            <span class="help-block">Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</span>
               <span class="help-block">Required amount to ship: {{ '%0.2f' % (bag.threshold-bag.amountinbag) }}</span>
               <label>Add to Bag:</label>
-              <label>Store URL</label>
-                <input type="text" name="itemurl" placeholder="paste url here!">
-	      <label>amount of purchase</label> 
-	        <input  type="text" name="price" placeholder="cost of your purchase?">
+              <label>Store URL</label> <input type="text" name="itemurl" placeholder="paste url here!">
+	      <label>amount of purchase</label> <input  type="text" name="price" placeholder="cost of your purchase?">
+		{% if error %}
+	          <p class=error><strong>Error:</strong> {{ error }}
+		{% endif %}
               <label>size</label> <input type="text" name="size" placeholder="what size do you want?">
-	            <label>quantity</label> <input type="text" name="quantity" placeholder="how many?">
-              <label class="checkbox">
+	      <label>quantity</label> <input type="text" name="quantity" placeholder="how many?">
+        	{% if error %}
+	          <p class=error><strong>Error:</strong> {{ error }}
+		{% endif %}
+	      <label class="checkbox">
                 <input type="checkbox" name="ship" value="True"> Ship to me?
               </label>
               <button type="submit" class="btn">Submit</button>
