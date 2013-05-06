@@ -249,6 +249,7 @@ def removed(orderid):
   orders = Order.query.filter_by(bag_id=int(bag.id), user_id=user.id).all()
   if not orders:
     user.bag.remove(bag)
+    db_session.commit()
   db_session.delete(order)
   db_session.commit()
   return render_template('removed.html', userid=user.id, bag=bag)
