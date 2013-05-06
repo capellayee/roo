@@ -11,10 +11,6 @@ import time, ast
 from werkzeug.wrappers import BaseResponse
 from functools import wraps
 
-#@app.teardown_request
-#def casdone():
-#  return redirect(url_for('home'))
-
 def with_netid(f):
   @wraps(f)
   def decorated_function(*args, **kwargs):
@@ -24,7 +20,6 @@ def with_netid(f):
       return netid
     return f(netid, *args, **kwargs)
   return decorated_function
-
 
 @app.route('/')
 def fblogin():
@@ -41,38 +36,6 @@ def cas(netid):
   session['logged_in'] = True
   db_session.commit()
   return redirect(url_for('home'))
-#  casdone()
-
-#@app.teardown_request
-#def casdone():
-#  return redirect(url_for('home'))
-#  return n
-#  return "hello!!!"
-#  return redirect(url_for('home'))
-
-#  n = casverify()
-#  return redirect(url_for('home'))
-#  return render_template('caslogin.html')
-#  return redirect('https://fed.princeton.edu/cas/')
-#  return "hello"
-#    return redirect(url_for('home', n=n))
-#  return "hello"
-#  return redirect(url_for('home', n=n))
-#  return "hello"
-#  n = netid
-#  user = User.query.filter_by(id=session['userid']).first()
-#  user.isauthenticated = True
-#  session['logged_in'] = True
-
-#  return netid
-#  if isinstance(netid, BaseResponse):
- #   user = User.query.filter_by(id=session['userid']).first()
- #   user.isauthenticated = True
-#    return "wtf"
-#    session['logged_in'] = True    
-#    return netid
-#    return redirect(url_for('home'))
-#  return "you failed"
 
 @app.route('/email')
 def email():
