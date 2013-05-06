@@ -9,22 +9,10 @@ from flask.ext.mail import Message
 from Roo import mail
 import time, ast
 from werkzeug.wrappers import BaseResponse
-from functools import wraps
 
 #@app.teardown_request
 #def casdone():
 #  return redirect(url_for('home'))
-
-def with_netid(f):
-  @wraps(f)
-  def decorated_function(*args, **kwargs):
-    C = CASClient()
-    netid = C.Authenticate()
-    if isinstance(netid, BaseResponse):
-      return netid
-    return f(netid, *args, **kwargs)
-  return decorated_function
-
 
 @app.route('/')
 def fblogin():
@@ -34,9 +22,9 @@ def fblogin():
     return redirect(url_for('home'))
 
 @app.route('/cas')
-@with_netid
 def cas():
-  return "hello"
+  C = CASClient()
+  n = C.Authenticate()
 #  casdone()
 
 #@app.teardown_request
@@ -236,7 +224,7 @@ def addtobag(userid):
         # add the user to the bag
         bag.users.append(user)
         # add the user's order to the bag
-        order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], bag.id, userid)
+        order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], ship, bag.id, userid)
         bag.orders.append(order)
         db_session.add(order)
         db_session.commit()
