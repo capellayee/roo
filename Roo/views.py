@@ -19,8 +19,11 @@ def fblogin():
 
 @app.route('/cas')
 def cas():
-  n = casverify()
-  return redirect(url_for('home'))
+  C = CASClient()
+  n = C.Authenticate()
+  return n
+#  n = casverify()
+#  return redirect(url_for('home'))
 #  return render_template('caslogin.html')
 #  return redirect('https://fed.princeton.edu/cas/')
 #  return "hello"
@@ -42,11 +45,6 @@ def cas():
 #    return netid
 #    return redirect(url_for('home'))
 #  return "you failed"
-
-def casverify():
-  C = CASClient()
-  n = C.Authenticate()
-  return n
 
 @app.route('/email')
 def email():
