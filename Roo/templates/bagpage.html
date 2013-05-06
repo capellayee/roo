@@ -91,17 +91,17 @@
 	        {% with priceerror = get_flashed_messages(category_filter=["priceerror"]) %}
 	          {% if priceerror %}
 	            {% for perror in priceerror %}
-	              <err class=priceerror><strong>Error:</strong> {{ perror }}</err>
+	              <he class=priceerror><strong>Error:</strong> {{ perror }}</he><br>
 		    {% endfor %}
 		  {% endif %}
 		{% endwith %}
 	      <input  type="text" name="price" placeholder="cost of your purchase?">
               <label>Size</label> <input type="text" name="size" placeholder="what size do you want?">
 	      <label>Quantity</label> 
-	         {% with priceerror = get_flashed_messages(category_filter=["quantityerror"]) %}
+	         {% with quantityerror = get_flashed_messages(category_filter=["quantityerror"]) %}
                   {% if quantityerror %}
 	            {% for qerror in quantityerror %}
-	              <err class=quantityerror><strong>Error:</strong> {{ qerror }}</err>
+	              <he class=quantityerror><strong>Error:</strong> {{ qerror }}</he><br>
 		    {% endfor %}
 		  {% endif %}
 		{% endwith %}
