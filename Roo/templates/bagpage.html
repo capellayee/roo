@@ -91,7 +91,7 @@
 	        {% with priceerror = get_flashed_messages(category_filter=["priceerror"]) %}
 	          {% if priceerror %}
 	            {% for perror in priceerror %}
-	              <p class=priceerror style="color:#ff0000;font-size:20px;font-weight:bold;"><strong>Error:</strong> {{ perror }}</p>
+	              <class=priceerror style="color:#ff0000;font-size:20px;font-weight:bold;"><strong>Error:</strong> {{ perror }}
 		    {% endfor %}
 		  {% endif %}
 		{% endwith %}
