@@ -150,7 +150,7 @@ def bagpage(bagid):
     bag.orders.append(order)
     db_session.add(order)
     db_session.commit()
-    flash("Your purchase of " + str(order.quantity) + " " + order.url + "in size " + str(order.size) + " has been added to the " + bag.store + " bag!", "addmessage")
+    flash("Your purchase of " + str(order.quantity) + " " + order.url + " in size " + str(order.size) + " has been added to the " + bag.store + " bag!", "addmessage")
     return redirect(url_for('bagpage', bagid=bagid))
   return render_template('bagpage.html', bag=bag, userid=session.get('userid'))
 
