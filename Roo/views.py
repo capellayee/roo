@@ -184,7 +184,7 @@ def mybags(userid):
 @app.route('/removeorder/<orderid>')
 def removeorder(orderid):
   order = Order.query.filter_by(id=orderid).first()
-  bag = Bag.query.filter_by(id=order.bag_id)
+  bag = Bag.query.filter_by(id=order.bag_id).first()
   return render_template('removeorder.html', order=order, bag=bag, userid=session.get('userid'))
 
 # removed order, link back to original page
