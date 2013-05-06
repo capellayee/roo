@@ -21,7 +21,7 @@ def fblogin():
 def cas():
 #  return render_template('caslogin.html')
 #  return redirect('https://fed.princeton.edu/cas/')
-  return "hello"
+#  return "hello"
   C = CASClient()
   netid = C.Authenticate()
   user = User.query.filter_by(id=session['userid']).first()
