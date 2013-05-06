@@ -140,7 +140,7 @@ def bagpage(bagid):
     if not (isinstance(request.form['quantity'], int)):
       flash("Invalid quantity", "quantityerror")
       errorfound = True
-    if errorFound:
+    if errorfound:
       return redirect(url_for('bagpage', bagid=bagid))
 
     # add the user's order to the bag
