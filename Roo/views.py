@@ -166,8 +166,8 @@ def bagpage(bagid):
     try:
       price = float(request.form['price'])
       if price < 0:
-      flash("Invalid price", "priceerror")
-      errorfound = True
+        flash("Invalid price", "priceerror")
+        errorfound = True
     except ValueError:
       flash("Invalid price", "priceerror")
       errorfound = True
