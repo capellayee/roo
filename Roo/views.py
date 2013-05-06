@@ -144,12 +144,18 @@ def bagpage(bagid):
   if request.method == 'POST':
     # check the validity of input, if something is wrong, return the page with error messages where appropriate
     errorfound = False
-    price = ast.literal_eval(request.form['price'])
-    quantity = ast.literal_eval(request.form['quantity'])
-    if not (isinstance(price, float) or isinstance(price,int)):
+    try:
+      price = float(request.form['price'])
+      break
+    except ValueError:
       flash("Invalid price", "priceerror")
       errorfound = True
-    if not (isinstance(quantity, int)):
+#    if not (isinstance(price, float) or isinstance(price,int)):
+#    if not (isinstance(quantity, int)):
+    try:
+      quantity = int(request.form['quantity'])
+      break
+    except ValueError:
       flash("Invalid quantity", "quantityerror")
       errorfound = True
     if errorfound:
