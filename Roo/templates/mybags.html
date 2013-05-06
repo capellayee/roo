@@ -83,6 +83,9 @@
   <div class="row-fluid">
     <div class="container">
     <ul class=bag>
+      {% if not mybags %}
+        <h2>You have no orders to display.. </h2>
+      
       {% for bag in mybags %}
       <div class="span4">
         <h2>{{bag.store}}</h2>
