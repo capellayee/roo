@@ -76,7 +76,10 @@ def email():
 @app.route('/purchase/<userid>')
 def paypal(userid):
   user = User.query.filter_by(id=userid).first()
-  return render_template('purchase.html', user=user)
+  total = 0.0
+  for order in user.orders:
+    total = total + order.price
+  return render_template('purchase.html', user=user, total=total)
 
 @app.route('/home')
 def home():

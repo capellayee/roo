@@ -63,6 +63,7 @@ def email():
   localtime = time.localtime(time.time())
   dayoftheweek = localtime[6]
 #  if dayoftheweek == 5:
+  users = User.query.all()
   with mail.connect() as conn:
     for user in users:
       subject = "hello, %s, your purchases on Roo are ready to be ordered" % user.firstname
