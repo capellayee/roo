@@ -2,6 +2,7 @@ from sqlalchemy import Table, Column, Integer, String, ForeignKey, Boolean, Floa
 from sqlalchemy.orm import relationship, backref
 from Roo.database import Base
 
+# create a many to many relationship between user and bag
 association_table = Table('association', Base.metadata, Column('users_id', Integer, ForeignKey('users.id')), Column('bags_id', Integer, ForeignKey('bags.id')))
 
 class Bag(Base):
