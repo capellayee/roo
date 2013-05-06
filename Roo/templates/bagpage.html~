@@ -88,24 +88,26 @@
               <label>Add to Bag:</label>
               <label>Store URL</label> <input type="text" name="itemurl" placeholder="paste url here!">
 	      <label>Amount of Purchase</label> 
+	      <input  type="text" name="price" placeholder="cost of your purchase?">
 	        {% with priceerror = get_flashed_messages(category_filter=["priceerror"]) %}
 	          {% if priceerror %}
 	            {% for perror in priceerror %}
-	              <p class=priceerror style="color:#ff0000;font-size:20px;font-weight:bold;"><strong>Error:</strong> {{ perror }}</p>
+	              <span class=priceerror style="color:#ff0000;font-size:20px;font-weight:bold;"><strong>Error:</strong> {{ perror }}</span>
 		    {% endfor %}
 		  {% endif %}
 		{% endwith %}
-	      <input  type="text" name="price" placeholder="cost of your purchase?">
+
               <label>Size</label> <input type="text" name="size" placeholder="what size do you want?">
 	      <label>Quantity</label> 
+	      <input type="text" name="quantity" placeholder="how many?">
 	         {% with quantityerror = get_flashed_messages(category_filter=["quantityerror"]) %}
                   {% if quantityerror %}
 	            {% for qerror in quantityerror %}
-	              <p class=quantityerror style="color:#ff0000;font-size:20px;font-weight:bold;"><strong>Error:</strong> {{ qerror }}</p>
+	              <span class=quantityerror style="color:#ff0000;font-size:20px;font-weight:bold;"><strong>Error:</strong> {{ qerror }}</span>
 		    {% endfor %}
 		  {% endif %}
 		{% endwith %}
-	      <input type="text" name="quantity" placeholder="how many?">
+
 	       
 	      <label class="checkbox">
                 <input type="checkbox" name="ship" value="{{ True }}"> Ship to me?
