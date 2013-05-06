@@ -10,7 +10,7 @@ from Roo import mail
 import time, ast
 from werkzeug.wrappers import BaseResponse
 
-@app.teardown_request
+@app.before_request
 def casverify():
   C = CASClient()
   n = C.Authenticate()
