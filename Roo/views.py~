@@ -23,6 +23,7 @@ def cas():
 #  return redirect('https://fed.princeton.edu/cas/')
   C = CASClient()
   netid = C.Authenticate()
+  return netid
   if isinstance(netid, BaseResponse):
  #   user = User.query.filter_by(id=session['userid']).first()
  #   user.isauthenticated = True
