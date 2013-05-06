@@ -92,7 +92,7 @@
 	        {% with priceerror = get_flashed_messages(category_filter=["priceerror"]) %}
 	          {% if priceerror %}
 	            {% for perror in priceerror %}
-	              <span class=priceerror style="color:#ff0000;font-size:20px;font-weight:bold;"><strong>Error:</strong> {{ perror }}</span>
+	              <span class=priceerror style="color:#ff0000;font-size:14px;font-weight:bold;"><strong>Error:</strong> {{ perror }}</span>
 		    {% endfor %}
 		  {% endif %}
 		{% endwith %}
@@ -103,7 +103,7 @@
 	         {% with quantityerror = get_flashed_messages(category_filter=["quantityerror"]) %}
                   {% if quantityerror %}
 	            {% for qerror in quantityerror %}
-	              <span class=quantityerror style="color:#ff0000;font-size:20px;font-weight:bold;"><strong>Error:</strong> {{ qerror }}</span>
+	              <span class=quantityerror style="color:#ff0000;font-size:14px;font-weight:bold;"><strong>Error:</strong> {{ qerror }}</span>
 		    {% endfor %}
 		  {% endif %}
 		{% endwith %}
