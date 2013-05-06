@@ -36,7 +36,7 @@ def fblogin():
 @app.route('/cas')
 @with_netid
 def cas(netid):
-  return "hello"
+  return redirect(url_for('home'))
 #  casdone()
 
 #@app.teardown_request

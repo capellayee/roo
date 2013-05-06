@@ -35,7 +35,7 @@ def fblogin():
 
 @app.route('/cas')
 @with_netid
-def cas(netid, bs1, bs2):
+def cas(netid):
   return "hello"
 #  casdone()
 
