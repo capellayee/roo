@@ -205,19 +205,19 @@ def removed(orderid):
   order = Order.query.filter_by(id=orderid).first()
   bag = Bag.query.filter_by(id=order.bag_id).first()
   bag.amountinbag = bag.amountinbag - order.price
-  
+
+  # delete the order
+  db_session.delete(order)  
+  db_session.commit()
+
   # if the user has no more orders from that store, remove that store from the user's bags
   user = User.query.filter_by(id=session.get('userid')).first()
   orders = Order.query.filter_by(bag_id=bag.id, user_id=user.id).all()
-  string = ""
-  for order in orders:
-    string = string + order.url + '<br>'
-  return string
   if not orders:
     user.bag.remove(bag)
     db_session.commit()
-  db_session.delete(order)
-  db_session.commit()
+
+
   return render_template('removed.html', userid=user.id, bag=bag)
 
 

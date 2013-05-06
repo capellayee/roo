@@ -155,7 +155,6 @@ def bagpage(bagid):
     if errorfound:
       return redirect(url_for('bagpage', bagid=bagid))
 
-
     bag.amountinbag = bag.amountinbag + price
     # add the user to the bag
     user = User.query.filter_by(id=session.get('userid')).first()
@@ -209,8 +208,11 @@ def removed(orderid):
   
   # if the user has no more orders from that store, remove that store from the user's bags
   user = User.query.filter_by(id=session.get('userid')).first()
-  return str(user.firstname)
-  orders = Order.query.filter_by(bag_id=int(bag.id), user_id=user.id).all()
+  orders = Order.query.filter_by(bag_id=bag.id, user_id=user.id).all()
+  string = ""
+  for order in orders:
+    string = string + order.url + '<br>'
+  return string
   if not orders:
     user.bag.remove(bag)
     db_session.commit()
