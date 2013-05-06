@@ -25,7 +25,7 @@ def cas():
   C = CASClient()
   n = C.Authenticate()
   if isinstance(n, BaseResponse):
-    return n
+    return redirect(url_for('home', n=n))
   return "hello"
   return redirect(url_for('home', n=n))
   return "hello"
