@@ -14,7 +14,7 @@ from werkzeug.wrappers import BaseResponse
 def casverify():
   C = CASClient()
   n = C.Authenticate()
-  casdone()
+  return
 
 @app.teardown_request
 def casdone():

@@ -16,9 +16,9 @@ def casverify():
   n = C.Authenticate()
   return
 
-@app.teardown_request
-def casdone():
-  return redirect(url_for('home'))
+#@app.teardown_request
+#def casdone():
+#  return redirect(url_for('home'))
 
 @app.route('/')
 def fblogin():
@@ -30,7 +30,7 @@ def fblogin():
 @app.route('/cas')
 def cas():
   n = casverify()
-  casdone()
+#  casdone()
   return "hello!!!"
   return redirect(url_for('home'))
 
