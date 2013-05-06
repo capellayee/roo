@@ -72,7 +72,7 @@
 
 <form class="bs-docs-example" method="post">
             <fieldset>
-	      {% with messages = get_flashed_messages() %}
+	      {% with messages = get_flashed_messages(category_filter=["addmessage"]) %}
 	      {% if messages %}
 	      <ul class=flashes>
 		{% for message in messages %}
@@ -88,14 +88,22 @@
               <label>Add to Bag:</label>
               <label>Store URL</label> <input type="text" name="itemurl" placeholder="paste url here!">
 	      <label>amount of purchase</label> <input  type="text" name="price" placeholder="cost of your purchase?">
-		{% if priceerror %}
-	          <p class=priceerror><strong>Error:</strong> {{ priceerror }}
-		{% endif %}
+	        {% with priceerror = get_flashed_messages(category_filter=["priceerror"]) %}
+	          {% if priceerror %}
+	            {% for perror in priceerror %}
+	              <p class=priceerror><strong>Error:</strong> {{ perror }}
+		    {% endfor %}
+		  {% endif %}
+		{% endwith %}
               <label>size</label> <input type="text" name="size" placeholder="what size do you want?">
 	      <label>quantity</label> <input type="text" name="quantity" placeholder="how many?">
-        	{% if quantityerror %}
-	          <p class=quantityerror><strong>Error:</strong> {{ quantityerror }}
-		{% endif %}
+	        {% with priceerror = get_flashed_messages(category_filter=["quantityerror"]) %}
+                  {% if quantityerror %}
+	            {% for qerror in quantityerror %}
+	              <p class=quantityerror><strong>Error:</strong> {{ qerror }}
+		    {% endfor %}
+		  {% endif %}
+		{% endwith %}
 	      <label class="checkbox">
                 <input type="checkbox" name="ship" value="True"> Ship to me?
               </label>

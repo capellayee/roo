@@ -87,23 +87,26 @@
               <span class="help-block">Required amount to ship: {{ '%0.2f' % (bag.threshold-bag.amountinbag) }}</span>
               <label>Add to Bag:</label>
               <label>Store URL</label> <input type="text" name="itemurl" placeholder="paste url here!">
-	      <label>amount of purchase</label> <input  type="text" name="price" placeholder="cost of your purchase?">
+	      <label>Amount of Purchase</label> 
 	        {% with priceerror = get_flashed_messages(category_filter=["priceerror"]) %}
 	          {% if priceerror %}
 	            {% for perror in priceerror %}
-	              <p class=priceerror><strong>Error:</strong> {{ perror }}
+	              <err class=priceerror><strong>Error:</strong> {{ perror }}</err>
 		    {% endfor %}
 		  {% endif %}
 		{% endwith %}
-              <label>size</label> <input type="text" name="size" placeholder="what size do you want?">
-	      <label>quantity</label> <input type="text" name="quantity" placeholder="how many?">
-	        {% with priceerror = get_flashed_messages(category_filter=["quantityerror"]) %}
+	      <input  type="text" name="price" placeholder="cost of your purchase?">
+              <label>Size</label> <input type="text" name="size" placeholder="what size do you want?">
+	      <label>Quantity</label> 
+	         {% with priceerror = get_flashed_messages(category_filter=["quantityerror"]) %}
                   {% if quantityerror %}
 	            {% for qerror in quantityerror %}
-	              <p class=quantityerror><strong>Error:</strong> {{ qerror }}
+	              <err class=quantityerror><strong>Error:</strong> {{ qerror }}</err>
 		    {% endfor %}
 		  {% endif %}
 		{% endwith %}
+	      <input type="text" name="quantity" placeholder="how many?">
+	       
 	      <label class="checkbox">
                 <input type="checkbox" name="ship" value="True"> Ship to me?
               </label>
