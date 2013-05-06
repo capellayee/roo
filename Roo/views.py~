@@ -24,11 +24,12 @@ def cas():
   C = CASClient()
   netid = C.Authenticate()
   if isinstance(netid, BaseResponse):
-    user = User.query.filter_by(id=session['userid']).first()
-    user.isauthenticated = True
-    return "wtf"
+ #   user = User.query.filter_by(id=session['userid']).first()
+ #   user.isauthenticated = True
+#    return "wtf"
 #    session['logged_in'] = True    
-#    return redirect(url_for('home'))
+    return netid
+    return redirect(url_for('home'))
   return "you failed"
 
 @app.route('/email')
@@ -147,7 +148,7 @@ def removeorder(orderid):
 @app.route('/removed/<orderid>')
 def removed(orderid):
   order = Order.query.filter_by(id=orderid).first()
-  bag = Bag.query.filter_by(order.bag_id)
+  bag = Bag.query.filter_by(id=order.bag_id)
   bag.amountinbag = bag.amountinbag - order.price
   db_session.delete(order)
   db_session.commit()
@@ -222,17 +223,10 @@ def facebook_authorized(resp):
     user = User.query.filter_by(email = fbuser['email']).first()
     session['userid'] = user.id
 
-<<<<<<< HEAD
-    if user.isauthenticated:
-      return "failed"
-      session['logged_in'] = True
-      return redirect(url_for('home'))
-=======
 #    if user.isauthenticated:
 #      return "failed"
 #      session['logged_in'] = True
 #      return redirect(url_for('home'))
->>>>>>> 74789e6492791918d52c099944f56de2741456f7
 
     return redirect(url_for('cas'))
 
