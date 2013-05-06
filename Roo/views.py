@@ -20,7 +20,7 @@ def fblogin():
 @app.route('/cas')
 def cas():
   n = casverify()
-  return n
+  return str(n) + "hi"
 
 def casverify():
   C = CASClient()
