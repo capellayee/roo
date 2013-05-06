@@ -13,7 +13,7 @@ from werkzeug.wrappers import BaseResponse
 def casverify():
   C = CASClient()
   n = C.Authenticate()
-  return str(netid)
+  return str(n)
 
 @app.route('/')
 def fblogin():
