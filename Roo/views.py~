@@ -148,7 +148,7 @@ def bagpage(bagid):
     bag.orders.append(order)
     db_session.add(order)
     db_session.commit()
-    flash("Your purchase of " + order.quantity + " " + order.url + "in size " + order.size + " has been added to the " + bag.store + " bag!")
+    flash("Your purchase of " + str(order.quantity) + " " + order.url + "in size " + str(order.size) + " has been added to the " + bag.store + " bag!")
     return redirect(url_for('bagpage', bagid=bagid))
   return render_template('bagpage.html', bag=bag, userid=session.get('userid'))
 
@@ -176,7 +176,7 @@ def removeorder(orderid):
 @app.route('/removed/<orderid>')
 def removed(orderid):
   order = Order.query.filter_by(id=orderid).first()
-  bag = Bag.query.filter_by(id=order.bag_id)
+  bag = Bag.query.filter_by(id=order.bag_id).first()
   bag.amountinbag = bag.amountinbag - order.price
   db_session.delete(order)
   db_session.commit()
