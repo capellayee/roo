@@ -24,6 +24,7 @@ def cas():
 #  return "hello"
   C = CASClient()
   n = C.Authenticate()
+  time.sleep(2)
   return redirect(url_for('home', n=n))
   return "hello"
 #  n = netid
@@ -124,6 +125,18 @@ def bagpage(bagid):
     # add the user to the bag
     user = User.query.filter_by(id=session.get('userid')).first()
     bag.users.append(user)
+
+    # check the validity of input, if something is wrong, return the page with error messages where appropriate
+    errorfound = False
+    if not (isinstance(request.form['price'], float)):
+      flash("Invalid price", "priceerror")
+      errorfound = True
+    if not (isinstance(request.form['quantity'], int)):
+      flash("Invalid quantity", "quantityerror")
+      errorfound = True
+    if errorFound:
+      return redirect(url_for('bagpage', bagid=bagid))
+
     # add the user's order to the bag
     order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], bag.id, user.id)
     bag.orders.append(order)
