@@ -36,6 +36,9 @@ def fblogin():
 @app.route('/cas')
 @with_netid
 def cas(netid):
+  user = User.query.filter_by(id = session['userid']).first()
+  user.isauthenticated = True
+  session['logged_in'] = True
   return redirect(url_for('home'))
 #  casdone()
 
@@ -275,12 +278,10 @@ def facebook_authorized(resp):
     user = User.query.filter_by(email = fbuser['email']).first()
     session['userid'] = user.id
 
-#    if user.isauthenticated:
-#      return "failed"
-    session['logged_in'] = True
-    return redirect(url_for('home'))
-
-#    return redirect(url_for('cas'))
+    if user.isauthenticated:
+      session['logged_in'] = True
+      return redirect(url_for('home'))
+    return redirect(url_for('cas'))
 
 @app.route("/logout")
 def logout():
