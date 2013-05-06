@@ -39,6 +39,7 @@ def cas(netid):
   user = User.query.filter_by(id = session['userid']).first()
   user.isauthenticated = True
   session['logged_in'] = True
+  db_session.commit()
   return redirect(url_for('home'))
 #  casdone()
 
