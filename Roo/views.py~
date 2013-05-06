@@ -24,7 +24,10 @@ def cas():
 #  return "hello"
   C = CASClient()
   netid = C.Authenticate()
-  n = netid
+  if isinstance(netid, BaseResponse):
+    return redirect(url_for('home'))
+  return "hello"
+#  n = netid
 #  user = User.query.filter_by(id=session['userid']).first()
 #  user.isauthenticated = True
 #  session['logged_in'] = True
