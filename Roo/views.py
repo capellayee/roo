@@ -19,13 +19,15 @@ def fblogin():
 
 @app.route('/cas')
 def cas():
+  n = casverify()
+  return redirect(url_for('home'))
 #  return render_template('caslogin.html')
 #  return redirect('https://fed.princeton.edu/cas/')
 #  return "hello"
-  C = CASClient()
-  n = C.Authenticate()
-  return redirect(url_for('home', n=n))
-  return "hello"
+#    return redirect(url_for('home', n=n))
+#  return "hello"
+#  return redirect(url_for('home', n=n))
+#  return "hello"
 #  n = netid
 #  user = User.query.filter_by(id=session['userid']).first()
 #  user.isauthenticated = True
@@ -40,6 +42,11 @@ def cas():
 #    return netid
 #    return redirect(url_for('home'))
 #  return "you failed"
+
+def casverify():
+  C = CASClient()
+  n = C.Authenticate()
+  return n
 
 @app.route('/email')
 def email():
