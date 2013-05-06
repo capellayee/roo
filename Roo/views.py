@@ -7,7 +7,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from flask_oauth import OAuth
 from flask.ext.mail import Message
 from Roo import mail
-import time
+import time, ast
 from werkzeug.wrappers import BaseResponse
 
 @app.route('/')
@@ -132,10 +132,12 @@ def bagpage(bagid):
 
     # check the validity of input, if something is wrong, return the page with error messages where appropriate
     errorfound = False
-    if not (isinstance(request.form['price'], float) or isinstance(request.form['price'],int)):
+    price = ast.literal_eval(request.form['price'])
+    quantity = ast.literal_eval(request.form['quantity'])
+    if not (isinstance(price, float) or isinstance(price,int)):
       flash("Invalid price", "priceerror")
       errorfound = True
-    if not (isinstance(request.form['quantity'], int)):
+    if not (isinstance(quantity, int)):
       flash("Invalid quantity", "quantityerror")
       errorfound = True
     if errorfound:
