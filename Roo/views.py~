@@ -10,10 +10,11 @@ from Roo import mail
 import time, ast
 from werkzeug.wrappers import BaseResponse
 
+@app.teardown_request
 def casverify():
   C = CASClient()
   n = C.Authenticate()
-  return str(n)
+  return n
 
 @app.route('/')
 def fblogin():
@@ -25,7 +26,7 @@ def fblogin():
 @app.route('/cas')
 def cas():
   n = casverify()
-  return n + "hi"
+  return n
 
 #  n = casverify()
 #  return redirect(url_for('home'))
