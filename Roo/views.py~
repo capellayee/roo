@@ -7,7 +7,23 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from flask_oauth import OAuth
 from flask.ext.mail import Message
 from Roo import mail
-import urllib, re
+import time, ast
+from werkzeug.wrappers import BaseResponse
+from functools import wraps
+
+#@app.teardown_request
+#def casdone():
+#  return redirect(url_for('home'))
+
+def with_netid(f):
+  @wraps(f)
+  def decorated_function(*args, **kwargs):
+    C = CASClient()
+    netid = C.Authenticate()
+    if isinstance(netid, BaseResponse):
+      return netid
+    return f(netid, *args, **kwargs)
+  return decorated_function
 
 
 @app.route('/')
@@ -18,28 +34,72 @@ def fblogin():
     return redirect(url_for('home'))
 
 @app.route('/cas')
-def cas():
+@with_netid
+def cas(netid):
+  user = User.query.filter_by(id = session['userid']).first()
+  user.isauthenticated = True
+  session['logged_in'] = True
+  db_session.commit()
+  return redirect(url_for('home'))
+#  casdone()
+
+#@app.teardown_request
+#def casdone():
+#  return redirect(url_for('home'))
+#  return n
+#  return "hello!!!"
+#  return redirect(url_for('home'))
+
+#  n = casverify()
+#  return redirect(url_for('home'))
 #  return render_template('caslogin.html')
 #  return redirect('https://fed.princeton.edu/cas/')
-  C = CASClient()
-  netid = C.Authenticate()
-  return str(netid) + " you are authenticated"
-  return render_template('login.cgi')
+#  return "hello"
+#    return redirect(url_for('home', n=n))
+#  return "hello"
+#  return redirect(url_for('home', n=n))
+#  return "hello"
+#  n = netid
+#  user = User.query.filter_by(id=session['userid']).first()
+#  user.isauthenticated = True
+#  session['logged_in'] = True
+
+#  return netid
+#  if isinstance(netid, BaseResponse):
+ #   user = User.query.filter_by(id=session['userid']).first()
+ #   user.isauthenticated = True
+#    return "wtf"
+#    session['logged_in'] = True    
+#    return netid
+#    return redirect(url_for('home'))
+#  return "you failed"
 
 @app.route('/email')
 def email():
-  text = ""
-  for bag in Bag.query.all():
-    text = text + bag.store
-  msg = Message(text, sender="rooshipping@gmail.com", recipients=["pranav.gokhale.93@gmail.com"])
-  msg.body = "Hi! You're bag on Roo is ready to be purchased!"
-  msg.html = """<a href="rooprinceton.herokuapp.com"><b>Please click this link and pay!</b></a>""" 
-  mail.send(msg)
-  return "Hi"
+  localtime = time.localtime(time.time())
+  dayoftheweek = localtime[6]
+#  if dayoftheweek == 5:
+  users = User.query.all()
+  with mail.connect() as conn:
+    for user in users:
+      if user.orders:
+        subject = "hello, %s, your purchases on Roo are ready to be ordered" % user.firstname
+        msg = Message(recipients=[user.email], subject=subject, sender="rooshipping@gmail.com")
+        msg.body = "Hi! You're bag on Roo is ready to be purchased!"
+        msg.html = """<a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+""""><b>Please click this link and pay!</b></a>""" 
+      
+        conn.send(msg)
 
-@app.route('/paypal')
-def paypal():
-  return render_template('paypal.html')
+@app.route('/purchase/<userid>')
+def paypal(userid):
+
+# add in a tab to make the user log in if they're not already logged in..
+
+  user = User.query.filter_by(id=userid).first()
+  total = 0.0
+  for order in user.orders:
+    total = total + order.price
+  return render_template('purchase.html', user=user, total=total)
 
 @app.route('/home')
 def home():
@@ -101,16 +161,45 @@ def newbag():
 def bagpage(bagid):
   bag = Bag.query.filter_by(id=bagid).first()
   if request.method == 'POST':
-    bag.amountinbag = bag.amountinbag + int(request.form['price'])
+    # check the validity of input, if something is wrong, return the page with error messages where appropriate
+    errorfound = False
+    try:
+      price = float(request.form['price'])
+      if price < 0:
+      flash("Invalid price", "priceerror")
+      errorfound = True
+    except ValueError:
+      flash("Invalid price", "priceerror")
+      errorfound = True
+#    if not (isinstance(price, float) or isinstance(price,int)):
+#    if not (isinstance(quantity, int)):
+    try:
+      quantity = int(request.form['quantity'])
+      if quantity < 0:
+        flash("Invalid quantity", "quantityerror")
+        errorfound = True
+    except ValueError:
+      flash("Invalid quantity", "quantityerror")
+      errorfound = True
+    if errorfound:
+      return redirect(url_for('bagpage', bagid=bagid))
+
+
+    bag.amountinbag = bag.amountinbag + price
     # add the user to the bag
     user = User.query.filter_by(id=session.get('userid')).first()
     bag.users.append(user)
+
+    ship = False
+    if 'ship' in request.form:
+      ship = True
+
     # add the user's order to the bag
-    order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], bag.id, user.id)
+    order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], ship, bag.id, user.id)
     bag.orders.append(order)
     db_session.add(order)
     db_session.commit()
-    flash("Your purchase has been added")
+    flash("Your purchase of " + str(order.quantity) + " " + order.url + " in size " + str(order.size) + " has been added to the " + bag.store + " bag!", "addmessage")
     return redirect(url_for('bagpage', bagid=bagid))
   return render_template('bagpage.html', bag=bag, userid=session.get('userid'))
 
@@ -129,35 +218,20 @@ def mybags(userid):
 
 # confirmation page for removing an order
 @app.route('/removeorder/<orderid>')
-def removeorder(bagid, orderid):
+def removeorder(orderid):
   order = Order.query.filter_by(id=orderid).first()
-  return render_template('removeorder.html', order=order, bag=Bag.query.filter_by.first())
+  bag = Bag.query.filter_by(id=order.bag_id).first()
+  return render_template('removeorder.html', order=order, bag=bag, userid=session.get('userid'))
 
 # removed order, link back to original page
 @app.route('/removed/<orderid>')
 def removed(orderid):
   order = Order.query.filter_by(id=orderid).first()
+  bag = Bag.query.filter_by(id=order.bag_id).first()
+  bag.amountinbag = bag.amountinbag - order.price
   db_session.delete(order)
   db_session.commit()
-  return render_template('removed.html', userid=session.get('userid'))
-
-
-# allows a user to add to a bag
-@app.route('/addtobag/<userid>', methods=['GET', 'POST'])
-def addtobag(userid):
-    if request.method == 'POST':
-        bag = Bag.query.filter_by(store = request.form['store']).first()
-        bag.amountinbag = bag.amountinbag + int(request.form['price'])
-        user = User.query.filter_by(id = userid).first()
-        # add the user to the bag
-        bag.users.append(user)
-        # add the user's order to the bag
-        order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], bag.id, userid)
-        bag.orders.append(order)
-        db_session.add(order)
-        db_session.commit()
-        return redirect(url_for('mybags', userid=userid))
-    return render_template('addtobagform.html')
+  return render_template('removed.html', userid=session.get('userid'), bag=bag)
 
 
 #----------------------------------------
@@ -199,18 +273,20 @@ def facebook_authorized(resp):
     if resp is None or 'access_token' not in resp:
         return redirect(next_url)
 
-    session['logged_in'] = True
     session['facebook_token'] = (resp['access_token'], '')
-
     fbuser = facebook.get('me').data
-#    return fbuser['email']
     if User.query.filter_by(email = fbuser['email']).first() == None:
       user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], '', '')
       db_session.add(user)
       db_session.commit()
     
-    session['userid'] = User.query.filter_by(email = fbuser['email']).first().id
-    return redirect(url_for('home'))
+    user = User.query.filter_by(email = fbuser['email']).first()
+    session['userid'] = user.id
+
+    if user.isauthenticated:
+      session['logged_in'] = True
+      return redirect(url_for('home'))
+    return redirect(url_for('cas'))
 
 @app.route("/logout")
 def logout():

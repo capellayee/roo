@@ -1,15 +1,16 @@
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, Boolean
+from sqlalchemy import Table, Column, Integer, String, ForeignKey, Boolean, Float
 from sqlalchemy.orm import relationship, backref
 from Roo.database import Base
 
+# create a many to many relationship between user and bag
 association_table = Table('association', Base.metadata, Column('users_id', Integer, ForeignKey('users.id')), Column('bags_id', Integer, ForeignKey('bags.id')))
 
 class Bag(Base):
   __tablename__ = 'bags'
   id = Column(Integer, primary_key=True)
   store = Column(String(30), unique=True)
-  threshold = Column(Integer, unique=False)
-  amountinbag = Column(Integer, unique=False)
+  threshold = Column(Float, unique=False)
+  amountinbag = Column(Float, unique=False)
   network = Column(String(30), unique=False)
 
   def __init__(self, store=None, threshold=None, amountinbag=None, network=None):
@@ -32,13 +33,15 @@ class User(Base):
   bag_id = Column(Integer, ForeignKey('bags.id'))
 
   bag = relationship("Bag", secondary=association_table, backref=backref('users', order_by=id))
+  isauthenticated = Column(Boolean, unique=False)
 
-  def __init__(self, firstname=None, lastname=None, email=None, password=None, address=None, bag_id=None):
+  def __init__(self, firstname=None, lastname=None, email=None, password=None, address=None, bag_id=None, isauthenticated=None):
     self.firstname = firstname
     self.lastname = lastname
     self.email = email
     self.password = password
     self.address = address
+    self.isauthenticated = False
 
   def __repr__(self):
     return '<User %r>' % (self.firstname)
@@ -47,10 +50,10 @@ class Order(Base):
   __tablename__ = 'orders'
   id = Column(Integer, primary_key=True)
   url = Column(String(200), unique=False)
-  price = Column(Integer, unique=False)
+  price = Column(Float, unique=False)
   quantity = Column(Integer, unique=False)
   size = Column(String(40), unique=False)
-#  ship = Column(Boolean, unique=False)
+  ship = Column(Boolean, unique=False)
 
   bag_id = Column(Integer, ForeignKey('bags.id'))
   user_id = Column(Integer, ForeignKey('users.id'))
@@ -58,12 +61,12 @@ class Order(Base):
   bag = relationship("Bag", backref="orders")
   user = relationship("User", backref="orders")
 
-  def __init__(self, url=None, price=None, quantity=None, size=None, bag_id=None, user_id=None):
+  def __init__(self, url=None, price=None, quantity=None, size=None, ship=None, bag_id=None, user_id=None):
     self.url = url
     self.price = price
     self.quantity = quantity
     self.size = size
- #   self.ship = ship
+    self.ship = ship
     self.bag_id = bag_id
     self.user_id = user_id
     

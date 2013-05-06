@@ -223,7 +223,7 @@ textarea {
 
 body {
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Rockwell, "Courier Bold", Courier, Georgia, Times, "Times New Roman", serif;
   font-size: 14px;
   line-height: 20px;
   color: #333333;
@@ -537,7 +537,7 @@ a:focus {
 .row-fluid .offset7 {
   margin-left: 61.70212765957446%;
   *margin-left: 61.59574468085106%;
-v}
+}
 
 .row-fluid .offset7:first-child {
   margin-left: 59.574468085106375%;
@@ -694,12 +694,12 @@ a.text-warning:focus {
 }
 
 .text-error {
-  color: #b94a48;
+  color: #ff000;
 }
 
 a.text-error:hover,
 a.text-error:focus {
-  color: #953b39;
+  color: #ff000;
 }
 
 .text-info {
@@ -1065,7 +1065,7 @@ input,
 button,
 select,
 textarea {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Rockwell, "Courier Bold", Courier, Georgia, Times, "Times New Roman", serif;
 }
 
 label {
@@ -4510,7 +4510,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-search .search-query {
   padding: 4px 14px;
   margin-bottom: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Rockwell, "Courier Bold", Courier, Georgia, Times, "Times New Roman", serif;
   font-size: 13px;
   font-weight: normal;
   line-height: 1;

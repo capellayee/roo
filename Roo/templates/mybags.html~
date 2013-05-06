@@ -57,7 +57,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="#">Roo</a>
+            <a class="brand" href='{{ url_for('home') }}'>Roo</a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
@@ -97,9 +97,8 @@
 		  <li>Price: {{ order.price }}</li>
 		  <li>Quantity: {{ order.quantity }}</li>
 		  <li>Size: {{ order.size }}</li>
-		  <li>orderid: {{order.id}} bag id: {{bag.id}}</li>
 		</ul>
-		<p><a class="btn" href='{{ url_for('removeorder', bagid=bag.id, orderid=order.id) }}'>Remove this order &raquo;</a></p>
+		<p><a class="btn" href='{{ url_for('removeorder', orderid=order.id) }}'>Remove this order &raquo;</a></p>
 	      {% endfor %}
 	    {% endif %}
 	  {% endfor %}
