@@ -93,8 +93,8 @@ def email():
 @app.route('/purchase/<userid>')
 def paypal(userid):
 
-# add in a tab to make the user log in if they're not already logged in..
-
+  # add in a tab to make the user log in if they're not already logged in..
+  # need to make sure it redirects to the purchase page.
   user = User.query.filter_by(id=userid).first()
   total = 0.0
   for order in user.orders:
