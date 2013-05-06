@@ -26,7 +26,7 @@ def fblogin():
 @app.route('/cas')
 def cas():
   n = casverify()
-  return n
+  return str(n)
 
 #  n = casverify()
 #  return redirect(url_for('home'))
