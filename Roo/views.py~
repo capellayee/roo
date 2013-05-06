@@ -23,15 +23,19 @@ def cas():
 #  return redirect('https://fed.princeton.edu/cas/')
   C = CASClient()
   netid = C.Authenticate()
-  return netid
-  if isinstance(netid, BaseResponse):
+  user = User.query.filter_by(id=session['userid']).first()
+  user.isauthenticated = True
+  session['logged_in'] = True
+  return redirect(url_for('home'))
+#  return netid
+#  if isinstance(netid, BaseResponse):
  #   user = User.query.filter_by(id=session['userid']).first()
  #   user.isauthenticated = True
 #    return "wtf"
 #    session['logged_in'] = True    
-    return netid
-    return redirect(url_for('home'))
-  return "you failed"
+#    return netid
+#    return redirect(url_for('home'))
+#  return "you failed"
 
 @app.route('/email')
 def email():
