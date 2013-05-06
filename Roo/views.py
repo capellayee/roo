@@ -62,7 +62,7 @@ def cas():
 def email():
   localtime = time.localtime(time.time())
   dayoftheweek = localtime[6]
-  return dayoftheweek
+  return str(dayoftheweek)
   if dayoftheweek == 5:
     with mail.connect() as conn:
       for user in users:
