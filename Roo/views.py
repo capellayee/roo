@@ -182,7 +182,7 @@ def removed(orderid):
   bag.amountinbag = bag.amountinbag - order.price
   db_session.delete(order)
   db_session.commit()
-  return render_template('removed.html', userid=session.get('userid'), bagid=bag.id)
+  return render_template('removed.html', userid=session.get('userid'), bag=bag)
 
 
 # allows a user to add to a bag
