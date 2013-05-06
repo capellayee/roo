@@ -268,8 +268,8 @@ def facebook_authorized(resp):
 
 #    if user.isauthenticated:
 #      return "failed"
-      session['logged_in'] = True
-      return redirect(url_for('home'))
+    session['logged_in'] = True
+    return redirect(url_for('home'))
 
 #    return redirect(url_for('cas'))
 
