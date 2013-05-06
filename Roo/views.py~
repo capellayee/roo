@@ -26,9 +26,13 @@ def cas():
   C = CASClient()
   n = C.Authenticate()
 #  casdone()
-  return n
-  return "hello!!!"
+
+@app.teardown_request
+def casdone():
   return redirect(url_for('home'))
+#  return n
+#  return "hello!!!"
+#  return redirect(url_for('home'))
 
 #  n = casverify()
 #  return redirect(url_for('home'))

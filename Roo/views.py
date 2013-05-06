@@ -27,9 +27,9 @@ def cas():
   n = C.Authenticate()
 #  casdone()
 
-@app.teardown_request
-def casdone():
-  return redirect(url_for('home'))
+#@app.teardown_request
+#def casdone():
+#  return redirect(url_for('home'))
 #  return n
 #  return "hello!!!"
 #  return redirect(url_for('home'))
@@ -279,9 +279,9 @@ def facebook_authorized(resp):
 #    if user.isauthenticated:
 #      return "failed"
     session['logged_in'] = True
-#    return redirect(url_for('home'))
+    return redirect(url_for('home'))
 
-    return redirect(url_for('cas'))
+#    return redirect(url_for('cas'))
 
 @app.route("/logout")
 def logout():
