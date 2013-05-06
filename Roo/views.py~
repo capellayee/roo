@@ -11,10 +11,10 @@ import time, ast
 from werkzeug.wrappers import BaseResponse
 
 #@app.before_request
-#def casverify():
-#  C = CASClient()
-#  n = C.Authenticate()
-#  return n
+def casverify():
+  C = CASClient()
+  n = C.Authenticate()
+  return n
 
 #@app.teardown_request
 #def casdone():
@@ -279,9 +279,9 @@ def facebook_authorized(resp):
 #    if user.isauthenticated:
 #      return "failed"
     session['logged_in'] = True
-    return redirect(url_for('home'))
+#    return redirect(url_for('home'))
 
-#    return redirect(url_for('cas'))
+    return redirect(url_for('cas'))
 
 @app.route("/logout")
 def logout():
