@@ -209,6 +209,7 @@ def removed(orderid):
   
   # if the user has no more orders from that store, remove that store from the user's bags
   user = User.query.filter_by(id=session.get('userid')).first()
+  return str(user.firstname)
   orders = Order.query.filter_by(bag_id=int(bag.id), user_id=user.id).all()
   if not orders:
     user.bag.remove(bag)
