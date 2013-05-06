@@ -16,6 +16,10 @@ def casverify():
   n = C.Authenticate()
   return n
 
+@app.teardown_request
+def casdone():
+  return redirect(url_for('home'))
+
 @app.route('/')
 def fblogin():
   if not session.get('logged_in'):
@@ -26,6 +30,7 @@ def fblogin():
 @app.route('/cas')
 def cas():
   n = casverify()
+  casdone()
   return "hello!!!"
   return redirect(url_for('home'))
 
