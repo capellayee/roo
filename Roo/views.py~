@@ -25,10 +25,13 @@ def cas():
   C = CASClient()
   n = C.Authenticate()
   if isinstance(n, BaseResponse):
-    return redirect(url_for('home', n=n))
-  return "hello"
-  return redirect(url_for('home', n=n))
-  return "hello"
+    render_template('carousel.html')
+  else:
+    return "bad"
+#    return redirect(url_for('home', n=n))
+#  return "hello"
+#  return redirect(url_for('home', n=n))
+#  return "hello"
 #  n = netid
 #  user = User.query.filter_by(id=session['userid']).first()
 #  user.isauthenticated = True

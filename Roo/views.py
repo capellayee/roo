@@ -25,7 +25,7 @@ def cas():
   C = CASClient()
   n = C.Authenticate()
   if isinstance(n, BaseResponse):
-    render_template('carousel.html')
+    return render_template('carousel.html')
   else:
     return "bad"
 #    return redirect(url_for('home', n=n))
