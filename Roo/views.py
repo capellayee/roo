@@ -132,7 +132,7 @@ def bagpage(bagid):
 
     # check the validity of input, if something is wrong, return the page with error messages where appropriate
     errorfound = False
-    if not (isinstance(request.form['price'], float) or isinstance(request.form['price'],int):
+    if not (isinstance(request.form['price'], float) or isinstance(request.form['price'],int)):
       flash("Invalid price", "priceerror")
       errorfound = True
     if not (isinstance(request.form['quantity'], int)):
