@@ -76,6 +76,9 @@ def email():
 
 @app.route('/purchase/<userid>')
 def paypal(userid):
+
+# add in a tab to make the user log in if they're not already logged in..
+
   user = User.query.filter_by(id=userid).first()
   total = 0.0
   for order in user.orders:
@@ -267,7 +270,6 @@ def facebook_authorized(resp):
 
     session['facebook_token'] = (resp['access_token'], '')
     fbuser = facebook.get('me').data
-#    return fbuser['email']
     if User.query.filter_by(email = fbuser['email']).first() == None:
       user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], '', '')
       db_session.add(user)
