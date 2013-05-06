@@ -61,7 +61,7 @@ class Order(Base):
   bag = relationship("Bag", backref="orders")
   user = relationship("User", backref="orders")
 
-  def __init__(self, url=None, price=None, quantity=None, size=None, bag_id=None, user_id=None):
+  def __init__(self, url=None, price=None, quantity=None, size=None, ship=None, bag_id=None, user_id=None):
     self.url = url
     self.price = price
     self.quantity = quantity
