@@ -170,9 +170,12 @@ def bagpage(bagid):
     user = User.query.filter_by(id=session.get('userid')).first()
     bag.users.append(user)
 
+    ship = False
+    if 'ship' in request.form:
+      ship = True
 
     # add the user's order to the bag
-    order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], bag.id, user.id)
+    order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], ship, bag.id, user.id)
     bag.orders.append(order)
     db_session.add(order)
     db_session.commit()

@@ -2,6 +2,7 @@ from sqlalchemy import Table, Column, Integer, String, ForeignKey, Boolean, Floa
 from sqlalchemy.orm import relationship, backref
 from Roo.database import Base
 
+# create a many to many relationship between user and bag
 association_table = Table('association', Base.metadata, Column('users_id', Integer, ForeignKey('users.id')), Column('bags_id', Integer, ForeignKey('bags.id')))
 
 class Bag(Base):
@@ -52,7 +53,7 @@ class Order(Base):
   price = Column(Float, unique=False)
   quantity = Column(Integer, unique=False)
   size = Column(String(40), unique=False)
-#  ship = Column(Boolean, unique=False)
+  ship = Column(Boolean, unique=False)
 
   bag_id = Column(Integer, ForeignKey('bags.id'))
   user_id = Column(Integer, ForeignKey('users.id'))
@@ -65,7 +66,7 @@ class Order(Base):
     self.price = price
     self.quantity = quantity
     self.size = size
- #   self.ship = ship
+    self.ship = ship
     self.bag_id = bag_id
     self.user_id = user_id
     

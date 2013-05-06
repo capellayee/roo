@@ -27,9 +27,9 @@ def cas():
   n = C.Authenticate()
 #  casdone()
 
-@app.teardown_request
-def casdone():
-  return redirect(url_for('home'))
+#@app.teardown_request
+#def casdone():
+#  return redirect(url_for('home'))
 #  return n
 #  return "hello!!!"
 #  return redirect(url_for('home'))
@@ -76,6 +76,9 @@ def email():
 
 @app.route('/purchase/<userid>')
 def paypal(userid):
+
+# add in a tab to make the user log in if they're not already logged in..
+
   user = User.query.filter_by(id=userid).first()
   total = 0.0
   for order in user.orders:
@@ -167,6 +170,9 @@ def bagpage(bagid):
     user = User.query.filter_by(id=session.get('userid')).first()
     bag.users.append(user)
 
+    ship = False
+    if 'ship' in request.form:
+      ship = True
 
     # add the user's order to the bag
     order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], bag.id, user.id)
@@ -267,7 +273,6 @@ def facebook_authorized(resp):
 
     session['facebook_token'] = (resp['access_token'], '')
     fbuser = facebook.get('me').data
-#    return fbuser['email']
     if User.query.filter_by(email = fbuser['email']).first() == None:
       user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], '', '')
       db_session.add(user)
@@ -279,9 +284,9 @@ def facebook_authorized(resp):
 #    if user.isauthenticated:
 #      return "failed"
     session['logged_in'] = True
-#    return redirect(url_for('home'))
+    return redirect(url_for('home'))
 
-    return redirect(url_for('cas'))
+#    return redirect(url_for('cas'))
 
 @app.route("/logout")
 def logout():
