@@ -103,7 +103,7 @@ def paypal(userid):
 
 @app.route('/home')
 def home():
-  if session['userid'] == None:
+  if not session.get('logged_in'):
     abort(401)
   # store the bagid's for the featured stores on the carousel
   # brooks brothers
@@ -124,7 +124,7 @@ def home():
 # a test page for the admin
 @app.route('/all')
 def all():
-  if session['userid'] == None:
+  if not session.get('logged_in'):
     abort(401)
   entries = ""
   for row in User.query.all():
@@ -153,7 +153,7 @@ def all():
 
 @app.route('/newbag', methods=['GET', 'POST'])
 def newbag():
-  if session['userid'] == None:
+  if not session.get('logged_in'):
     abort(401)
   if request.method == 'POST':
     bag = Bag(request.form['store'], request.form['threshold'], 0, request.form['network'])
@@ -165,7 +165,7 @@ def newbag():
 # shows all of the relevant information for a store's bag
 @app.route('/bag/<bagid>', methods=['GET', 'POST'])
 def bagpage(bagid):
-  if session['userid'] == None:
+  if not session.get('logged_in'):
     abort(401)
   bag = Bag.query.filter_by(id=bagid).first()
   if request.method == 'POST':
@@ -215,7 +215,7 @@ def bagpage(bagid):
 # displays all of the users' bags
 @app.route('/mybags/<userid>')
 def mybags(userid):
-  if session['userid'] == None:
+  if not session.get('logged_in'):
     abort(401)
   user = User.query.filter_by(id = userid).first()  
   userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
@@ -229,7 +229,7 @@ def mybags(userid):
 # confirmation page for removing an order
 @app.route('/removeorder/<orderid>')
 def removeorder(orderid):
-  if session['userid'] == None:
+  if not session.get('logged_in'):
     abort(401)
   order = Order.query.filter_by(id=orderid).first()
   bag = Bag.query.filter_by(id=order.bag_id).first()
@@ -238,7 +238,7 @@ def removeorder(orderid):
 # removed order, link back to original page
 @app.route('/removed/<orderid>')
 def removed(orderid):
-  if session['userid'] == None:
+  if not session.get('logged_in'):
     abort(401)
   order = Order.query.filter_by(id=orderid).first()
   bag = Bag.query.filter_by(id=order.bag_id).first()
