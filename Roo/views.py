@@ -9,10 +9,22 @@ from flask.ext.mail import Message
 from Roo import mail
 import time, ast
 from werkzeug.wrappers import BaseResponse
+from functools import wraps
 
 #@app.teardown_request
 #def casdone():
 #  return redirect(url_for('home'))
+
+def with_netid(f):
+  @wraps(f)
+  def decorated_function(*args, **kwargs):
+    C = CASClient()
+    netid = C.Authenticate()
+    if isinstance(netid, BaseResponse):
+      return netid
+    return f(netid, *args, **kwargs)
+  return decorated_function
+
 
 @app.route('/')
 def fblogin():
@@ -22,9 +34,9 @@ def fblogin():
     return redirect(url_for('home'))
 
 @app.route('/cas')
+@with_netid
 def cas():
-  C = CASClient()
-  n = C.Authenticate()
+  return "hello"
 #  casdone()
 
 #@app.teardown_request
