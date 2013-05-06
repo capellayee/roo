@@ -226,24 +226,6 @@ def removed(orderid):
   return render_template('removed.html', userid=session.get('userid'), bag=bag)
 
 
-# allows a user to add to a bag
-@app.route('/addtobag/<userid>', methods=['GET', 'POST'])
-def addtobag(userid):
-    if request.method == 'POST':
-        bag = Bag.query.filter_by(store = request.form['store']).first()
-        bag.amountinbag = bag.amountinbag + int(request.form['price'])
-        user = User.query.filter_by(id = userid).first()
-        # add the user to the bag
-        bag.users.append(user)
-        # add the user's order to the bag
-        order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], bag.id, userid)
-        bag.orders.append(order)
-        db_session.add(order)
-        db_session.commit()
-        return redirect(url_for('mybags', userid=userid))
-    return render_template('addtobagform.html')
-
-
 #----------------------------------------
 # facebook authentication
 #----------------------------------------
