@@ -125,11 +125,6 @@ def newbag():
 def bagpage(bagid):
   bag = Bag.query.filter_by(id=bagid).first()
   if request.method == 'POST':
-    bag.amountinbag = bag.amountinbag + int(request.form['price'])
-    # add the user to the bag
-    user = User.query.filter_by(id=session.get('userid')).first()
-    bag.users.append(user)
-
     # check the validity of input, if something is wrong, return the page with error messages where appropriate
     errorfound = False
     price = ast.literal_eval(request.form['price'])
@@ -142,6 +137,13 @@ def bagpage(bagid):
       errorfound = True
     if errorfound:
       return redirect(url_for('bagpage', bagid=bagid))
+
+
+    bag.amountinbag = bag.amountinbag + int(request.form['price'])
+    # add the user to the bag
+    user = User.query.filter_by(id=session.get('userid')).first()
+    bag.users.append(user)
+
 
     # add the user's order to the bag
     order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], bag.id, user.id)
