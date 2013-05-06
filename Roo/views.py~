@@ -19,6 +19,10 @@ def fblogin():
 
 @app.route('/cas')
 def cas():
+  n = casverify()
+  return n + " HI!"
+
+def casverify():
   C = CASClient()
   n = C.Authenticate()
   return n
