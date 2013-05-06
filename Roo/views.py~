@@ -10,6 +10,11 @@ from Roo import mail
 import time, ast
 from werkzeug.wrappers import BaseResponse
 
+def casverify():
+  C = CASClient()
+  n = C.Authenticate()
+  return n
+
 @app.route('/')
 def fblogin():
   if not session.get('logged_in'):
@@ -22,10 +27,6 @@ def cas():
   n = casverify()
   return str(n) + "hi"
 
-def casverify():
-  C = CASClient()
-  n = C.Authenticate()
-  return n
 #  n = casverify()
 #  return redirect(url_for('home'))
 #  return render_template('caslogin.html')
