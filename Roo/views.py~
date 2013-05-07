@@ -22,6 +22,10 @@ def with_netid(f):
     return f(netid, *args, **kwargs)
   return decorated_function
 
+@app.errorhandler(401)
+def login_first(e):
+  return "you suck"
+
 @app.route('/')
 def fblogin():
   if not session.get('logged_in'):
