@@ -44,16 +44,16 @@ def email():
   localtime = time.localtime(time.time())
   dayoftheweek = localtime[6]
   if dayoftheweek == 0:
-  users = User.query.all()
-  with mail.connect() as conn:
-    for user in users:
-      if user.orders:
-        subject = "hello, %s, your purchases on Roo are ready to be ordered" % user.firstname
-        msg = Message(recipients=[user.email], subject=subject, sender="rooshipping@gmail.com")
-        msg.body = "Hi! You're bag on Roo is ready to be purchased!"
-        msg.html = """<a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+""""><b>Please click this link and pay!</b></a>""" 
-      
-        conn.send(msg)
+    users = User.query.all()
+    with mail.connect() as conn:
+      for user in users:
+        if user.orders:
+          subject = "hello, %s, your purchases on Roo are ready to be ordered" % user.firstname
+          msg = Message(recipients=[user.email], subject=subject, sender="rooshipping@gmail.com")
+          msg.body = "Hi! You're bag on Roo is ready to be purchased!"
+          msg.html = """<a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+""""><b>Please click this link and pay!</b></a>""" 
+          
+          conn.send(msg)
 
 @app.route('/purchase/<userid>')
 def paypal(userid):
