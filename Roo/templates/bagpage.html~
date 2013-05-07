@@ -96,19 +96,8 @@
 		    {% endfor %}
 		  {% endif %}
 		{% endwith %}
-
-              <label>Size</label> <input type="text" name="size" placeholder="what size do you want?">
 	      <label>Order Details</label> 
-	      <input type="text" name="details" placeholder="For example, what size?  What color?  How many? Special details specific to the product?">
-	         {% with detailserror = get_flashed_messages(category_filter=["detailserror"]) %}
-                  {% if detailserror %}
-	            {% for derror in detailserror %}
-	              <span class=detailserror style="color:#ff0000;font-size:14px;font-weight:bold;"><strong>Error:</strong> {{ derror }}</span>
-		    {% endfor %}
-		  {% endif %}
-		{% endwith %}
-
-	       
+	      <input type="textarea" name="details" placeholder="For example, what size?  What color?  How many? Special details specific to the product?">
 	      <label class="checkbox">
                 <input type="checkbox" name="ship" value="{{ True }}"> Ship to me?
               </label>
