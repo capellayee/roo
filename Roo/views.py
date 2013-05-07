@@ -24,7 +24,7 @@ def with_netid(f):
 
 @app.errorhandler(401)
 def login_first(e):
-  return "you suck"
+  return redirect(url_for('fblogin'))
 
 @app.route('/')
 def fblogin():
