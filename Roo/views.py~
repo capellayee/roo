@@ -1,4 +1,4 @@
-#testcomment
+# import statements
 from Roo import app
 from Roo.CASClient import CASClient
 from Roo.database import db_session
@@ -11,6 +11,7 @@ from Roo import mail
 import time, ast
 from werkzeug.wrappers import BaseResponse
 from functools import wraps
+
 
 def with_netid(f):
   @wraps(f)
@@ -26,13 +27,17 @@ def with_netid(f):
 def login_first(e):
   return redirect(url_for('fblogin'))
 
+# opening page of the site.  
 @app.route('/')
 def fblogin():
+  # if not logged in, redirect to facebook
   if not session.get('logged_in'):
     return render_template('login.html')
+  # if already logged in, redirect to home.
   else:
     return redirect(url_for('home'))
 
+# Princeton CAS login authentication.
 @app.route('/cas')
 @with_netid
 def cas(netid):
@@ -42,22 +47,55 @@ def cas(netid):
   db_session.commit()
   return redirect(url_for('home'))
 
-# send email notifications
-@app.route('/email')
-def email():
+
+# for all these email notifications we keep in the app.route for debugging purposes so that we can email on demand w/o heroku scheduler
+
+# Email notifications to users with orders telling them to pay for their order
+# Happens weekly using Heroku Scheduler
+@app.route('/payemail')
+def payemail():
+  # Send emails to purchase bags every Friday ( 12 noon )
   localtime = time.localtime(time.time())
   dayoftheweek = localtime[6]
-  if dayoftheweek == 1:
+  if dayoftheweek == 5:  # 5 = Friday
     users = User.query.all()
     with mail.connect() as conn:
       for user in users:
+        # if the user actually has orders in the bag
         if user.orders:
-          subject = "hello, %s, your purchases on Roo are ready to be ordered" % user.firstname
+          subject = "hello, %s, your purchases on The Milkman are ready to be ordered" % user.firstname
           msg = Message(recipients=[user.email], subject=subject, sender="rooshipping@gmail.com")
-          msg.body = "Hi! You're bag on Roo is ready to be purchased!"
-          msg.html = """<a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+""""><b>Please click this link and pay!</b></a>""" 
-          
+          # link to purchase page.
+          msg.html = """<p>Hey there, <br>, Your order(s) are ready to be purchased and shipped!  Head on over to The Milkman using the link below!<br><br><a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+""""><b>Get me my stuff!</b></a></p><br><br> The Milkman""" 
           conn.send(msg)
+
+# Send reminder emails in case a user has not yet paid for their order
+# This reminder email should happen 12 hours later ( Saturday midnight )
+# Sent via Heroku Scheduler
+@app.route('/reminderemail')
+def reminderemail():
+  localtime = time.localtime(time.time())
+  dayoftheweek = localtime[6]
+  if dayoftheweek == 6:
+    users = User.query.all()
+    with mail.connect() as conn:
+      for user in users:
+        # if the user has not purchased any of his or her order, send an email
+        for order in user.orders:
+          if not order.paid:
+            subject = "hello, %s, please pay for your order on The Milkman!"
+            msg = Message(recipients=[user.email], subject=subject, sender="rooshipping@gmail.com")
+            msg.html = """ Hey there, <br> Just a reminder to pay for your orders!  We know you want your stuff as soon as possible!  Click the link below to pay now! <br><br><a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+""""><b>Get me my stuff!</b></a><br><br> The Milkman</p>"""
+            conn.send(msg)
+
+# Send an email once the purchase has been made
+@app.route('/purchasedemail')
+def purchasedemail():
+  
+# Send an email once the purchase has been received, per our tracking information
+@app.route('/receivedemail')
+def receivedemail():
+  
 
 @app.route('/purchase/<userid>')
 def paypal(userid):

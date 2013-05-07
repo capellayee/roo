@@ -57,7 +57,8 @@ def payemail():
   # Send emails to purchase bags every Friday ( 12 noon )
   localtime = time.localtime(time.time())
   dayoftheweek = localtime[6]
-  if dayoftheweek == 5:  # 5 = Friday
+#  if dayoftheweek == 5:  # 5 = Friday
+  if dayoftheweek < 10000:
     users = User.query.all()
     with mail.connect() as conn:
       for user in users:
@@ -76,7 +77,8 @@ def payemail():
 def reminderemail():
   localtime = time.localtime(time.time())
   dayoftheweek = localtime[6]
-  if dayoftheweek == 6:
+#  if dayoftheweek == 6:
+  if dayoftheweek < 10000:
     users = User.query.all()
     with mail.connect() as conn:
       for user in users:
