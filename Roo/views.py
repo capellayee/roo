@@ -93,11 +93,12 @@ def reminderemail():
 # Send an email once the purchase has been made
 @app.route('/purchasedemail')
 def purchasedemail():
-  
+  return "hello"
+
 # Send an email once the purchase has been received, per our tracking information
 @app.route('/receivedemail')
 def receivedemail():
-  
+  return "hello"
 
 @app.route('/purchase/<userid>')
 def paypal(userid):
