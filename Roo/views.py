@@ -42,7 +42,7 @@ def cas(netid):
 def email():
   localtime = time.localtime(time.time())
   dayoftheweek = localtime[6]
-#  if dayoftheweek == 5:
+  if dayoftheweek == 0:
   users = User.query.all()
   with mail.connect() as conn:
     for user in users:

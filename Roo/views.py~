@@ -37,6 +37,7 @@ def cas(netid):
   db_session.commit()
   return redirect(url_for('home'))
 
+# send email notifications
 @app.route('/email')
 def email():
   localtime = time.localtime(time.time())
