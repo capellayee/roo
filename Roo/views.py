@@ -148,16 +148,6 @@ def bagpage(bagid):
     except ValueError:
       flash("Invalid price", "priceerror")
       errorfound = True
-#    if not (isinstance(price, float) or isinstance(price,int)):
-#    if not (isinstance(quantity, int)):
-    try:
-      quantity = int(request.form['quantity'])
-      if quantity < 0:
-        flash("Invalid quantity", "quantityerror")
-        errorfound = True
-    except ValueError:
-      flash("Invalid quantity", "quantityerror")
-      errorfound = True
     if errorfound:
       return redirect(url_for('bagpage', bagid=bagid))
 
@@ -171,11 +161,11 @@ def bagpage(bagid):
       ship = True
 
     # add the user's order to the bag
-    order = Order(request.form['itemurl'], request.form['price'], request.form['quantity'], request.form['size'], ship, bag.id, user.id)
+    order = Order(request.form['itemurl'], request.form['price'], request.form['details'], ship, bag.id, user.id)
     bag.orders.append(order)
     db_session.add(order)
     db_session.commit()
-    flash("Your purchase of " + str(order.quantity) + " " + order.url + " in size " + str(order.size) + " has been added to the " + bag.store + " bag!", "addmessage")
+    flash("Your purchase of " + order.url + " has been added to the " + bag.store + " bag!", "addmessage")
     return redirect(url_for('bagpage', bagid=bagid))
   return render_template('bagpage.html', bag=bag, userid=session.get('userid'))
 
@@ -222,7 +212,6 @@ def removed(orderid):
   if not orders:
     user.bag.remove(bag)
     db_session.commit()
-
 
   return render_template('removed.html', userid=user.id, bag=bag)
 

@@ -92,18 +92,18 @@
 	        {% with priceerror = get_flashed_messages(category_filter=["priceerror"]) %}
 	          {% if priceerror %}
 	            {% for perror in priceerror %}
-	              <span class=priceerror style="color:#ff0000;font-size:20px;font-weight:bold;"><strong>Error:</strong> {{ perror }}</span>
+	              <span class=priceerror style="color:#ff0000;font-size:14px;font-weight:bold;"><strong>Error:</strong> {{ perror }}</span>
 		    {% endfor %}
 		  {% endif %}
 		{% endwith %}
 
               <label>Size</label> <input type="text" name="size" placeholder="what size do you want?">
-	      <label>Quantity</label> 
-	      <input type="text" name="quantity" placeholder="how many?">
-	         {% with quantityerror = get_flashed_messages(category_filter=["quantityerror"]) %}
-                  {% if quantityerror %}
-	            {% for qerror in quantityerror %}
-	              <span class=quantityerror style="color:#ff0000;font-size:20px;font-weight:bold;"><strong>Error:</strong> {{ qerror }}</span>
+	      <label>Order Details</label> 
+	      <input type="text" name="details" placeholder="For example, what size?  What color?  How many? Special details specific to the product?">
+	         {% with detailserror = get_flashed_messages(category_filter=["detailserror"]) %}
+                  {% if detailserror %}
+	            {% for derror in detailserror %}
+	              <span class=detailserror style="color:#ff0000;font-size:14px;font-weight:bold;"><strong>Error:</strong> {{ derror }}</span>
 		    {% endfor %}
 		  {% endif %}
 		{% endwith %}
