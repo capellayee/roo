@@ -138,6 +138,7 @@ def bagpage(bagid):
     abort(401)
   bag = Bag.query.filter_by(id=bagid).first()
   if request.method == 'POST':
+    return request.form['details']
     # check the validity of input, if something is wrong, return the page with error messages where appropriate
     errorfound = False
     try:

@@ -148,16 +148,6 @@ def bagpage(bagid):
     except ValueError:
       flash("Invalid price", "priceerror")
       errorfound = True
-#    if not (isinstance(price, float) or isinstance(price,int)):
-#    if not (isinstance(quantity, int)):
-    try:
-      quantity = int(request.form['quantity'])
-      if quantity < 0:
-        flash("Invalid quantity", "quantityerror")
-        errorfound = True
-    except ValueError:
-      flash("Invalid quantity", "quantityerror")
-      errorfound = True
     if errorfound:
       return redirect(url_for('bagpage', bagid=bagid))
 
