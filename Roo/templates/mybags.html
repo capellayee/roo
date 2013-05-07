@@ -98,8 +98,7 @@
 	        Order details:
 	        <ul>
 		  <li>Price: {{ '%0.2f' % order.price }}</li>
-		  <li>Quantity: {{ order.quantity }}</li>
-		  <li>Size: {{ order.size }}</li>
+		  <li>Details: {{ order.details }}</li>
 		</ul>
 		<p><a class="btn" href='{{ url_for('removeorder', orderid=order.id) }}'>Remove this order &raquo;</a></p>
 	      {% endfor %}

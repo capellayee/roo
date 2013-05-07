@@ -83,7 +83,7 @@
   <div class="row-fluid">
     <div class="container">
     <ul class=bag>
-      {% if not mybags %}
+      {% if not user.bag %}
         <h2>You have no orders to display.. </h2>
       {% endif %}
       {% for bag in mybags %}
