@@ -62,17 +62,17 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href='{{ url_for('home') }}'>Roo</a>
+            <a class="brand" href='{{ url_for('home') }}'>The Milkman</a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
-                <li><a href="#about">About</a></li>
+                <li><a href='{{ url_for('about') }}'>About</a></li>
                 <li><a href='{{ url_for('logout') }}'>Logout</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Roo<b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href='{{ url_for('mybags', userid=userid) }}'>My Bags</a></li>
+                    <li><a href='{{ url_for('mybags', userid=userid) }}'>My Crates</a></li>
                     <li><a href="#">My Networks</a></li>
                   </ul>
                 </li>
@@ -103,9 +103,9 @@
               <legend><h1>{{ bag.store }}</h1></legend>
 
               <span class="help-block">Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</span>
-	            <span class="help-block">Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</span>
+	            <span class="help-block">Current amount in the crate: {{ '%0.2f' % bag.amountinbag }}</span>
               <span class="help-block">Required amount to ship: {{ '%0.2f' % (bag.threshold-bag.amountinbag) }}</span>
-              <h2>Add to Bag:</h2>
+              <h2>Add to Crate:</h2>
               <h3>URL of Item</h3> 
 	      <!-- error message if field is not filled out -->
 	        {% with missingurlerror = get_flashed_messages(category_filter=["missingurlerror"]) %}
@@ -129,7 +129,6 @@
                       </p>
                     {% endfor %}
                   {% endif %}
-                {% endwith %}
 
 	      <!-- error message if price is invalid.  Only display if above error does not display-->
 	        {% with priceerror = get_flashed_messages(category_filter=["priceerror"]) %}
@@ -142,6 +141,7 @@
 		      {% endfor %}
 		    {% endif %}
 		  {% endif %}
+		{% endwith %}
 		{% endwith %}
 	      <input  type="text" name="price" placeholder="cost of your purchase?">
 

@@ -280,23 +280,6 @@
     <link rel="apple-touch-icon-precomposed" href={{url_for('static',filename="static/ico/apple-touch-icon-57-precomposed.png") }}>
     <link rel="shortcut icon" href={{url_for('static',filename="static/ico/favicon.png") }}>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
-    </script>
-    
-
-    <script>
-    <!--$(document).ready(function($) {
-      $('#myModal').modal(options)
-    });JQuery -->
-
-     <!-- $(window).load(function(){
-        $('#myModal').modal('show');
-      });-->
-     $('#myModal').modal()
-    </script>
-
-
-
 
   </head>
 
@@ -329,7 +312,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href='{{ url_for('mybags', userid=userid ) }}'>My Crates</a></li>
-                    <li><a href="#">My Networks</a></li>
+                    <li><a href='{{ url_for('mynetworks', userid=userid ) }}'>My Networks</a></li>
                   </ul>
                 </li>
               </ul>
@@ -342,26 +325,6 @@
 
 
 
-
-
-    <!-- Popup if users address hasn't been input yet! -->
-    <!-- Button to trigger modal 
-    <a href="#addressRequest" role="button" class="btn" data-toggle="modal">Launch demo modal</a>-->
-
-    <!-- Modal -->
-    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	<h3 id="myModalLabel">Modal header</h3>
-      </div>
-      <div class="modal-body">
-	<p>One fine body…</p>
-      </div>
-      <div class="modal-footer">
-	<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-	<button class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
 
     <!-- Carousel
     ================================================== -->
