@@ -215,7 +215,7 @@ def home():
 def about():
   if not session.get('logged_in'):
     abort(401)
-  return render_template('about.html', user=User.query.filter_by(id=session.get('userid')).first())
+  return render_template('about.html', userid=session.get('userid'))
 
 # my networks 
 @app.route('/mynetworks/<userid>')

@@ -161,8 +161,8 @@ def editorder(orderid):
       return "ERROR"
 
     order = Order.query.filter_by(id=orderid).first()    
-    order.bag.amountinbag = order.bag.amountinbag - order.price + request.form['price']
-    order.price = request.form['price']
+    order.bag.amountinbag = order.bag.amountinbag - order.price + float(request.form['price'])
+    order.price = float(request.form['price'])
     order.url = request.form['itemurl']
     order.details = request.form['details']
     ship = False
@@ -215,7 +215,7 @@ def home():
 def about():
   if not session.get('logged_in'):
     abort(401)
-  return render_template('about.html', user=User.query.filter_by(id=session.get('userid')).first())
+  return render_template('about.html', userid=session.get('userid'))
 
 # my networks 
 @app.route('/mynetworks/<userid>')

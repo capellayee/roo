@@ -411,10 +411,27 @@
     <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Modal header</h3>
+        <h3 id="myModalLabel">Welcome to The Milkman</h3>
       </div>
       <div class="modal-body">
-        <p>One fine body…</p>
+        <p>Welcome to the Princeton Milkman community.  To get started, please enter your Frist mailbox number.</p>
+	<form class="form-bag" method="post">
+	  <fieldset>
+	    <h3></h3>
+              <!-- error if field is not filled out -->
+               {% with missingmailboxerror = get_flashed_messages(category_filter=["missingmailboxerror"]) %}
+                  {% if missingmailboxerror %}
+                    {% for mmberror in missingmailboxerror %}
+                      <p class=missingmailboxerror style="color:#ff0000;font-size:14px;font-weight:bold;">
+                        <strong>Error:</strong> {{ mmberror }}
+                      </p>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+             <input  type="text" name="mailbox" placeholder="e.g. 5180">
+	     <button type="submit" class="btn">Submit</button>
+          </fieldset>
+        </form>
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>

@@ -30,6 +30,7 @@ class User(Base):
   email = Column(String(40), unique=True)
   password = Column(String(40), unique=False)
   address = Column(String(80), unique=False)
+  mailbox = Column(Integer, unique=False) #should technically be true but worried itll mad break before we do a lot of error handling
   bag_id = Column(Integer, ForeignKey('bags.id'))
 
   bag = relationship("Bag", secondary=association_table, backref=backref('users', order_by=id))
@@ -65,11 +66,16 @@ class Order(Base):
   bag = relationship("Bag", backref=backref("orders", order_by=id))
   user = relationship("User", backref="orders")
 
-  def __init__(self, url=None, price=None, details=None, ship=None, bag_id=None, user_id=None):
+  def __init__(self, url=None, price=None, details=None, ship=None, paid=None, datepaid=None, dateordered=None, datereceived_shipper=None, datereceived_buyer=None, bag_id=None, user_id=None):
     self.url = url
     self.price = price
     self.details = details
     self.ship = ship
+    self.paid = paid
+    self.datepaid = datepaid
+    self.dateordered = dateordered
+    self.datereceived_shipper = datereceived_shipper
+    self.daterecevied_buyer = datereceived_buyer
     self.bag_id = bag_id
     self.user_id = user_id
     
