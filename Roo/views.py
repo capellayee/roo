@@ -27,6 +27,12 @@ def with_netid(f):
 def login_first(e):
   return redirect(url_for('fblogin'))
 
+
+#test modal
+@app.route('/modal')
+def modal():
+  return render_template('modal.html')
+
 # opening page of the site.  
 @app.route('/')
 def fblogin():
