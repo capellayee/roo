@@ -329,7 +329,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href='{{ url_for('mybags', userid=userid ) }}'>My Crates</a></li>
-                    <li><a href="#">My Networks</a></li>
+                    <li><a href='{{ url_for('mynetworks', userid=userid ) }}'>My Networks</a></li>
                   </ul>
                 </li>
               </ul>
@@ -381,7 +381,7 @@
           <a href="http://www.ralphlauren.com"><img src={{url_for('static',filename="imgs/ralphlauren.JPG") }} alt=""></a>
           <div class="container">
             <div class="carousel-caption">
-              <h1>Ralph Lauren</h1>
+              <h1 style="color:black">Ralph Lauren</h1>
               <p class="lead"></p>
               <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=ralphlaurenid) }}'>Add to crate</a>
             </div>
@@ -391,7 +391,7 @@
           <a href="http://www.jcrew.com"><img src={{url_for('static',filename="imgs/jcrew.JPG") }} alt=""></a>
           <div class="container">
             <div class="carousel-caption">
-              <h1>J. Crew</h1>
+              <h1 style="color:black">J. Crew</h1>
               <p class="lead"></p>
               <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=jcrewid) }}'>Add to crate</a>
             </div>
