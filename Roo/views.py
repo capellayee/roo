@@ -61,10 +61,18 @@ def payemail():
   if dayoftheweek < 10000:
     bags = Bag.query.all()
     for bag in bags:
+      subject = "Milkman order for %s" % bag.store
       if len(bag.users) == 1:
         # send apology message
-        msg = Message(recipients=[bag.users[0].email], subject="sorry no one else joined your bag", sender="rooshipping@gmail.com")
+        msg = Message(recipients=[bag.users[0].email], subject=subject, sender="rooshipping@gmail.com")
+        msg.html = "Sorry, no one else joined your Milkman crate :(. Just go ahead and order it on your own. Better luck next week!" 
         mail.send(msg)
+        return
+      msgtext = None
+      if bag.amountinbag >= bag.threshold:
+        msgtext = "The Milkman has delivered: your crate for %s meets the minimum for free shipping!<br>" % bag.store
+      else:
+        msgtext = "While your Milkman crate for %s did not meet the minimum for free shipping, you can still save on shipping by ordering together!<br>"
       if len(bag.users) > 1:
         bagleader = bag.users[0]
         for order in bag.orders:
@@ -75,7 +83,8 @@ def payemail():
           recipients.append(user.email)
         msg = Message(recipients=recipients, subject="Milkman", sender="rooshipping@gmail.com")
         # customize message. also check if bag threshold has been met.
-        msg.html = "leader is " + bagleader.email + "!"
+        msgtext = msgtext + "leader is " + bagleader.email + "!"
+        mail.html = msgtext
         mail.send(msg)
 #    users = User.query.all()
 #    with mail.connect() as conn:
