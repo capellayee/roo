@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>My Bags &middot; Roo</title>
+    <title>My Bags &middot; The Milkman</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -14,11 +14,26 @@
       body {
         padding-top: 60px;
         padding-bottom: 40px;
+        background:url(../static/imgs/milk.png)
       }
       .sidebar-nav {
         padding: 9px 0;
       }
 
+      
+    .form-bag {
+ 	max-width: 800px;
+	padding: 19px 29px 29px;
+	margin 0 auto 20 px;
+	background-color: #fff;
+	border: 5px solid #add6ff;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
       @media (max-width: 980px) {
         /* Enable use of floated navbar text */
         .navbar-text.pull-right {
@@ -79,7 +94,7 @@
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
 
-          
+<form class="form-bag">
   <div class="row-fluid">
     <div class="container">
       <div class="span4">
@@ -88,7 +103,7 @@
 	<p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> Take me back to the {{bag.store}} bag &raquo;</a></p>
 	<p><a class="btn" href='{{ url_for('mybags', userid=userid) }}'> Take me back to my bags &raquo;</a></p>
       </div><!--/span-->
-    
+</form>    
     </div><!--/.container-->
     </div><!--/.fluid-container-->
 
