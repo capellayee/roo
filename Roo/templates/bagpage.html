@@ -76,7 +76,9 @@
 	      {% if messages %}
 	      <ul class=flashes>
 		{% for message in messages %}
-		<li>{{ message }}</li>
+		<div class="alert alert-success">
+		  {{ message }}
+		</div>
 		{% endfor %}
 	      </ul>
 	      {% endif %}
@@ -92,7 +94,11 @@
 	        {% with priceerror = get_flashed_messages(category_filter=["priceerror"]) %}
 	          {% if priceerror %}
 	            {% for perror in priceerror %}
-	              <span class=priceerror style="color:#ff0000;font-size:14px;font-weight:bold;"><strong>Error:</strong> {{ perror }}</span>
+	              <span class=priceerror style="color:#ff0000;font-size:14px;font-weight:bold;">
+			<div class="alert alert-error">
+			  <strong>Error:</strong> {{ perror }}
+			</div>
+		      </span>
 		    {% endfor %}
 		  {% endif %}
 		{% endwith %}
