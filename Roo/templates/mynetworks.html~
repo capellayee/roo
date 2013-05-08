@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Buy a Bag &middot; The Milkman</title>
+    <title>My Networks &middot; The Milkman </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -14,22 +14,7 @@
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-        background:url(../static/imgs/milk.png)
       }
-
-    .form-bag {
- 	max-width: 800px;
-	padding: 19px 29px 29px;
-	margin 0 auto 20 px;
-	background-color: #fff;
-	border: 5px solid #add6ff;
-        -webkit-border-radius: 5px;
-           -moz-border-radius: 5px;
-                border-radius: 5px;
-        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-                box-shadow: 0 1px 2px rgba(0,0,0,.05);
-    }
     </style>
     <link href={{url_for('static',filename="bootstrap/css/bootstrap-responsive.css")}} rel="stylesheet">
 
@@ -84,86 +69,7 @@
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
     <div class="container">
-
-<form class="form-bag">
-<form class="bs-docs-example" method="post">
-            <fieldset>
-	      {% with messages = get_flashed_messages(category_filter=["addmessage"]) %}
-	      {% if messages %}
-	      <ul class=flashes>
-		{% for message in messages %}
-		<div class="alert alert-success">
-		  {{ message }}
-		</div>
-		{% endfor %}
-	      </ul>
-	      {% endif %}
-	      {% endwith %}
-              <legend><h1>{{ bag.store }}</h1></legend>
-
-              <span class="help-block">Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</span>
-	            <span class="help-block">Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</span>
-              <span class="help-block">Required amount to ship: {{ '%0.2f' % (bag.threshold-bag.amountinbag) }}</span>
-              <h2>Edit your order:</h2>
-              <h3>URL of Item</h3> 
-	      <!-- error message if field is not filled out -->
-	        {% with missingurlerror = get_flashed_messages(category_filter=["missingurlerror"]) %}
-                  {% if missingurlerror %}
-                    {% for muerror in missingurlerror %}
-                      <p class=missingfielderror style="color:#ff0000;font-size:14px;font-weight:bold;">
-                        <strong>Error:</strong> {{ muerror }}
-                      </p>
-                    {% endfor %}
-                  {% endif %}
-                {% endwith %}
-	      <input type="text" name="itemurl" value={{order.url}}>
-
-	      <h3>Amount of Purchase</h3> 
-	      <!-- error message if field is not filled out -->  
-      	        {% with missingpriceerror = get_flashed_messages(category_filter=["missingpriceerror"]) %}
-                  {% if missingpriceerror %}
-                    {% for mperror in missingpriceerror %}
-                      <p class=missingpriceerror style="color:#ff0000;font-size:14px;font-weight:bold;">
-                        <strong>Error:</strong> {{ mperror }}
-                      </p>
-                    {% endfor %}
-                  {% endif %}
-                {% endwith %}
-
-	      <!-- error message if price is invalid.  Only display if above error does not display-->
-	        {% with priceerror = get_flashed_messages(category_filter=["priceerror"]) %}
-	          {% if priceerror %}
-	            {% if not missingpriceerror %}
-	              {% for perror in priceerror %}
-	                <p class=priceerror style="color:#ff0000;font-size:14px;font-weight:bold;">
-			  <strong>Error:</strong> {{ perror }}
-		        </p>
-		      {% endfor %}
-		    {% endif %}
-		  {% endif %}
-		{% endwith %}
-	      <input  type="text" name="price" value={{order.price}}>
-
-	      <h3>Order Details</h3> 
-	      <!-- error if field is not filled out -->
-	       {% with missingdetailserror = get_flashed_messages(category_filter=["missingdetailserror"]) %}
-                  {% if missingdetailserror %}
-                    {% for mderror in missingdetailserror %}
-                      <p class=missingdetailserror style="color:#ff0000;font-size:14px;font-weight:bold;">
-                        <strong>Error:</strong> {{ mderror }}
-                      </p>
-                    {% endfor %}
-                  {% endif %}
-                {% endwith %}
-	      <textarea rows="4" name="details">{{order.details}}</textarea>
-	      <label class="checkbox">
-                <input type="checkbox" name="ship" value={{order.ship}}> <h3>Ship to me?</h3>
-              </label>
-
-              <button type="submit" class="btn">Submit</button>
-            </fieldset>
-          </form>
-	</form>
+       <h1>You're all part of Princeton! </h1>
     </div> <!-- /container -->
 
 

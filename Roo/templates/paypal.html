@@ -56,11 +56,10 @@
                 <li><a href='/logout'>Logout</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Roo<b class="caret"></b></a>
+                  <a href='{{ url_for('home') }}' class="dropdown-toggle" data-toggle="dropdown">My Roo<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">My Bags</a></li>
-                    <li><a href="#">My Friend's Bags</a></li>
-                    <li><a href="#">My Networks</a></li>
+                    <li><a href='{{ url_for('mybags', userid=userid) }}'>My Bags</a></li>
+                    <li><a href='{{ url_for('mynetworks', userid=userid) }}'">My Networks</a></li>
                   </ul>
                 </li>
               </ul>
