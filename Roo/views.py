@@ -64,7 +64,7 @@ def payemail():
       if len(bag.users) == 1:
         # send apology message
         subject = "sorry, no one else joined your bag"
-        msg = Message(recipients=[bag.users[0].email], subject=suject, sender="rooshipping@gmail.com")
+        msg = Message(recipients=[bag.users[0].email], subject=subject, sender="rooshipping@gmail.com")
         mail.send(msg)
       if len(bag.users) > 1:
         bagleader = bag.users[0]
@@ -135,8 +135,8 @@ def home():
   if not session.get('logged_in'):
     abort(401)
   # store the bagid's for the featured stores on the carousel
-  # brooks brothers
-  brooksbrothersid = Bag.query.filter_by(store = 'Brooks Brothers').first().id
+  # urban outfitters
+  urbanoutfittersid = Bag.query.filter_by(store = 'Urban Outfitters').first().id
   # ralph lauren
   ralphlaurenid = Bag.query.filter_by(store = 'Ralph Lauren').first().id
   # j. crew
@@ -148,7 +148,7 @@ def home():
   mybags = []
   for b in user.bag:
     mybags.append(b)
-  return render_template('carousel.html', userid=userid, brooksbrothersid=brooksbrothersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags)
+  return render_template('carousel.html', userid=userid, urbanoutfittersid=urbanoutfittersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags)
 
 # a test page for the admin
 @app.route('/all')
