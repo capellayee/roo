@@ -81,9 +81,9 @@ def payemail():
         for user in bag.users:
           recipients.append(user.email)
         msg = Message(recipients=recipients, subject=subject, sender="rooshipping@gmail.com")
-        msgtext = msgtext + "The crate should be ordered by " + bagleader.firstname + " " + bagleader.lastname + " (" + bagleader.email + ")<br> Here are the orders in the crate:"
+        msgtext = msgtext + "The crate should be ordered by " + bagleader.firstname + " " + bagleader.lastname + " (" + bagleader.email + ")<br><br> Here are the orders in the crate: <br><hr>"
         for order in bag.orders:
-          msgtext = msgtext + "User: " + order.user.firstname + " " + order.user.lastname + " (" + order.user.email + ")" + "Order cost: $" + str(order.price) + " Order URL: " + order.url
+          msgtext = msgtext + "User: " + order.user.firstname + " " + order.user.lastname + " (" + order.user.email + ") " + "Order cost: $" + str(order.price) + " URL: " + order.url
           msgtext = msgtext + "<br> Comments: " + order.details + "<hr>"
         msg.html = msgtext
         mail.send(msg)
@@ -164,8 +164,8 @@ def home():
 #about page
 @app.route('/about')
 def about():
-   if not session.get('logged_in'):
-      abort(401)
+#   if not session.get('logged_in'):
+#      abort(401)
    return render_template('about.html')
 
 # a test page for the admin
