@@ -6122,6 +6122,9 @@ a.badge:focus {
   line-height: 30px;
   color: inherit;
   background-color: #5CADFF;
+  border:1px solid black;
+  opacity:0.6;
+  filter:alpha(opacity=60);
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
           border-radius: 6px;
