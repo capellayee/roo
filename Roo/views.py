@@ -139,7 +139,7 @@ def editorder(orderid):
   if request.method == 'POST':
     return "okay"
   else:
-    return render_template(editorder.html, order=Order.query.filter_by(id=orderid).first())
+    return render_template('editorder.html', order=Order.query.filter_by(id=orderid).first())
 
 @app.route('/purchase/<userid>')
 def paypal(userid):
