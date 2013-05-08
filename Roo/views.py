@@ -187,7 +187,7 @@ def about():
 def mynetworks(userid):
   if not session.get('logged_in'):
     abort(401)
-  return render_template('mynetworks.html', user=user)
+  return render_template('mynetworks.html', user=User.query.filter_by(id=userid).first())
 
 # a test page for the admin
 @app.route('/all')

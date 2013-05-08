@@ -120,9 +120,10 @@
 	  {% endfor %}
 
 	<h3>Total in {{bag.store}} bag:</h3> {{ '%0.2f' % bag.amountinbag }} <br>
+
 	{% with toship = bag.threshold - bag.amountinbag %}
-	  {% if toship <= 0 %}
-	    {% toship = 0 %}
+	  {% if toship < 0 %}
+	    {% set toship = 0 %}
 	  {% endif %}
         <h3>Amount needed to ship:</h3> {{ '%0.2f' % (toship) }} <br>
 	{% endwith %}
