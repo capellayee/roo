@@ -135,11 +135,6 @@ def editorder(orderid):
   else:
     return render_template(editorder.html, order=Order.query.filter_by(id=orderid).first())
 
-@app.route('/newbag', methods=['GET', 'POST'])
-def newbag():
-  if not session.get('logged_in'):
-    abort(401)
-  if request.method == 'POST':
 @app.route('/purchase/<userid>')
 def paypal(userid):
 
