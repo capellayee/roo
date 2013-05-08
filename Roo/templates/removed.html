@@ -72,17 +72,17 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href='{{ url_for('home') }}'>Roo</a>
+            <a class="brand" href='{{ url_for('home') }}'>The Milkman</a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
-                <li><a href="#about">About</a></li>
+                <li><a href='{{ url_for('about') }}'>About</a></li>
                 <li><a href='{{ url_for('logout') }}'>Logout</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Roo<b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href='{{ url_for('mybags', userid=userid) }}'>My Bags</a></li>
+                    <li><a href='{{ url_for('mybags', userid=userid) }}'>My Crates</a></li>
                     <li><a href="#">My Networks</a></li>
                   </ul>
                 </li>
@@ -100,8 +100,8 @@
       <div class="span4">
         <h2>Done!</h2>
 	<h3>Your order has been removed</h3>
-	<p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> Take me back to the {{bag.store}} bag &raquo;</a></p>
-	<p><a class="btn" href='{{ url_for('mybags', userid=userid) }}'> Take me back to my bags &raquo;</a></p>
+	<p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> Take me back to the {{bag.store}} crate &raquo;</a></p>
+	<p><a class="btn" href='{{ url_for('mybags', userid=userid) }}'> Take me back to my crates &raquo;</a></p>
       </div><!--/span-->
 </form>    
     </div><!--/.container-->
