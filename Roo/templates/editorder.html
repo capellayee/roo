@@ -155,7 +155,7 @@
                     {% endfor %}
                   {% endif %}
                 {% endwith %}
-	      <textarea rows="4" name="details" value={{order.details}}></textarea>
+	      <textarea rows="4" name="details">{{order.details}}</textarea>
 	      <label class="checkbox">
                 <input type="checkbox" name="ship" value={{order.ship}}> <h3>Ship to me?</h3>
               </label>
