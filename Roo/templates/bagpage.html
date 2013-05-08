@@ -129,7 +129,6 @@
                       </p>
                     {% endfor %}
                   {% endif %}
-                {% endwith %}
 
 	      <!-- error message if price is invalid.  Only display if above error does not display-->
 	        {% with priceerror = get_flashed_messages(category_filter=["priceerror"]) %}
@@ -142,6 +141,7 @@
 		      {% endfor %}
 		    {% endif %}
 		  {% endif %}
+		{% endwith %}
 		{% endwith %}
 	      <input  type="text" name="price" placeholder="cost of your purchase?">
 

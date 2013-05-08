@@ -161,12 +161,20 @@ def home():
     mybags.append(b)
   return render_template('home.html', userid=userid, urbanoutfittersid=urbanoutfittersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags, address=address)
 
-#about page
+# about page
 @app.route('/about')
 def about():
-#   if not session.get('logged_in'):
-#      abort(401)
-   return render_template('about.html')
+  if not session.get('logged_in'):
+    abort(401)
+  return render_template('about.html')
+
+# my networks 
+@app.route('/mynetworks/<userid>')
+def mynetworks(userid):
+  if not session.get('logged_in'):
+    abort(401)
+  user = User.query.filter_by(id=userid)
+  return render_template('mynetworks.html', user=user)
 
 # a test page for the admin
 @app.route('/all')
