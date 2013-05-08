@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>The Milkman</title>
+    <title>Roo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -84,22 +84,9 @@
 
     .carousel-control {
       height: 80px;
-      margin-top: 0;g {
- 	max-width: 800px;
-	padding: 19px 29px 29px;
-	margin 0 auto 20 px;
-	background-color: #fff;
-	border: 5px solid #add6ff;
-        -webkit-border-radius: 5px;
-           -moz-border-radius: 5px;
-                border-radius: 5px;
-        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-                box-shadow: 0 1px 2px rgba(0,0,0,.05);
-    }
-
+      margin-top: 0;
       font-size: 120px;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4m
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
       background-color: transparent;
       border: 0;
       z-index: 10;
@@ -276,11 +263,9 @@
     <!-- Fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href={{url_for('static',filename="static/ico/apple-touch-icon-144-precomposed.png") }}>
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href={{url_for('static',filename="static/ico/apple-touch-icon-114-precomposed.png") }}>
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href={{url_for('static',filename="static/ico/apple-touch-icon-72-precomposed.png") }}>
-    <link rel="apple-touch-icon-precomposed" href={{url_for('static',filename="static/ico/apple-touch-icon-57-precomposed.png") }}>
-    <link rel="shortcut icon" href={{url_for('static',filename="static/ico/favicon.png") }}>
-
-
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href={{url_for('static',filename="static/ico/apple-touch-icon-72-precomposed.png") }}>
+                    <link rel="apple-touch-icon-precomposed" href={{url_for('static',filename="static/ico/apple-touch-icon-57-precomposed.png") }}>
+                                   <link rel="shortcut icon" href={{url_for('static',filename="static/ico/favicon.png") }}>
   </head>
 
   <body>
@@ -301,18 +286,18 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href='{{ url_for('home') }}'><img src={{ url_for('static', filename="imgs/milkman-logo.jpg") }} alt=""></a>
+            <a class="brand" href='{{ url_for('home') }}'>Roo</a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
-                <li><a href='{{ url_for('about') }}'>About</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href='{{ url_for('logout') }}'>Logout</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Roo<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href='{{ url_for('mybags', userid=userid ) }}'>My Crates</a></li>
-                    <li><a href='{{ url_for('mynetworks', userid=userid ) }}'>My Networks</a></li>
+                    <li><a href='{{ url_for('mybags', userid=userid ) }}'>My Bags</a></li>
+                    <li><a href="#">My Networks</a></li>
                   </ul>
                 </li>
               </ul>
@@ -325,38 +310,37 @@
 
 
 
-
     <!-- Carousel
     ================================================== -->
     <div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
         <div class="item active">
-          <a href="http://www.urbanoutfitters.com"><img src={{url_for('static',filename="imgs/UrbanOutfitters.jpg") }} alt=""></a>
+          <a href="www.urbanoutfitters.com"><img src={{url_for('static',filename="imgs/UrbanOutfitters.jpg") }} alt=""></a>
           <div class="container">
             <div class="carousel-caption">
-              <h1 style="color:black">Urban Outfitters.</h1>
+              <h1>Urban Outfitters.</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=urbanoutfittersid) }}'>Add to crate</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=urbanoutfittersid) }}'>Add to bag</a>
             </div>
           </div>
         </div>
         <div class="item">
-          <a href="http://www.ralphlauren.com"><img src={{url_for('static',filename="imgs/ralphlauren.JPG") }} alt=""></a>
+          <a href="www.ralphlauren.com"><img src={{url_for('static',filename="imgs/ralphlauren.JPG") }} alt=""></a>
           <div class="container">
             <div class="carousel-caption">
-              <h1 style="color:black">Ralph Lauren</h1>
+              <h1>Ralph Lauren</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=ralphlaurenid) }}'>Add to crate</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=ralphlaurenid) }}'>Add to bag</a>
             </div>
           </div>
         </div>
         <div class="item">
-          <a href="http://www.jcrew.com"><img src={{url_for('static',filename="imgs/jcrew.JPG") }} alt=""></a>
+          <a href="www.jcrew.com"><img src={{url_for('static',filename="imgs/jcrew.JPG") }} alt=""></a>
           <div class="container">
             <div class="carousel-caption">
-              <h1 style="color:black">J. Crew</h1>
+              <h1>J. Crew</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=jcrewid) }}'>Add to crate</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=jcrewid) }}'>Add to bag</a>
             </div>
           </div>
         </div>
@@ -373,22 +357,19 @@
 
     <div class="container marketing">
 
-
-
-
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="span4">
           <img class="img-circle" data-src="holder.js/140x140">
-          <h2>My Crates</h2>
+          <h2>My Bags</h2>
 	{% for bag in mybags %}
-          <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
+          <p><a class="btn" href='{{ url_for('editorder', orderid=bag.orders.) }}'> {{bag.store}} &raquo;</a></p>
 	{% endfor %}
         </div><!-- /.span4 -->
         <div class="span4">
           <img class="img-circle" data-src="holder.js/140x140">
-          <h2>All Crates</h2>
-          <p>list of all existing crates</p>
+          <h2>All Bags</h2>
+          <p>list of all existing bags</p>
 	{% for bag in allbags %}
           <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
 	{% endfor %}
@@ -400,27 +381,6 @@
           <p><a class="btn" href="#">Join a network &raquo;</a></p>
         </div><!-- /.span4 -->
       </div><!-- /.row -->
-
-
-
- <!-- Popup if users address hasn't been input yet! -->
-    <!-- Button to trigger modal 
-    <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>-->
-
-    <!-- Modal -->
-    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Modal header</h3>
-      </div>
-      <div class="modal-body">
-        <p>One fine body…</p>
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
 
 
       <!-- FOOTER -->
@@ -458,12 +418,5 @@
       }(window.jQuery)
     </script>
     <script src="../bootstrap/js/holder/holder.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-    <script src="/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-modal.js"></script> 
-    <script>
-      $(function ()    
-      { $("#myModal").modal(show);    
-      });
-    </script>
   </body>
 </html>
