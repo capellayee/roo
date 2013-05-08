@@ -159,6 +159,13 @@ def home():
     mybags.append(b)
   return render_template('home.html', userid=userid, urbanoutfittersid=urbanoutfittersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags, address=address)
 
+#about page
+@app.route('/about')
+def about():
+   if not session.get('logged_in'):
+      abort(401)
+   return render_template('about.html')
+
 # a test page for the admin
 @app.route('/all')
 def all():
