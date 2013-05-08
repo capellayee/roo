@@ -137,7 +137,42 @@ def receivedemail():
 @app.route('/editorder/<orderid>', methods=['GET', 'POST'])
 def editorder(orderid):
   if request.method == 'POST':
-    return "okay"
+    # check the validity of input, if something is wrong, return the page with error messages where appropriate
+    errorfound = False
+    try:
+      price = float(request.form['price'])
+      if price < 0:
+        flash("Invalid price", "priceerror")
+        errorfound = True
+    except ValueError:
+      flash("Invalid price", "priceerror")
+      errorfound = True
+    # check if any fields were left empty                                                                                              
+    if not request.form['itemurl']:
+      flash("Please input the item's URL", "missingurlerror")
+      errorfound = True
+    if not request.form['price']:
+      flash("Please input the price of the item", "missingpriceerror")
+      errorfound = True
+    if not request.form['details']:
+      flash("Please enter details about your order", "missingdetailserror")
+      errorfound = True
+    if errorfound:
+      return "ERROR"
+
+    order = Order.query.filter_by(id=orderid).first()    
+    order.bag.amountinbag = order.bag.amountinbag - order.price + request.form['price']
+    order.price = request.form['price']
+    order.url = request.form['itemurl']
+    order.details = request.form['details']
+    ship = False
+    if 'ship' in request.form:
+      ship = True
+    order.ship = ship
+    db_session.commit()
+
+    flash("Your purchase of " + order.url + " has been updated for the " + order.bag.store + " bag!", "addmessage")
+    return render_template('editorder.html', order=order, bag=order.bag)
   else:
     order = Order.query.filter_by(id=orderid).first()
     return render_template('editorder.html', order=order, bag=order.bag)
@@ -261,15 +296,15 @@ def bagpage(bagid):
     if errorfound:
       return redirect(url_for('bagpage', bagid=bagid))
 
-    bag.amountinbag = bag.amountinbag + price
+    bag.amountinbag = bag.amountinbag - price
     # add the user to the bag
-    user = User.query.filter_by(id=session.get('userid')).first()
-    bag.users.append(user)
 
     ship = False
     if 'ship' in request.form:
       ship = True
-
+    curorder = Order.query.filter_by(id=userid).first()
+    db_session.delete(order)
+    db_session.commit()
     # add the user's order to the bag
     order = Order(request.form['itemurl'], request.form['price'], request.form['details'], ship, None, None, None, None, None, bag.id, user.id)
     bag.orders.append(order)
