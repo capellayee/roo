@@ -81,10 +81,11 @@ def payemail():
         recipients = []
         for user in bag.users:
           recipients.append(user.email)
-        msg = Message(recipients=recipients, subject="Milkman", sender="rooshipping@gmail.com")
+        return recipients
+        msg = Message(recipients=recipients, subject=subject, sender="rooshipping@gmail.com")
         # customize message. also check if bag threshold has been met.
         msgtext = msgtext + "leader is " + bagleader.email + "!"
-        mail.html = msgtext
+        msg.html = msgtext
         mail.send(msg)
 #    users = User.query.all()
 #    with mail.connect() as conn:
@@ -149,6 +150,8 @@ def home():
   ralphlaurenid = Bag.query.filter_by(store = 'Ralph Lauren').first().id
   # j. crew
   jcrewid = Bag.query.filter_by(store = 'J. Crew').first().id
+  
+  address = True
 
   userid = session.get('userid')
   allbags = Bag.query.all()
@@ -156,7 +159,7 @@ def home():
   mybags = []
   for b in user.bag:
     mybags.append(b)
-  return render_template('home.html', userid=userid, urbanoutfittersid=urbanoutfittersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags)
+  return render_template('home.html', userid=userid, urbanoutfittersid=urbanoutfittersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags, address=address)
 
 # a test page for the admin
 @app.route('/all')
