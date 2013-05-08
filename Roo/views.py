@@ -70,7 +70,7 @@ def payemail():
       subject = "Milkman order for %s" % bag.store
       if len(bag.users) == 1:
         # send apology message
-        msg = Message(recipients=[bag.users[0].email], subject=subject, sender="rooshipping@gmail.com")
+        msg = Message(recipients=[bag.users[0].email], subject=subject, sender="themilkmanipping@gmail.com")
         msg.html = "Sorry, no one else joined your Milkman crate :(. Just go ahead and order it on your own. Better luck next week!" 
         mail.send(msg)
       msgtext = None
@@ -86,7 +86,7 @@ def payemail():
         recipients = []
         for user in bag.users:
           recipients.append(user.email)
-        msg = Message(recipients=recipients, subject=subject, sender="rooshipping@gmail.com")
+        msg = Message(recipients=recipients, subject=subject, sender="themilkmanshipping@gmail.com")
         msgtext = msgtext + "The crate should be ordered by " + bagleader.firstname + " " + bagleader.lastname + " (" + bagleader.email + ")<br><br> Here are the orders in the crate: <br><hr>"
         for order in bag.orders:
           msgtext = msgtext + "User: " + order.user.firstname + " " + order.user.lastname + " (" + order.user.email + ") " + "Order cost: $" + str(order.price) + " URL: " + order.url
@@ -120,7 +120,7 @@ def reminderemail():
         for order in user.orders:
            if not order.paid:
             subject = "hello, %s, please pay for your order on The Milkman!" % user.firstname
-            msg = Message(recipients=[user.email], subject=subject, sender="rooshipping@gmail.com")
+            msg = Message(recipients=[user.email], subject=subject, sender="themilkmanshipping@gmail.com")
             msg.html = """ Hey there, <br> Just a reminder to pay for your orders!  We know you want your stuff as soon as possible!  Click the link below to pay now! <br><br><a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+""""><b>Get me my stuff!</b></a><br><br> The Milkman</p>"""
             conn.send(msg)
 
@@ -139,7 +139,7 @@ def editorder(orderid):
   if request.method == 'POST':
     return "okay"
   else:
-    return render_template('editorder.html', order=Order.query.filter_by(id=orderid).first())
+    return render_template('editorder.html', order=Order.query.filter_by(id=orderid).first(), bag=order.bag)
 
 @app.route('/purchase/<userid>')
 def paypal(userid):
