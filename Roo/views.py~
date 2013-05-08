@@ -232,7 +232,7 @@ def bagpage(bagid):
       ship = True
 
     # add the user's order to the bag
-    order = Order(request.form['itemurl'], request.form['price'], request.form['details'], ship, bag.id, user.id)
+    order = Order(request.form['itemurl'], request.form['price'], request.form['details'], ship, , , , , , bag.id, user.id)
     bag.orders.append(order)
     db_session.add(order)
     db_session.commit()
