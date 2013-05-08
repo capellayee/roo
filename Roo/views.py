@@ -180,14 +180,13 @@ def home():
 def about():
   if not session.get('logged_in'):
     abort(401)
-  return render_template('about.html')
+  return render_template('about.html', user=User.query.filter_by(id=session.get('userid')).first())
 
 # my networks 
 @app.route('/mynetworks/<userid>')
 def mynetworks(userid):
   if not session.get('logged_in'):
     abort(401)
-  user = User.query.filter_by(id=userid)
   return render_template('mynetworks.html', user=user)
 
 # a test page for the admin
