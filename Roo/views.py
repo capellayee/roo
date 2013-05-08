@@ -59,6 +59,9 @@ def payemail():
   dayoftheweek = localtime[6]
 #  if dayoftheweek == 5:  # 5 = Friday
   if dayoftheweek < 10000:
+    bags = Bag.query.all()
+    for bag in bags:
+      
     users = User.query.all()
     with mail.connect() as conn:
       for user in users:
