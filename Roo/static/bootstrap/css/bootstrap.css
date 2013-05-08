@@ -6142,6 +6142,11 @@ a.badge:focus {
   line-height: 30px;
 }
 
+h1.ontop {
+  position: relative; 
+  top: 4.7em;
+}
+
 .pull-right {
   float: right;
 }
