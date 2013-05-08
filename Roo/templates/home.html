@@ -20,6 +20,7 @@
     body {
       padding-bottom: 40px;
       color: #5a5a5a;
+      background:url(../static/imgs/milk.png)
     }
 
 
@@ -377,29 +378,23 @@
 
 
       <!-- Three columns of text below the carousel -->
-      <div class="row">
-        <div class="span4">
-          <img class="img-circle" data-src="holder.js/140x140">
+        <div class="hero-unit">
           <li><h2 href='{{ url_for('mybags', userid=userid) }}'> My Crates</h2></li>
 	{% for bag in mybags %}
           <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
 	{% endfor %}
-        </div><!-- /.span4 -->
-        <div class="span4">
-          <img class="img-circle" data-src="holder.js/140x140">
+        </div><!-- /.herounit -->
+        <div class="hero-unit">
           <li><h2 href='{{ url_for('allbags') }}'>All Crates</h2></li>
           <p>list of all existing crates</p>
 	{% for bag in allbags %}
           <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
 	{% endfor %}
-        </div><!-- /.span4 -->
-        <div class="span4">
-          <img class="img-circle" data-src="holder.js/140x140">
+        </div><!-- /.herounit -->
+        <div class="hero-unit">
           <li><h2 href='{{ url_for('mynetworks') }}'>My Networks</h2></li>
-          <p><a class="btn" href="#">Current networks &raquo;</a></p>
-          <p><a class="btn" href="#">Join a network &raquo;</a></p>
-        </div><!-- /.span4 -->
-      </div><!-- /.row -->
+          <p><a class="btn" href='{{ url_for('mynetworks') }}'>Princeton &raquo;</a></p>
+        </div><!-- /.herounit -->
 
 
 
