@@ -71,7 +71,7 @@ def payemail():
       if bag.amountinbag >= bag.threshold:
         msgtext = "The Milkman has delivered: your crate for %s meets the minimum for free shipping!<br>" % bag.store
       else:
-        msgtext = "While your Milkman crate for %s did not meet the minimum for free shipping, you can still save on shipping by ordering together!<br>"
+        msgtext = "While your Milkman crate for %s did not meet the minimum for free shipping, you can still save on shipping by ordering together!<br>" % bag.store
       if len(bag.users) > 1:
         bagleader = bag.users[0]
         for order in bag.orders:
