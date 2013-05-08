@@ -74,7 +74,7 @@ def payemail():
         recipients = []
         for user in bag.users:
           recipients.append(user.email)
-        msg = Message(recipients, subject="Milkman", sender="rooshipping@gmail.com")
+        msg = Message(recipients=["pranav.gokhale.93@gmail.com"], subject="Milkman", sender="rooshipping@gmail.com")
         # customize message. also check if bag threshold has been met.
         msg.html = "leader is " + bagleader.email + "!"
         mail.send(msg)
@@ -148,7 +148,7 @@ def home():
   mybags = []
   for b in user.bag:
     mybags.append(b)
-  return render_template('carousel.html', userid=userid, urbanoutfittersid=urbanoutfittersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags)
+  return render_template('home.html', userid=userid, urbanoutfittersid=urbanoutfittersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags)
 
 # a test page for the admin
 @app.route('/all')
