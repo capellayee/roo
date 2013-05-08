@@ -159,8 +159,7 @@
 	      <label class="checkbox">
 {% if order.ship %}
                 <input type="checkbox" name="ship" checked> <h3>Ship to me?</h3>
-{% endif %}
-{% if not order.ship %}
+{% else %}
 <input type="checkbox" name="ship" value={{order.ship}}> <h3>Ship to me?</h3>
 {% endif %}
               </label>
