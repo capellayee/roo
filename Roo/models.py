@@ -1,4 +1,4 @@
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, Boolean, Float
+from sqlalchemy import Table, Column, Integer, String, ForeignKey, Boolean, Float, Date
 from sqlalchemy.orm import relationship, backref
 from Roo.database import Base
 
@@ -53,11 +53,16 @@ class Order(Base):
   price = Column(Float, unique=False)
   details = Column(String(200), unique=False)
   ship = Column(Boolean, unique=False)
+  paid = Column(Boolean, unique=False)
+  datepaid = Column(Date, unique=False)
+  dateordered = Column(Date, unique=False)
+  datereceived_shipper = Column(Date, unique=False)
+  datereceived_buyer = Column(Date, unique=False)
 
   bag_id = Column(Integer, ForeignKey('bags.id'))
   user_id = Column(Integer, ForeignKey('users.id'))
   
-  bag = relationship("Bag", backref="orders")
+  bag = relationship("Bag", backref=backref("orders", order_by=id))
   user = relationship("User", backref="orders")
 
   def __init__(self, url=None, price=None, details=None, ship=None, bag_id=None, user_id=None):
