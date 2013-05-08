@@ -404,8 +404,8 @@
 
 
  <!-- Popup if users address hasn't been input yet! -->
-    <!-- Button to trigger modal -->
-    <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+    <!-- Button to trigger modal 
+    <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>-->
 
     <!-- Modal -->
     <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -458,5 +458,12 @@
       }(window.jQuery)
     </script>
     <script src="../bootstrap/js/holder/holder.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+    <script src="/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-modal.js"></script> 
+    <script>
+      $(function ()    
+      { $("#myModal").modal(show);    
+      });
+    </script>
   </body>
 </html>
