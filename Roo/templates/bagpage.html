@@ -95,9 +95,7 @@
 	          {% if priceerror %}
 	            {% for perror in priceerror %}
 	              <span class=priceerror style="color:#ff0000;font-size:14px;font-weight:bold;">
-			<div class="alert alert-error">
-			  <strong>Error:</strong> {{ perror }}
-			</div>
+			<strong>Error:</strong> {{ perror }}
 		      </span>
 		    {% endfor %}
 		  {% endif %}
