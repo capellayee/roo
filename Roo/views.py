@@ -81,8 +81,10 @@ def payemail():
         for user in bag.users:
           recipients.append(user.email)
         msg = Message(recipients=recipients, subject=subject, sender="rooshipping@gmail.com")
-        # customize message. also check if bag threshold has been met.
-        msgtext = msgtext + "leader is " + bagleader.email + "!"
+        msgtext = msgtext + "The crate should be ordered by " + bagleader.firstname + " " + bagleader.lastname + " (" + bagleader.email + ")<br> Here are the orders in the crate:"
+        for order in bag.orders:
+          msgtext = msgtext + "User: " + order.user.firstname + " " + order.user.lastname + " (" + order.user.email + ")" + "Order cost: $" + str(order.price) + " Order URL: " + order.url
+          msgtext = msgtext + "<br> Comments: " + order.details + "<hr>"
         msg.html = msgtext
         mail.send(msg)
 #    users = User.query.all()
