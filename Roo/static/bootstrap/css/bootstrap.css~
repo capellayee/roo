@@ -6103,7 +6103,7 @@ a.badge:focus {
 .carousel-caption h4,
 .carousel-caption p {
   line-height: 20px;
-  color: #ffffff;
+  color: #000000;
 }
 
 .carousel-caption h4 {
@@ -6121,7 +6121,8 @@ a.badge:focus {
   font-weight: 200;
   line-height: 30px;
   color: inherit;
-  background-color: #5CADFF;
+  background: rgba(173, 214, 255, 0.5); 
+  border:5px solid black;
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
           border-radius: 6px;
@@ -6137,6 +6138,11 @@ a.badge:focus {
 
 .hero-unit li {
   line-height: 30px;
+}
+
+h1.ontop {
+  position: relative; 
+  top: 4.7em;
 }
 
 .pull-right {
