@@ -272,13 +272,13 @@
     
 
     <script>
-    $(document).ready(function($) {
+    <!--$(document).ready(function($) {
       $('#myModal').modal(options)
-    });
+    });JQuery -->
 
-<!--      $(window).load(function(){
+      $(window).load(function(){
         $('#myModal').modal('show');
-      }); Javascript stuff -->
+      }); 
     </script>
 
 
