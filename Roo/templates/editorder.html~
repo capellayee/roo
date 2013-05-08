@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>My Networks &middot; The Milkman </title>
+    <title>Buy a Bag &middot; The Milkman</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -29,7 +29,7 @@
         -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
                 box-shadow: 0 1px 2px rgba(0,0,0,.05);
-     }
+    }
     </style>
     <link href={{url_for('static',filename="bootstrap/css/bootstrap-responsive.css")}} rel="stylesheet">
 
@@ -62,18 +62,18 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href='{{ url_for('home') }}'>The Milkman</a>
+            <a class="brand" href='{{ url_for('home') }}'>Roo</a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
-                <li><a href='{{ url_for('about') }}'>About</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href='{{ url_for('logout') }}'>Logout</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Roo<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href='{{ url_for('mybags', userid=userid) }}'>My Crates</a></li>
-                    <li><a href='{{ url_for('mynetworks', userid=userid) }}'>My Networks</a></li>
+                    <li><a href='{{ url_for('mybags', userid=userid) }}'>My Bags</a></li>
+                    <li><a href="#">My Networks</a></li>
                   </ul>
                 </li>
               </ul>
@@ -84,9 +84,91 @@
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
     <div class="container">
-	<form class="form-bag">
-       <h1>You're part of Princeton! </h1>
-    </form>
+
+<form class="form-bag">
+<form class="bs-docs-example" method="post">
+            <fieldset>
+	      {% with messages = get_flashed_messages(category_filter=["addmessage"]) %}
+	      {% if messages %}
+	      <ul class=flashes>
+		{% for message in messages %}
+		<div class="alert alert-success">
+		  {{ message }}
+		</div>
+		{% endfor %}
+	      </ul>
+	      {% endif %}
+	      {% endwith %}
+              <legend><h1>{{ bag.store }}</h1></legend>
+
+              <span class="help-block">Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</span>
+	            <span class="help-block">Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</span>
+              <span class="help-block">Required amount to ship: {{ '%0.2f' % (bag.threshold-bag.amountinbag) }}</span>
+              <h2>Edit your order:</h2>
+              <h3>URL of Item</h3> 
+	      <!-- error message if field is not filled out -->
+	        {% with missingurlerror = get_flashed_messages(category_filter=["missingurlerror"]) %}
+                  {% if missingurlerror %}
+                    {% for muerror in missingurlerror %}
+                      <p class=missingfielderror style="color:#ff0000;font-size:14px;font-weight:bold;">
+                        <strong>Error:</strong> {{ muerror }}
+                      </p>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+	      <input type="text" name="itemurl" value={{order.url}}>
+
+	      <h3>Amount of Purchase</h3> 
+	      <!-- error message if field is not filled out -->  
+      	        {% with missingpriceerror = get_flashed_messages(category_filter=["missingpriceerror"]) %}
+                  {% if missingpriceerror %}
+                    {% for mperror in missingpriceerror %}
+                      <p class=missingpriceerror style="color:#ff0000;font-size:14px;font-weight:bold;">
+                        <strong>Error:</strong> {{ mperror }}
+                      </p>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+
+	      <!-- error message if price is invalid.  Only display if above error does not display-->
+	        {% with priceerror = get_flashed_messages(category_filter=["priceerror"]) %}
+	          {% if priceerror %}
+	            {% if not missingpriceerror %}
+	              {% for perror in priceerror %}
+	                <p class=priceerror style="color:#ff0000;font-size:14px;font-weight:bold;">
+			  <strong>Error:</strong> {{ perror }}
+		        </p>
+		      {% endfor %}
+		    {% endif %}
+		  {% endif %}
+		{% endwith %}
+	      <input  type="text" name="price" value={{order.price}}>
+
+	      <h3>Order Details</h3> 
+	      <!-- error if field is not filled out -->
+	       {% with missingdetailserror = get_flashed_messages(category_filter=["missingdetailserror"]) %}
+                  {% if missingdetailserror %}
+                    {% for mderror in missingdetailserror %}
+                      <p class=missingdetailserror style="color:#ff0000;font-size:14px;font-weight:bold;">
+                        <strong>Error:</strong> {{ mderror }}
+                      </p>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+	      <textarea rows="4" name="details">{{order.details}}</textarea>
+	      <label class="checkbox">
+{% if order.ship %}
+                <input type="checkbox" name="ship" checked> <h3>Ship to me?</h3>
+{% endif %}
+{% if not order.ship %}
+<input type="checkbox" name="ship" value={{order.ship}}> <h3>Ship to me?</h3>
+{% endif %}
+              </label>
+
+              <button type="submit" class="btn">Submit</button>
+            </fieldset>
+          </form>
+	</form>
     </div> <!-- /container -->
 
 
