@@ -380,7 +380,7 @@
       <div class="row">
         <div class="span4">
           <img class="img-circle" data-src="holder.js/140x140">
-          <li><h2 href='/mybags/2'> My Crates</h2></li>
+          <li><h2 href='{{ url_for('mybags', userid=userid) }}'> My Crates</h2></li>
 	{% for bag in mybags %}
           <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
 	{% endfor %}
