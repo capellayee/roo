@@ -63,8 +63,7 @@ def payemail():
     for bag in bags:
       if len(bag.users) == 1:
         # send apology message
-        subject = "sorry, no one else joined your bag"
-        msg = Message(recipients=[bag.users[0].email], subject=subject, sender="rooshipping@gmail.com")
+        msg = Message(recipients=[bag.users[0].email], subject="sorry no one else joined your bag", sender="rooshipping@gmail.com")
         mail.send(msg)
       if len(bag.users) > 1:
         bagleader = bag.users[0]
