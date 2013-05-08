@@ -68,7 +68,7 @@ def payemail():
         mail.send(msg)
       if len(bag.users) > 1:
         bagleader = bag.users[0]
-        for order in bag.orders[0]:
+        for order in bag.orders:
           if order.ship == True:
             bagleader = order.user
         recipients = []
