@@ -140,6 +140,8 @@ def home():
   ralphlaurenid = Bag.query.filter_by(store = 'Ralph Lauren').first().id
   # j. crew
   jcrewid = Bag.query.filter_by(store = 'J. Crew').first().id
+  
+  address = True
 
   userid = session.get('userid')
   allbags = Bag.query.all()
@@ -147,7 +149,7 @@ def home():
   mybags = []
   for b in user.bag:
     mybags.append(b)
-  return render_template('home.html', userid=userid, urbanoutfittersid=urbanoutfittersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags)
+  return render_template('home.html', userid=userid, urbanoutfittersid=urbanoutfittersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags, address=address)
 
 # a test page for the admin
 @app.route('/all')

@@ -73,7 +73,7 @@ def payemail():
         recipients = []
         for user in bag.users:
           recipients.append(user.email)
-        msg = Message(recipients=["pranav.gokhale.93@gmail.com"], subject="Milkman", sender="rooshipping@gmail.com")
+        msg = Message(recipients=recipients, subject="Milkman", sender="rooshipping@gmail.com")
         # customize message. also check if bag threshold has been met.
         msg.html = "leader is " + bagleader.email + "!"
         mail.send(msg)

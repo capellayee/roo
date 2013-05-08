@@ -315,7 +315,7 @@
     <div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
         <div class="item active">
-          <a href="www.urbanoutfitters.com"><img src={{url_for('static',filename="imgs/UrbanOutfitters.jpg") }} alt=""></a>
+          <a href="http://www.urbanoutfitters.com"><img src={{url_for('static',filename="imgs/UrbanOutfitters.jpg") }} alt=""></a>
           <div class="container">
             <div class="carousel-caption">
               <h1>Urban Outfitters.</h1>
@@ -325,7 +325,7 @@
           </div>
         </div>
         <div class="item">
-          <a href="www.ralphlauren.com"><img src={{url_for('static',filename="imgs/ralphlauren.JPG") }} alt=""></a>
+          <a href="http://www.ralphlauren.com"><img src={{url_for('static',filename="imgs/ralphlauren.JPG") }} alt=""></a>
           <div class="container">
             <div class="carousel-caption">
               <h1>Ralph Lauren</h1>
@@ -335,7 +335,7 @@
           </div>
         </div>
         <div class="item">
-          <a href="www.jcrew.com"><img src={{url_for('static',filename="imgs/jcrew.JPG") }} alt=""></a>
+          <a href="http://www.jcrew.com"><img src={{url_for('static',filename="imgs/jcrew.JPG") }} alt=""></a>
           <div class="container">
             <div class="carousel-caption">
               <h1>J. Crew</h1>
