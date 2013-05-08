@@ -4,8 +4,6 @@ from Roo.database import db_session
 from flask import Flask
 from flask.ext.mail import Mail
 
-
-
 #configuration
 DATABASE = '/tmp/flasktest.db'
 DEBUG = True
