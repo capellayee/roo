@@ -30,6 +30,7 @@ class User(Base):
   email = Column(String(40), unique=True)
   password = Column(String(40), unique=False)
   address = Column(String(80), unique=False)
+  mailbox = Column(Integer, unique=False) #should technically be true but worried itll mad break before we do a lot of error handling
   bag_id = Column(Integer, ForeignKey('bags.id'))
 
   bag = relationship("Bag", secondary=association_table, backref=backref('users', order_by=id))
