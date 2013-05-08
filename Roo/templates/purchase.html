@@ -15,7 +15,23 @@
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        background:url(../static/imgs/milk.png)
       }
+
+   .form-bag {
+ 	max-width: 800px;
+	padding: 19px 29px 29px;
+	margin 0 auto 20 px;
+	background-color: #fff;
+	border: 5px solid #add6ff;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    } 
+
     </style>
     <link href=/static/bootstrap/css/bootstrap-responsive.css rel="stylesheet">
 
@@ -48,19 +64,18 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href='/home'>Roo</a>
+            <a class="brand" href='/home'>The Milkman</a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
-                <li><a href="#about">About</a></li>
+                <li><a href='/about'>About</a></li>
                 <li><a href='/logout'>Logout</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Roo<b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">My Bags</a></li>
-                    <li><a href="#">My Friend's Bags</a></li>
-                    <li><a href="#">My Networks</a></li>
+                    <li><a href='/mybags/3'>My Crates</a></li>
+                    <li><a href='/mynetworks/3'>My Networks</a></li>
                   </ul>
                 </li>
               </ul>
@@ -71,7 +86,7 @@
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
     <div class="container">
-
+<form class="form-bag" method="post">
       <h2>Your orders are:</h2>
       <p>
       {% for order in user.orders %}
@@ -92,6 +107,7 @@
 </table>
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
 </form>
     </div> <!-- /container -->
 
