@@ -315,12 +315,12 @@
     <div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
         <div class="item active">
-          <img src={{url_for('static',filename="imgs/brooksbrothers.JPG") }} alt="">
+          <img src={{url_for('static',filename="imgs/urbanoutfitters.JPG") }} alt="">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Brooks Brothers.</h1>
+              <h1>Urban Outfitters.</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=brooksbrothersid) }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=urbanoutfittersid) }}'>Add to bag</a>
             </div>
           </div>
         </div>
