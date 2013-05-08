@@ -732,6 +732,7 @@ a.text-success:focus {
   text-align: center;
 }
 
+he,
 h1,
 h2,
 h3,
@@ -746,6 +747,7 @@ h6 {
   text-rendering: optimizelegibility;
 }
 
+he small,
 h1 small,
 h2 small,
 h3 small,
@@ -761,6 +763,10 @@ h1,
 h2,
 h3 {
   line-height: 40px;
+}
+
+he {
+   color: #ff000;
 }
 
 h1 {
@@ -6115,7 +6121,7 @@ a.badge:focus {
   font-weight: 200;
   line-height: 30px;
   color: inherit;
-  background-color: #eeeeee;
+  background-color: #5CADFF;
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
           border-radius: 6px;
