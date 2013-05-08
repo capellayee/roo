@@ -164,8 +164,8 @@ def home():
 #about page
 @app.route('/about')
 def about():
-   if not session.get('logged_in'):
-      abort(401)
+#   if not session.get('logged_in'):
+#      abort(401)
    return render_template('about.html')
 
 # a test page for the admin
