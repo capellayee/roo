@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Roo</title>
+    <title>The Milkman</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -84,9 +84,22 @@
 
     .carousel-control {
       height: 80px;
-      margin-top: 0;
+      margin-top: 0;g {
+ 	max-width: 800px;
+	padding: 19px 29px 29px;
+	margin 0 auto 20 px;
+	background-color: #fff;
+	border: 5px solid #add6ff;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    }
+
       font-size: 120px;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+      text-shadow: 0 1px 1px rgba(0,0,0,.4m
       background-color: transparent;
       border: 0;
       z-index: 10;
@@ -276,9 +289,10 @@
       $('#myModal').modal(options)
     });JQuery -->
 
-      $(window).load(function(){
+     <!-- $(window).load(function(){
         $('#myModal').modal('show');
-      }); 
+      });-->
+     $('#myModal').modal()
     </script>
 
 
@@ -304,17 +318,17 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href='{{ url_for('home') }}'>Roo</a>
+            <a class="brand" href='{{ url_for('home') }}'>The Milkman</a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
-                <li><a href="#about">About</a></li>
+                <li><a href='{{ url_for('about') }}'>About</a></li>
                 <li><a href='{{ url_for('logout') }}'>Logout</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Roo<b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href='{{ url_for('mybags', userid=userid ) }}'>My Bags</a></li>
+                    <li><a href='{{ url_for('mybags', userid=userid ) }}'>My Crates</a></li>
                     <li><a href="#">My Networks</a></li>
                   </ul>
                 </li>
@@ -359,7 +373,7 @@
             <div class="carousel-caption">
               <h1>Urban Outfitters.</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=urbanoutfittersid) }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=urbanoutfittersid) }}'>Add to crate</a>
             </div>
           </div>
         </div>
@@ -369,7 +383,7 @@
             <div class="carousel-caption">
               <h1>Ralph Lauren</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=ralphlaurenid) }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=ralphlaurenid) }}'>Add to crate</a>
             </div>
           </div>
         </div>
@@ -379,7 +393,7 @@
             <div class="carousel-caption">
               <h1>J. Crew</h1>
               <p class="lead"></p>
-              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=jcrewid) }}'>Add to bag</a>
+              <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=jcrewid) }}'>Add to crate</a>
             </div>
           </div>
         </div>
@@ -400,15 +414,15 @@
       <div class="row">
         <div class="span4">
           <img class="img-circle" data-src="holder.js/140x140">
-          <h2>My Bags</h2>
+          <h2>My Crates</h2>
 	{% for bag in mybags %}
           <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
 	{% endfor %}
         </div><!-- /.span4 -->
         <div class="span4">
           <img class="img-circle" data-src="holder.js/140x140">
-          <h2>All Bags</h2>
-          <p>list of all existing bags</p>
+          <h2>All Crates</h2>
+          <p>list of all existing crates</p>
 	{% for bag in allbags %}
           <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
 	{% endfor %}
