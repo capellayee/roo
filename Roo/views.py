@@ -67,12 +67,11 @@ def payemail():
         msg = Message(recipients=[bag.users[0].email], subject=subject, sender="rooshipping@gmail.com")
         msg.html = "Sorry, no one else joined your Milkman crate :(. Just go ahead and order it on your own. Better luck next week!" 
         mail.send(msg)
-        return
       msgtext = None
       if bag.amountinbag >= bag.threshold:
         msgtext = "The Milkman has delivered: your crate for %s meets the minimum for free shipping!<br>" % bag.store
       else:
-        msgtext = "While your Milkman crate for %s did not meet the minimum for free shipping, you can still save on shipping by ordering together!<br>"
+        msgtext = "While your Milkman crate for %s did not meet the minimum for free shipping, you can still save on shipping by ordering together!<br>" % bag.store
       if len(bag.users) > 1:
         bagleader = bag.users[0]
         for order in bag.orders:
@@ -81,7 +80,6 @@ def payemail():
         recipients = []
         for user in bag.users:
           recipients.append(user.email)
-        return recipients
         msg = Message(recipients=recipients, subject=subject, sender="rooshipping@gmail.com")
         # customize message. also check if bag threshold has been met.
         msgtext = msgtext + "leader is " + bagleader.email + "!"
