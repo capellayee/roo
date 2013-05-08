@@ -120,7 +120,7 @@
 	  {% endfor %}
 
 	<h3>Total in {{bag.store}} bag:</h3> {{ '%0.2f' % bag.amountinbag }} <br>
-        <h3>Amount needed to ship:</h3> {{ '%0.2f' % (bag.threshold - bag.amountinbag) }} <br>
+        <h3>Amount needed to ship:</h3> {{ '%0.2f' % (toship) }} <br>
 	<!--<ul class=order>-->
 	  	<!--</ul>-->
 	</p>
