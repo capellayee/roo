@@ -189,6 +189,17 @@ def bagpage(bagid):
     except ValueError:
       flash("Invalid price", "priceerror")
       errorfound = True
+
+    # check if any fields were left empty
+    if not request.form['itemurl']:
+      flash("Please input the item's URL", "missingurlerror")
+      errorfound = True
+    if not request.form['price']:
+      flash("Please input the price of the item", "missingpriceerror")
+      errorfound = True
+    if not request.form['details']:
+      flash("Please enter details about your order", "missingdetailserror")
+      errorfound = True
     if errorfound:
       return redirect(url_for('bagpage', bagid=bagid))
 

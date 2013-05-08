@@ -83,14 +83,36 @@
 	      </ul>
 	      {% endif %}
 	      {% endwith %}
-              <legend>{{ bag.store }}</legend>
+              <legend><h1>{{ bag.store }}</h1></legend>
               <span class="help-block">Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</span>
 	            <span class="help-block">Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</span>
               <span class="help-block">Required amount to ship: {{ '%0.2f' % (bag.threshold-bag.amountinbag) }}</span>
-              <label>Add to Bag:</label>
-              <label>Store URL</label> <input type="text" name="itemurl" placeholder="paste url here!">
-	      <label>Amount of Purchase</label> 
+              <h2>Add to Bag:</h2>
+              <h3>URL of Item</h3> <input type="text" name="itemurl" placeholder="paste url here! e.g. www.jcrew.com/shirt">
+	      <!-- error message if field is not filled out -->
+	        {% with missingurlerror = get_flashed_messages(category_filter=["missingurlerror"]) %}
+                  {% if missingurlerror %}
+                    {% for muerror in missingurlerror %}
+                      <span class=missingfielderror style="color:#ff0000;font-size:14px;font-weight:bold;">
+                        <strong>Error:</strong> {{ muerror }}
+                      </span>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+	      <h3>Amount of Purchase</h3> 
 	      <input  type="text" name="price" placeholder="cost of your purchase?">
+	      <!-- error message if field is not filled out -->  
+      	        {% with missingpriceerror = get_flashed_messages(category_filter=["missingpriceerror"]) %}
+                  {% if missingpriceerror %}
+                    {% for mperror in missingpriceerror %}
+                      <span class=missingpriceerror style="color:#ff0000;font-size:14px;font-weight:bold;">
+                        <strong>Error:</strong> {{ mperror }}
+                      </span>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+
+	      <!-- error message if price is invalid-->
 	        {% with priceerror = get_flashed_messages(category_filter=["priceerror"]) %}
 	          {% if priceerror %}
 	            {% for perror in priceerror %}
@@ -100,11 +122,20 @@
 		    {% endfor %}
 		  {% endif %}
 		{% endwith %}
-	      <label>Order Details</label> 
+	      <h3>Order Details</h3> 
 	      <textarea rows="4" name="details" placeholder="For example, what size?  What color?  How many? Special details specific to the product?"></textarea>
 	      <label class="checkbox">
-                <input type="checkbox" name="ship" value="{{ True }}"> Ship to me?
+                <input type="checkbox" name="ship" value="{{ True }}"> <h3>Ship to me?</h3>
               </label>
+	       {% with missingdetailserror = get_flashed_messages(category_filter=["missingdetailserror"]) %}
+                  {% if missingdetailserror %}
+                    {% for mderror in missingdetailserror %}
+                      <span class=missingdetailserror style="color:#ff0000;font-size:14px;font-weight:bold;">
+                        <strong>Error:</strong> {{ mderror }}
+                      </span>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
               <button type="submit" class="btn">Submit</button>
             </fieldset>
           </form>

@@ -84,9 +84,8 @@ def reminderemail():
       for user in users:
         # if the user has not purchased any of his or her order, send an email
         for order in user.orders:
-          if True:
-          # if not order.paid:
-            subject = "hello, %s, please pay for your order on The Milkman!"
+           if not order.paid:
+            subject = "hello, %s, please pay for your order on The Milkman!" % user.firstname
             msg = Message(recipients=[user.email], subject=subject, sender="rooshipping@gmail.com")
             msg.html = """ Hey there, <br> Just a reminder to pay for your orders!  We know you want your stuff as soon as possible!  Click the link below to pay now! <br><br><a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+""""><b>Get me my stuff!</b></a><br><br> The Milkman</p>"""
             conn.send(msg)
