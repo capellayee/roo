@@ -81,10 +81,10 @@ def payemail():
         recipients = []
         for user in bag.users:
           recipients.append(user.email)
-        msg = Message(recipients=recipients, subject="Milkman", sender="rooshipping@gmail.com")
+        msg = Message(recipients=recipients, subject=subject, sender="rooshipping@gmail.com")
         # customize message. also check if bag threshold has been met.
         msgtext = msgtext + "leader is " + bagleader.email + "!"
-        mail.html = msgtext
+        msg.html = msgtext
         mail.send(msg)
 #    users = User.query.all()
 #    with mail.connect() as conn:
