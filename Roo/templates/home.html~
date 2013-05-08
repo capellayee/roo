@@ -310,12 +310,41 @@
 
 
 
+
+
+    <!-- Popup if users address hasn't been input yet! -->
+    <!-- Button to trigger modal 
+    <a href="#addressRequest" role="button" class="btn" data-toggle="modal">Launch demo modal</a>-->
+    
+    {% if address %}
+      <script type="text/javascript">
+	$(window).load(function(){
+          $('#myModal').modal('show');
+	});
+      </script>
+    {% endif %}
+
+    <!-- Modal -->
+    <div id="addressRequest" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addressRequestID" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="addressRequestID">Modal header</h3>
+      </div>
+      <div class="modal-body">
+        <p>One fine body…</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+
     <!-- Carousel
     ================================================== -->
     <div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
         <div class="item active">
-          <a href="www.urbanoutfitters.com"><img src={{url_for('static',filename="imgs/UrbanOutfitters.jpg") }} alt=""></a>
+          <a href="http://www.urbanoutfitters.com"><img src={{url_for('static',filename="imgs/UrbanOutfitters.jpg") }} alt=""></a>
           <div class="container">
             <div class="carousel-caption">
               <h1>Urban Outfitters.</h1>
@@ -325,7 +354,7 @@
           </div>
         </div>
         <div class="item">
-          <a href="www.ralphlauren.com"><img src={{url_for('static',filename="imgs/ralphlauren.JPG") }} alt=""></a>
+          <a href="http://www.ralphlauren.com"><img src={{url_for('static',filename="imgs/ralphlauren.JPG") }} alt=""></a>
           <div class="container">
             <div class="carousel-caption">
               <h1>Ralph Lauren</h1>
@@ -335,7 +364,7 @@
           </div>
         </div>
         <div class="item">
-          <a href="www.jcrew.com"><img src={{url_for('static',filename="imgs/jcrew.JPG") }} alt=""></a>
+          <a href="http://www.jcrew.com"><img src={{url_for('static',filename="imgs/jcrew.JPG") }} alt=""></a>
           <div class="container">
             <div class="carousel-caption">
               <h1>J. Crew</h1>
