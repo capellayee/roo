@@ -14,6 +14,7 @@
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        background:url(../static/imgs/milk.png)
       }
     </style>
     <link href={{url_for('static',filename="bootstrap/css/bootstrap-responsive.css")}} rel="stylesheet">
@@ -70,6 +71,9 @@
     </div><!-- /.navbar-wrapper -->
     <div class="container">
 
+<div class="container-fluid">
+<div class="row-fluid">
+<header class="span12">
 <form class="bs-docs-example" method="post">
             <fieldset>
 	      {% with messages = get_flashed_messages(category_filter=["addmessage"]) %}
@@ -147,6 +151,9 @@
               <button type="submit" class="btn">Submit</button>
             </fieldset>
           </form>
+	</header>
+	</div>
+	</div>
     </div> <!-- /container -->
 
 
