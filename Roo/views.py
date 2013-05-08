@@ -128,6 +128,18 @@ def purchasedemail():
 def receivedemail():
   return "hello"
 
+@app.route('/editorder/<orderid>', methods=['GET', 'POST'])
+def editorder(orderid):
+  if request.method == 'POST':
+    return "okay"
+  else:
+    return render_template(editorder.html, order=Order.query.filter_by(id=orderid).first())
+
+@app.route('/newbag', methods=['GET', 'POST'])
+def newbag():
+  if not session.get('logged_in'):
+    abort(401)
+  if request.method == 'POST':
 @app.route('/purchase/<userid>')
 def paypal(userid):
 
