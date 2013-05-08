@@ -61,17 +61,33 @@ def payemail():
   if dayoftheweek < 10000:
     bags = Bag.query.all()
     for bag in bags:
-      
-    users = User.query.all()
-    with mail.connect() as conn:
-      for user in users:
-        # if the user actually has orders in the bag
-        if user.orders:
-          subject = "hello, %s, your purchases on The Milkman are ready to be ordered" % user.firstname
-          msg = Message(recipients=[user.email], subject=subject, sender="rooshipping@gmail.com")
+      if len(bag.users) == 1:
+        # send apology message
+        subject = "sorry, no one else joined your bag"
+        msg = Message(recipients=[bag.users[0].email], subject=suject, sender="rooshipping@gmail.com")
+        mail.send(msg)
+      if len(bag.users) > 1:
+        bagleader = bag.users[0]
+        for order in bag.orders[0]:
+          if order.ship == True:
+            bagleader = order.user
+        recipients = []
+        for user in bag.users:
+          recipients.append(user.email)
+        msg = Message(recipients, subject="Milkman", sender="rooshipping@gmail.com")
+        # customize message. also check if bag threshold has been met.
+        msg.html = "leader is " + bagleader.email + "!"
+        mail.send(msg)
+#    users = User.query.all()
+#    with mail.connect() as conn:
+#      for user in users:
+#        # if the user actually has orders in the bag
+#        if user.orders:
+#          subject = "hello, %s, your purchases on The Milkman are ready to be ordered" % user.firstname
+#          msg = Message(recipients=[user.email], subject=subject, sender="rooshipping@gmail.com")
           # link to purchase page.
-          msg.html = """<p>Hey there, <br>, Your order(s) are ready to be purchased and shipped!  Head on over to The Milkman using the link below!<br><br><a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+""""><b>Get me my stuff!</b></a></p><br><br> The Milkman""" 
-          conn.send(msg)
+#          msg.html = """<p>Hey there, <br>, Your order(s) are ready to be purchased and shipped!  Head on over to The Milkman using the link below!<br><br><a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+""""><b>Get me my stuff!</b></a></p><br><br> The Milkman""" 
+#          conn.send(msg)
 
 # Send reminder emails in case a user has not yet paid for their order
 # This reminder email should happen 12 hours later ( Saturday midnight )
