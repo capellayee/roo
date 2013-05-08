@@ -316,13 +316,13 @@
     <!-- Button to trigger modal 
     <a href="#addressRequest" role="button" class="btn" data-toggle="modal">Launch demo modal</a>-->
     
-    {% if address %}
-      <script type="text/javascript">
-	$(window).load(function(){
-          $('#myModal').modal('show');
-	});
-      </script>
-    {% endif %}
+
+    <script>
+      $(window).load(function(){
+        $('#addressRequest').modal('show');
+      });
+    </script>
+
 
     <!-- Modal -->
     <div id="addressRequest" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addressRequestID" aria-hidden="true">

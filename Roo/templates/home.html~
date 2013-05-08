@@ -317,8 +317,10 @@
     <a href="#addressRequest" role="button" class="btn" data-toggle="modal">Launch demo modal</a>-->
     
     {% if address %}
-      <script>
-        $('#addressRequest').modal(options)
+      <script type="text/javascript">
+	$(window).load(function(){
+          $('#myModal').modal('show');
+	});
       </script>
     {% endif %}
 
