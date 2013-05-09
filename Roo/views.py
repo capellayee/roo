@@ -136,6 +136,16 @@ def receivedemail():
 
 @app.route('/editorder/<orderid>', methods=['GET', 'POST'])
 def editorder(orderid):
+  if not session.get('logged_in'):
+    abort(401)
+  user = User.query.filter_by(id=session.get('userid')).first()
+  valid = False
+  for order in user.orders:
+    if order.id == orderid:
+      valid = True
+  if not valid:
+    return "Hey dickhead, you're not supposed to be here"
+
   if request.method == 'POST':
     # check the validity of input, if something is wrong, return the page with error messages where appropriate
     errorfound = False
@@ -179,7 +189,10 @@ def editorder(orderid):
 
 @app.route('/purchase/<userid>')
 def paypal(userid):
-
+  if not sesssion.get('logged_in'):
+    abort(401)
+  if not session.get('userid') == userid:
+    return "Hey, you're not allowed to see this page!"
   # add in a tab to make the user log in if they're not already logged in..
   # need to make sure it redirects to the purchase page.
   user = User.query.filter_by(id=userid).first()
