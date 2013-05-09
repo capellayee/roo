@@ -235,6 +235,8 @@ def about():
 def mynetworks(userid):
   if not session.get('logged_in'):
     abort(401)
+  if not session.get('userid') == userid:
+    return "Hey dickhead, you're not supposed to be here"
   return render_template('mynetworks.html', user=User.query.filter_by(id=userid).first())
 
 # all bags
@@ -341,6 +343,8 @@ def bagpage(bagid):
 def mybags(userid):
   if not session.get('logged_in'):
     abort(401)
+  if not session.get('userid') == userid:
+    return "Hey dickhead, you're not supposed to be here"
   user = User.query.filter_by(id = userid).first()  
   userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
   userorders = []
