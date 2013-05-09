@@ -172,7 +172,7 @@
 	      <textarea rows="4" name="details" placeholder="For example, what size?  What color?  How many? Special details specific to the product?"></textarea>
 	      <p>
 	      <label class="checkbox">
-                <input type="checkbox" name="ship" value="{{ True }}"> Ship to me?<a href="#" id="example" rel="popover" data-content="Want to be a leader?  Willing to have all the orders in this crate shipped to you?  Check the box here!  We'll let you know if the order is shipped to you, and then you just have to hand out the goods." data-original-title="Ship to me!">(?)</a> 
+                <input type="checkbox" name="ship" value="{{ True }}"> Ship to me?<a href="#" id="example" rel="popover" data-content="Want to be a leader?  Willing to have all the orders in this crate shipped to you?  Check the box here!  We'll let you know if the order is shipped to you, and then you just have to hand out the goods." data-original-title="Ship to me!"> (?)</a> 
 	      </label>
 	      </p>
               <button type="submit" class="btn">Submit</button>
@@ -200,5 +200,12 @@
 
     <script src="/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-tooltip.js"></script>  
     <script src="/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-popover.js"></script>  
+        <script>
+      <!-- tool tip for ship to me -->
+      $(function ()
+      { $("#example").popover();
+      });
+    </script>
+
   </body>
 </html>

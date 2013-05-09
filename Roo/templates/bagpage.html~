@@ -113,7 +113,7 @@
 		{% if toship < 0 %}
                   {% set toship = 0 %}
 		    {% endif %}
-              <span class="help-block">Required amount to ship: {{ '%0.2f' % (toship) }}</span>
+              <span class="help-block"><h3 style="color:#add6ff;">Required amount to ship: {{ '%0.2f' % (toship) }}</h3></span>
 	      {% endwith %}
               <div class="progress">
 		<div class="bar bar-danger" style={{ percentfull|safe }}></div>
