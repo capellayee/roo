@@ -201,7 +201,7 @@ def paypal(userid):
     total = total + order.price
   return render_template('purchase.html', user=user, total=total)
 
-@app.route('/home')
+@app.route('/home', methods=['GET','POST'])
 def home():
   if not session.get('logged_in'):
     abort(401)
@@ -213,11 +213,17 @@ def home():
   # j. crew
   jcrewid = Bag.query.filter_by(store = 'J. Crew').first().id
   
-  address = True
-
   userid = session.get('userid')
-  allbags = Bag.query.all()
   user = User.query.filter_by(id=userid).first()
+
+#  address = isinstance(user.mailbox, None)
+  address = True
+  if request.method == 'POST':
+    user.mailbox = request.form['mailbox']
+    db_session.commit()
+
+  # return all the bags
+  allbags = Bag.query.all()
   mybags = []
   for b in user.bag:
     mybags.append(b)

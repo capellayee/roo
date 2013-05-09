@@ -471,9 +471,11 @@
     </script>
     <script src="../bootstrap/js/holder/holder.js"></script>
     <script>
+      {% if address %}
       $(window).load(function(){
       $('#myModal').modal('show');
       });
+      {% endif %}
     </script>
   </body>
 </html>
