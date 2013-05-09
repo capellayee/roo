@@ -93,14 +93,22 @@
     <th>Amount remaining for free shipping</th>
 </tr>
 </thead>
+<u1 class=bag>
 <tbody>
+{% for bag in mybags %}
+ {% with toship = bag.threshold - bag.amountinbag %}
+  {% if toship < 0 %}
+    {% set toship = 0 %}
+  {% endif %}
 <tr>
-    <td>J. Crew</td>
+    <td>{{bag.store}}</td>
     <td>Princeton</td>
-    <td>175.00</td>
-    <td>0.00</td>
-    <td>0.00</td>
+    <td>{{ '%0.2f' % bag.threshold }}</td>
+    <td>{{ '%0.2f' % bag.amountinbag }}</td>
+    <td>{{ '%0.2f' % (toship) }}</td>
 </tr>     
+{% endwith %}
+{% endfor %}
 </tbody>    
 </table>
 
