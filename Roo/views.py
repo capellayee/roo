@@ -160,8 +160,8 @@ def editorder(orderid):
   bag = Bag.query.filter_by(id=order.bag_id).first()
 
   # data for the progress bar
-  myorders = """ "width: """ + str(int(order.price*100 / bag.threshold)) + """%;" """ 
-  othersorders = """ "width: """ + str(int(100*(bag.amountinbag-order.price) / bag.threshold)) + """%;" """
+  myorders = """ "width: """ + str(int(order.price*100 / max(bag.threshold,bag.amountinbag))) + """%;" """ 
+  othersorders = """ "width: """ + str(int(100*(bag.amountinbag-order.price) / max(bag.threshold,bag.amountinbag))) + """%;" """
 
 
   if request.method == 'POST':
@@ -186,7 +186,7 @@ def editorder(orderid):
       flash("Please enter details about your order", "missingdetailserror")
       errorfound = True
     if errorfound:
-      return "ERROR"
+      return redirect( url_for('editorder', orderid=orderid) )
 
     order.bag.amountinbag = order.bag.amountinbag - order.price + float(request.form['price'])
     order.price = float(request.form['price'])
@@ -199,6 +199,11 @@ def editorder(orderid):
     db_session.commit()
 
     flash("Your purchase of " + order.url + " has been updated for the " + order.bag.store + " bag!", "addmessage")
+
+    # update order info for progress bar
+    myorders = """ "width: """ + str(int(order.price*100 / max(bag.threshold,bag.amountinbag))) + """%;" """ 
+    othersorders = """ "width: """ + str(int(100*(bag.amountinbag-order.price) / max(bag.threshold,bag.amountinbag))) + """%;" """
+
     return render_template('editorder.html', order=order, bag=order.bag, userid=user.id, myorders=myorders, othersorders=othersorders)
   else:
     order = Order.query.filter_by(id=orderid).first()
