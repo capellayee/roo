@@ -55,7 +55,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="static/ico/apple-touch-icon-114-precomposed.png">
       <link rel="apple-touch-icon-precomposed" sizes="72x72" href="static/ico/apple-touch-icon-72-precomposed.png">
                     <link rel="apple-touch-icon-precomposed" href="static/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="static/ico/favicon.png">
+    <link rel="shortcut icon" href={{url_for('static',filename="imgs/favicon.ico") }}>
   </head>
 
   <body>
@@ -64,6 +64,7 @@
         <p class="lead"><i>Save on shipping fees by combining online orders with fellow Princetonians. Join The Milkman, shop your favorite stores, and save big!</i></p>
       <form class="form-signin">
         <li><a href="/facebook_login">Sign in through Facebook</a></li>
+	<img src={{ url_for('static', filename="imgs/milkvector.png") }} alt="">
       </form>
    </div>
    <br>
@@ -72,7 +73,7 @@
    <br>
    <div class="hero-unit">
      <h1>Why use The Milkman:</h1>
-     <p class="lead"><i>Do you remember when the milkman would come weekly, pick up your empty milk bottles and drop off fresh, delicious milk right at your door?  Well, we don't either, but the consolidation of such a necessary service is not lost on us.  With millions of users shopping online, many in the same place, why not take advantage of this opportunity to both evade those pesky shipping fees ($150 before you can get free shipping?  No way) and reduce the amount of packaging waste.  </i></p>
+     <p class="lead"><i>Do you remember when the milkman would come weekly, pick up your empty milk bottles and drop off fresh, delicious milk right at your door?  Well, we don't either, but the consolidation of such a necessary service is not lost on us.  With millions of users shopping online, many in the same place, why not take advantage of this opportunity to both evade those pesky shipping fees ($150 before you can get free shipping?  No way) and reduce the amount of packaging waste.</i><br><br><i>If you're still unconvinced, consider it a chance to meet Princetonians who shop at the same stores as you.  It could be the start of a beautiful friendship</i></p>
    </div>
    <br>
    <br>
@@ -80,7 +81,7 @@
    <br>
    <div class="hero-unit">
      <h1>Customize your Milkman orders!</h1>
-     <p class="lead"><i>If you don't see a crate for your favorite store amongst our options, sign in and email us! We'd be happy to expand our options for you.</i></p>
+     <p class="lead"><i>If you don't see a crate for your favorite store amongst our options, sign in and email us! We'd be happy to expand our options for you.  Are you an online retailer?  Shoot us an email if you're interested in being one of our featured stores.</i></p>
    </div>
 </div> <!-- /container -->
 

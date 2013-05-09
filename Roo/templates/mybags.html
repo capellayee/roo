@@ -104,8 +104,8 @@
       <div class="form-bag">          
         <h2>{{bag.store}}</h2>
 	<p>
-        <div style="height:300px;width:200px;border:1px solid #add6ff; font:16px/26px Rockwell;overflow:auto;">
-	  <h3>My items:</h3>
+	<h3>My items:</h3>
+        <div style="height:275px;width:300px;border:1px solid #add6ff; font:16px/26px Rockwell;overflow:auto;">
 	  {% for orders in userorders %}
 	    {% if orders[1] == bag.store %}
 	      {% for order in orders[0] %}
@@ -119,7 +119,7 @@
 	      {% endfor %}
 	    {% endif %}
 	  {% endfor %}
-
+	</div>
 	<h3>Total in {{bag.store}} bag:</h3> {{ '%0.2f' % bag.amountinbag }} <br>
 
 	{% with toship = bag.threshold - bag.amountinbag %}
@@ -131,10 +131,11 @@
 	<!--<ul class=order>-->
 	  	<!--</ul>-->
 	</p>
-       </div>
+
         <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'>Add to bag &raquo;</a></p>
        </div><!--/form-->
       </div><!--/span-->
+      <br><br><div></div>
       {% endfor %}
     </ul>
     </div><!--/.row-->

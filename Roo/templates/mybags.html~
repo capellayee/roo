@@ -54,7 +54,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href={{url_for('static', filename="static/ico/apple-touch-icon-114-precomposed.png") }}>
       <link rel="apple-touch-icon-precomposed" sizes="72x72" href={{url_for('static', filename="static/ico/apple-touch-icon-72-precomposed.png") }}>
                     <link rel="apple-touch-icon-precomposed" href={{url_for('static', filename="static/ico/apple-touch-icon-57-precomposed.png") }}>
-                                   <link rel="shortcut icon" href={{url_for('static', filename="static/ico/favicon.png") }}>
+    <link rel="shortcut icon" href={{url_for('static',filename="imgs/favicon.ico") }}>
   </head>
 
   <body>
@@ -83,6 +83,7 @@
                   <ul class="dropdown-menu">
                     <li><a href='{{ url_for('mybags', userid=userid) }}'>My Crates</a></li>
                     <li><a href='{{ url_for('mynetworks', userid=userid) }}'>My Networks</a></li>
+                    <li><a href='{{ url_for('mymilk', userid=userid ) }}'>My Account</a></li>
                   </ul>
                 </li>
               </ul>
@@ -92,17 +93,18 @@
 
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
-<div class="container">
-<form class="form-bag">          
-  <div class="row-fluid">
-    <ul class=bag>
+<div class="container marketing">
+  <div class="row"> 
+   <ul class=bag>
       {% if not user.bag %}
         <h2>You have no orders to display.. </h2>
       {% endif %}
       {% for bag in mybags %}
       <div class="span4">
+      <div class="form-bag">          
         <h2>{{bag.store}}</h2>
 	<p>
+        <div style="height:300px;width:200px;border:1px solid #add6ff; font:16px/26px Rockwell;overflow:auto;">
 	  <h3>My items:</h3>
 	  {% for orders in userorders %}
 	    {% if orders[1] == bag.store %}
@@ -129,13 +131,14 @@
 	<!--<ul class=order>-->
 	  	<!--</ul>-->
 	</p>
+       </div>
         <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'>Add to bag &raquo;</a></p>
+       </div><!--/form-->
       </div><!--/span-->
       {% endfor %}
     </ul>
-    </div><!--/.container-->
- </form>   
-</div><!--/.fluid-container-->
+    </div><!--/.row-->
+</div><!--/container-->
 
 
  <!-- Le javascript

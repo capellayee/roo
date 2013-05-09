@@ -95,25 +95,27 @@
           <h2>Bags in the Princeton network:</h2>
 	</div>
       </div>
+      <br><br><div></div>
 	<!--Body content-->
         {% for bag in allbags %}
 	<div class="span4">
 	  <div class="form-bag">  
 	    <p>
-	    <a href='{{ url_for('bagpage', bagid=bag.id) }}'<h3>{{ bag.store }}</h3></a>
-             Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}
-             Current amount in the crate: {{ '%0.2f' % bag.amountinbag }}
+	    <a href='{{ url_for('bagpage', bagid=bag.id) }}'<h3>{{ bag.store }}</h3></a><br>
+             <h2>Purchase needed for free shipping:</h2> {{ '%0.2f' % bag.threshold}}<br>
+             <h2>Current amount in the crate:</h2> {{ '%0.2f' % bag.amountinbag }}<br>
              {% with toship = bag.threshold - bag.amountinbag %}
              {% if toship < 0 %}
 	     {% set toship = 0 %}
 	     {% endif %}
-	     Required amount to ship: {{ '%0.2f' % (toship) }}
+	     <h2>Required amount to ship:</h2> {{ '%0.2f' % (toship) }}<br>
 	     {% endwith %}
 	     <a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'>Add to bag &raquo;</a>
-	     {% endfor %}
 	     </p>
-        </div>
-      </div>
+          </div>
+         </div>
+<br><br><div></div>
+	     {% endfor %}
     </div>
   </div>
 
