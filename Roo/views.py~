@@ -217,7 +217,7 @@ def home():
   user = User.query.filter_by(id=userid).first()
 
   address = False
-  if address == -1:
+  if user.mailbox == -1:
     address = True
 
   if request.method == 'POST':

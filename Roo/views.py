@@ -327,14 +327,18 @@ def bagpage(bagid):
     if errorfound:
       return redirect(url_for('bagpage', bagid=bagid))
 
-    bag.amountinbag = bag.amountinbag - price
+
+    bag.amountinbag = bag.amountinbag + price
     # add the user to the bag
+    user = User.query.filter_by(id=session.get('userid')).first()
+    bag.users.append(user)
 
     ship = False
     if 'ship' in request.form:
       ship = True
+
     # add the user's order to the bag
-    order = Order(request.form['itemurl'], request.form['price'], request.form['details'], ship, None, None, None, None, None, bag.id, session.get('userid'))
+    order = Order(request.form['itemurl'], request.form['price'], request.form['details'], ship, None, None, None, None, None, bag.id, user.id)
     bag.orders.append(order)
     db_session.add(order)
     db_session.commit()
