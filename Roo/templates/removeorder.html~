@@ -84,7 +84,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href='{{ url_for('mybags', userid=userid) }}'>My Crates</a></li>
-                    <li><a href="#">My Networks</a></li>
+                    <li><a href='{{ url_for('mynetworks', userid=userid) }}'>My Networks</a></li>
                   </ul>
                 </li>
               </ul>
@@ -95,9 +95,9 @@
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
 
-<form class="form bag">          
   <div class="row-fluid">
     <div class="container">
+     <form class="form bag">
       <div class="span4">
         <h2>Remove the following order?</h2>
 	<h3>{{ order.url }} in {{ bag.store }}</h3><br>
