@@ -87,10 +87,10 @@ caption {
 	transition: height 0.1s ease;
 }
 .tablesorter-bootstrap .tablesorter-filter-row .tablesorter-filter.disabled {
-	background: #1f1f1f;
+	background: #eee;
 }
 .tablesorter-bootstrap .tablesorter-filter-row td {
-	background: #1f1f1f;
+	background: #eee;
 	line-height: normal;
 	text-align: center;
 	padding: 4px 6px;
