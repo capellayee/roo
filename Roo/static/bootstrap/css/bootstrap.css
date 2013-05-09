@@ -5850,14 +5850,14 @@ a.badge:focus {
 
 .progress-danger .bar,
 .progress .bar-danger {
-  background-color: #000000;
-  background-image: -moz-linear-gradient(top, #000000, #111111);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#000000), to(#111111));
-  background-image: -webkit-linear-gradient(top, #000000, #111111);
-  background-image: -o-linear-gradient(top, #000000, #111111);
-  background-image: linear-gradient(to bottom, #000000, #111111);
+  background-color: #344152;
+  background-image: -moz-linear-gradient(top, #344152, #26466d);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#344152), to(#26466d));
+  background-image: -webkit-linear-gradient(top, #344152, #264662);
+  background-image: -o-linear-gradient(top, #344152, #26466d);
+  background-image: linear-gradient(to bottom, #344152, #26466d);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff111111', endColorstr='#ff000000', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff344152', endColorstr='#ff264662', GradientType=0);
 }
 
 .progress-danger.progress-striped .bar,

@@ -77,6 +77,7 @@
               <ul class="nav pull-right">
                 <li><a href='{{ url_for('about') }}'>About</a></li>
                 <li><a href='{{ url_for('logout') }}'>Logout</a></li>
+                <li><a href='{{ url_for('allbags') }}'>All Crates</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
@@ -106,7 +107,7 @@
         <h3>{{order.bag.store}}</h3>
 	<p>
 	<strong>My orders:</strong>
-        <div style="margin-left:auto;margin-right:auto;height:150px;width:30em;border:1px solid #add6ff; font:16px/26px Rockwell;overflow-y:scroll;overflow-x:hidden">
+        <div style="margin-left:auto;margin-right:auto;height:150px;width:300px;border:1px solid #add6ff; font:16px/26px Rockwell;overflow-y:scroll;overflow-x:hidden">
 	        {{ order.url }} <br>
 	        Order details:
 	        <ul>
