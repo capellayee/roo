@@ -385,7 +385,7 @@ def mybags(userid):
   for bag in userbags:
     tuple = (Order.query.filter_by(bag_id=int(bag.id), user_id=userid).all(), str(bag.store))
     userorders.append(tuple)
-  return render_template('mybags.html', mybags=userbags, userorders=userorders, userid=user.id, user=user)
+  return render_template('mybags.html', myorders=user.orders, mybags=userbags, userorders=userorders, userid=user.id, user=user)
 
 # confirmation page for removing an order
 @app.route('/removeorder/<orderid>')
