@@ -189,7 +189,7 @@ def editorder(orderid):
 
 @app.route('/purchase/<userid>')
 def paypal(userid):
-  if not sesssion.get('logged_in'):
+  if not session.get('logged_in'):
     abort(401)
   if not session.get('userid') == userid:
     return "Hey, you're not allowed to see this page!"
