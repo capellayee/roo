@@ -100,14 +100,14 @@
         {% for bag in allbags %}
 	<div class="span4">
 	  <div class="form-bag">  
-	     <h3>{{ bag.store }}</h3><br>
+	     <h3>{{ bag.store }}</h3>
              <strong>Purchase needed for free shipping:</strong> {{ '%0.2f' % bag.threshold}}<br>
              <strong>Current amount in the crate:</strong> {{ '%0.2f' % bag.amountinbag }}<br>
              {% with toship = bag.threshold - bag.amountinbag %}
              {% if toship < 0 %}
 	     {% set toship = 0 %}
 	     {% endif %}
-	     <strong>Required amount to ship:</strong> {{ '%0.2f' % (toship) }}<br>
+	     <strong>Required amount to ship:</strong> {{ '%0.2f' % (toship) }}<br><br>
 	     {% endwith %}
 	     <a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'>Add to bag &raquo;</a>
           </div>
