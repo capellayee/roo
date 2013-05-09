@@ -84,7 +84,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href='{{ url_for('mybags', userid=userid) }}'>My Crates</a></li>
-                    <li><a href="#">My Networks</a></li>
+                    <li><a href='{{ url_for('mynetworks', userid=userid) }}'>My Networks</a></li>
                   </ul>
                 </li>
               </ul>
@@ -95,8 +95,8 @@
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
 
-<form class="form bag">          
   <div class="row-fluid">
+    <form class="form-bag">
     <div class="container">
       <div class="span4">
         <h2>Remove the following order?</h2>
@@ -112,8 +112,8 @@
 	<p><a class="btn" href='{{ url_for('removed', orderid=order.id, bagid=bag.id) }}'>Remove this order &raquo;</a></p>
 	<p><a class="btn" href='{{ url_for('mybags', userid=userid) }}'>No, keep it! &raquo;</a></p>	
       </div><!--/span-->
-  </form>  
     </div><!--/.container-->
+    </form>  
     </div><!--/.fluid-container-->
 
 
