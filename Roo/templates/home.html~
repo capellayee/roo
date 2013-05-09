@@ -433,7 +433,6 @@
                   {% endif %}
                 {% endwith %}
              <input  type="text" name="mailbox" placeholder="e.g. 5180">
-	     <button type="submit" class="btn">Submit</button>
           </fieldset>
         </form>
       </div>
