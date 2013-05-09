@@ -14,9 +14,14 @@
 	padding: 8px;
 	margin: 0 0 18px;
 	list-style: none;
-	background-color: #add6ff;
-	background-repeat: repeat-x;
-	-webkit-box-shadow: inset 0 1px 0 #1f1f1f;
+  background-image: -moz-linear-gradient(top, #a2d2f2, #add6ff);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#a2d2f2), to(#add6ff));
+  background-image: -webkit-linear-gradient(top, #a2d2f2, #add6ff);
+  background-image: -o-linear-gradient(top, #a2d2f2, #add6ff);
+  background-image: linear-gradient(to bottom, #a2d2f2, #add6ff);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a2d2f2', endColorstr='#add6ff', GradientType=0);
+-webkit-box-shadow: inset 0 1px 0 #1f1f1f;
 	-moz-box-shadow: inset 0 1px 0 #1f1f1f;
 	box-shadow: inset 0 1px 0 #1f1f1f;
 }
@@ -52,7 +57,7 @@
 }
 .tablesorter-bootstrap tbody > .odd:hover > td,
 .tablesorter-bootstrap tbody > .even:hover > td {
-	background-color: #000000;
+	background-color: #ffffff;
 }
 .tablesorter-bootstrap tr.even td {
 	background-color: #add6ff;
@@ -76,7 +81,7 @@ caption {
 	height: auto;
 	margin: 0 auto;
 	padding: 4px 6px;
-	background-color: #add6ff;
+	background-color: #fff;
 	color: #333;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
