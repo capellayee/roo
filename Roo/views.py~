@@ -189,7 +189,7 @@ def editorder(orderid):
 
 @app.route('/purchase/<userid>')
 def paypal(userid):
-  if not sesssion.get('logged_in'):
+  if not session.get('logged_in'):
     abort(401)
   if not session.get('userid') == userid:
     return "Hey, you're not allowed to see this page!"
@@ -216,8 +216,8 @@ def home():
   userid = session.get('userid')
   user = User.query.filter_by(id=userid).first()
 
-  address = isinstance(user.mailbox, None)
-
+#  address = isinstance(user.mailbox, None)
+  address = True
   if request.method == 'POST':
     user.mailbox = request.form['mailbox']
     db_session.commit()
@@ -241,6 +241,8 @@ def about():
 def mynetworks(userid):
   if not session.get('logged_in'):
     abort(401)
+  if not session.get('userid') == userid:
+    return "Hey dickhead, you're not supposed to be here"
   return render_template('mynetworks.html', user=User.query.filter_by(id=userid).first())
 
 # all bags
@@ -347,6 +349,8 @@ def bagpage(bagid):
 def mybags(userid):
   if not session.get('logged_in'):
     abort(401)
+  if not session.get('userid') == userid:
+    return "Hey dickhead, you're not supposed to be here"
   user = User.query.filter_by(id = userid).first()  
   userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
   userorders = []
