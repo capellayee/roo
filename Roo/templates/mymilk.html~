@@ -83,7 +83,8 @@
                   <ul class="dropdown-menu">
                     <li><a href='{{ url_for('mybags', userid=userid) }}'>My Crates</a></li>
                     <li><a href='{{ url_for('mynetworks', userid=userid) }}'>My Networks</a></li>
-                  </ul>
+                    <li><a href='{{ url_for('mymilk', userid=userid ) }}'>My Account</a></li>
+                 </u1>
                 </li>
               </ul>
             </div><!--/.nav-collapse -->
@@ -92,48 +93,17 @@
 
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
+
 <div class="container">
 <div class="form-bag">          
   <div class="row-fluid">
-    <ul class=bag>
-      {% if not user.bag %}
-        <h2>You have no orders to display.. </h2>
-      {% endif %}
-      {% for bag in mybags %}
-      <div class="span4">
-        <h2>{{bag.store}}</h2>
-	<p>
-	  <h3>My items:</h3>
-	  {% for orders in userorders %}
-	    {% if orders[1] == bag.store %}
-	      {% for order in orders[0] %}
-	        {{ order.url }} <br>
-	        Order details:
-	        <ul>
-		  <li>Price: {{ '%0.2f' % order.price }}</li>
-		  <li>Details: {{ order.details }}</li>
-		</ul>
-		<p><a class="btn" href='{{ url_for('removeorder', orderid=order.id) }}'>Remove this order &raquo;</a></p>
-	      {% endfor %}
-	    {% endif %}
-	  {% endfor %}
-
-	<h3>Total in {{bag.store}} bag:</h3> {{ '%0.2f' % bag.amountinbag }} <br>
-
-	{% with toship = bag.threshold - bag.amountinbag %}
-	  {% if toship < 0 %}
-	    {% set toship = 0 %}
-	  {% endif %}
-        <h3>Amount needed to ship:</h3> {{ '%0.2f' % (toship) }} <br>
-	{% endwith %}
-	<!--<ul class=order>-->
-	  	<!--</ul>-->
-	</p>
-        <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'>Add to bag &raquo;</a></p>
-      </div><!--/span-->
-      {% endfor %}
-    </ul>
-    </div><!--/.container-->
+    <h1>My Account</h1>
+    <p>
+      <h3>Name:</h3>{{ user.firstname + ' ' + user.lastname }}<br>
+      <h3>Email:</h3>{{ user.email }}<br>
+      <h3>Frist Mailbox:</h3>{{ user.mailbox }}
+    </p>
+  </div><!--/.container-->
  </div>   
 </div><!--/.fluid-container-->
 

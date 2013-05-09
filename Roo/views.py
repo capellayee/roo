@@ -247,7 +247,7 @@ def about():
 def mymilk(userid):
   if not session.get('logged_in'):
     abort(401)
-  user = User.query.filter_by(id=userid)
+  user = User.query.filter_by(id=userid).first()
   return render_template('mymilk.html', user=user, userid=userid)
 
 # my networks 
