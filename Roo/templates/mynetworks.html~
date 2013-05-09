@@ -86,7 +86,7 @@
 
 
   <div class="container-fluid">
-    <div class="row-fluid">
+    <div class="row">
       <div class="span12">
 	<div class="form-bag">
 	  <!--Sidebar content-->
@@ -112,7 +112,7 @@
 	     <a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'>Add to bag &raquo;</a>
           </div>
          </div>
-<br><br><div></div>
+<div></div>
 	     {% endfor %}
     </div>
   </div>

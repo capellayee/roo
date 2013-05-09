@@ -93,19 +93,19 @@
 
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
-<div class="container marketing">
+<div class="container-fluid">
   <div class="row"> 
    <ul class=bag>
       {% if not user.bag %}
         <h2>You have no orders to display.. </h2>
       {% endif %}
       {% for bag in mybags %}
-      <div class="span6">
+      <div class="span4">
       <div class="form-bag">          
         <h2>{{bag.store}}</h2>
 	<p>
 	<h3>My items:</h3>
-        <div style="height:275px;width:300px;border:1px solid #add6ff; font:16px/26px Rockwell;overflow:auto;">
+        <div style="height:200px;width:300px;border:1px solid #add6ff; font:16px/26px Rockwell;overflow:auto;">
 	  {% for orders in userorders %}
 	    {% if orders[1] == bag.store %}
 	      {% for order in orders[0] %}

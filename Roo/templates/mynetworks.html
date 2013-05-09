@@ -98,9 +98,9 @@
       <br><br><div></div>
 	<!--Body content-->
         {% for bag in allbags %}
-	<div class="span4">
+	<div class="span6">
 	  <div class="form-bag">  
-	    <a href='{{ url_for('bagpage', bagid=bag.id) }}'<h2>{{ bag.store }}</h2></a><br>
+	     <h2>{{ bag.store }}</h2><br>
              <h3>Purchase needed for free shipping:</h3> {{ '%0.2f' % bag.threshold}}<br>
              <h3>Current amount in the crate:</h3> {{ '%0.2f' % bag.amountinbag }}<br>
              {% with toship = bag.threshold - bag.amountinbag %}

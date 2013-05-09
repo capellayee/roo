@@ -100,7 +100,7 @@
         <h2>You have no orders to display.. </h2>
       {% endif %}
       {% for bag in mybags %}
-      <div class="span3">
+      <div class="span6">
       <div class="form-bag">          
         <h2>{{bag.store}}</h2>
 	<p>
@@ -135,7 +135,6 @@
         <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'>Add to bag &raquo;</a></p>
        </div><!--/form-->
       </div><!--/span-->
-      <br><br>
       {% endfor %}
     </ul>
     </div><!--/.row-->
