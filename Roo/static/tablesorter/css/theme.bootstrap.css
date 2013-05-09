@@ -52,10 +52,10 @@
 }
 .tablesorter-bootstrap tbody > .odd:hover > td,
 .tablesorter-bootstrap tbody > .even:hover > td {
-	background-color: #f5f5f5;
+	background-color: #000000;
 }
 .tablesorter-bootstrap tr.even td {
-	background-color: #fff;
+	background-color: #add6ff;
 }
 
 /* processing icon */
@@ -76,7 +76,7 @@ caption {
 	height: auto;
 	margin: 0 auto;
 	padding: 4px 6px;
-	background-color: #fff;
+	background-color: #add6ff;
 	color: #333;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -87,10 +87,10 @@ caption {
 	transition: height 0.1s ease;
 }
 .tablesorter-bootstrap .tablesorter-filter-row .tablesorter-filter.disabled {
-	background: #1f1f1f;
+	background: #eee;
 }
 .tablesorter-bootstrap .tablesorter-filter-row td {
-	background: #1f1f1f;
+	background: #eee;
 	line-height: normal;
 	text-align: center;
 	padding: 4px 6px;
