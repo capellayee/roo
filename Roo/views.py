@@ -151,7 +151,7 @@ def editorder(orderid):
     if str(order.id) == orderid:
       valid = True
   if not valid:
-    return "Hey dickhead, you're not supposed to be here"
+    return redirect('error.html')
 
   if request.method == 'POST':
     # check the validity of input, if something is wrong, return the page with error messages where appropriate
@@ -267,7 +267,7 @@ def mynetworks(userid):
   if not session.get('logged_in'):
     abort(401)
   if not str(session.get('userid')) == userid:
-    return "Hey dickhead, you're not supposed to be here"
+    return redirect('error.html')
   allbags = Bag.query.all()
   return render_template('mynetworks.html', userid=userid, allbags=allbags)
 
@@ -377,7 +377,7 @@ def mybags(userid):
   if not session.get('logged_in'):
     abort(401)
   if not str(session.get('userid')) == userid:
-    return "Hey dickhead you're not supposed to be here"
+    return redirect('error.html')
   user = User.query.filter_by(id = userid).first()  
   userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
   userorders = []

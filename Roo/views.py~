@@ -137,6 +137,10 @@ def purchasedemail():
 def receivedemail():
   return "hello"
 
+@app.route('/error')
+def error():
+  return render_template('error.html')
+
 @app.route('/editorder/<orderid>', methods=['GET', 'POST'])
 def editorder(orderid):
   if not session.get('logged_in'):
