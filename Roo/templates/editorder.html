@@ -107,9 +107,8 @@
 
 
 	      <div class="progress" id="progressbar">
-		<div class="bar bar-success"></div>
-		<div class="bar bar-warning"></div>
-		<div class="bar bar-danger"></div>
+		<div class="bar bar-success" style={{ myorders }}></div>
+		<div class="bar bar-danger" style={{ othersorders }}></div>
 	      </div>
 
 
@@ -210,15 +209,5 @@ inal-title="Ship to me!">(?)</a>
       { $("#example").popover();
       });
     </script>
-    <!-- progress bar -->
-    <script type="text/javascript">
-      $('#progressbar').progressbar({
-      warningMarker: {{ myorders }},
-      dangerMarker: {{ othersorders  }},
-      maximum: 100,
-      step: 5
-      });
-    </script>
-
   </body>
 </html>

@@ -153,6 +153,17 @@ def editorder(orderid):
   if not valid:
     return redirect(url_for('error'))
 
+  # get order
+  order = Order.query.filter_by(id=orderid).first()    
+  
+  # get bag associated with order
+  bag = Bag.query.filter_by(id=order.bag_id).first()
+
+  # data for the progress bar
+  myorders = int(order.price / bag.threshold) 
+  othersorders = int( (bag.amountinbag-order.price) / bag.threshold )
+
+
   if request.method == 'POST':
     # check the validity of input, if something is wrong, return the page with error messages where appropriate
     errorfound = False
@@ -177,7 +188,6 @@ def editorder(orderid):
     if errorfound:
       return "ERROR"
 
-    order = Order.query.filter_by(id=orderid).first()    
     order.bag.amountinbag = order.bag.amountinbag - order.price + float(request.form['price'])
     order.price = float(request.form['price'])
     order.url = request.form['itemurl']
@@ -189,10 +199,10 @@ def editorder(orderid):
     db_session.commit()
 
     flash("Your purchase of " + order.url + " has been updated for the " + order.bag.store + " bag!", "addmessage")
-    return render_template('editorder.html', order=order, bag=order.bag, userid=user.id)
+    return render_template('editorder.html', order=order, bag=order.bag, userid=user.id, myorders=myorders, othersorders=othersorders)
   else:
     order = Order.query.filter_by(id=orderid).first()
-    return render_template('editorder.html', order=order, bag=order.bag, userid=user.id)
+    return render_template('editorder.html', order=order, bag=order.bag, userid=user.id, myorders=myorders, othersorders=othersorders)
 
 @app.route('/purchase/<userid>')
 def paypal(userid):
@@ -328,7 +338,7 @@ def bagpage(bagid):
   user = User.query.filter_by(id=session.get('userid')).first()
   redir = False
   for order in user.orders:
-    if order.bag.id == bagid:
+    if str(order.bag.id) == bagid:
       redir = True
       orderid = order.id
   if redir:
