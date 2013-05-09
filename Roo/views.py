@@ -352,7 +352,7 @@ def mybags(userid):
   if not session.get('logged_in'):
     abort(401)
   if not int(session.get('userid')) == userid:
-    return session.get('userid') + " vs " + str(userid)
+    return str(session.get('userid')) + " vs " + str(userid)
   user = User.query.filter_by(id = userid).first()  
   userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
   userorders = []
