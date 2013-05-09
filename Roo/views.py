@@ -96,6 +96,7 @@ def payemail():
             msg = Message(recipients=recipients, subject=subject,sender="themilkmanshipping@gmail.com")
             msg.html = msgtext + followermsg
             mail.send(msg)
+  return "check your email!"
 #    users = User.query.all()
 #    with mail.connect() as conn:
 #      for user in users:
@@ -106,7 +107,7 @@ def payemail():
           # link to purchase page.
 #          msg.html = """<p>Hey there, <br>, Your order(s) are ready to be purchased and shipped!  Head on over to The Milkman using the link below!<br><br><a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+""""><b>Get me my stuff!</b></a></p><br><br> The Milkman""" 
 #          conn.send(msg)
-
+            
 # Send reminder emails in case a user has not yet paid for their order
 # This reminder email should happen 12 hours later ( Saturday midnight )
 # Sent via Heroku Scheduler
@@ -126,6 +127,7 @@ def reminderemail():
             msg = Message(recipients=[user.email], subject=subject, sender="themilkmanshipping@gmail.com")
             msg.html = """ Hey there, <br> Just a reminder to pay for your orders!  We know you want your stuff as soon as possible!  Click the link below to pay now! <br><br><a href="themilkman.herokuapp.com/purchase/"""+str(user.id)+""""><b>Get me my stuff!</b></a><br><br> The Milkman</p>"""
             conn.send(msg)
+  return "check your email!"
 
 # Send an email once the purchase has been made
 @app.route('/purchasedemail')
