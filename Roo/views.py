@@ -216,9 +216,9 @@ def home():
   userid = session.get('userid')
   user = User.query.filter_by(id=userid).first()
 
-  address = True
+  address = False
   if address == -1:
-    address = False
+    address = True
 
   if request.method == 'POST':
     user.mailbox = request.form['mailbox']
