@@ -42,7 +42,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
       <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
                     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
+                                   <link rel="shortcut icon" href=/static/imgs/favicon.ico>
   </head>
 
   <body>
@@ -107,9 +107,8 @@
 
 
 	      <div class="progress" id="progressbar">
-		<div class="bar bar-success"></div>
-		<div class="bar bar-warning"></div>
-		<div class="bar bar-danger"></div>
+		<div class="bar bar-success" style={{ myorders|safe }}></div>
+		<div class="bar bar-danger" style={{ othersorders|safe }}></div>
 	      </div>
 
 
@@ -210,15 +209,5 @@ inal-title="Ship to me!">(?)</a>
       { $("#example").popover();
       });
     </script>
-    <!-- progress bar -->
-    <script type="text/javascript">
-      $('#progressbar').progressbar({
-      warningMarker: {{ myorders }},
-      dangerMarker: {{ othersorders  }},
-      maximum: 100,
-      step: 5
-      });
-    </script>
-
   </body>
 </html>
