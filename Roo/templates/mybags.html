@@ -93,19 +93,18 @@
 
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
-<div class="container-fluid">
+<div class="container">
   <div class="row"> 
-   <ul class=bag>
       {% if not user.bag %}
         <h2>You have no orders to display.. </h2>
       {% endif %}
       {% for bag in mybags %}
       <div class="span4">
       <div class="form-bag">          
-        <h2>{{bag.store}}</h2>
+        <h3>{{bag.store}}</h3>
 	<p>
-	<h3>My items:</h3>
-        <div style="height:150px;width:300px;border:1px solid #add6ff; font:16px/26px Rockwell;overflow:auto;">
+	<strong>My items:</strong>
+        <div style="margin-left:auto;margin-right:auto;height:150px;width:300px;border:1px solid #add6ff; font:16px/26px Rockwell;overflow:auto;">
 	  {% for orders in userorders %}
 	    {% if orders[1] == bag.store %}
 	      {% for order in orders[0] %}
@@ -120,13 +119,13 @@
 	    {% endif %}
 	  {% endfor %}
 	</div>
-	<h3>Total in {{bag.store}} bag:</h3> {{ '%0.2f' % bag.amountinbag }} <br>
+	<strong>Total in {{bag.store}} bag:</strong> {{ '%0.2f' % bag.amountinbag }} <br>
 
 	{% with toship = bag.threshold - bag.amountinbag %}
 	  {% if toship < 0 %}
 	    {% set toship = 0 %}
 	  {% endif %}
-        <h3>Amount needed to ship:</h3> {{ '%0.2f' % (toship) }} <br>
+        <strong>Amount needed to ship:</strong> {{ '%0.2f' % (toship) }} <br>
 	{% endwith %}
 	<!--<ul class=order>-->
 	  	<!--</ul>-->
@@ -136,8 +135,8 @@
        </div><!--/form-->
       </div><!--/span-->
       {% endfor %}
-    </ul>
     </div><!--/.row-->
+  <br>
 </div><!--/container-->
 
 
