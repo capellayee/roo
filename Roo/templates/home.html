@@ -374,29 +374,30 @@
 
     <div class="container marketing">
 
-
-
-
-      <!-- Three columns of text below the carousel -->
-        <div class="hero-unit">
-          <li><h2 href='{{ url_for('mybags', userid=userid) }}'> My Crates</h2></li>
-	{% for bag in mybags %}
+    <div class="row">
+      <div class="span4">
+	<form class="form-bag">
+	  <li><h2 href='{{ url_for('mybags', userid=userid) }}'> My Crates</h2></li>
+          {% for bag in mybags %}
           <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
-	{% endfor %}
-        </div><!-- /.herounit -->
-        <div class="hero-unit">
-          <li><h2 href='{{ url_for('allbags') }}'>All Crates</h2></li>
-          <p>list of all existing crates</p>
-	{% for bag in allbags %}
-          <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
-	{% endfor %}
-        </div><!-- /.herounit -->
-        <div class="hero-unit">
-          <li><h2 href='{{ url_for('mynetworks', userid=userid) }}'>My Networks</h2></li>
-          <p><a class="btn" href='{{ url_for('mynetworks', userid=userid) }}'>Princeton &raquo;</a></p>
-        </div><!-- /.herounit -->
-
-
+        {% endfor %}
+	</form>
+      </div>
+      <div class="span4">
+	<form class="form-bag">
+	  <li><h2 href='{{ url_for('allbags') }}'>All Crates</h2></li>
+            {% for bag in allbags %}
+            <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
+            {% endfor %}
+	</form>
+      </div>
+      <div class="span4">
+      <form class="form-bag">
+        <li><h2 href='{{ url_for('mynetworks', userid=userid) }}'>My Networks</h2></li>
+        <p><a class="btn" href='{{ url_for('mynetworks', userid=userid) }}'>Princeton &raquo;</a></p>
+      </form>
+      </div>
+    </div>
 
  <!-- Popup if users address hasn't been input yet! -->
     <!-- Button to trigger modal 
