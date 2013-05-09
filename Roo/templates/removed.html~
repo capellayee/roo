@@ -94,19 +94,18 @@
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
 
-
-  <div class="row-fluid">
+  <div class="container">
     <form class="form-bag">
-    <div class="container">
-      <div class="span4">
-        <h2>Done!</h2>
-	<h3>Your order has been removed</h3>
-	<p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> Take me back to the {{bag.store}} crate &raquo;</a></p>
-	<p><a class="btn" href='{{ url_for('mybags', userid=userid) }}'> Take me back to my crates &raquo;</a></p>
-      </div><!--/span-->
-    </div><!--/.container-->
+      <div class="row-fluid">
+	<div class="span4">
+          <h2>Done!</h2>
+	  <h3>Your order has been removed</h3>
+	  <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> Take me back to the {{bag.store}} crate &raquo;</a></p>
+	  <p><a class="btn" href='{{ url_for('mybags', userid=userid) }}'> Take me back to my crates &raquo;</a></p>
+	</div><!--/span-->
+      </div><!--/.container-->
     </form>    
-    </div><!--/.fluid-container-->
+  </div><!--/.fluid-container-->
 
 
  <!-- Le javascript

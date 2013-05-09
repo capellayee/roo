@@ -84,10 +84,12 @@ def payemail():
           if order.ship == True:
             bagleader = order.user
         recipients = [bagleader.email]
-        leadermsg = "You (" + bagleader.firstname + ")<br><br> are in charge of ordering the bags. Here are the orders in the crate: <br><hr>"
+        leadermsg = "As soon as everyone in the crate pays The Milkman via paypal, we will order the crate and have it shipped to you (" + bagleader.firstname + "). You you will be in charge of distributing the individual orders to everyone in the crate. Here are the orders in the crate: <br><hr>"
         for order in bag.orders:
-          leadermsg = leadermsg + "User: " + order.user.firstname + " " + order.user.lastname + " (" + order.user.email + ") " + "Order cost: $" + str(order.price) + " URL: " + order.url
+          leadermsg = leadermsg + "User: " + order.user.firstname + " " + order.user.lastname + " (" + order.user.email + ") " + "<br>Order cost: $" + str(order.price) + "<br>URL: " + order.url
           leadermsg = leadermsg + "<br> Comments: " + order.details + "<hr>"
+        leadermsg = leadermsg + """<br> Now, head over to The Milkman using the link below to pay for\
+ your order, so that we can order the crate!<br><a href="rooprinceton.herokuapp.com/purchase/"""+str(bagleader.id)+""""><b>Pay for my stuff!</b></a>"""
         msg = Message(recipients=recipients, subject=subject, sender="themilkmanshipping@gmail.com")
         msg.html = msgtext + leadermsg
         mail.send(msg)
@@ -95,7 +97,8 @@ def payemail():
         for user in bag.users:
           if user.email != bagleader.email:
             recipients = [user.email]
-            followermsg = "The crate will be shipped to " + bagleader.firstname + " " + bagleader.lastname + " (" + bagleader.email + "). Your order is: <br>" + "User: " + order.user.firstname + " " + order.user.lastname + " (" + order.user.email + ") " + "Order cost: $" + str(order.price) + " URL: " + order.url + "<br> Comments: " + order.details + "<hr>"
+            followermsg = "The crate will be shipped to " + bagleader.firstname + " " + bagleader.lastname + " (" + bagleader.email + "). Your order is: <br>" + "User: " + order.user.firstname + " " + order.user.lastname + " (" + order.user.email + ")" + "<br>Order cost: $" + str(order.price) + "<br>URL: " + order.url + "<br>Comments: " + order.details + "<hr>"
+            followermsg = followermsg + """<br> Now, head over to The Milkman using the link below to pay for your order, so that we can order the crate!<br><a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+""""><b>Pay for my stuff!</b></a>"""
             msg = Message(recipients=recipients, subject=subject,sender="themilkmanshipping@gmail.com")
             msg.html = msgtext + followermsg
             mail.send(msg)

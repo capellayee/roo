@@ -22,7 +22,6 @@
 
 
     .form-bag {
- 	max-width: 800px;
 	padding: 19px 29px 29px;
 	margin 0 auto 20 px;
 	background-color: #fff;
@@ -64,7 +63,7 @@
       <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
       <div class="container">
 
-        <div class="navbar navbar-inverse">
+        <div class="navbar navbar-inverse navbar-fixed-top">
           <div class="navbar-inner">
             <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -72,7 +71,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href='{{ url_for('home') }}'>The Milkman</a>
+            <a class="brand" href='{{ url_for('home') }}'><img src={{ url_for('static', filename="imgs/milkman-logo.png") }} height="50" alt=""></a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">

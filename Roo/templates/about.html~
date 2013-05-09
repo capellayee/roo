@@ -20,8 +20,9 @@
         padding: 9px 0;
       }
 
+    /* FORM - BAG STYLE
+    ----------------------------------------------------*/
    .form-bag {
- 	max-width: 800px;
 	padding: 19px 29px 29px;
 	margin 0 auto 20 px;
 	background-color: #fff;
@@ -60,11 +61,14 @@
 
   <body>
 
-  <div class="navbar-wrapper">
+
+ <!-- NAVBAR
+    ================================================== -->
+    <div class="navbar-wrapper">
       <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
       <div class="container">
 
-        <div class="navbar navbar-inverse">
+        <div class="navbar navbar-inverse navbar-fixed-top">
           <div class="navbar-inner">
             <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -72,7 +76,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href='/home'>The Milkman</a>
+            <a class="brand" href='/home'><img src=/static/imgs/milkman-logo.png alt=""></a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
@@ -82,8 +86,8 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href='{{ url_for('mybags', userid=userid) }}'>My Crates</a></li>
-                    <li><a href='{{ url_for('mynetworks', userid=userid) }}'>My Networks</a></li>
+                    <li><a href='{{ url_for('mybags', userid=userid }}'>My Crates</a></li>
+                    <li><a href='{{ url_for('mynetworks', userid=userid }}'>My Networks</a></li>
                   </ul>
                 </li>
               </ul>
@@ -94,8 +98,8 @@
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
 
-   <div class="container">       
-    <form class="form-bag">
+<div class="container">    
+<form class="form-bag">
       <h1>About the Milkman</h1>
       <p class="lead">We're just a few students who saw need in our daily lives for this application, and figured some other people would appreciate it too! We want to make this site as helpful as possible so contact us with any comments, concerns or suggestions! </p>
 	<a href="mailto:themilkmanshipping@gmail.com>Email The MilkMan!</a>	

@@ -188,6 +188,12 @@
 
     @media (max-width: 979px) {
 
+      .navbar-text.pull-right {
+        float: none;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+
       .container.navbar-wrapper {
         margin-bottom: 0;
         width: auto;
