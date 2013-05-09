@@ -96,8 +96,8 @@
     </div><!-- /.navbar-wrapper -->
 
   <div class="row-fluid">
+    <form class="form-bag">
     <div class="container">
-     <form class="form bag">
       <div class="span4">
         <h2>Remove the following order?</h2>
 	<h3>{{ order.url }} in {{ bag.store }}</h3><br>
@@ -112,8 +112,8 @@
 	<p><a class="btn" href='{{ url_for('removed', orderid=order.id, bagid=bag.id) }}'>Remove this order &raquo;</a></p>
 	<p><a class="btn" href='{{ url_for('mybags', userid=userid) }}'>No, keep it! &raquo;</a></p>	
       </div><!--/span-->
-  </form>  
     </div><!--/.container-->
+    </form>  
     </div><!--/.fluid-container-->
 
 

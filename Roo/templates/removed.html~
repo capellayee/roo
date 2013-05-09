@@ -83,7 +83,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href='{{ url_for('mybags', userid=userid) }}'>My Crates</a></li>
-                    <li><a href="#">My Networks</a></li>
+                    <li><a href='{{ url_for('mynetworks', userid=userid) }}'>My Networks</a></li>
                   </ul>
                 </li>
               </ul>
@@ -94,8 +94,9 @@
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
 
-<form class="form-bag">
+
   <div class="row-fluid">
+    <form class="form-bag">
     <div class="container">
       <div class="span4">
         <h2>Done!</h2>
@@ -103,8 +104,8 @@
 	<p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> Take me back to the {{bag.store}} crate &raquo;</a></p>
 	<p><a class="btn" href='{{ url_for('mybags', userid=userid) }}'> Take me back to my crates &raquo;</a></p>
       </div><!--/span-->
-</form>    
     </div><!--/.container-->
+    </form>    
     </div><!--/.fluid-container-->
 
 
