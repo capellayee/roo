@@ -26,7 +26,6 @@
     /* FORM - BAG STYLE
     ----------------------------------------------------*/
     .form-bag {
-        max-width: 800px;
         padding: 19px 29px 29px;
         margin 0 auto 20 px;
         background-color: #fff;
@@ -84,8 +83,7 @@
     }
 
 
-
-    /* CUSTOMIZE THE CAROUSEL
+/* CUSTOMIZE THE CAROUSEL
     -------------------------------------------------- */
 
     /* Carousel base class */
@@ -100,22 +98,9 @@
 
     .carousel-control {
       height: 80px;
-      margin-top: 0;g {
- 	max-width: 800px;
-	padding: 19px 29px 29px;
-	margin 0 auto 20 px;
-	background-color: #fff;
-	border: 5px solid #add6ff;
-        -webkit-border-radius: 5px;
-           -moz-border-radius: 5px;
-                border-radius: 5px;
-        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-                box-shadow: 0 1px 2px rgba(0,0,0,.05);
-    }
-
+      margin-top: 0;
       font-size: 120px;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4m
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
       background-color: transparent;
       border: 0;
       z-index: 10;
@@ -137,21 +122,18 @@
       position: static;
       max-width: 550px;
       padding: 0 20px;
-      margin-top: 100px;
+      margin-top: 200px;
     }
     .carousel-caption h1,
     .carousel-caption .lead {
       margin: 0;
       line-height: 1.25;
-      color: #ffffff;
+      color: #000000;
       text-shadow: 0 1px 1px rgba(0,0,0,.4);
     }
     .carousel-caption .btn {
       margin-top: 10px;
     }
-
-
-
 
     /* MARKETING CONTENT
     -------------------------------------------------- */
@@ -310,7 +292,7 @@
       <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
       <div class="container">
 
-        <div class="navbar navbar-inverse">
+        <div class="navbar navbar-inverse navbar-fixed-top">
           <div class="navbar-inner">
             <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -353,9 +335,10 @@
           <a href="http://www.urbanoutfitters.com"><img src={{url_for('static',filename="imgs/UrbanOutfitters.jpg") }} alt=""></a>
           <div class="container">
             <div class="carousel-caption">
-              <h1 style="color:black">Urban Outfitters.</h1>
+              <h1>Urban Outfitters.</h1>
               <p class="lead"></p>
               <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=urbanoutfittersid) }}'>Add to crate</a>
+              <a class="btn btn-large btn-primary" href="http://www.urbanoutfitters.com">Shop Urban Outfitters</a>
             </div>
           </div>
         </div>
@@ -363,9 +346,10 @@
           <a href="http://www.ralphlauren.com"><img src={{url_for('static',filename="imgs/ralphlauren.JPG") }} alt=""></a>
           <div class="container">
             <div class="carousel-caption">
-              <h1 style="color:black">Ralph Lauren</h1>
+              <h1>Ralph Lauren</h1>
               <p class="lead"></p>
               <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=ralphlaurenid) }}'>Add to crate</a>
+              <a class="btn btn-large btn-primary" href="http://www.ralphlauren.com">Shop Ralph Lauren</a>
             </div>
           </div>
         </div>
@@ -373,9 +357,10 @@
           <a href="http://www.jcrew.com"><img src={{url_for('static',filename="imgs/jcrew.JPG") }} alt=""></a>
           <div class="container">
             <div class="carousel-caption">
-              <h1 style="color:black">J. Crew</h1>
+              <h1>J. Crew</h1>
               <p class="lead"></p>
               <a class="btn btn-large btn-primary" href='{{ url_for('bagpage', bagid=jcrewid) }}'>Add to crate</a>
+              <a class="btn btn-large btn-primary" href="http://www.jcrew.com">Shop J. Crew</a>
             </div>
           </div>
         </div>
