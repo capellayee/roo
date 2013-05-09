@@ -101,9 +101,9 @@
 	      {% endwith %}
               <legend><h1>{{ bag.store }}</h1></legend>
 
-              <span class="help-block">Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</span>
-	            <span class="help-block">Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</span>
-              <span class="help-block">Required amount to ship: {{ '%0.2f' % max_function(bag.threshold-bag.amountinbag,0) }}</span>
+              <span class="help-block"><h2 style="color:#555555;">*</h2>Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</span>
+	            <span class="help-block"><h2 style="color:#000000;">*</h2>Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</span>
+              <span class="help-block"><h2 style="color:#add6ff;">*</h2>Required amount to ship: {{ '%0.2f' % max_function(bag.threshold-bag.amountinbag,0) }}</span>
 
 
 	      <div class="progress" id="progressbar">
