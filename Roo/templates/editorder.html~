@@ -158,9 +158,15 @@
 	      <textarea rows="4" name="details">{{order.details}}</textarea>
 	      <label class="checkbox">
 {% if order.ship %}
-                <input type="checkbox" name="ship" checked> <h3>Ship to me?</h3>
+                <input type="checkbox" name="ship" checked> Ship to me? <a href="#" id="example" class="btn" rel="popover" data-content="Want to be a leader?  Willing to\
+ have all the orders in this crate shipped to you?  Check the box here!  We'll let you know if the order is shipped to you, and then you just have to hand out the goods." data-orig\
+inal-title="Ship to me!">(?)</a>
+
 {% else %}
-<input type="checkbox" name="ship" value={{order.ship}}> <h3>Ship to me?</h3>
+<input type="checkbox" name="ship" value={{order.ship}}> Ship to me? <a href="#" id="example" class="btn" rel="popover" data-content="Want to be a leader?  Willing to\
+ have all the orders in this crate shipped to you?  Check the box here!  We'll let you know if the order is shipped to you, and then you just have to hand out the goods." data-orig\
+inal-title="Ship to me!">(?)</a>
+
 {% endif %}
               </label>
 
