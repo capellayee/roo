@@ -105,10 +105,15 @@
 	            <span class="help-block">Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</span>
               <span class="help-block">Required amount to ship: {{ '%0.2f' % max_function(bag.threshold-bag.amountinbag,0) }}</span>
 
-
 	      <div class="progress">
 		<div class="bar bar-success" style="width: 35%;"></div>
+		<div class="bar bar-warning" style="width: 20%;"></div>
 		<div class="bar bar-danger" style="width: 10%;"></div>
+	      </div>
+	      <div class="progress">
+		<div class="bar bar-success"></div>
+		<div class="bar bar-warning"></div>
+		<div class="bar bar-danger"></div>
 	      </div>
 
 
@@ -207,15 +212,6 @@ inal-title="Ship to me!">(?)</a>
       <!-- tool tip for ship to me -->
       $(function ()
       { $("#example").popover();
-      });
-    </script>
-    <!-- progress bar -->
-    <script type="text/javascript">
-      $('#progressbar').progressbar({
-      warningMarker: {{ myorders }},
-      dangerMarker: {{ othersorders  }},
-      maximum: 100,
-      step: 5
       });
     </script>
 
