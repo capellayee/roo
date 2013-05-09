@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Pay for a Bag &middot; Roo</title>
+    <title>Purchase my Milk &middot; The Milkman</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -19,7 +19,6 @@
       }
 
    .form-bag {
- 	max-width: 800px;
 	padding: 19px 29px 29px;
 	margin 0 auto 20 px;
 	background-color: #fff;
@@ -56,7 +55,7 @@
       <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
       <div class="container">
 
-        <div class="navbar navbar-inverse">
+        <div class="navbar navbar-inverse navbar-fixed-top">
           <div class="navbar-inner">
             <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -64,18 +63,18 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href='/home'>The Milkman</a>
+            <a class="brand" href='{{ url_for('home') }}'><img src={{ url_for('static', filename="imgs/milkman-logo.png") }} height="50" alt=""></a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
-                <li><a href='/about'>About</a></li>
-                <li><a href='/logout'>Logout</a></li>
+                <li><a href='{{ url_for('about') }}'>About</a></li>
+                <li><a href='{{ url_for('logout') }}'>Logout</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href='/mybags/3'>My Crates</a></li>
-                    <li><a href='/mynetworks/3'>My Networks</a></li>
+                    <li><a href='{{ url_for('mybags', userid=userid }}'>My Crates</a></li>
+                    <li><a href='{{ url_for('mynetworks', userid=userid) }}'>My Networks</a></li>
                   </ul>
                 </li>
               </ul>

@@ -21,6 +21,21 @@
         padding: 9px 0;
       }
 
+    /* FORM - BAG STYLE
+    ----------------------------------------------------*/
+    .form-bag {
+        padding: 19px 29px 29px;
+        margin 0 auto 20 px;
+        background-color: #fff;
+      border: 5px solid #add6ff;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+
       @media (max-width: 980px) {
         /* Enable use of floated navbar text */
         .navbar-text.pull-right {
@@ -53,7 +68,7 @@
       <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
       <div class="container">
 
-        <div class="navbar navbar-inverse">
+        <div class="navbar navbar-inverse navbar-fixed-top">
           <div class="navbar-inner">
             <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -61,7 +76,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href='{{ url_for('home') }}'>The Milkman</a>
+	    <a class="brand" href='{{ url_for('home') }}'><img src={{ url_for('static', filename="imgs/milkman-logo.png") }} height="50" alt=""></a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
@@ -83,34 +98,38 @@
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
 
-<table id="All Crates" class="tablesorter">
-<thead>
-<tr>
-    <th>Store name</th>
-    <th>Crate network</th>
-    <th>Amount needed for free shipping</th>
-    <th>Current amount in the crate</th>
-    <th>Amount remaining for free shipping</th>
-</tr>
-</thead>
-<u1 class=bag>
-<tbody>
-{% for bag in allbags %}
- {% with toship = bag.threshold - bag.amountinbag %}
-  {% if toship < 0 %}
-    {% set toship = 0 %}
-  {% endif %}
-<tr>
-    <td>{{bag.store}}</td>
-    <td>Princeton</td>
-    <td>{{ '%0.2f' % bag.threshold }}</td>
-    <td>{{ '%0.2f' % bag.amountinbag }}</td>
-    <td>{{ '%0.2f' % (toship) }}</td>
-</tr>     
-{% endwith %}
-{% endfor %}
-</tbody>    
-</table>
+    <div class="container">
+      <form class="form-bag">
+	<table id="All Crates" class="tablesorter">
+	  <thead>
+	    <tr>
+	      <th>Store name</th>
+	      <th>Crate network</th>
+	      <th>Amount needed for free shipping</th>
+	      <th>Current amount in the crate</th>
+	      <th>Amount remaining for free shipping</th>
+	    </tr>
+	  </thead>
+	  <u1 class=bag>
+	    <tbody>
+	      {% for bag in allbags %}
+	      {% with toship = bag.threshold - bag.amountinbag %}
+	      {% if toship < 0 %}
+	      {% set toship = 0 %}
+  	      {% endif %}
+	    <tr>
+	      <td>{{bag.store}}</td>
+	      <td>Princeton</td>
+	      <td>{{ '%0.2f' % bag.threshold }}</td>
+	      <td>{{ '%0.2f' % bag.amountinbag }}</td>
+	      <td>{{ '%0.2f' % (toship) }}</td>
+	    </tr>     
+	    {% endwith %}
+	    {% endfor %}
+	    </tbody>    
+	</table>
+      </form>
+    </div>
 
 <!-- Le javascript
     ================================================== -->
