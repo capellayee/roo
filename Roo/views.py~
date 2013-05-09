@@ -349,6 +349,12 @@ def bagpage(bagid):
   if redir:
     return redirect(url_for('editorder', orderid=orderid))
   bag = Bag.query.filter_by(id=bagid).first()
+
+    # update order info for progress bar
+  percentfull = """ "width: """ + str(int(bag.amountinbag*100 / max(bag.threshold,bag.amountinbag))) + """%;" """ 
+  percentempty = """ "width: """ + str(100-int(100*bag.amountinbag / max(bag.threshold,bag.amountinbag))) + """%;" """
+  
+
   if request.method == 'POST':
     # check the validity of input, if something is wrong, return the page with error messages where appropriate
     errorfound = False
@@ -390,8 +396,12 @@ def bagpage(bagid):
     db_session.add(order)
     db_session.commit()
     flash("Your purchase of " + order.url + " has been added to the " + bag.store + " bag!", "addmessage")
+    # update order info for progress bar
+    percentfull = """ "width: """ + str(int(bag.amountinbag*100 / max(bag.threshold,bag.amountinbag))) + """%;" """ 
+    percentempty = """ "width: """ + str(100-int(100*bag.amountinbag / max(bag.threshold,bag.amountinbag))) + """%;" """
+
     return redirect(url_for('bagpage', bagid=bagid))
-  return render_template('bagpage.html', bag=bag, userid=session.get('userid'))
+  return render_template('bagpage.html', percentempty=percentempty, percentfull=percentfull, bag=bag, userid=session.get('userid'))
 
 
 # displays all of the users' bags
