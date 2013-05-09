@@ -248,7 +248,7 @@ def about():
 
 # sourmilk page
 @app.route('/sourmilk')
-def about():
+def sourmilk():
   if not session.get('logged_in'):
     abort(401)
   return render_template('sourmilk.html', userid=session.get('userid'))
