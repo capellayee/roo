@@ -95,7 +95,7 @@
 </thead>
 <u1 class=bag>
 <tbody>
-{% for bag in mybags %}
+{% for bag in allbags %}
  {% with toship = bag.threshold - bag.amountinbag %}
   {% if toship < 0 %}
     {% set toship = 0 %}
