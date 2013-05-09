@@ -83,16 +83,22 @@ def payemail():
         for order in bag.orders:
           if order.ship == True:
             bagleader = order.user
-        recipients = []
-        for user in bag.users:
-          recipients.append(user.email)
-        msg = Message(recipients=recipients, subject=subject, sender="themilkmanshipping@gmail.com")
-        msgtext = msgtext + "The crate should be ordered by " + bagleader.firstname + " " + bagleader.lastname + " (" + bagleader.email + ")<br><br> Here are the orders in the crate: <br><hr>"
+        recipients = [bagleader.email]
+        leadermsg = "You (" + bagleader.firstname + ")<br><br> are in charge of ordering the bags. Here are the orders in the crate: <br><hr>"
         for order in bag.orders:
-          msgtext = msgtext + "User: " + order.user.firstname + " " + order.user.lastname + " (" + order.user.email + ") " + "Order cost: $" + str(order.price) + " URL: " + order.url
-          msgtext = msgtext + "<br> Comments: " + order.details + "<hr>"
-        msg.html = msgtext
+          leadermsg = leadermsg + "User: " + order.user.firstname + " " + order.user.lastname + " (" + order.user.email + ") " + "Order cost: $" + str(order.price) + " URL: " + order.url
+          leadermsg = leadermsg + "<br> Comments: " + order.details + "<hr>"
+        msg = Message(recipients=recipients, subject=subject, sender="themilkmanshipping@gmail.com")
+        msg.html = msgtext + leadermsg
         mail.send(msg)
+        
+        for user in bag.users:
+          if user.email != bagleader.email:
+            recipients = [user.email]
+            followermsg = "The crate will be shipped to " + bagleader.firstname + " " + bagleader.lastname + " (" + bagleader.email + "). Your order is: <br>" + "User: " + order.user.firstname + " " + order.user.lastname + " (" + order.user.email + ") " + "Order cost: $" + str(order.price) + " URL: " + order.url + "<br> Comments: " + order.details + "<hr>"
+            msg = Message(recipients=recipients, subject=subject,sender="themilkmanshipping@gmail.com")
+            msg.html = msgtext + followermsg
+            mail.send(msg)
 #    users = User.query.all()
 #    with mail.connect() as conn:
 #      for user in users:
@@ -223,7 +229,7 @@ def home():
   if request.method == 'POST':
     user.mailbox = request.form['mailbox']
     db_session.commit()
-    address = False
+#    address = False
 
   # return all the bags
   allbags = Bag.query.all()
