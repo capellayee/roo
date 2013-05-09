@@ -96,7 +96,9 @@
 <div class="container">
   <div class="row"> 
       {% if not user.bag %}
+        <div class="form-bag">
         <h2>You have no orders to display.. </h2>
+        </div>
       {% endif %}
       {% for bag in mybags %}
       <div class="span4">
