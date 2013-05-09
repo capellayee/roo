@@ -160,8 +160,8 @@ def editorder(orderid):
   bag = Bag.query.filter_by(id=order.bag_id).first()
 
   # data for the progress bar
-  myorders = """ "width: """ + str(int(order.price*100 / bag.threshold)) + """%;" """ 
-  othersorders = """ "width: """ + str(int(100*(bag.amountinbag-order.price) / bag.threshold)) + """%;" """
+  myorders = """ "width: """ + str(int(order.price*100 / max(bag.threshold,bag.amountinbag))) + """%;" """ 
+  othersorders = """ "width: """ + str(int(100*(bag.amountinbag-order.price) / max(bag.threshold,bag.amountinbag))) + """%;" """
 
 
   if request.method == 'POST':
