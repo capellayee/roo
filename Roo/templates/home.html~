@@ -23,6 +23,21 @@
       background:url(../static/imgs/milk.png)
     }
 
+    /* FORM - BAG STYLE
+    ----------------------------------------------------*/
+    .form-bag {
+        max-width: 800px;
+        padding: 19px 29px 29px;
+        margin 0 auto 20 px;
+        background-color: #fff;
+        border: 5px solid #add6ff;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
 
 
     /* CUSTOMIZE THE NAVBAR
@@ -122,7 +137,7 @@
       position: static;
       max-width: 550px;
       padding: 0 20px;
-      margin-top: 200px;
+      margin-top: 100px;
     }
     .carousel-caption h1,
     .carousel-caption .lead {
@@ -134,6 +149,7 @@
     .carousel-caption .btn {
       margin-top: 10px;
     }
+
 
 
 
@@ -302,7 +318,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href='{{ url_for('home') }}'><img src={{ url_for('static', filename="imgs/milkman-logo.png") }} height="70" alt=""></a>
+            <a class="brand" href='{{ url_for('home') }}'><img src={{ url_for('static', filename="imgs/milkman-logo.png") }} height="50" alt=""></a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav">
@@ -476,8 +492,8 @@
       $(window).load(function(){
       $('#myModal').modal('show');
       });
-
     </script>
+    <h1>Hellooooooo hiiiii!!</h1>
     {% endif %}
   </body>
 </html>
