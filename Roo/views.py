@@ -161,7 +161,7 @@ def editorder(orderid):
 
   # data for the progress bar
   myorders = """ "width: """ + str(int(order.price*100 / bag.threshold)) + """%;" """ 
-  othersorders = """ "width: """ + str(int(100*(bag.amountinbag-order.price) / bag.threshold )) + """%;""""
+  othersorders = """ "width: """ + str(int(100*(bag.amountinbag-order.price) / bag.threshold)) + """%;" """
 
 
   if request.method == 'POST':
