@@ -302,7 +302,7 @@ def bagpage(bagid):
     ship = False
     if 'ship' in request.form:
       ship = True
-    curorder = Order.query.filter_by(id=userid).first()
+    curorder = Order.query.filter_by(id=session.get('userid')).first()
     db_session.delete(order)
     db_session.commit()
     # add the user's order to the bag
