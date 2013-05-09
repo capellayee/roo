@@ -325,6 +325,14 @@ def newbag():
 def bagpage(bagid):
   if not session.get('logged_in'):
     abort(401)
+  user = User.query.filter_by(id=session.get('userid')).first()
+  redir = false
+  for order in user.orders:
+    if order.bag.id == bagid:
+      redir = true
+      orderid = order.id
+  if redir:
+    return redirect(url_for('editorder', orderid=orderid))
   bag = Bag.query.filter_by(id=bagid).first()
   if request.method == 'POST':
     # check the validity of input, if something is wrong, return the page with error messages where appropriate
