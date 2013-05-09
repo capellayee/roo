@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Buy a Bag &middot; The Milkman</title>
+    <title>Edit Order &middot; The Milkman</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -67,12 +67,14 @@
               <ul class="nav pull-right">
                 <li><a href='{{ url_for('about') }}'>About</a></li>
                 <li><a href='{{ url_for('logout') }}'>Logout</a></li>
+                <li><a href='{{ url_for('allbags') }}'>All Crates</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href='{{ url_for('mybags', userid=userid) }}'>My Crate</a></li>
+                    <li><a href='{{ url_for('mybags', userid=userid) }}'>My Crates</a></li>
                     <li><a href='{{ url_for('mynetworks', userid=userid) }}'>My Networks</a></li>
+                    <li><a href='{{ url_for('mymilk', userid=userid) }}'>My Account</a></li>
                   </ul>
                 </li>
               </ul>
@@ -84,7 +86,7 @@
     </div><!-- /.navbar-wrapper -->
     <div class="container">
 
-<div class="form-bag" method="post">
+<form class="form-bag" method="post">
             <fieldset>
 	      {% with messages = get_flashed_messages(category_filter=["addmessage"]) %}
 	      {% if messages %}
@@ -101,7 +103,17 @@
 
               <span class="help-block">Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</span>
 	            <span class="help-block">Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</span>
-              <span class="help-block">Required amount to ship: {{ '%0.2f' % (bag.threshold-bag.amountinbag) }}</span>
+              <span class="help-block">Required amount to ship: {{ '%0.2f' % max_function(bag.threshold-bag.amountinbag,0) }}</span>
+
+
+	      
+	      <div class="progress">
+		<div class="bar bar-success" style="width: 35%;"></div>
+		<div class="bar bar-warning" style="width: 20%;"></div>
+		<div class="bar bar-danger" style="width: 10%;"></div>
+	      </div>
+
+
               <h2>Edit your order:</h2>
               <h3>URL of Item</h3> 
 	      <!-- error message if field is not filled out -->
@@ -156,15 +168,21 @@
 	      <textarea rows="4" name="details">{{order.details}}</textarea>
 	      <label class="checkbox">
 {% if order.ship %}
-                <input type="checkbox" name="ship" checked> <h3>Ship to me?</h3>
+                <input type="checkbox" name="ship" checked> Ship to me? <a href="#" id="example" class="btn" rel="popover" data-content="Want to be a leader?  Willing to\
+ have all the orders in this crate shipped to you?  Check the box here!  We'll let you know if the order is shipped to you, and then you just have to hand out the goods." data-orig\
+inal-title="Ship to me!">(?)</a>
+
 {% else %}
-<input type="checkbox" name="ship" value={{order.ship}}> <h3>Ship to me?</h3>
+<input type="checkbox" name="ship" value={{order.ship}}> Ship to me? <a href="#" id="example" class="btn" rel="popover" data-content="Want to be a leader?  Willing to\
+ have all the orders in this crate shipped to you?  Check the box here!  We'll let you know if the order is shipped to you, and then you just have to hand out the goods." data-orig\
+inal-title="Ship to me!">(?)</a>
+
 {% endif %}
               </label>
 
               <button type="submit" class="btn">Submit</button>
             </fieldset>
-	   </form>
+          </form>
     </div> <!-- /container -->
 
 
@@ -185,6 +203,13 @@
     <script src={{url_for('static', filename = "bootstrap/js/bootstrap-carousel.js")}}></script>
     <script src={{url_for('static', filename = "bootstrap/js/bootstrap-typeahead.js")}}></script>
 
+    <script src="/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-tooltip.js"></script>
+    <script src="/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-popover.js"></script>
+    <script>
+      $(function ()
+      { $("#example").popover();
+      });
+    </script>
 
   </body>
 </html>
