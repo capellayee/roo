@@ -216,7 +216,9 @@ def home():
   userid = session.get('userid')
   user = User.query.filter_by(id=userid).first()
 
-  address = isinstance(user.mailbox, None)
+  address = True
+  if address == -1:
+    address = False
 
   if request.method == 'POST':
     user.mailbox = request.form['mailbox']
@@ -350,7 +352,7 @@ def mybags(userid):
   if not session.get('logged_in'):
     abort(401)
   if not int(session.get('userid')) == userid:
-    return "Hey dickhead, you're not supposed to be here"
+    return session.get('userid') + " vs " + str(userid)
   user = User.query.filter_by(id = userid).first()  
   userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
   userorders = []
@@ -434,7 +436,7 @@ def facebook_authorized(resp):
     session['facebook_token'] = (resp['access_token'], '')
     fbuser = facebook.get('me').data
     if User.query.filter_by(email = fbuser['email']).first() == None:
-      user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], None, '')
+      user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], -1, '')
       db_session.add(user)
       db_session.commit()
     
