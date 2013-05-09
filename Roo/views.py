@@ -27,12 +27,6 @@ def with_netid(f):
 def login_first(e):
   return redirect(url_for('fblogin'))
 
-
-#test modal
-@app.route('/modal')
-def modal():
-  return render_template('modal.html')
-
 # opening page of the site.  
 @app.route('/')
 def fblogin():
@@ -247,6 +241,14 @@ def about():
   if not session.get('logged_in'):
     abort(401)
   return render_template('about.html', userid=session.get('userid'))
+
+# account information page
+@app.route('/mymilk/<userid>')
+def mymilk(userid):
+  if not session.get('logged_in'):
+    abort(401)
+  user = User.query.filter_by(id=userid)
+  return render_template('mymilk.html', user=user, userid=userid)
 
 # my networks 
 @app.route('/mynetworks/<userid>')
