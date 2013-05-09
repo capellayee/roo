@@ -23,6 +23,21 @@
       background:url(../static/imgs/milk.png)
     }
 
+    /* FORM - BAG STYLE
+    ----------------------------------------------------*/
+    .form-bag {
+        max-width: 800px;
+        padding: 19px 29px 29px;
+        margin 0 auto 20 px;
+        background-color: #fff;
+        border: 5px solid #add6ff;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
 
 
     /* CUSTOMIZE THE NAVBAR
@@ -476,8 +491,8 @@
       $(window).load(function(){
       $('#myModal').modal('show');
       });
-
     </script>
+    <h1>Hellooooooo hiiiii!!</h1>
     {% endif %}
   </body>
 </html>
