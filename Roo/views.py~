@@ -141,7 +141,7 @@ def editorder(orderid):
   user = User.query.filter_by(id=session.get('userid')).first()
   valid = False
   for order in user.orders:
-    if order.id == orderid:
+    if str(order.id) == orderid:
       valid = True
   if not valid:
     return "Hey dickhead, you're not supposed to be here"
@@ -191,7 +191,7 @@ def editorder(orderid):
 def paypal(userid):
   if not session.get('logged_in'):
     abort(401)
-  if not session.get('userid') == userid:
+  if not str(session.get('userid')) == userid:
     return "Hey, you're not allowed to see this page!"
   # add in a tab to make the user log in if they're not already logged in..
   # need to make sure it redirects to the purchase page.
@@ -216,9 +216,9 @@ def home():
   userid = session.get('userid')
   user = User.query.filter_by(id=userid).first()
 
-  address = True
+  address = False
   if address == -1:
-    address = False
+    address = True
 
   if request.method == 'POST':
     user.mailbox = request.form['mailbox']
@@ -243,7 +243,7 @@ def about():
 def mynetworks(userid):
   if not session.get('logged_in'):
     abort(401)
-  if not session.get('userid') == userid:
+  if not str(session.get('userid')) == userid:
     return "Hey dickhead, you're not supposed to be here"
   return render_template('mynetworks.html', user=User.query.filter_by(id=userid).first())
 
@@ -333,9 +333,6 @@ def bagpage(bagid):
     ship = False
     if 'ship' in request.form:
       ship = True
-    curorder = Order.query.filter_by(id=session.get('userid')).first()
-    db_session.delete(order)
-    db_session.commit()
     # add the user's order to the bag
     order = Order(request.form['itemurl'], request.form['price'], request.form['details'], ship, None, None, None, None, None, bag.id, user.id)
     bag.orders.append(order)
@@ -351,9 +348,8 @@ def bagpage(bagid):
 def mybags(userid):
   if not session.get('logged_in'):
     abort(401)
-  if not int(session.get('userid')) == int(userid):
-    return "bad"
-  return "good"
+  if not str(session.get('userid')) == userid:
+    return "Hey dickhead you're not supposed to be here"
   user = User.query.filter_by(id = userid).first()  
   userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
   userorders = []
