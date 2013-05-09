@@ -29,6 +29,8 @@
            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
                 box-shadow: 0 1px 2px rgba(0,0,0,.05);
     }
+
+
     </style>
     <link href={{url_for('static',filename="bootstrap/css/bootstrap-responsive.css")}} rel="stylesheet">
 
@@ -113,6 +115,9 @@
 		    {% endif %}
               <span class="help-block">Required amount to ship: {{ '%0.2f' % (toship) }}</span>
 	      {% endwith %}
+              <div class="progress">
+		<div class="bar" style="width: 0%;"></div>
+	      </div>
               <h2>Add to Crate:</h2>
               <h3>URL of Item</h3> 
 	      <!-- error message if field is not filled out -->
@@ -199,6 +204,100 @@
       $(function ()  
       { $("#example").popover();  
       });  
-    </script>  
+    </script> 
+    <script>
+     (function($) {
+   	var Progressbar = function(element, options) {
+	   this.element = $(element);
+           this.position = 0;
+	   this.percent = 0;
+           var hasOptions = typeof options == 'object';
+
+           this.maximum = $.fn.progressbar.defaults.maximum;
+		if (hasOptions && typeof options.maximum == 'number') {
+			this.setMaximum(options.maximum);
+		}
+       
+           this.step = $.fn.progressbar.defaults.step;
+		if (hasOptions && typeof options.step == 'number') {
+			this.setStep(options.step);
+		}
+
+		this.element.html($(DRPGlobal.template));
+        };
+
+        ProgressBar.prototype = {
+		constructor: ProgressBar,
+
+		stepIt: function () {
+			if (this.position < this.maximum)
+				this.position += this.step;
+
+			this.setPosition(this.position);
+		},
+     
+                setMaximum: function (maximum) {
+			this.maximum = parseInt(maximum);
+		},
+      
+                setStep: function (step) {
+			step = parseInt(step);
+			if (step <= 0)
+				step = 1;
+
+			this.step = parseInt(step);
+		},
+
+	        setPosition: function (position) {
+			position = parseInt(position);
+			if (position < 0)
+				position = 0;
+			if (position > this.maximum)
+				position = this.maximum;
+
+			this.position = position;
+			this.percent = Math.ceil((this.position / this.maximum) * 100);
+
+
+		        this.element.find('.bar-success').css('width', this.percent + "%");
+
+		        this._triggerPositionChanged();
+		},
+
+               _triggerPositionChanged: function () {
+			this.element.trigger({
+				type: "positionChanged",
+				position: this.position,
+				percent: this.percent
+			});
+		}
+	};
+
+
+
+        $.fn.progressbar = function (option) {
+		var args = Array.apply(null, arguments);
+		args.shift();
+		return this.each(function () {
+			var $this = $(this),
+				data = $this.data('progressbar'),
+				options = typeof option == 'object' && option;
+
+			if (!data) {
+				$this.data('progressbar', new ProgressBar(this, $.extend({}, $.fn.progressbar().defaults, options)));
+			}
+			if (typeof option == 'string' && typeof data[option] == 'function') {
+				data[option].apply(data, args);
+			}
+		});
+	};
+
+        $.fn.progressbar.Constructor = ProgressBar;
+
+	var DRPGlobal = {};
+
+	DRPGlobal.template = '<div class="progress"></div>';
+}(window.jQuery);
+    </script> 
   </body>
 </html>
