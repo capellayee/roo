@@ -100,16 +100,13 @@
         <h2>You have no orders to display.. </h2>
         </div>
       {% endif %}
-      {% for bag in mybags %}
+      {% for order in myorders %}
       <div class="span4">
       <div class="form-bag">          
-        <h3>{{bag.store}}</h3>
+        <h3>{{order.bag.store}}</h3>
 	<p>
-	<strong>My items:</strong>
+	<strong>My orders:</strong>
         <div style="margin-left:auto;margin-right:auto;height:150px;width:300px;border:1px solid #add6ff; font:16px/26px Rockwell;overflow:auto;">
-	  {% for orders in userorders %}
-	    {% if orders[1] == bag.store %}
-	      {% for order in orders[0] %}
 	        {{ order.url }} <br>
 	        Order details:
 	        <ul>
@@ -117,13 +114,11 @@
 		  <li>Details: {{ order.details }}</li>
 		</ul>
 		<p><a class="btn" href='{{ url_for('removeorder', orderid=order.id) }}'>Remove this order &raquo;</a></p>
-	      {% endfor %}
-	    {% endif %}
-	  {% endfor %}
+	  
 	</div>
-	<strong>Total in {{bag.store}} bag:</strong> {{ '%0.2f' % bag.amountinbag }} <br>
+	<strong>Total in {{order.bag.store}} bag:</strong> {{ '%0.2f' % order.bag.amountinbag }} <br>
 
-	{% with toship = bag.threshold - bag.amountinbag %}
+	{% with toship = order.bag.threshold - order.bag.amountinbag %}
 	  {% if toship < 0 %}
 	    {% set toship = 0 %}
 	  {% endif %}
@@ -133,7 +128,7 @@
 	  	<!--</ul>-->
 	</p>
 
-        <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'>Add to bag &raquo;</a></p>
+        <p><a class="btn" href='{{ url_for('editorder', orderid=order.id) }}'>Edit Order &raquo;</a></p>
        </div><!--/form-->
       </div><!--/span-->
       {% endfor %}
