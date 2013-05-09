@@ -89,7 +89,7 @@ def payemail():
           leadermsg = leadermsg + "User: " + order.user.firstname + " " + order.user.lastname + " (" + order.user.email + ") " + "<br>Order cost: $" + str(order.price) + "<br>URL: " + order.url
           leadermsg = leadermsg + "<br> Comments: " + order.details + "<hr>"
         leadermsg = leadermsg + """<br> Now, head over to The Milkman using the link below to pay for\
- your order, so that we can order the crate!<br><a href="rooprinceton.herokuapp.com/purchase/"""+str(bagleader.id)+"""><b>Pay for my stuff!</b></a>"""
+ your order, so that we can order the crate!<br><a href="rooprinceton.herokuapp.com/purchase/"""+str(bagleader.id)+""""><b>Pay for my stuff!</b></a>"""
         msg = Message(recipients=recipients, subject=subject, sender="themilkmanshipping@gmail.com")
         msg.html = msgtext + leadermsg
         mail.send(msg)
@@ -98,7 +98,7 @@ def payemail():
           if user.email != bagleader.email:
             recipients = [user.email]
             followermsg = "The crate will be shipped to " + bagleader.firstname + " " + bagleader.lastname + " (" + bagleader.email + "). Your order is: <br>" + "User: " + order.user.firstname + " " + order.user.lastname + " (" + order.user.email + ")" + "<br>Order cost: $" + str(order.price) + "<br>URL: " + order.url + "<br>Comments: " + order.details + "<hr>"
-            followermsg = followermsg + """<br> Now, head over to The Milkman using the link below to pay for your order, so that we can order the crate!<br><a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+"""><b>Pay for my stuff!</b></a>"""
+            followermsg = followermsg + """<br> Now, head over to The Milkman using the link below to pay for your order, so that we can order the crate!<br><a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+""""><b>Pay for my stuff!</b></a>"""
             msg = Message(recipients=recipients, subject=subject,sender="themilkmanshipping@gmail.com")
             msg.html = msgtext + followermsg
             mail.send(msg)

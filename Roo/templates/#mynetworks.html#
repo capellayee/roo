@@ -3,23 +3,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>My Bags &middot; The Milkman</title>
+    <title>My Networks &middot; The Milkman </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href={{ url_for('static', filename="bootstrap/css/bootstrap.css") }} rel="stylesheet">
-    <style type="text/css">
+    <link href={{url_for('static',filename="bootstrap/css/bootstrap.css")}} rel="stylesheet">
+
+    <style>
       body {
-        padding-top: 60px;
-        padding-bottom: 40px;
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
         background:url(../static/imgs/milk.png)
       }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
-
 
     .form-bag {
 	padding: 19px 29px 29px;
@@ -33,31 +29,25 @@
            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
                 box-shadow: 0 1px 2px rgba(0,0,0,.05);
      }
-      @media (max-width: 980px) {
-        /* Enable use of floated navbar text */
-        .navbar-text.pull-right {
-          float: none;
-          padding-left: 5px;
-          padding-right: 5px;
-        }
-      }
     </style>
-    <link href={{ url_for('static', filename="bootstrap/css/bootstrap-responsive.css")}} rel="stylesheet">
+    <link href={{url_for('static',filename="bootstrap/css/bootstrap-responsive.css")}} rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="../bootstrap/js/html5shiv.js"></script>
+      <script src={{url_for('static',filename="bootstrap/js/html5shiv.js")}}></script>
     <![endif]-->
 
     <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href={{url_for('static', filename="static/ico/apple-touch-icon-144-precomposed.png") }}>
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href={{url_for('static', filename="static/ico/apple-touch-icon-114-precomposed.png") }}>
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href={{url_for('static', filename="static/ico/apple-touch-icon-72-precomposed.png") }}>
-                    <link rel="apple-touch-icon-precomposed" href={{url_for('static', filename="static/ico/apple-touch-icon-57-precomposed.png") }}>
-                                   <link rel="shortcut icon" href={{url_for('static', filename="static/ico/favicon.png") }}>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
   </head>
 
   <body>
+
+
 
   <div class="navbar-wrapper">
       <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
@@ -92,56 +82,34 @@
 
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
-<div class="container">
-<form class="form-bag">          
-  <div class="row-fluid">
-    <ul class=bag>
-      {% if not user.bag %}
-        <h2>You have no orders to display.. </h2>
-      {% endif %}
-      {% for bag in mybags %}
-      <div class="span4">
-        <h2>{{bag.store}}</h2>
-	<p>
-	  <h3>My items:</h3>
-	  {% for orders in userorders %}
-	    {% if orders[1] == bag.store %}
-	      {% for order in orders[0] %}
-	        {{ order.url }} <br>
-	        Order details:
-	        <ul>
-		  <li>Price: {{ '%0.2f' % order.price }}</li>
-		  <li>Details: {{ order.details }}</li>
-		</ul>
-		<p><a class="btn" href='{{ url_for('removeorder', orderid=order.id) }}'>Remove this order &raquo;</a></p>
-	      {% endfor %}
-	    {% endif %}
-	  {% endfor %}
-
-	<h3>Total in {{bag.store}} bag:</h3> {{ '%0.2f' % bag.amountinbag }} <br>
-
-	{% with toship = bag.threshold - bag.amountinbag %}
-	  {% if toship < 0 %}
-	    {% set toship = 0 %}
-	  {% endif %}
-        <h3>Amount needed to ship:</h3> {{ '%0.2f' % (toship) }} <br>
-	{% endwith %}
-	<!--<ul class=order>-->
-	  	<!--</ul>-->
-	</p>
-        <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'>Add to bag &raquo;</a></p>
-      </div><!--/span-->
-      {% endfor %}
-    </ul>
-    </div><!--/.container-->
- </form>   
-</div><!--/.fluid-container-->
+    <div class="container">
+      <form class="form-bag">
+	<div class="row-fluid"> 
+	  <h1>You're part of Princeton! </h1>
+	  <br>
+          <h2>Bags in the Princeton network:</h2>
+          {% for bag in allbags %}
+	  <div class="span4">
+	    <a href='{{ url_for('bagpage', bagid=bag.id) }}'<h3>{{ bag.store }}</h3></a>
+               Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}
+               Current amount in the crate: {{ '%0.2f' % bag.amountinbag }}
+               {% with toship = bag.threshold - bag.amountinbag %}
+               {% if toship < 0 %}
+			      {% set toship = 0 %}
+			      {% endif %}
+			      Required amount to ship: {{ '%0.2f' % (toship) }}
+			      {% endwith %}
+	     <a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'>Add to bag &raquo;</a><br>
+	     {% endfor %}
+          </div>
+        </div>
+      </form>
+    </div> <!-- /container -->
 
 
- <!-- Le javascript
+    <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-
     <script src={{url_for('static', filename = "bootstrap/js/jquery.js")}}></script>
     <script src={{url_for('static', filename = "bootstrap/js/bootstrap-transition.js")}}></script>
     <script src={{url_for('static', filename = "bootstrap/js/bootstrap-alert.js")}}></script>
@@ -155,5 +123,7 @@
     <script src={{url_for('static', filename = "bootstrap/js/bootstrap-collapse.js")}}></script>
     <script src={{url_for('static', filename = "bootstrap/js/bootstrap-carousel.js")}}></script>
     <script src={{url_for('static', filename = "bootstrap/js/bootstrap-typeahead.js")}}></script>
+
+
   </body>
 </html>

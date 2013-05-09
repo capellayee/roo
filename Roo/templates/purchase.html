@@ -66,7 +66,7 @@
             <a class="brand" href='{{ url_for('home') }}'><img src={{ url_for('static', filename="imgs/milkman-logo.png") }} height="50" alt=""></a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
-              <ul class="nav">
+              <ul class="nav pull-right">
                 <li><a href='{{ url_for('about') }}'>About</a></li>
                 <li><a href='{{ url_for('logout') }}'>Logout</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
@@ -85,7 +85,7 @@
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
     <div class="container">
-<form class="form-bag" method="post">
+<div class="form-bag" method="post">
       <h2>Your orders are:</h2>
       <p>
       {% for order in user.orders %}
@@ -97,17 +97,17 @@
       <h3>Total cost of your orders:</h3> {{ '%0.2f' % total }}
       </p>
 
-
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="SY9QNHUUUTK8G">
-<table>
-<tr><td><input type="hidden" name="on0" value="Enter amount of your purchase">Enter amount of your purchase</td></tr><tr><td><input type="text" name="os0" maxlength="200"></td></tr>
-</table>
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-</form>
+      
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+	<input type="hidden" name="cmd" value="_s-xclick">
+	<input type="hidden" name="hosted_button_id" value="SY9QNHUUUTK8G">
+	<table>
+	  <tr><td><input type="hidden" name="on0" value="Enter amount of your purchase">Enter amount of your purchase</td></tr><tr><td><input type="text" name="os0" maxlength="200"></td></tr>
+	</table>
+	<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+	<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+      </form>
+</div>
     </div> <!-- /container -->
 
 
