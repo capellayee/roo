@@ -85,9 +85,9 @@
     </div><!-- /.navbar-wrapper -->
 
 
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
-      <div class="span12">
+      <div class="span10">
 	<div class="form-bag">
 	  <!--Sidebar content-->
 	  <h1>You're part of Princeton! </h1>
@@ -98,16 +98,16 @@
       <br><br><div></div>
 	<!--Body content-->
         {% for bag in allbags %}
-	<div class="span6">
+	<div class="span4">
 	  <div class="form-bag">  
-	     <h2>{{ bag.store }}</h2><br>
-             <h3>Purchase needed for free shipping:</h3> {{ '%0.2f' % bag.threshold}}<br>
-             <h3>Current amount in the crate:</h3> {{ '%0.2f' % bag.amountinbag }}<br>
+	     <h3>{{ bag.store }}</h3><br>
+             <strong>Purchase needed for free shipping:</strong> {{ '%0.2f' % bag.threshold}}<br>
+             <strong>Current amount in the crate:</strong> {{ '%0.2f' % bag.amountinbag }}<br>
              {% with toship = bag.threshold - bag.amountinbag %}
              {% if toship < 0 %}
 	     {% set toship = 0 %}
 	     {% endif %}
-	     <h3>Required amount to ship:</h3> {{ '%0.2f' % (toship) }}<br>
+	     <strong>Required amount to ship:</strong> {{ '%0.2f' % (toship) }}<br>
 	     {% endwith %}
 	     <a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'>Add to bag &raquo;</a>
           </div>

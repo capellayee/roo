@@ -105,7 +105,7 @@
         <h2>{{bag.store}}</h2>
 	<p>
 	<h3>My items:</h3>
-        <div style="height:200px;width:300px;border:1px solid #add6ff; font:16px/26px Rockwell;overflow:auto;">
+        <div style="height:150px;width:300px;border:1px solid #add6ff; font:16px/26px Rockwell;overflow:auto;">
 	  {% for orders in userorders %}
 	    {% if orders[1] == bag.store %}
 	      {% for order in orders[0] %}
