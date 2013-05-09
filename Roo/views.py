@@ -224,6 +224,14 @@ def mynetworks(userid):
     abort(401)
   return render_template('mynetworks.html', user=User.query.filter_by(id=userid).first())
 
+# all bags
+@app.route('/allbags')
+def allbags():
+  if not session.get('logged_in'):
+    abort(401)
+  allbags = Bag.query.all()
+  return render_template('allbags.html', userid=session.get('userid'))
+
 # a test page for the admin
 @app.route('/all')
 def all():

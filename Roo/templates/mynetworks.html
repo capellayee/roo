@@ -84,9 +84,23 @@
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
     <div class="container">
-	<form class="form-bag">
-       <h1>You're part of Princeton! </h1>
-    </form>
+      <form class="form-bag">
+	<h1>You're part of Princeton! </h1>
+	<h2>Bags in the Princeton network:</h2>
+	{% for bag in allbags %}
+	  <a href='{{ url_for('bagpage', bagid=bag.id}}'<h3>{{ bag.store }}</h3>
+	  <span class="help-block">Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</span>
+          <span class="help-block">Current amount in the crate: {{ '%0.2f' % bag.amountinbag }}</span>
+	  
+
+          {% with toship = bag.threshold - bag.amountinbag %}
+            {% if toship < 0 %}
+	      {% set toship = 0 %}
+	    {% endif %}
+            <span class="help-block">Required amount to ship: {{ '%0.2f' % (toship) }}</span>
+          {% endwith %}
+
+      </form>
     </div> <!-- /container -->
 
 
