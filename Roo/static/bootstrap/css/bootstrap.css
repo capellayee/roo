@@ -5850,14 +5850,14 @@ a.badge:focus {
 
 .progress-danger .bar,
 .progress .bar-danger {
-  background-color: #dd514c;
-  background-image: -moz-linear-gradient(top, #ee5f5b, #c43c35);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ee5f5b), to(#c43c35));
-  background-image: -webkit-linear-gradient(top, #ee5f5b, #c43c35);
-  background-image: -o-linear-gradient(top, #ee5f5b, #c43c35);
-  background-image: linear-gradient(to bottom, #ee5f5b, #c43c35);
+  background-color: #000000;
+  background-image: -moz-linear-gradient(top, #000000, #111111);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#000000), to(#111111));
+  background-image: -webkit-linear-gradient(top, #000000, #111111);
+  background-image: -o-linear-gradient(top, #000000, #111111);
+  background-image: linear-gradient(to bottom, #000000, #111111);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffee5f5b', endColorstr='#ffc43c35', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff111111', endColorstr='#ff000000', GradientType=0);
 }
 
 .progress-danger.progress-striped .bar,
@@ -5872,14 +5872,14 @@ a.badge:focus {
 
 .progress-success .bar,
 .progress .bar-success {
-  background-color: #5eb95e;
-  background-image: -moz-linear-gradient(top, #62c462, #57a957);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#57a957));
-  background-image: -webkit-linear-gradient(top, #62c462, #57a957);
-  background-image: -o-linear-gradient(top, #62c462, #57a957);
-  background-image: linear-gradient(to bottom, #62c462, #57a957);
+  background-color: #555555;
+  background-image: -moz-linear-gradient(top, #555555, #666666);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#555555), to(#666666));
+  background-image: -webkit-linear-gradient(top, #555555, #666666);
+  background-image: -o-linear-gradient(top, #555555, #666666);
+  background-image: linear-gradient(to bottom, #555555, #666666);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff57a957', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff555555', endColorstr='#ff666666', GradientType=0);
 }
 
 .progress-success.progress-striped .bar,
