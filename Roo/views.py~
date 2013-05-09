@@ -229,7 +229,7 @@ def home():
   if request.method == 'POST':
     user.mailbox = request.form['mailbox']
     db_session.commit()
-#    address = False
+    address = False
 
   # return all the bags
   allbags = Bag.query.all()
@@ -260,7 +260,7 @@ def allbags():
   if not session.get('logged_in'):
     abort(401)
   allbags = Bag.query.all()
-  return render_template('allbags.html', userid=session.get('userid'))
+  return render_template('allbags.html', userid=session.get('userid'), allbags=allbags)
 
 # a test page for the admin
 @app.route('/all')

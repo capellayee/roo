@@ -92,8 +92,6 @@
           <a href='{{ url_for('bagpage', bagid=bag.id) }}'<h3>{{ bag.store }}</h3>
           <span class="help-block">Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</span>
           <span class="help-block">Current amount in the crate: {{ '%0.2f' % bag.amountinbag }}</span>
-
-
           {% with toship = bag.threshold - bag.amountinbag %}
             {% if toship < 0 %}
               {% set toship = 0 %}

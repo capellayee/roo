@@ -100,7 +100,7 @@
             {% endif %}
             <span class="help-block">Required amount to ship: {{ '%0.2f' % (toship) }}</span>
           {% endwith %}
-
+	{% endfor %}
       </form>
 
     </div> <!-- /container -->

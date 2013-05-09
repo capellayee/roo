@@ -252,7 +252,8 @@ def mynetworks(userid):
     abort(401)
   if not str(session.get('userid')) == userid:
     return "Hey dickhead, you're not supposed to be here"
-  return render_template('mynetworks.html', user=User.query.filter_by(id=userid).first())
+  allbags = Bag.query.all()
+  return render_template('mynetworks.html', user=User.query.filter_by(id=userid).first(), allbags=allbags)
 
 # all bags
 @app.route('/allbags')
@@ -260,7 +261,7 @@ def allbags():
   if not session.get('logged_in'):
     abort(401)
   allbags = Bag.query.all()
-  return render_template('allbags.html', userid=session.get('userid'))
+  return render_template('allbags.html', userid=session.get('userid'), allbags=allbags)
 
 # a test page for the admin
 @app.route('/all')
