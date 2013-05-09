@@ -3355,7 +3355,7 @@ input[type="button"].btn-block {
 }
 
 .btn-primary {
-  color: #ffffff;
+  color: #333333;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #add6ff;
   *background-color: #a2d2f2;
