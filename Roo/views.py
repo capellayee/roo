@@ -189,10 +189,10 @@ def editorder(orderid):
     db_session.commit()
 
     flash("Your purchase of " + order.url + " has been updated for the " + order.bag.store + " bag!", "addmessage")
-    return render_template('editorder.html', order=order, bag=order.bag)
+    return render_template('editorder.html', order=order, bag=order.bag, userid=user.id)
   else:
     order = Order.query.filter_by(id=orderid).first()
-    return render_template('editorder.html', order=order, bag=order.bag)
+    return render_template('editorder.html', order=order, bag=order.bag, userid=user.id)
 
 @app.route('/purchase/<userid>')
 def paypal(userid):
