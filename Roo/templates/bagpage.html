@@ -167,7 +167,9 @@
 	      <label class="checkbox">
                 <input type="checkbox" name="ship" value="{{ True }}"> <h3>Ship to me?</h3>
               </label>
-
+	      
+		<a href="#" id="example" class="btn" rel="popover" data-content="Want to be a leader?  Willing to have all the orders in this crate shipped to you?  Check the box here!  We'll let you know if the order is shipped to you, and then you just have to hand out the goods." data-original-title="Ship to me!">?</a>  
+		
               <button type="submit" class="btn">Submit</button>
             </fieldset>
       </form>
@@ -191,6 +193,12 @@
     <script src={{url_for('static', filename = "bootstrap/js/bootstrap-carousel.js")}}></script>
     <script src={{url_for('static', filename = "bootstrap/js/bootstrap-typeahead.js")}}></script>
 
-
+    <script src="/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-tooltip.js"></script>  
+    <script src="/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-popover.js"></script>  
+    <script>  
+      $(function ()  
+      { $("#example").popover();  
+      });  
+    </script>  
   </body>
 </html>

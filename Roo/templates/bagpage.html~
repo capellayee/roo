@@ -73,6 +73,7 @@
                   <ul class="dropdown-menu">
                     <li><a href='{{ url_for('mybags', userid=userid) }}'>My Crates</a></li>
                     <li><a href='{{ url_for('mynetworks', userid=userid ) }}'>My Networks</a></li>
+                    <li><a href='{{ url_for('mymilk', userid=userid ) }}'>My Account</a></li>
                   </ul>
                 </li>
               </ul>
@@ -86,7 +87,7 @@
 
 <!--<form class="form-bag">
 <form class="bs-docs-example" method="post">-->
-<div class="form-bag" method="post">
+<form class="form-bag" method="post">
             <fieldset>
 	      {% with messages = get_flashed_messages(category_filter=["addmessage"]) %}
 	      {% if messages %}
@@ -169,7 +170,7 @@
 
               <button type="submit" class="btn">Submit</button>
             </fieldset>
-      </div>
+      </form>
     </div> <!-- /container -->
 
 
