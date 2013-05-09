@@ -229,7 +229,7 @@ def home():
   if request.method == 'POST':
     user.mailbox = request.form['mailbox']
     db_session.commit()
-#    address = False
+    address = False
 
   # return all the bags
   allbags = Bag.query.all()
