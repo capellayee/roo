@@ -237,7 +237,7 @@ def home():
   mybags = []
   for b in user.bag:
     mybags.append(b)
-  return render_template('home.html', userid=userid, urbanoutfittersid=urbanoutfittersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags, address=address)
+  return render_template('home.html', userid=userid, urbanoutfittersid=urbanoutfittersid, ralphlaurenid=ralphlaurenid, jcrewid=jcrewid, mybags=mybags, allbags=allbags, address=address, myorders=user.orders)
 
 # about page
 @app.route('/about')

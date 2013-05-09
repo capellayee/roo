@@ -387,8 +387,8 @@
       <div class="span4">
 	<div class="form-bag">
 	  <li><a href='{{ url_for('mybags', userid=userid) }}'><h2>My Crates</h2></a></li>
-          {% for bag in mybags %}
-          <p><a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'> {{bag.store}} &raquo;</a></p>
+          {% for order in myorders %}
+          <p><a class="btn" href='{{ url_for('editorder', orderid=order.id) }}'> {{order.bag.store}} &raquo;</a></p>
         {% endfor %}
 	</div>
       </div>
