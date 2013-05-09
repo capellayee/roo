@@ -83,30 +83,39 @@
 
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
-    <div class="container">
-      <div class="form-bag">
-	<div class="row-fluid"> 
+
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+	<div class="form-bag">
+	  <!--Sidebar content-->
 	  <h1>You're part of Princeton! </h1>
 	  <br>
           <h2>Bags in the Princeton network:</h2>
-          {% for bag in allbags %}
-          <div class="span4">
-	  <a href='{{ url_for('bagpage', bagid=bag.id) }}'<h3>{{ bag.store }}</h3></a>
+	</div>
+      </div>
+	<!--Body content-->
+        {% for bag in allbags %}
+	<div class="span4">
+	  <div class="form-bag">  
+	    <p>
+	    <a href='{{ url_for('bagpage', bagid=bag.id) }}'<h3>{{ bag.store }}</h3></a>
              Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}
              Current amount in the crate: {{ '%0.2f' % bag.amountinbag }}
              {% with toship = bag.threshold - bag.amountinbag %}
-               {% if toship < 0 %}
-	         {% set toship = 0 %}
-	       {% endif %}
+             {% if toship < 0 %}
+	     {% set toship = 0 %}
+	     {% endif %}
 	     Required amount to ship: {{ '%0.2f' % (toship) }}
 	     {% endwith %}
 	     <a class="btn" href='{{ url_for('bagpage', bagid=bag.id) }}'>Add to bag &raquo;</a>
-	  {% endfor %}
-	  </div>
-	</div>
+	     {% endfor %}
+	     </p>
+        </div>
       </div>
-    </div> <!-- /container -->
-
+    </div>
+  </div>
 
     <!-- Le javascript
     ================================================== -->
