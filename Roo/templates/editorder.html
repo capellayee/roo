@@ -101,7 +101,7 @@
 
               <span class="help-block">Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</span>
 	            <span class="help-block">Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</span>
-              <span class="help-block">Required amount to ship: {{ '%0.2f' % (bag.threshold-bag.amountinbag) }}</span>
+              <span class="help-block">Required amount to ship: {{ '%0.2f' % max_function(bag.threshold-bag.amountinbag)) }}</span>
               <h2>Edit your order:</h2>
               <h3>URL of Item</h3> 
 	      <!-- error message if field is not filled out -->
