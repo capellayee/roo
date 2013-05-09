@@ -12,12 +12,14 @@ class Bag(Base):
   threshold = Column(Float, unique=False)
   amountinbag = Column(Float, unique=False)
   network = Column(String(30), unique=False)
+  url = Column(String(200), unique=False)
 
-  def __init__(self, store=None, threshold=None, amountinbag=None, network=None):
+  def __init__(self, store=None, threshold=None, amountinbag=None, network=None, url=None):
     self.store = store
     self.threshold = threshold
     self.amountinbag = amountinbag
     self.network = network
+    self.url = url
 
   def __repr__(self):
     return '<Bag %r>' % (self.store)

@@ -28,20 +28,20 @@ class User(Base):
   firstname = Column(String(30), unique=False)
   lastname = Column(String(30), unique=False)
   email = Column(String(40), unique=True)
-  password = Column(String(40), unique=False)
-  address = Column(String(80), unique=False)
+#  address = Column(String(80), unique=False)
   mailbox = Column(Integer, unique=False) #should technically be true but worried itll mad break before we do a lot of error handling
+  isauthenticated = Column(Boolean, unique=False)
   bag_id = Column(Integer, ForeignKey('bags.id'))
 
   bag = relationship("Bag", secondary=association_table, backref=backref('users', order_by=id))
-  isauthenticated = Column(Boolean, unique=False)
 
-  def __init__(self, firstname=None, lastname=None, email=None, password=None, address=None, bag_id=None, isauthenticated=None):
+
+  def __init__(self, firstname=None, lastname=None, email=None, mailbox=None, isauthenticated=None):
     self.firstname = firstname
     self.lastname = lastname
     self.email = email
-    self.password = password
-    self.address = address
+#    self.address = address
+    self.mailbox = mailbox
     self.isauthenticated = False
 
   def __repr__(self):
