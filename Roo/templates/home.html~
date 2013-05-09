@@ -470,12 +470,14 @@
       }(window.jQuery)
     </script>
     <script src="../bootstrap/js/holder/holder.js"></script>
+    {% if address %}
     <script>
-      {% if address %}
       $(window).load(function(){
       $('#myModal').modal('show');
       });
-      {% endif %}
+
     </script>
+<h1>    Hello hellooooo </h1>
+    {% endif %}
   </body>
 </html>
