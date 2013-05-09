@@ -242,6 +242,13 @@ def about():
     abort(401)
   return render_template('about.html', userid=session.get('userid'))
 
+# sourmilk page
+@app.route('/sourmilk')
+def about():
+  if not session.get('logged_in'):
+    abort(401)
+  return render_template('sourmilk.html', userid=session.get('userid'))
+
 # account information page
 @app.route('/mymilk/<userid>')
 def mymilk(userid):

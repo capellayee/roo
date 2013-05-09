@@ -81,6 +81,7 @@
               <ul class="nav pull-right">
                 <li><a href='{{ url_for('about') }}'>About</a></li>
                 <li><a href='{{ url_for('logout') }}'>Logout</a></li>
+                <li><a href='{{ url_for('allbags') }}'>All Crates</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
@@ -104,10 +105,15 @@
       <p class="lead">We're just a few students who saw need in our daily lives for this application, and figured some other people would appreciate it too! We want to make this site as helpful as possible so contact us with any comments, concerns or suggestions! </p>
 	<a href="mailto:themilkmanshipping@gmail.com">Email The Milkman!</a>	
       <h1>Frequently Asked Questions</h1>
-      <h2>Who are you? </h2>
-      <h2>Where are you going with your life? </h2>
-      <h2>What are you doing this summer? </h2>
-      <h2>Why aren't these real FAQ's? </h2>
+      <h2>Can I join networks other than Princeton?</h2>
+	<p class="lead">For now, no. We are launching our site only within the Princeton network. We hope to one day expand, but we'd like to test the system out for Princeton first.</p>
+      <h2>What if the store I want doesn't have an available crate?</h2>
+	<p class="lead">Email us! We want to accomdate your needs, so please let us know if you'd like crates delivered from a specific store. There is an email link above taking you to our email: themilkmanshipping@gmail.com </p>
+      <h2>How do I get the items I ordered?</h2>
+	<p class="lead">The crate will be shipped to one of the people would joined the given crate, and you can coordinate with them to pick up your items. You will have their netid, and since everyone is part of the Princeton network, they'll be easy to meet up with.</p>
+      <h2>What happens if the other person in the crate steals my stuff?</h2>
+	<p class="lead">The Milkman strongly dislikes theft. This website is built on camaraderie, so please let us know if anyone fails to uphold this ideal. All thieves will have their information posted on: </p>
+  	<li><a href='{{ url_for('sourmilk') }}'>The Wall of Sour Milk</a></li>
     </div> 
     </div><!--/.container-->
 
