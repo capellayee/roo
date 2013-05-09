@@ -93,9 +93,8 @@
 
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
-<div class="container-fluid">
+<div class="container">
   <div class="row"> 
-   <ul class=bag>
       {% if not user.bag %}
         <h2>You have no orders to display.. </h2>
       {% endif %}
@@ -136,8 +135,8 @@
        </div><!--/form-->
       </div><!--/span-->
       {% endfor %}
-    </ul>
     </div><!--/.row-->
+  <br>
 </div><!--/container-->
 
 
