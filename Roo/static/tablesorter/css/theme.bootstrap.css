@@ -9,18 +9,18 @@
 .tablesorter-bootstrap .tablesorter-header,
 .tablesorter-bootstrap tfoot th,
 .tablesorter-bootstrap tfoot td {
-	font: bold 14px/20px Arial, Sans-serif;
+	font: bold 14px/20px Rockwell;
 	position: relative;
 	padding: 8px;
 	margin: 0 0 18px;
 	list-style: none;
-	background-color: #FBFBFB;
-	background-image: -moz-linear-gradient(top, white, #efefef);
-	background-image: -ms-linear-gradient(top, white, #efefef);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#efefef));
-	background-image: -webkit-linear-gradient(top, white, #efefef);
-	background-image: -o-linear-gradient(top, white, #efefef);
-	background-image: linear-gradient(to bottom, white, #efefef);
+	background-color: #add6ff;
+	background-image: -moz-linear-gradient(top, white, #1f1f1f);
+	background-image: -ms-linear-gradient(top, white, #1f1f1f);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#1f1f1f));
+	background-image: -webkit-linear-gradient(top, white, #1f1f1f);
+	background-image: -o-linear-gradient(top, white, #1f1f1f);
+	background-image: linear-gradient(to bottom, white, #1f1f1f);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#efefef', GradientType=0);
 	background-repeat: repeat-x;
 	-webkit-box-shadow: inset 0 1px 0 white;
@@ -94,10 +94,10 @@ caption {
 	transition: height 0.1s ease;
 }
 .tablesorter-bootstrap .tablesorter-filter-row .tablesorter-filter.disabled {
-	background: #eee;
+	background: #1f1f1f;
 }
 .tablesorter-bootstrap .tablesorter-filter-row td {
-	background: #eee;
+	background: #1f1f1f;
 	line-height: normal;
 	text-align: center;
 	padding: 4px 6px;
@@ -120,8 +120,6 @@ caption {
 	padding: 0;
 	margin: 0;
 	/* don't use visibility: hidden because it disables tabbing */
-	opacity: 0;
-	filter: alpha(opacity=0);
 }
 
 /* pager plugin */
