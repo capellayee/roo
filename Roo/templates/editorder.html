@@ -101,9 +101,9 @@
 	      {% endwith %}
               <legend><h1>{{ bag.store }}</h1></legend>
 
-              <span class="help-block"><p style="font-size:150%;color:#555555;">*</p>Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</span>
-	            <span class="help-block"><p style="color:#000000;">* Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</p></span>
-              <p style="color:#add6ff;">*</p> Required amount to ship: {{ '%0.2f' % max_function(bag.threshold-bag.amountinbag,0) }}<br>
+              <span class="help-block"><h2 style="color:#555555;">* Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</h2></span>
+	      <span class="help-block"><h2 style="color:#000000;">* Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</h2></span>
+              <span class="help-block"><h2 style="color:#add6ff;">* Required amount to ship: {{ '%0.2f' % max_function(bag.threshold-bag.amountinbag,0) }}</h2></span>
 
 
 	      <div class="progress" id="progressbar">
@@ -171,7 +171,7 @@
 inal-title="Ship to me!">(?)</a>
 
 {% else %}
-<input type="checkbox" name="ship" value={{order.ship}}> Ship to me? <a href="#" id="example" class="btn" rel="popover" data-content="Want to be a leader?  Willing to
+<input type="checkbox" name="ship" value={{order.ship}}> Ship to me? <a href="#" id="example" rel="popover" data-content="Want to be a leader?  Willing to
  have all the orders in this crate shipped to you?  Check the box here!  We'll let you know if the order is shipped to you, and then you just have to hand out the goods." data-orig\
 inal-title="Ship to me!">(?)</a>
 
