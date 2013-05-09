@@ -21,7 +21,6 @@ app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = 'themilkmanshipping@gmail.com'
 app.config['MAIL_PASSWORD'] = 'brian333'
 app.config['DEFAULT_MAIL_SENDER'] = 'themilkmanshippinggmail.com'
-app.add_url_rule('/favicon.ico', redirect_to=url_for('static',filename='imgs/favicon.ico'))
 mail = Mail(app)
 
 import Roo.views
