@@ -189,7 +189,7 @@ def editorder(orderid):
 
 @app.route('/purchase/<userid>')
 def paypal(userid):
-  if not sesssion.get('logged_in'):
+  if not session.get('logged_in'):
     abort(401)
   if not session.get('userid') == userid:
     return "Hey, you're not allowed to see this page!"
@@ -201,7 +201,7 @@ def paypal(userid):
     total = total + order.price
   return render_template('purchase.html', user=user, total=total)
 
-@app.route('/home')
+@app.route('/home', methods=['GET','POST'])
 def home():
   if not session.get('logged_in'):
     abort(401)
@@ -213,11 +213,17 @@ def home():
   # j. crew
   jcrewid = Bag.query.filter_by(store = 'J. Crew').first().id
   
-  address = True
-
   userid = session.get('userid')
-  allbags = Bag.query.all()
   user = User.query.filter_by(id=userid).first()
+
+  address = isinstance(user.mailbox, None)
+
+  if request.method == 'POST':
+    user.mailbox = request.form['mailbox']
+    db_session.commit()
+
+  # return all the bags
+  allbags = Bag.query.all()
   mybags = []
   for b in user.bag:
     mybags.append(b)
@@ -235,6 +241,8 @@ def about():
 def mynetworks(userid):
   if not session.get('logged_in'):
     abort(401)
+  if not session.get('userid') == userid:
+    return "Hey dickhead, you're not supposed to be here"
   return render_template('mynetworks.html', user=User.query.filter_by(id=userid).first())
 
 # all bags
@@ -341,6 +349,8 @@ def bagpage(bagid):
 def mybags(userid):
   if not session.get('logged_in'):
     abort(401)
+  if not int(session.get('userid')) == userid:
+    return "Hey dickhead, you're not supposed to be here"
   user = User.query.filter_by(id = userid).first()  
   userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
   userorders = []
