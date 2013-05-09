@@ -186,7 +186,7 @@ def editorder(orderid):
       flash("Please enter details about your order", "missingdetailserror")
       errorfound = True
     if errorfound:
-      return "ERROR"
+      return redirect( url_for('editorder', orderid=orderid) )
 
     order.bag.amountinbag = order.bag.amountinbag - order.price + float(request.form['price'])
     order.price = float(request.form['price'])

@@ -199,6 +199,11 @@ def editorder(orderid):
     db_session.commit()
 
     flash("Your purchase of " + order.url + " has been updated for the " + order.bag.store + " bag!", "addmessage")
+
+    # update order info for progress bar
+    myorders = """ "width: """ + str(int(order.price*100 / max(bag.threshold,bag.amountinbag))) + """%;" """ 
+    othersorders = """ "width: """ + str(int(100*(bag.amountinbag-order.price) / max(bag.threshold,bag.amountinbag))) + """%;" """
+
     return render_template('editorder.html', order=order, bag=order.bag, userid=user.id, myorders=myorders, othersorders=othersorders)
   else:
     order = Order.query.filter_by(id=orderid).first()
