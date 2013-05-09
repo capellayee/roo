@@ -89,7 +89,7 @@
        <br>
         <h2>Bags in the Princeton network:</h2>
         {% for bag in allbags %}
-          <a href='{{ url_for('bagpage', bagid=bag.id}}'<h3>{{ bag.store }}</h3>
+          <a href='{{ url_for('bagpage', bagid=bag.id) }}'<h3>{{ bag.store }}</h3>
           <span class="help-block">Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</span>
           <span class="help-block">Current amount in the crate: {{ '%0.2f' % bag.amountinbag }}</span>
 
