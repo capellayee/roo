@@ -120,7 +120,7 @@
 	      {% set toship = 0 %}
   	      {% endif %}
 	    <tr>
-	      <td><a href'{{ url_for('bagpage', bagid=bag.id) }}'>{{bag.store}}</a></td>
+	      <td><a href='{{ url_for('bagpage', bagid=bag.id) }}'>{{bag.store}}</a></td>
 	      <td>Princeton</td>
 	      <td>{{ '%0.2f' % bag.threshold }}</td>
 	      <td>{{ '%0.2f' % bag.amountinbag }}</td>
