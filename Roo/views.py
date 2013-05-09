@@ -160,8 +160,8 @@ def editorder(orderid):
   bag = Bag.query.filter_by(id=order.bag_id).first()
 
   # data for the progress bar
-  myorders = """ "width: """ + str(int(order.price*100 / max(bag.threshold,bag.amountinbag))) + """%;" """ 
-  othersorders = """ "width: """ + str(int(100*(bag.amountinbag-order.price) / max(bag.threshold,bag.amountinbag))) + """%;" """
+  myorders = """ "width: """ + str(order.price*100 / max(bag.threshold,bag.amountinbag)) + """%;" """ 
+  othersorders = """ "width: """ + str(100*(bag.amountinbag-order.price) / max(bag.threshold,bag.amountinbag)) + """%;" """
 
 
   if request.method == 'POST':
@@ -201,8 +201,8 @@ def editorder(orderid):
     flash("Your purchase of " + order.url + " has been updated for the " + order.bag.store + " bag!", "addmessage")
 
     # update order info for progress bar
-    myorders = """ "width: """ + str(int(order.price*100 / max(bag.threshold,bag.amountinbag))) + """%;" """ 
-    othersorders = """ "width: """ + str(int(100*(bag.amountinbag-order.price) / max(bag.threshold,bag.amountinbag))) + """%;" """
+    myorders = """ "width: """ + str(order.price*100 / max(bag.threshold,bag.amountinbag)) + """%;" """ 
+    othersorders = """ "width: """ + str(100*(bag.amountinbag-order.price) / max(bag.threshold,bag.amountinbag)) + """%;" """
 
     return render_template('editorder.html', order=order, bag=order.bag, userid=user.id, myorders=myorders, othersorders=othersorders)
   else:
@@ -351,8 +351,8 @@ def bagpage(bagid):
   bag = Bag.query.filter_by(id=bagid).first()
 
     # update order info for progress bar
-  percentfull = """ "width: """ + str(int(bag.amountinbag*100 / max(bag.threshold,bag.amountinbag))) + """%;" """ 
-  percentempty = """ "width: """ + str(100-int(100*bag.amountinbag / max(bag.threshold,bag.amountinbag))) + """%;" """
+  percentfull = """ "width: """ + str(bag.amountinbag*100 / max(bag.threshold,bag.amountinbag)) + """%;" """ 
+  percentempty = """ "width: """ + str(100-100*bag.amountinbag / max(bag.threshold,bag.amountinbag)) + """%;" """
   
 
   if request.method == 'POST':
