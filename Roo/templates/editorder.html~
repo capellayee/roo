@@ -67,12 +67,14 @@
               <ul class="nav pull-right">
                 <li><a href='{{ url_for('about') }}'>About</a></li>
                 <li><a href='{{ url_for('logout') }}'>Logout</a></li>
+                <li><a href='{{ url_for('allbags') }}'>All Creates</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href='{{ url_for('mybags', userid=userid) }}'>My Crate</a></li>
+                    <li><a href='{{ url_for('mybags', userid=userid) }}'>My Crates</a></li>
                     <li><a href='{{ url_for('mynetworks', userid=userid) }}'>My Networks</a></li>
+                    <li><a href='{{ url_for('mymilk', userid=userid) }}'>My Account</a></li>
                   </ul>
                 </li>
               </ul>
@@ -101,7 +103,7 @@
 
               <span class="help-block">Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</span>
 	            <span class="help-block">Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</span>
-              <span class="help-block">Required amount to ship: {{ '%0.2f' % max_function(bag.threshold-bag.amountinbag) }}</span>
+              <span class="help-block">Required amount to ship: {{ '%0.2f' % max_function(bag.threshold-bag.amountinbag,0) }}</span>
               <h2>Edit your order:</h2>
               <h3>URL of Item</h3> 
 	      <!-- error message if field is not filled out -->
