@@ -106,10 +106,10 @@
               <span class="help-block">Required amount to ship: {{ '%0.2f' % max_function(bag.threshold-bag.amountinbag,0) }}</span>
 
 
-	      
 	      <div class="progress">
-		<div class="bar bar-success" style="width: 35%;"></div>
-		<div class="bar bar-danger" style="width: 10%;"></div>
+		<div class="bar bar-success"></div>
+		<div class="bar bar-warning"></div>
+		<div class="bar bar-danger"></div>
 	      </div>
 
 
@@ -205,8 +205,18 @@ inal-title="Ship to me!">(?)</a>
     <script src="/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-tooltip.js"></script>
     <script src="/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-popover.js"></script>
     <script>
+      <!-- tool tip for ship to me -->
       $(function ()
       { $("#example").popover();
+      });
+    </script>
+    <!-- progress bar -->
+    <script type="text/javascript">
+      $('#progressbar').progressbar({
+      warningMarker: {{ myorders }},
+      dangerMarker: {{ othersorders  }},
+      maximum: 100,
+      step: 5
       });
     </script>
 
