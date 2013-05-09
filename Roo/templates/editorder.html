@@ -67,7 +67,7 @@
               <ul class="nav pull-right">
                 <li><a href='{{ url_for('about') }}'>About</a></li>
                 <li><a href='{{ url_for('logout') }}'>Logout</a></li>
-                <li><a href='{{ url_for('allbags') }}'>All Creates</a></li>
+                <li><a href='{{ url_for('allbags') }}'>All Crates</a></li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Milk Order<b class="caret"></b></a>
@@ -193,6 +193,13 @@ inal-title="Ship to me!">(?)</a>
     <script src={{url_for('static', filename = "bootstrap/js/bootstrap-carousel.js")}}></script>
     <script src={{url_for('static', filename = "bootstrap/js/bootstrap-typeahead.js")}}></script>
 
+    <script src="/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-tooltip.js"></script>
+    <script src="/twitter-bootstrap/twitter-bootstrap-v2/js/bootstrap-popover.js"></script>
+    <script>
+      $(function ()
+      { $("#example").popover();
+      });
+    </script>
 
   </body>
 </html>
