@@ -338,7 +338,7 @@ def bagpage(bagid):
   user = User.query.filter_by(id=session.get('userid')).first()
   redir = False
   for order in user.orders:
-    if order.bag.id == bagid:
+    if str(order.bag.id) == bagid:
       redir = True
       orderid = order.id
   if redir:
