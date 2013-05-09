@@ -24,7 +24,7 @@ app.config['DEFAULT_MAIL_SENDER'] = 'themilkmanshippinggmail.com'
 
 
 def max_function(a,b):
-  return (max(a,b)
+  return max(a,b)
 
 app.jinja_env.globals.update(max_function=max_function)
 
