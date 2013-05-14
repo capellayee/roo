@@ -335,7 +335,7 @@ def editaccount(userid):
       errorfound = True
 
     try:
-      mailbox = integer(request.form['mailbox'])
+      mailbox = int(request.form['mailbox'])
       if mailbox < 0:
         errorfound = True
     except ValueError:
