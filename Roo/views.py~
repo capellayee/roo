@@ -280,7 +280,7 @@ def mymilk(userid):
 
 # edit account information
 @app.route('/mymilk/edit/<userid>', methods=['GET,','POST'])
-def mymilkedit(userid):
+def editaccount(userid):
   if not session.get('logged_in'):
     abort(401)
   user = User.query.filter_by(id=userid).first()
@@ -331,8 +331,18 @@ def mymilkedit(userid):
     user.mailbox = request.form['mailbox']
     db_session.commit()
     flash("Your information has been updated!", "accountedit")
-    return redirect(url_for(('mymik', userid=user.id))
+    return redirect(url_for('mymik', userid=user.id))
   return render_template('accountedit.html', user=user)
+
+# delete account
+@app.route('deleteaccount/<userid>')
+def deleteaccount(userid):
+  if not session.get('logged_in'):
+    abort(401)
+  u = User.query.filter_by(id=userid).first()
+  db_session.delete(u)
+  db_session.commit()
+  return redirect(url_for('login'))
 
 # my networks 
 @app.route('/mynetworks/<userid>')

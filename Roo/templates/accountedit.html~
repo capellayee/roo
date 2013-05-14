@@ -197,12 +197,29 @@
 	<input type="text" name="mailbox" value={ {user.mailbox }}>
     </p>
      <button type="submit" class="btn">Save Changes</button>
-     </div>
-    </fieldset>
-   </form>
- </div>   
-</div><!--/.fluid-container-->
 
+     <!-- Button to trigger modal -->
+     <a href="#myModal" role="button" class="btn btn-danger" data-toggle="modal">Delete my account</a>
+ 
+     <!-- Modal -->
+     <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-header">
+	 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	 <h3 id="myModalLabel">Delete your account</h3>
+       </div>
+       <div class="modal-body">
+	 <p>Are you sure you want to delete your account and say goodbye to The Milkman?  If you do, all your current orders will be permanently erased.</p>
+       </div>
+       <div class="modal-footer">
+	 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+	 <button class="btn btn-primary">Delete my account</button>
+       </div>
+     </div>
+     </div>
+  </fieldset>
+</form>
+</div>   
+</div><!--/.fluid-container-->
 
  <!-- Le javascript
     ================================================== -->
