@@ -308,6 +308,8 @@ def mymilk(userid):
 def editaccount(userid):
   if not session.get('logged_in'):
     abort(401)
+  if not str(session.get('userid')) == userid:
+    return redirect(url_for('error'))
   user = User.query.filter_by(id=userid).first()
   errorfound = False
 
@@ -365,9 +367,12 @@ def editaccount(userid):
 def deleteaccount(userid):
   if not session.get('logged_in'):
     abort(401)
+  if not str(session.get('userid')) == userid:
+    return redirect(url_for('error'))
   u = User.query.filter_by(id=userid).first()
   db_session.delete(u)
   db_session.commit()
+  pop_login_session()
   return redirect(url_for('fblogin'))
 
 # my networks 
