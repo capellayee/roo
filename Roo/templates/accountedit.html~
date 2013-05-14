@@ -123,6 +123,7 @@
                       </p>
                     {% endfor %}
                   {% endif %}
+		{% endif %}
                 {% endwith %}
       {% endwith %}
 	<input type="text" name="firstname" value={{user.firstname}}>

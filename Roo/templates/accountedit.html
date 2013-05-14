@@ -129,7 +129,7 @@
 	<input type="text" name="firstname" value={{user.firstname}}>
       <h3>Last Name:</h3>
       <!-- if the name is too long -->
-      {% with lnameerror = get_flashed_messages(category_filter=["lnameerror") %}
+      {% with lnameerror = get_flashed_messages(category_filter=["lnameerror"]) %}
       {% if lnameerror %}
       {% for lnerr in lnameerror %}
         <p class=lnameerror style="color:#ff0000;font-size:14px;font-weight:bold;">
@@ -153,7 +153,7 @@
       <h3>Email: * Note that you still need to login with your facebook email address, but all correspondence will be sent to this email address.</h3>
 	<input type="text" name="email" value={{ user.email }}>
       <!-- if the name is too long -->
-      {% with emailerror = get_flashed_messages(category_filter=["emailerror") %}
+      {% with emailerror = get_flashed_messages(category_filter=["emailerror"]) %}
       {% if emailerror %}
       {% for fnerr in emailerror %}
         <p class=emailerror style="color:#ff0000;font-size:14px;font-weight:bold;">
@@ -175,7 +175,7 @@
       {% endwith %}
       <h3>Frist Mailbox:</h3>
       <!-- if the name is too long -->
-      {% with mailboxerror = get_flashed_messages(category_filter=["mailboxerror") %}
+      {% with mailboxerror = get_flashed_messages(category_filter=["mailboxerror"]) %}
       {% if mailboxerror %}
       {% for mberr in mailboxerror %}
         <p class=mailboxerror style="color:#ff0000;font-size:14px;font-weight:bold;">
