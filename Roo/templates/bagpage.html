@@ -103,7 +103,7 @@
 	      </ul>
 	      {% endif %}
 	      {% endwith %}
-              <legend><h1>{{ bag.store }}</h1></legend>
+              <legend><a href='{{ url_for('bagpage', bagid=bag.id) }}'><h1>{{ bag.store }}</h1></a></legend>
 
               <span class="help-block"><h3 style="color:#000000;">Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</h3></span>
 	            <span class="help-block"><h3 style="color:#27408b;">Current amount in the crate: {{ '%0.2f' % bag.amountinbag }}</h3></span>

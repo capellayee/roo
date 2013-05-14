@@ -99,11 +99,13 @@
 	      </ul>
 	      {% endif %}
 	      {% endwith %}
-              <legend><h1>{{ bag.store }}</h1></legend>
+              <legend><a href=''{{ url_for('bagpage', bagid=bag.id) }}><h1>{{ bag.store }}</h1></legend>
 
-              <span class="help-block"><h2 style="color:#555555;">* Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</h2></span>
-	      <span class="help-block"><h2 style="color:#000000;">* Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</h2></span>
-              <span class="help-block"><h2 style="color:#add6ff;">* Required amount to ship: {{ '%0.2f' % max_function(bag.threshold-bag.amountinbag,0) }}</h2></span>
+              <span class="help-block"><h3 style="color:#000000;">* Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</h3></span>
+	      <span class="help-block"><h3 style="color:#000000;">* Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</h3></span>
+	      <span class="help-block"><h4 style="color:#555555;">     *Your orders</h4></span>
+	      <span class="help-block"><h4 style="color:#27408b;">     *Other orders in the bag</h4></span>
+              <span class="help-block"><h3 style="color:#add6ff;">* Required amount to ship: {{ '%0.2f' % max_function(bag.threshold-bag.amountinbag,0) }}</h3></span>
 
 
 	      <div class="progress" id="progressbar">
