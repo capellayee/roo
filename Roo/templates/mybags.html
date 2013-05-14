@@ -117,7 +117,7 @@
 		<p><a class="btn" href='{{ url_for('removeorder', orderid=order.id) }}'>Remove this order &raquo;</a></p>
 	  
 	</div>
-	<strong>Total in {{order.bag.store}} bag:</strong> {{ '%0.2f' % order.bag.amountinbag }} <br>
+	<strong>Total in {{order.bag.store}} crate:</strong> {{ '%0.2f' % order.bag.amountinbag }} <br>
 
 	{% with toship = order.bag.threshold - order.bag.amountinbag %}
 	  {% if toship < 0 %}
