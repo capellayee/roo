@@ -347,7 +347,7 @@ def editaccount(userid):
       flash("Please enter your mailbox number", "missingmailboxerror")
       errorfound = True
     if errorfound:
-      return redirect( url_for('editorder', orderid=orderid) )
+      return redirect( url_for('editaccount', userid=userid) )
 
     # if no errors, proceed!
     user.firstname = request.form['username']
@@ -356,7 +356,7 @@ def editaccount(userid):
     user.mailbox = request.form['mailbox']
     db_session.commit()
     flash("Your information has been updated!", "accountedit")
-    return redirect(url_for('mymik', userid=user.id))
+    return redirect(url_for('mymik', userid=userid))
   
   return render_template('accountedit.html', user=user)
 

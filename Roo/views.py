@@ -350,7 +350,7 @@ def editaccount(userid):
       return redirect( url_for('editaccount', userid=userid) )
 
     # if no errors, proceed!
-    user.firstname = request.form['username']
+    user.firstname = request.form['firstname']
     user.lastname = request.form['lastname']
     user.email = request.form['email']    
     user.mailbox = request.form['mailbox']
