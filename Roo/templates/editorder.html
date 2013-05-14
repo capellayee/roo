@@ -165,7 +165,7 @@
 		    {% endif %}
 		  {% endif %}
 		{% endwith %}
-	      <input  type="text" name="price" value={{order.price}}>
+	      <font font-size="5">$</font><input  type="text" name="price" value={{order.price}}>
 
 	      <h3>Order Details</h3>
               <!-- if details input is too long -->
@@ -188,6 +188,7 @@
                       </p>
                     {% endfor %}
                   {% endif %}
+		  {% endif %}
                 {% endwith %}
 		{% endwith %}
 	      <textarea rows="4" name="details">{{order.details}}</textarea>

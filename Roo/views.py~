@@ -177,6 +177,15 @@ def editorder(orderid):
     except ValueError:
       flash("Invalid price", "priceerror")
       errorfound = True
+
+    # check if any of the input is too long
+    if len(request.form['itemurl']) > 200:
+      flash("That URL is too long.  Please contact us!", "urllongerr")
+      errorfound = True
+    if len(request.form['details']) > 400:
+      flash("Looks like you've got too many details.  If you can't shorten it, please contact us!", "detailslongerr")
+      errorfound = True
+
     # check if any fields were left empty                                                                                              
     if not request.form['itemurl']:
       flash("Please input the item's URL", "missingurlerror")
@@ -442,8 +451,13 @@ def bagpage(bagid):
       errorfound = True
 
     # check if any of the input is too long
-    if request.form['itemurl']:
-      
+    if len(request.form['itemurl']) > 200:
+      flash("That URL is too long.  Please contact us!", "urllongerr")
+      errorfound = True
+    if len(request.form['details']) > 400:
+      flash("Looks like you've got too many details.  If you can't shorten it, please contact us!", "detailslongerr")
+      errorfound = True
+
     # check if any fields were left empty
     if not request.form['itemurl']:
       flash("Please input the item's URL", "missingurlerror")
