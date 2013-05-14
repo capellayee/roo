@@ -99,6 +99,29 @@
 <div class="container">
 <form class="form-bag" method="post">
   <fieldset>          
+    <!-- error if input is wrong -->
+    {% with mailboxerror = get_flashed_messages(category_filter=["mailboxerror"]) %}
+    {% if mailboxerror %}
+    {% for mberror in mailboxerror %}
+    <p class=mailboxerror style="color:#ff0000;font-size:14px;font-weight:bold;">
+      <strong>Error:</strong> {{ mberror }}
+    </p>
+    {% endfor %}
+    {% endif %}
+    <!-- error if field is not filled out -->
+    {% with missingmailboxerror = get_flashed_messages(category_filter=["missingmailboxerror"]) %}
+    {% if missingmailboxerror %}
+    {% if not mailboxerror %}
+    {% for mmberror in missingmailboxerror %}
+    <p class=missingmailboxerror style="color:#ff0000;font-size:14px;font-weight:bold;">
+      <strong>Error:</strong> {{ mmberror }}
+    </p>
+    {% endfor %}
+    {% endif %}
+    {% endif %}
+    {% endwith %}
+    {% endwith %}
+
     <h1>My Account</h1>
     <h2>Edit your Account:</h2>
     <p>
