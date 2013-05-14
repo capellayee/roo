@@ -98,6 +98,17 @@
 <div class="container">
 <div class="form-bag">          
   <div class="row-fluid">
+    {% with messages = get_flashed_messages(category_filter=["accountedit"]) %}^M
+    {% if messages %}^M
+    <ul class=flashes>^M
+      {% for message in messages %}^M
+      <div class="alert alert-success">^M
+        {{ message }}^M
+      </div>^M
+      {% endfor %}^M
+              </ul>^M
+    {% endif %}^M
+    {% endwith %}^M
     <h1>My Account</h1>
     <p>
       <h3>Name:</h3>{{ user.firstname }} {{ user.lastname }}<br>
@@ -109,6 +120,8 @@
       {% endif %}
       {% endwith %}
     </p>
+    <p><a class="btn" href='{{ url_for('editaccount', userid=user.id) }}'> Edit my information </a></p>
+
   </div><!--/.container-->
  </div>   
 </div><!--/.fluid-container-->

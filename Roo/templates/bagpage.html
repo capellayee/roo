@@ -119,12 +119,12 @@
 		<div class="bar bar-danger" style={{ percentfull|safe }}></div>
 	      </div>
               <h2>Add to Crate:</h2>
-              <h3>URL of Item</h3> 
+              <h3>Item URL(s)</h3> 
 	      <!-- error message if field is not filled out -->
 	        {% with missingurlerror = get_flashed_messages(category_filter=["missingurlerror"]) %}
                   {% if missingurlerror %}
                     {% for muerror in missingurlerror %}
-                      <p class=missingfielderror style="color:#ff0000;font-size:14px;font-weight:bold;">
+                      <p class=missingurlerror style="color:#ff0000;font-size:14px;font-weight:bold;">
                         <strong>Error:</strong> {{ muerror }}
                       </p>
                     {% endfor %}
@@ -156,7 +156,7 @@
 		  {% endif %}
 		{% endwith %}
 		{% endwith %}
-	      <input  type="text" name="price" placeholder="cost of your purchase?">
+	      $<input  type="text" name="price" placeholder="cost of your purchase?">
 
 	      <h3>Order Details</h3> 
 	      <!-- error if field is not filled out -->

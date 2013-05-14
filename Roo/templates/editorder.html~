@@ -99,7 +99,7 @@
 	      </ul>
 	      {% endif %}
 	      {% endwith %}
-              <legend><a href={{ bag.url }}><h1>{{ bag.store }}</h1></a></legend>
+              <legend><a href="{{ bag.url }}"><h1>{{ bag.store }}</h1></a></legend>
 
               <span class="help-block"><h3 style="color:#000000;">* Purchase needed for free shipping: {{ '%0.2f' % bag.threshold}}</h3></span>
 	      <span class="help-block"><h3 style="color:#000000;">* Current amount in the bag: {{ '%0.2f' % bag.amountinbag }}</h3></span>
@@ -115,7 +115,8 @@
 
 
               <h2>Edit your order:</h2>
-              <h3>URL of Item</h3> 
+	      To add more items to your order, add in the next url separated by commas, update the price, and add in order details below.
+              <h3>URL of Item(s)</h3> 
 	      <!-- error message if field is not filled out -->
 	        {% with missingurlerror = get_flashed_messages(category_filter=["missingurlerror"]) %}
                   {% if missingurlerror %}

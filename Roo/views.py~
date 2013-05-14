@@ -96,6 +96,7 @@ def payemail():
             msg = Message(recipients=recipients, subject=subject,sender="themilkmanshipping@gmail.com")
             msg.html = msgtext + followermsg
             mail.send(msg)
+  return "check your email!"
 #    users = User.query.all()
 #    with mail.connect() as conn:
 #      for user in users:
@@ -106,7 +107,7 @@ def payemail():
           # link to purchase page.
 #          msg.html = """<p>Hey there, <br>, Your order(s) are ready to be purchased and shipped!  Head on over to The Milkman using the link below!<br><br><a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+""""><b>Get me my stuff!</b></a></p><br><br> The Milkman""" 
 #          conn.send(msg)
-
+            
 # Send reminder emails in case a user has not yet paid for their order
 # This reminder email should happen 12 hours later ( Saturday midnight )
 # Sent via Heroku Scheduler
@@ -126,6 +127,7 @@ def reminderemail():
             msg = Message(recipients=[user.email], subject=subject, sender="themilkmanshipping@gmail.com")
             msg.html = """ Hey there, <br> Just a reminder to pay for your orders!  We know you want your stuff as soon as possible!  Click the link below to pay now! <br><br><a href="themilkman.herokuapp.com/purchase/"""+str(user.id)+""""><b>Get me my stuff!</b></a><br><br> The Milkman</p>"""
             conn.send(msg)
+  return "check your email!"
 
 # Send an email once the purchase has been made
 @app.route('/purchasedemail')
@@ -275,6 +277,61 @@ def mymilk(userid):
     abort(401)
   user = User.query.filter_by(id=userid).first()
   return render_template('mymilk.html', user=user, userid=userid)
+
+# edit account information
+@app.route('/mymilk/edit/<userid>', methods=['GET,','POST'])
+def mymilkedit(userid):
+  if not session.get('logged_in'):
+    abort(401)
+  user = User.query.filter_by(id=userid).first()
+  errorfound = False
+  if method == 'POST':
+
+    # check the validity of the input, return error messages if necessary
+    if len(request.form['email']) > 40:
+      flash("Sorry, your email address is simply too long!", "emailerror")
+      errorfound = True
+    
+    if len(request.form['firstname']) > 30:
+      flash("Sorry, your first name is too long... take it up with your parents.", "fnameerror")
+      errorfound = True
+
+    if len(request.form['lastname']) > 30:
+      flash("Sorry, your last name is too long... best marry someone with a shorter last name..", "lnameerror")
+      errorfound = True
+
+    try:
+      mailbox = integer(request.form['mailbox'])
+      if mailbox < 0:
+        errorfound = True
+    except ValueError:
+      flash("Invalid mailbox number", "mailboxerror")
+      errorfound = True
+
+    # check if any fields were left empty
+    if not request.form['firstname']:
+      flash("Please enter your first name", "missingfnameerror")
+      errorfound = True
+    if not request.form['lastname']:
+      flash("Please input the price of the item", "missinglnameerror")
+      errorfound = True
+    if not request.form['email']:
+      flash("Please enter details about your order", "missingemailerror")
+      errorfound = True
+    if errorfound:
+      return redirect( url_for('editorder', orderid=orderid) )
+
+    user.firstname = request.form['username']
+    user.lastname = request.form['lastname']
+    user.email = request.form['email']    
+    if errorfound:
+      return render_template('accountedit.html', user=user)
+
+    # if no errors, proceed!
+    user.mailbox = request.form['mailbox']
+    db_session.commit()
+    return redirect(url_for(('mymik', userid=user.id))
+  return render_template('accountedit.html', user=user)
 
 # my networks 
 @app.route('/mynetworks/<userid>')
