@@ -582,7 +582,7 @@ def facebook_authorized(resp):
         return redirect(next_url)
 
     session['facebook_token'] = (resp['access_token'], '')
-    fbuser = facebook.get('me').data
+    fbuser = facebook.get('/me').data
     if User.query.filter_by(email = fbuser['email']).first() == None:
       user = User(fbuser['first_name'], fbuser['last_name'], fbuser['email'], -1, '')
       db_session.add(user)
