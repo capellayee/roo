@@ -12,7 +12,7 @@ import time, ast
 from werkzeug.wrappers import BaseResponse
 from functools import wraps
 
-
+# decorator function for logging in
 def with_netid(f):
   @wraps(f)
   def decorated_function(*args, **kwargs):
@@ -23,7 +23,7 @@ def with_netid(f):
     return f(netid, *args, **kwargs)
   return decorated_function
 
-@app.errorhandler(401)
+@app.errorhandler(401) # if user tries to access a page while not logged on
 def login_first(e):
   return redirect(url_for('fblogin'))
 
@@ -42,7 +42,7 @@ def fblogin():
 @with_netid
 def cas(netid):
   user = User.query.filter_by(id = session['userid']).first()
-  user.isauthenticated = True
+  user.isauthenticated = True # once CAS authentication happens, user is authenticated forever (but still needs to Facebook login)
   session['logged_in'] = True
   db_session.commit()
   return redirect(url_for('home'))
@@ -58,28 +58,30 @@ def payemail():
   localtime = time.localtime(time.time())
   dayoftheweek = localtime[6]
 #  if dayoftheweek == 5:  # 5 = Friday
-  if dayoftheweek < 10000:
+
+  if dayoftheweek < 10000: # for testing, we're ignoring day of the week
     bags = Bag.query.all()
     for bag in bags:
       subject = "Milkman order for %s" % bag.store
-      if len(bag.users) == 1:
+      if len(bag.users) == 1: # if no one else joined the crate
         # send apology message
         msg = Message(recipients=[bag.users[0].email], subject=subject, sender="themilkmanipping@gmail.com")
         msg.html = "Sorry, no one else joined your Milkman crate :(. Just go ahead and order it on your own. Better luck next week!" 
         mail.send(msg)
       msgtext = None
-      if bag.amountinbag >= bag.threshold:
+      if bag.amountinbag >= bag.threshold: # if crate meets minimum for free shipping
         msgtext = "The Milkman has delivered: your crate for %s meets the minimum for free shipping!<br>" % bag.store
       else:
         msgtext = "While your Milkman crate for %s did not meet the minimum for free shipping, you can still save on shipping by ordering together!<br>" % bag.store
-      if len(bag.users) > 1:
+      if len(bag.users) > 1: # if crate has many users
+        # crate leader (person who receives shipment) is some user who clicked "ship to me"...if no one clicked "ship to me", it is the first person who joined the crate
         bagleader = bag.users[0]
         for order in bag.orders:
           if order.ship == True:
             bagleader = order.user
         recipients = [bagleader.email]
         leadermsg = "As soon as everyone in the crate pays The Milkman via paypal, we will order the crate and have it shipped to you (" + bagleader.firstname + "). You you will be in charge of distributing the individual orders to everyone in the crate. Here are the orders in the crate: <br><hr>"
-        for order in bag.orders:
+        for order in bag.orders: # tell the crate leader everyone's orders
           leadermsg = leadermsg + "User: " + order.user.firstname + " " + order.user.lastname + " (" + order.user.email + ") " + "<br>Order cost: $" + str(order.price) + "<br>URL: " + order.url
           leadermsg = leadermsg + "<br> Comments: " + order.details + "<hr>"
         leadermsg = leadermsg + """<br> Now, head over to The Milkman using the link below to pay for\
@@ -88,7 +90,7 @@ def payemail():
         msg.html = msgtext + leadermsg
         mail.send(msg)
         
-        for user in bag.users:
+        for user in bag.users: # email everyone else with their order information and who the crate leader is
           if user.email != bagleader.email:
             recipients = [user.email]
             followermsg = "The crate will be shipped to " + bagleader.firstname + " " + bagleader.lastname + " (" + bagleader.email + "). Your order is: <br>" + "User: " + order.user.firstname + " " + order.user.lastname + " (" + order.user.email + ")" + "<br>Order cost: $" + str(order.price) + "<br>URL: " + order.url + "<br>Comments: " + order.details + "<hr>"
@@ -97,16 +99,6 @@ def payemail():
             msg.html = msgtext + followermsg
             mail.send(msg)
   return "check your email!"
-#    users = User.query.all()
-#    with mail.connect() as conn:
-#      for user in users:
-#        # if the user actually has orders in the bag
-#        if user.orders:
-#          subject = "hello, %s, your purchases on The Milkman are ready to be ordered" % user.firstname
-#          msg = Message(recipients=[user.email], subject=subject, sender="rooshipping@gmail.com")
-          # link to purchase page.
-#          msg.html = """<p>Hey there, <br>, Your order(s) are ready to be purchased and shipped!  Head on over to The Milkman using the link below!<br><br><a href="rooprinceton.herokuapp.com/purchase/"""+str(user.id)+""""><b>Get me my stuff!</b></a></p><br><br> The Milkman""" 
-#          conn.send(msg)
             
 # Send reminder emails in case a user has not yet paid for their order
 # This reminder email should happen 12 hours later ( Saturday midnight )
@@ -129,17 +121,8 @@ def reminderemail():
             conn.send(msg)
   return "check your email!"
 
-# Send an email once the purchase has been made
-@app.route('/purchasedemail')
-def purchasedemail():
-  return "hello"
 
-# Send an email once the purchase has been received, per our tracking information
-@app.route('/receivedemail')
-def receivedemail():
-  return "hello"
-
-@app.route('/error')
+@app.route('/error') # for if a user tries to view information for another user
 def error():
   return render_template('error.html')
 
@@ -149,7 +132,7 @@ def editorder(orderid):
     abort(401)
   user = User.query.filter_by(id=session.get('userid')).first()
   valid = False
-  for order in user.orders:
+  for order in user.orders: # make sure current user is indeed involved with this order
     if str(order.id) == orderid:
       valid = True
   if not valid:
@@ -166,7 +149,7 @@ def editorder(orderid):
   othersorders = """ "width: """ + str(100*(bag.amountinbag-order.price) / max(bag.threshold,bag.amountinbag)) + """%;" """
 
 
-  if request.method == 'POST':
+  if request.method == 'POST': #modify the order according to what user submitted
     # check the validity of input, if something is wrong, return the page with error messages where appropriate
     errorfound = False
     try:
@@ -238,7 +221,7 @@ def paypal(userid):
 def home():
   if not session.get('logged_in'):
     abort(401)
-  # store the bagid's for the featured stores on the carousel
+  # store the bagid's for the featured stores on the carousel. Right now these are hard coded for simplicity, but it will be straightforward to make them dynamic.
   # urban outfitters
   urbanoutfittersid = Bag.query.filter_by(store = 'Urban Outfitters').first().id
   # ralph lauren
@@ -394,45 +377,46 @@ def allbags():
   return render_template('allbags.html', userid=session.get('userid'), allbags=allbags)
 
 # a test page for the admin
-@app.route('/all')
-def all():
-  if not session.get('logged_in'):
-    abort(401)
-  entries = ""
-  for row in User.query.all():
-    entries = entries + "first name: " + row.firstname + '<br>'
-    entries = entries + "last name: " + row.lastname + '<br>'
-    entries = entries + "mailbox: " + row.mailbox + '<br>'
-    entries = entries + "email: " + row.email + '<br><br>'
-    for row2 in row.bag:
-      entries = entries + "bags involved: " + str(row2.store) + '<br>'
-    for row2 in row.orders:
-      entries = entries + "order: " + str(row2.price) + '<br>'
-      
-  entries = entries + "<br><br><br><br><br>Now, the Bags:<br>"
-    
-  for row in Bag.query.all():
-    entries = entries + "store name: " + row.store + "<br>"
-    entries = entries + "threshold: " + str(row.threshold) + "<br>"
-    entries = entries + "amount in bag: " + str(row.amountinbag) + "<br>"
-    entries = entries + "network: " + row.network + "<br>"
-    for row2 in row.users:
-      entries = entries + "user in bag: " + str(row2.firstname) + '<br>'
-    for row2 in row.orders:
-      entries = entries + "order: " + str(row2.price) + '<br>'
-    entries = entries + "<br><br>"
-  return entries
+#@app.route('/all')
+#def all():
+#  if not session.get('logged_in'):
+#    abort(401)
+#  entries = ""
+#  for row in User.query.all():
+#    entries = entries + "first name: " + row.firstname + '<br>'
+#    entries = entries + "last name: " + row.lastname + '<br>'
+#    entries = entries + "mailbox: " + row.mailbox + '<br>'
+#    entries = entries + "email: " + row.email + '<br><br>'
+#    for row2 in row.bag:
+#      entries = entries + "bags involved: " + str(row2.store) + '<br>'
+#    for row2 in row.orders:
+#      entries = entries + "order: " + str(row2.price) + '<br>'
+#      
+#  entries = entries + "<br><br><br><br><br>Now, the Bags:<br>"
+#    
+#  for row in Bag.query.all():
+#    entries = entries + "store name: " + row.store + "<br>"
+#    entries = entries + "threshold: " + str(row.threshold) + "<br>"
+#    entries = entries + "amount in bag: " + str(row.amountinbag) + "<br>"
+#    entries = entries + "network: " + row.network + "<br>"
+#    for row2 in row.users:
+#      entries = entries + "user in bag: " + str(row2.firstname) + '<br>'
+#    for row2 in row.orders:
+#      entries = entries + "order: " + str(row2.price) + '<br>'
+#    entries = entries + "<br><br>"
+#  return entries
 
-@app.route('/newbag', methods=['GET', 'POST'])
-def newbag():
-  if not session.get('logged_in'):
-    abort(401)
-  if request.method == 'POST':
-    bag = Bag(request.form['store'], request.form['threshold'], 0, request.form['network'])
-    db_session.add(bag)
-    db_session.commit()
-    return redirect(url_for('home'))
-  return render_template('newbagform.html')
+#@app.route('/newbag', methods=['GET', 'POST']) #create a new crate
+# disabled so that only admins (we) can create new bags through Heroku database command line)
+#def newbag():
+#  if not session.get('logged_in'):
+#    abort(401)
+#  if request.method == 'POST':
+#    bag = Bag(request.form['store'], request.form['threshold'], 0, request.form['network'])
+#    db_session.add(bag)
+#    db_session.commit()
+#    return redirect(url_for('home'))
+#  return render_template('newbagform.html')
 
 # shows all of the relevant information for a store's bag
 @app.route('/bag/<bagid>', methods=['GET', 'POST'])
@@ -559,7 +543,7 @@ def removed(orderid):
 
 
 #----------------------------------------
-# facebook authentication
+# facebook authentication, based on Ryan Shea's tutorial on his blog
 #----------------------------------------
 
 
