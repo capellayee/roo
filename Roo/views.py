@@ -280,7 +280,7 @@ def mymilk(userid):
 
 # edit account information
 @app.route('/mymilk/edit/<userid>', methods=['GET,','POST'])
-def mymilkedit(userid):
+def editaccount(userid):
   if not session.get('logged_in'):
     abort(401)
   user = User.query.filter_by(id=userid).first()
@@ -318,29 +318,29 @@ def mymilkedit(userid):
     if not request.form['email']:
       flash("Please enter details about your order", "missingemailerror")
       errorfound = True
+    if not request.form['mailbox']:
+      flash("Please enter your mailbox number", "missingmailboxerror")
+      errorfound = True
     if errorfound:
       return redirect( url_for('editorder', orderid=orderid) )
 
+    # if no errors, proceed!
     user.firstname = request.form['username']
     user.lastname = request.form['lastname']
     user.email = request.form['email']    
-    if errorfound:
-      return render_template('accountedit.html', user=user)
-
-    # if no errors, proceed!
     user.mailbox = request.form['mailbox']
     db_session.commit()
+    flash("Your information has been updated!", "accountedit")
     return redirect(url_for('mymik', userid=user.id))
-  
   return render_template('accountedit.html', user=user)
 
-# delete accont
-@app.route('/deleteaccount/<userid>')
+# delete account
+@app.route('deleteaccount/<userid>')
 def deleteaccount(userid):
   if not session.get('logged_in'):
     abort(401)
-  user = User.query.filter_by(id=userid).first()
-  db_session.delete(user)
+  u = User.query.filter_by(id=userid).first()
+  db_session.delete(u)
   db_session.commit()
   return redirect(url_for('login'))
 
@@ -371,7 +371,7 @@ def all():
   for row in User.query.all():
     entries = entries + "first name: " + row.firstname + '<br>'
     entries = entries + "last name: " + row.lastname + '<br>'
-    entries = entries + "address: " + row.address + '<br>'
+    entries = entries + "mailbox: " + row.mailbox + '<br>'
     entries = entries + "email: " + row.email + '<br><br>'
     for row2 in row.bag:
       entries = entries + "bags involved: " + str(row2.store) + '<br>'
