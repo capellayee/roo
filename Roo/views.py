@@ -275,8 +275,6 @@ def about():
 # how it works page
 @app.route('/howitworks')
 def howitworks():
-  if not session.get('logged_in'):
-    abort(401)
   return render_template('howitworks.html')
 
 # sourmilk page

@@ -168,7 +168,7 @@
 		  {% endif %}
 		{% endwith %}
 		{% endwith %}
-	      $<input  type="text" name="price" placeholder="cost of your purchase?">
+	      <font font-size="5">$</font><input  type="text" name="price" placeholder="cost of your purchase?">
 
 	      <h3>Order Details</h3> 
 	      <!-- if details input is too long -->
@@ -176,7 +176,7 @@
 	      {% if detailslongerr %}
 	      {% for dlerr in detailslongerr %}
 	      <p class=detailslongerr style="color:#ff0000;font-size:14px;font-weight:bold;">
-                <strong>Error:</strong> {{ dlerror }}
+                <strong>Error:</strong> {{ dlerr }}
               </p>
 	      {% endfor %}
 	      {% endif %}
