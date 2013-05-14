@@ -102,7 +102,12 @@
     <p>
       <h3>Name:</h3>{{ user.firstname }} {{ user.lastname }}<br>
       <h3>Email:</h3>{{ user.email }}<br>
-      <h3>Frist Mailbox:</h3>{{ user.mailbox }}
+      <h3>Frist Mailbox:</h3>
+      {% with mailbox = user.mailbox %}
+      {% if mailbox != -1 %}
+        {{ user.mailbox }}
+      {% endif %}
+      {% endwith %}
     </p>
   </div><!--/.container-->
  </div>   
