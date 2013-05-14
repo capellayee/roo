@@ -147,6 +147,7 @@
                       </p>
                     {% endfor %}
                   {% endif %}
+		 {% endif %}
                 {% endwith %}
       {% endwith %}
 	<input type="text" name="lastname" value={{user.lastname}}>
@@ -171,6 +172,7 @@
                       </p>
                     {% endfor %}
                   {% endif %}
+                  {% endif %}
                 {% endwith %}
       {% endwith %}
       <h3>Frist Mailbox:</h3>
@@ -192,6 +194,7 @@
                         <strong>Error:</strong> {{ mmberror }}
                       </p>
                     {% endfor %}
+                  {% endif %
                   {% endif %}
                 {% endwith %}
       {% endwith %}
