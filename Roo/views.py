@@ -30,15 +30,15 @@ def login_first(e):
 # opening page of the site.  
 @app.route('/index')
 def index():
-  render_template('index.html')
+  return render_template('index.html')
 
 @app.route('/internals')
 def internals():
-  render_template('internals.html')
+  return render_template('internals.html')
 
 @app.route('/report')
 def report():
-  render_template('report.html')
+  return render_template('report.html')
 
 @app.route('/')
 def fblogin():
