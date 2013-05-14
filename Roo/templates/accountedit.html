@@ -150,8 +150,7 @@
                 {% endwith %}
       {% endwith %}
 	<input type="text" name="lastname" value={{user.lastname}}>
-      <h3>Email:</h3>
-       * Note that you still need to login with your facebook email address, but all correspondence will be sent to this email address.
+      <h3>Email:</h3><p>* Note that you still need to login with your facebook email address, but all correspondence will be sent to this email address.</p>
 	<input type="text" name="email" value={{ user.email }}>
       <!-- if the name is too long -->
       {% with emailerror = get_flashed_messages(category_filter=["emailerror"]) %}
@@ -200,7 +199,7 @@
       {% endwith %}
 	{% with mbox = user.mailbox %}
 		 {% if mbox == -1 %}
-		      {% set mbox = "Please enter your mailbox number" %}
+		      {% set mbox = """Please enter your mailbox number""" %}
 		      {% endif %}
 	<input type="text" name="mailbox" value={{ mbox }}>
 	{% endwith %}
@@ -209,7 +208,6 @@
 
      <!-- Button to trigger modal -->
      <a href="#myModal" role="button" class="btn btn-danger" data-toggle="modal">Delete my account</a>
-  </div>
   </fieldset>
    </form>
 </div><!--/.fluid-container-->
