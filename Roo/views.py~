@@ -356,7 +356,7 @@ def deleteaccount(userid):
   u = User.query.filter_by(id=userid).first()
   db_session.delete(u)
   db_session.commit()
-  return redirect(url_for('login'))
+  return redirect(url_for('/'))
 
 # my networks 
 @app.route('/mynetworks/<userid>')

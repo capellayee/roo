@@ -99,7 +99,6 @@
 <div class="container">
 <div class="form-bag" method="post">
   <fieldset>          
-  <div class="row-fluid">
     <h1>My Account</h1>
     <h2>Edit your Account:</h2>
     <p>
@@ -199,7 +198,12 @@
                   {% endif %}
                 {% endwith %}
       {% endwith %}
-	<input type="text" name="mailbox" value={{ user.mailbox }}>
+	{% with mbox = user.mailbox %}
+		 {% if mbox == -1 %}
+		      {% set mbox = "Please enter your mailbox number" %}
+		      {% endif %}
+	<input type="text" name="mailbox" value={{ mbox }}>
+	{% endwith %}
     </p>
      <button type="submit" class="btn">Save Changes</button>
 
@@ -208,7 +212,6 @@
   </div>
   </fieldset>
    </form>
-</div>   
 </div><!--/.fluid-container-->
 
      <!-- Modal -->
