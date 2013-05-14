@@ -279,13 +279,13 @@ def mymilk(userid):
   return render_template('mymilk.html', user=user, userid=userid)
 
 # edit account information
-@app.route('/mymilk/edit/<userid>', methods=['GET,','POST'])
-def mymilkedit(userid):
+@app.route('/mymilk/edit/<userid>', methods=['GET','POST'])
+def editaccount(userid):
   if not session.get('logged_in'):
     abort(401)
   user = User.query.filter_by(id=userid).first()
   errorfound = False
-  if method == 'POST':
+  if request.method == 'POST':
 
     # check the validity of the input, return error messages if necessary
     if len(request.form['email']) > 40:
@@ -331,8 +331,18 @@ def mymilkedit(userid):
     user.mailbox = request.form['mailbox']
     db_session.commit()
     flash("Your information has been updated!", "accountedit")
-    return redirect(url_for(('mymik', userid=user.id))
+    return redirect(url_for('mymik', userid=user.id))
   return render_template('accountedit.html', user=user)
+
+# delete account
+@app.route('/deleteaccount/<userid>')
+def deleteaccount(userid):
+  if not session.get('logged_in'):
+    abort(401)
+  u = User.query.filter_by(id=userid).first()
+  db_session.delete(u)
+  db_session.commit()
+  return redirect(url_for('login'))
 
 # my networks 
 @app.route('/mynetworks/<userid>')
@@ -361,7 +371,7 @@ def all():
   for row in User.query.all():
     entries = entries + "first name: " + row.firstname + '<br>'
     entries = entries + "last name: " + row.lastname + '<br>'
-    entries = entries + "address: " + row.address + '<br>'
+    entries = entries + "mailbox: " + row.mailbox + '<br>'
     entries = entries + "email: " + row.email + '<br><br>'
     for row2 in row.bag:
       entries = entries + "bags involved: " + str(row2.store) + '<br>'
@@ -412,7 +422,6 @@ def bagpage(bagid):
   percentfull = """ "width: """ + str(bag.amountinbag*100 / max(bag.threshold,bag.amountinbag)) + """%;" """ 
   percentempty = """ "width: """ + str(100-100*bag.amountinbag / max(bag.threshold,bag.amountinbag)) + """%;" """
   
-
   if request.method == 'POST':
     # check the validity of input, if something is wrong, return the page with error messages where appropriate
     errorfound = False
@@ -425,6 +434,9 @@ def bagpage(bagid):
       flash("Invalid price", "priceerror")
       errorfound = True
 
+    # check if any of the input is too long
+    if request.form['itemurl']:
+      
     # check if any fields were left empty
     if not request.form['itemurl']:
       flash("Please input the item's URL", "missingurlerror")
