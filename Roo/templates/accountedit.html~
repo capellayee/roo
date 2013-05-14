@@ -140,7 +140,7 @@
                 {% with missinglnameerror = get_flashed_messages(category_filter=["missinglnameerror"]) %}
                   {% if missinglnameerror %}
          {% if not fnameerror %}
-                    {% for mfnerror in missinglnameerror %}
+                    {% for mlnerror in missinglnameerror %}
                       <p class=missinglnameerror style="color:#ff0000;font-size:14px;font-weight:bold;">
                         <strong>Error:</strong> {{ mlnerror }}
                       </p>
@@ -151,7 +151,6 @@
       {% endwith %}
 	<input type="text" name="lastname" value={{user.lastname}}>
       <h3>Email:</h3><p>* Note that you still need to login with your facebook email address, but all correspondence will be sent to this email address.</p>
-	<input type="text" name="email" value={{ user.email }}>
       <!-- if the name is too long -->
       {% with emailerror = get_flashed_messages(category_filter=["emailerror"]) %}
       {% if emailerror %}
@@ -174,6 +173,7 @@
                   {% endif %}
                 {% endwith %}
       {% endwith %}
+		      <input type="text" name="email" value={{ user.email }}>
       <h3>Frist Mailbox:</h3>
       <!-- if the name is too long -->
       {% with mailboxerror = get_flashed_messages(category_filter=["mailboxerror"]) %}
