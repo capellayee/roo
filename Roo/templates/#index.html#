@@ -1,0 +1,28 @@
+<html>
+<h1>The Milkman </h1>
+<body>
+Pranav Gokhale,  pgokhale<br>
+Capella Yee,  cyee<br>
+Virginia Willis,  vwillis<br>
+
+<p>As shipping and handling fees are one of the most significant causes of dropped purchases online (something we have all personally experienced and been frustrated by), The Milkman is mutually beneficial to both seller and shipper. By integrating through Facebook, thereby inheriting networking capabilities, The Milkman allows local friends to aggregate their online shipping purchases to meet the minimum for free shipping and avoid the shipping fee. Additionally, the service reduces shipping waste and traffic through aggregation. 
+Shoppers are able to create their own network of people to join a "crate" (purchases from the same site). In this way, users can control who they enter the free shipping with, providing a feeling of mutual trust and security. This also allows for users to have flexibility in their crates. 
+<br>
+ How to access or create a running version of your system.
+<br>
+ Contact the project leader, Pranav Gokhale, at pgokhale@princeton.edu if something goes wrong.
+
+<blockquote>
+<a href="http://themilkman.herokuapp.com"> The Milkman</a>
+
+<a href="http://sites.google.com/a/princeton.edu/cos-333-timeline/">Timeline</a>
+
+<a href={{url_for('internals')}}>Internals</a>
+
+<a href={{url_for('report')}}>Report</a>
+
+<P> <a href={{url_for('static', filename="presentation.pdf")}}>Presentation</a>.
+</blockquote>
+
+</body>
+</html>
