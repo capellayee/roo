@@ -3,16 +3,35 @@
 <title>Internals</title>
 </head>
 <body> 
+<h1>Internals</h1>
+<br>
+<br>
 <p>
 This document is intended for developers who want to recreate The Milkman or build a similar product. Our software was written with the Flask web application framework, which involves coding in Python. We used release 0.9, which is available for download at flask.pocoo.org. We used the pip installation tool to install Flask. Our software was coded with Python 2.7 and we used emacs for all code editing.
-	The application was hosted online by the Heroku cloud application platform. We attached two Heroku addons to our application. The first, PostgreSQL Dev is our production database that provides 10,000 free rows. The other, Heroku scheduler, serves as a daemon for processes that must be run independently of user interaction (we used the scheduler to send out payment emails once a week, as well as subsequent reminder emails if the user had yet to pay). Both addons can be installed with the heroku addons:add command and Heroku provides documentation for further configuration. A special note: the Heroku scheduler is interfaced through the Heroku dashboard. It is normally scheduled to be run weekly (so that crates are only checked on Fridays), but in order to facilitate testing by COS 333 staff, we have disabled the daemon. Instead, anytime the tester browses to themilkman.herokuapp.com/payemail, the bag checking process will be activated.
-	We used git for revision control and hosted our code on GitHub, using free student accounts. We set the origin master branch to Github and pushed to Heroku for deployment using git push heroku.
-	For the frontend design, we used Twitter Bootstrap. All of the necessary css and js are provided by Twitter bootstrap, and are configured in the appropriate file (static) in our Github. We also have a file within the static file titled imgs. This file holds all of the imgs seen on our site, and any additional images can be added to  this folder, and called in the same manner as the that the other images are within our templates. We have some other open source javascript add-ons, such as the tablesorter, which is used on the All Crates page with its css contained in the static folder. 
-	Overall, our code follows the model-view-control design pattern, with database objects stored in models.py, all web page views stored in views.py, and database setup and control code in database.py. The application configuration settings are in __init__.py. And lastly, runserver.py is the main file that creates an instance of the application. In order to change the database models (in models.py), the database must be reinitialized. This can be done by first using the heroku pg:reset DATABASE_URL command and then running the init_db function from database.py.
-	We used Flask-Mail (v 0.8.2) to send emails from themilkmanshipping@gmail.com. Flask-OAuth (v 0.12) was used to handle Facebook authentication. Jinja2 (v 2.6) was used in the html templates to handle dynamic content and to integrate the frontend and backend. Finally, we used the Flask-SQLAlchemy object relational mapper (v 0.16) to interface with the database via Python. All of these extensions can be downloaded using pip install and then pip freeze > requirements.txt to updates the requirements file. A procfile must also be set up with the text web: python runserver.py to instruct Heroku what to run.
-	We used PayPal to handle all payments, but it just involves linking to a Paypal url rather than using an API. However, for the Facebook setup, we had to register an application with Facebook and paste the APP_ID and APP_SECRET parameters into the views.py file. We also registered our site url with Facebook so that Facebook knows to provide authentication services to The Milkman.
-	We also used Princeton CAS authentication that runs the first time a user logs onto The Milkman. The code is handled by CASClient.py, which is adapted from OITs CAS documentation. Then, a decorator function in views.py retrives the CAS ticket and checks authentication.
-	In terms of testing The Milkman, it should be entirely functional at this point. As mentioned above, the automatic weekly checking of bags has been disabled temporarily--instead, you can visit themilkman.herokuapp.com/payemail to activate the checking function and send emails. This url is not login-protected because it will be disabled when we release The Milkman to the general public. Please do not hesitate to contact us with any questions about site functionality or testing.
+<br>
+<br>
+The application was hosted online by the Heroku cloud application platform. We attached two Heroku addons to our application. The first, PostgreSQL Dev is our production database that provides 10,000 free rows. The other, Heroku scheduler, serves as a daemon for processes that must be run independently of user interaction (we used the scheduler to send out payment emails once a week, as well as subsequent reminder emails if the user had yet to pay). Both addons can be installed with the heroku addons:add command and Heroku provides documentation for further configuration. A special note: the Heroku scheduler is interfaced through the Heroku dashboard. It is normally scheduled to be run weekly (so that crates are only checked on Fridays), but in order to facilitate testing by COS 333 staff, we have disabled the daemon. Instead, anytime the tester browses to themilkman.herokuapp.com/payemail, the bag checking process will be activated.
+<br>
+<br>
+We used git for revision control and hosted our code on GitHub, using free student accounts. We set the origin master branch to Github and pushed to Heroku for deployment using git push heroku.
+<br>
+<br>
+For the frontend design, we used Twitter Bootstrap. All of the necessary css and js are provided by Twitter bootstrap, and are configured in the appropriate file (static) in our Github. We also have a file within the static file titled imgs. This file holds all of the imgs seen on our site, and any additional images can be added to  this folder, and called in the same manner as the that the other images are within our templates. We have some other open source javascript add-ons, such as the tablesorter, which is used on the All Crates page with its css contained in the static folder. 
+<br>
+<br>
+Overall, our code follows the model-view-control design pattern, with database objects stored in models.py, all web page views stored in views.py, and database setup and control code in database.py. The application configuration settings are in __init__.py. And lastly, runserver.py is the main file that creates an instance of the application. In order to change the database models (in models.py), the database must be reinitialized. This can be done by first using the heroku pg:reset DATABASE_URL command and then running the init_db function from database.py.
+<br>
+<br>
+We used Flask-Mail (v 0.8.2) to send emails from themilkmanshipping@gmail.com. Flask-OAuth (v 0.12) was used to handle Facebook authentication. Jinja2 (v 2.6) was used in the html templates to handle dynamic content and to integrate the frontend and backend. Finally, we used the Flask-SQLAlchemy object relational mapper (v 0.16) to interface with the database via Python. All of these extensions can be downloaded using pip install and then pip freeze > requirements.txt to updates the requirements file. A procfile must also be set up with the text web: python runserver.py to instruct Heroku what to run.
+<br>
+<br>
+We used PayPal to handle all payments, but it just involves linking to a Paypal url rather than using an API. However, for the Facebook setup, we had to register an application with Facebook and paste the APP_ID and APP_SECRET parameters into the views.py file. We also registered our site url with Facebook so that Facebook knows to provide authentication services to The Milkman.
+<br>
+<br>
+We also used Princeton CAS authentication that runs the first time a user logs onto The Milkman. The code is handled by CASClient.py, which is adapted from OITs CAS documentation. Then, a decorator function in views.py retrives the CAS ticket and checks authentication.
+<br>
+<br>
+In terms of testing The Milkman, it should be entirely functional at this point. As mentioned above, the automatic weekly checking of bags has been disabled temporarily--instead, you can visit themilkman.herokuapp.com/payemail to activate the checking function and send emails. This url is not login-protected because it will be disabled when we release The Milkman to the general public. Please do not hesitate to contact us with any questions about site functionality or testing.
 </p>
 </body>
 </html>
