@@ -54,7 +54,7 @@ class Order(Base):
   id = Column(Integer, primary_key=True)
   url = Column(String(200), unique=False)
   price = Column(Float, unique=False)
-  details = Column(String(200), unique=False)
+  details = Column(String(400), unique=False)
   ship = Column(Boolean, unique=False)
   paid = Column(Boolean, unique=False)
   datepaid = Column(Date, unique=False)

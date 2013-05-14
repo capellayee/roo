@@ -117,16 +117,28 @@
               <h2>Edit your order:</h2>
 	      To add more items to your order, add in the next url separated by commas, update the price, and add in order details below.
               <h3>Item URL(s)</h3> 
+              <!-- error message if the input is too long -->
+              {% with urllongerr = get_flashed_messages(category_filter=["urllongerr"]) %}
+              {% if urllongerr %}
+              {% for ulerr in urllongerr %}
+              <p class=urlongerr style="color:#ff0000;font-size:14px;font-weight:bold;">
+                <strong>Error:</strong> {{ ulerr }}
+              </p>
+              {% endfor %}
+              {% endif %}
 	      <!-- error message if field is not filled out -->
 	        {% with missingurlerror = get_flashed_messages(category_filter=["missingurlerror"]) %}
                   {% if missingurlerror %}
-                    {% for muerror in missingurlerror %}
+                    {% if not urllongerr %}
+	            {% for muerror in missingurlerror %}
                       <p class=missingfielderror style="color:#ff0000;font-size:14px;font-weight:bold;">
                         <strong>Error:</strong> {{ muerror }}
                       </p>
                     {% endfor %}
                   {% endif %}
+		  {% endif %}
                 {% endwith %}
+		{% endwith %}
 	      <input type="text" name="itemurl" value={{order.url}}>
 
 	      <h3>Amount of Purchase</h3> 
@@ -155,10 +167,21 @@
 		{% endwith %}
 	      <input  type="text" name="price" value={{order.price}}>
 
-	      <h3>Order Details</h3> 
+	      <h3>Order Details</h3>
+              <!-- if details input is too long -->
+              {% with detailslongerr = get_flashed_messages(category_filter=["detailslongerr"]) %}
+              {% if detailslongerr %}
+              {% for dlerr in detailslongerr %}
+              <p class=detailslongerr style="color:#ff0000;font-size:14px;font-weight:bold;">
+                <strong>Error:</strong> {{ dlerror }}
+              </p>
+              {% endfor %}
+              {% endif %}
+ 
 	      <!-- error if field is not filled out -->
 	       {% with missingdetailserror = get_flashed_messages(category_filter=["missingdetailserror"]) %}
                   {% if missingdetailserror %}
+	           {% if not detailslongerr %}
                     {% for mderror in missingdetailserror %}
                       <p class=missingdetailserror style="color:#ff0000;font-size:14px;font-weight:bold;">
                         <strong>Error:</strong> {{ mderror }}
@@ -166,6 +189,7 @@
                     {% endfor %}
                   {% endif %}
                 {% endwith %}
+		{% endwith %}
 	      <textarea rows="4" name="details">{{order.details}}</textarea>
 	      <label class="checkbox">
 {% if order.ship %}

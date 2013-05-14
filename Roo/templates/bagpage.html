@@ -120,16 +120,28 @@
 	      </div>
               <h2>Add to Crate:</h2>
               <h3>Item URL(s)</h3> 
+	      <!-- error message if the input is too long -->
+	      {% with urllongerr = get_flashed_messages(category_filter=["urllongerr"]) %}
+	      {% if urllongerr %}
+	      {% for ulerr in urllongerr %}
+	      <p class=urlongerr style="color:#ff0000;font-size:14px;font-weight:bold;">
+                <strong>Error:</strong> {{ ulerr }}
+              </p>
+	      {% endfor %}
+	      {% endif %}
 	      <!-- error message if field is not filled out -->
 	        {% with missingurlerror = get_flashed_messages(category_filter=["missingurlerror"]) %}
                   {% if missingurlerror %}
-                    {% for muerror in missingurlerror %}
+                   {% if not urllongerr %} 
+	            {% for muerror in missingurlerror %}
                       <p class=missingurlerror style="color:#ff0000;font-size:14px;font-weight:bold;">
                         <strong>Error:</strong> {{ muerror }}
                       </p>
                     {% endfor %}
                   {% endif %}
+		  {% endif %}
                 {% endwith %}
+		{% endwith %}
 	      <input type="text" name="itemurl" placeholder="paste url here! e.g. www.jcrew.com/shirt">
 
 	      <h3>Amount of Purchase</h3> 
@@ -137,7 +149,7 @@
       	        {% with missingpriceerror = get_flashed_messages(category_filter=["missingpriceerror"]) %}
                   {% if missingpriceerror %}
                     {% for mperror in missingpriceerror %}
-                      <p class=missingpriceerror style="color:#ff0000;font-size:14px;font-weight:bold;">
+                      <p class=missingpricerror style="color:#ff0000;font-size:14px;font-weight:bold;">
                         <strong>Error:</strong> {{ mperror }}
                       </p>
                     {% endfor %}
@@ -159,16 +171,29 @@
 	      $<input  type="text" name="price" placeholder="cost of your purchase?">
 
 	      <h3>Order Details</h3> 
+	      <!-- if details input is too long -->
+	      {% with detailslongerr = get_flashed_messages(category_filter=["detailslongerr"]) %}
+	      {% if detailslongerr %}
+	      {% for dlerr in detailslongerr %}
+	      <p class=detailslongerr style="color:#ff0000;font-size:14px;font-weight:bold;">
+                <strong>Error:</strong> {{ dlerror }}
+              </p>
+	      {% endfor %}
+	      {% endif %}
+
 	      <!-- error if field is not filled out -->
 	       {% with missingdetailserror = get_flashed_messages(category_filter=["missingdetailserror"]) %}
                   {% if missingdetailserror %}
-                    {% for mderror in missingdetailserror %}
+                    {% if not detailslongerr %}
+	            {% for mderror in missingdetailserror %}
                       <p class=missingdetailserror style="color:#ff0000;font-size:14px;font-weight:bold;">
                         <strong>Error:</strong> {{ mderror }}
                       </p>
                     {% endfor %}
                   {% endif %}
+		  {% endif %}
                 {% endwith %}
+		{% endwith %}
 	      <textarea rows="4" name="details" placeholder="For example, what size?  What color?  How many? Special details specific to the product?"></textarea>
 	      <p>
 	      <label class="checkbox">

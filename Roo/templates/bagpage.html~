@@ -124,7 +124,7 @@
 	        {% with missingurlerror = get_flashed_messages(category_filter=["missingurlerror"]) %}
                   {% if missingurlerror %}
                     {% for muerror in missingurlerror %}
-                      <p class=missingfielderror style="color:#ff0000;font-size:14px;font-weight:bold;">
+                      <p class=missingurlerror style="color:#ff0000;font-size:14px;font-weight:bold;">
                         <strong>Error:</strong> {{ muerror }}
                       </p>
                     {% endfor %}

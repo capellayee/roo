@@ -24,9 +24,6 @@ class Bag(Base):
   def __repr__(self):
     return '<Bag %r>' % (self.store)
 
-  def __url__(self):
-    return '"%s"' % self.url
-
 class User(Base):
   __tablename__ = 'users'
   id = Column(Integer, primary_key=True)

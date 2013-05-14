@@ -116,7 +116,7 @@
 
               <h2>Edit your order:</h2>
 	      To add more items to your order, add in the next url separated by commas, update the price, and add in order details below.
-              <h3>URL of Item(s)</h3> 
+              <h3>Item URL(s)</h3> 
 	      <!-- error message if field is not filled out -->
 	        {% with missingurlerror = get_flashed_messages(category_filter=["missingurlerror"]) %}
                   {% if missingurlerror %}
