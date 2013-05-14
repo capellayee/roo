@@ -335,7 +335,7 @@ def editaccount(userid):
   return render_template('accountedit.html', user=user)
 
 # delete account
-@app.route('deleteaccount/<userid>')
+@app.route('/deleteaccount/<userid>')
 def deleteaccount(userid):
   if not session.get('logged_in'):
     abort(401)
