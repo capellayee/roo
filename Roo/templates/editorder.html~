@@ -188,6 +188,7 @@
                       </p>
                     {% endfor %}
                   {% endif %}
+		  {% endif %}
                 {% endwith %}
 		{% endwith %}
 	      <textarea rows="4" name="details">{{order.details}}</textarea>

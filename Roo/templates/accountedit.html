@@ -199,7 +199,7 @@
       {% endwith %}
 	{% with mbox = user.mailbox %}
 		 {% if mbox == -1 %}
-		      {% set mbox = """Please enter your mailbox number""" %}
+		      {% set mbox = """""" %}
 		      {% endif %}
 	<input type="text" name="mailbox" value={{ mbox }}>
 	{% endwith %}
