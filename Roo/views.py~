@@ -285,7 +285,7 @@ def editaccount(userid):
     abort(401)
   user = User.query.filter_by(id=userid).first()
   errorfound = False
-  if method == 'POST':
+  if request.method == 'POST':
 
     # check the validity of the input, return error messages if necessary
     if len(request.form['email']) > 40:
@@ -422,7 +422,6 @@ def bagpage(bagid):
   percentfull = """ "width: """ + str(bag.amountinbag*100 / max(bag.threshold,bag.amountinbag)) + """%;" """ 
   percentempty = """ "width: """ + str(100-100*bag.amountinbag / max(bag.threshold,bag.amountinbag)) + """%;" """
   
-
   if request.method == 'POST':
     # check the validity of input, if something is wrong, return the page with error messages where appropriate
     errorfound = False
@@ -435,6 +434,9 @@ def bagpage(bagid):
       flash("Invalid price", "priceerror")
       errorfound = True
 
+    # check if any of the input is too long
+    if request.form['itemurl']:
+      
     # check if any fields were left empty
     if not request.form['itemurl']:
       flash("Please input the item's URL", "missingurlerror")

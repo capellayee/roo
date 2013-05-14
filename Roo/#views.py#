@@ -263,6 +263,8 @@ def about():
     abort(401)
   return render_template('about.html', userid=session.get('userid'))
 
+
+
 # sourmilk page
 @app.route('/sourmilk')
 def sourmilk():
@@ -422,6 +424,7 @@ def bagpage(bagid):
   percentfull = """ "width: """ + str(bag.amountinbag*100 / max(bag.threshold,bag.amountinbag)) + """%;" """ 
   percentempty = """ "width: """ + str(100-100*bag.amountinbag / max(bag.threshold,bag.amountinbag)) + """%;" """
   
+
   if request.method == 'POST':
     # check the validity of input, if something is wrong, return the page with error messages where appropriate
     errorfound = False
@@ -434,9 +437,6 @@ def bagpage(bagid):
       flash("Invalid price", "priceerror")
       errorfound = True
 
-    # check if any of the input is too long
-    if request.form['itemurl']:
-      
     # check if any fields were left empty
     if not request.form['itemurl']:
       flash("Please input the item's URL", "missingurlerror")
