@@ -151,7 +151,8 @@
                 {% endwith %}
       {% endwith %}
 	<input type="text" name="lastname" value={{user.lastname}}>
-      <h3>Email: * Note that you still need to login with your facebook email address, but all correspondence will be sent to this email address.</h3>
+      <h3>Email:</h3>
+       * Note that you still need to login with your facebook email address, but all correspondence will be sent to this email address.
 	<input type="text" name="email" value={{ user.email }}>
       <!-- if the name is too long -->
       {% with emailerror = get_flashed_messages(category_filter=["emailerror"]) %}
@@ -198,13 +199,18 @@
                   {% endif %}
                 {% endwith %}
       {% endwith %}
-	<input type="text" name="mailbox" value={ {user.mailbox }}>
+	<input type="text" name="mailbox" value={{ user.mailbox }}>
     </p>
      <button type="submit" class="btn">Save Changes</button>
 
      <!-- Button to trigger modal -->
      <a href="#myModal" role="button" class="btn btn-danger" data-toggle="modal">Delete my account</a>
-     
+  </div>
+  </fieldset>
+   </form>
+</div>   
+</div><!--/.fluid-container-->
+
      <!-- Modal -->
      <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
        <div class="modal-header">
@@ -219,11 +225,6 @@
 	 <a href='{{ url_for('deleteaccount', userid=user.id) }}' class="btn btn-danger">Delete my account</a>
        </div>
      </div>
-  </div>
-  </fieldset>
-   </form>
-</div>   
-</div><!--/.fluid-container-->
 
  <!-- Le javascript
     ================================================== -->
@@ -242,7 +243,7 @@
     <script src=/static/bootstrap/js/bootstrap-collapse.js></script>
     <script src=/static/bootstrap/js/bootstrap-carousel.js></script>
     <script src=/static/bootstrap/js/bootstrap-typeahead.js></script>
-    <script src="../bootstrap/js/holder/holder.js"></script>^M
+    <script src="../bootstrap/js/holder/holder.js"></script>
 
   </body>
 </html>
