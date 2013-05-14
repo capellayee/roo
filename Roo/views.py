@@ -310,8 +310,8 @@ def editaccount(userid):
     abort(401)
   user = User.query.filter_by(id=userid).first()
   errorfound = False
-  if request.method == 'POST':
 
+  if request.method == 'POST':
     # check the validity of the input, return error messages if necessary
     if len(request.form['email']) > 40:
       flash("Sorry, your email address is simply too long!", "emailerror")
@@ -326,7 +326,7 @@ def editaccount(userid):
       errorfound = True
 
     try:
-      mailbox = integer(request.form['mailbox'])
+      mailbox = int(request.form['mailbox'])
       if mailbox < 0:
         errorfound = True
     except ValueError:
@@ -357,6 +357,7 @@ def editaccount(userid):
     db_session.commit()
     flash("Your information has been updated!", "accountedit")
     return redirect(url_for('mymik', userid=user.id))
+  
   return render_template('accountedit.html', user=user)
 
 # delete account
