@@ -28,6 +28,18 @@ def login_first(e):
   return redirect(url_for('fblogin'))
 
 # opening page of the site.  
+@app.route('/index')
+def index():
+  render_template('index.html')
+
+@app.route('/internals')
+def internals():
+  render_template('internals.html')
+
+@app.route('/report')
+def report():
+  render_template('report.html')
+
 @app.route('/')
 def fblogin():
   # if not logged in, redirect to facebook

@@ -131,6 +131,8 @@ def editorder(orderid):
   if not session.get('logged_in'):
     abort(401)
   user = User.query.filter_by(id=session.get('userid')).first()
+  if not user.isauthenticated:
+    abort(401)
   valid = False
   for order in user.orders: # make sure current user is indeed involved with this order
     if str(order.id) == orderid:
@@ -208,10 +210,12 @@ def paypal(userid):
   if not session.get('logged_in'):
     abort(401)
   if not str(session.get('userid')) == userid:
-    return "Hey, you're not allowed to see this page!"
+    return redirect(url_for('error'))
   # add in a tab to make the user log in if they're not already logged in..
   # need to make sure it redirects to the purchase page.
   user = User.query.filter_by(id=userid).first()
+  if not user.isauthenticated:
+    abort(401)
   total = 0.0
   for order in user.orders:
     total = total + order.price
@@ -231,6 +235,8 @@ def home():
   
   userid = session.get('userid')
   user = User.query.filter_by(id=userid).first()
+  if not user.isauthenticated:
+    abort(401)
 
   address = False
   if user.mailbox == -1:
@@ -284,6 +290,8 @@ def mymilk(userid):
   if not session.get('logged_in'):
     abort(401)
   user = User.query.filter_by(id=userid).first()
+  if not user.isauthenticated:
+    abort(401)
   return render_template('mymilk.html', user=user, userid=userid)
 
 # edit account information
@@ -294,6 +302,8 @@ def editaccount(userid):
   if not str(session.get('userid')) == userid:
     return redirect(url_for('error'))
   user = User.query.filter_by(id=userid).first()
+  if not user.isauthenticated:
+    abort(401)
   errorfound = False
 
   if request.method == 'POST':
@@ -353,6 +363,8 @@ def deleteaccount(userid):
   if not str(session.get('userid')) == userid:
     return redirect(url_for('error'))
   u = User.query.filter_by(id=userid).first()
+  if not u.isauthenticated:
+    abort(401)
   db_session.delete(u)
   db_session.commit()
   pop_login_session()
@@ -424,6 +436,8 @@ def bagpage(bagid):
   if not session.get('logged_in'):
     abort(401)
   user = User.query.filter_by(id=session.get('userid')).first()
+  if not user.isauthenticated:
+    abort(401)
   redir = False
   for order in user.orders:
     if str(order.bag.id) == bagid:
@@ -502,6 +516,8 @@ def mybags(userid):
   if not str(session.get('userid')) == userid:
     return redirect(url_for('error'))
   user = User.query.filter_by(id = userid).first()  
+  if not user.isauthenticated:
+    abort(401)
   userbags = Bag.query.join(Bag.users, aliased=True).filter_by(id=userid)
   userorders = []
   bags = ""
