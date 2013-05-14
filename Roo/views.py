@@ -254,6 +254,17 @@ def home():
     address = True
 
   if request.method == 'POST':
+    # check to make sure the input is valid 
+    errorfound = False
+    try:
+      price = int(request.form['mailbox'])
+      if price < 0:
+        flash("Sorry, that's not a valid mailbox number.  Please enter an integer number greater than zero", "mailboxerror")
+        errorfound = True
+    except ValueError:
+      flash("Invalid price", "priceerror")
+      errorfound = True
+
     user.mailbox = request.form['mailbox']
     db_session.commit()
     address = False

@@ -176,7 +176,7 @@
 	      {% if detailslongerr %}
 	      {% for dlerr in detailslongerr %}
 	      <p class=detailslongerr style="color:#ff0000;font-size:14px;font-weight:bold;">
-                <strong>Error:</strong> {{ dlerror }}
+                <strong>Error:</strong> {{ dlerr }}
               </p>
 	      {% endfor %}
 	      {% endif %}
