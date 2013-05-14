@@ -356,7 +356,7 @@ def editaccount(userid):
     user.mailbox = request.form['mailbox']
     db_session.commit()
     flash("Your information has been updated!", "accountedit")
-    return redirect(url_for('mymik', userid=userid))
+    return redirect(url_for('mymilk', userid=userid))
   
   return render_template('accountedit.html', user=user)
 
