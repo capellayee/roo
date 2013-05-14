@@ -200,7 +200,7 @@
 
      <!-- Button to trigger modal -->
      <a href="#myModal" role="button" class="btn btn-danger" data-toggle="modal">Delete my account</a>
- 
+     
      <!-- Modal -->
      <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
        <div class="modal-header">
@@ -208,16 +208,16 @@
 	 <h3 id="myModalLabel">Delete your account</h3>
        </div>
        <div class="modal-body">
-	 <p>Are you sure you want to delete your account and say goodbye to The Milkman?  If you do, all your current orders will be permanently erased.</p>
+	 <p>Are you sure you want to delete your account?  Your information will be lost and unrecoverable</p>
        </div>
        <div class="modal-footer">
 	 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-	 <a href='{{ url_for('deleteaccount', userid=user.id) }}' class="btn btn-danger" >Delete my account</a>
+	 <a href='{{ url_for('deleteaccount', userid=user.id) }}' class="btn btn-danger">Delete my account</a>
        </div>
      </div>
-     </div>
+  </div>
   </fieldset>
-</form>
+   </form>
 </div>   
 </div><!--/.fluid-container-->
 
@@ -238,5 +238,7 @@
     <script src=/static/bootstrap/js/bootstrap-collapse.js></script>
     <script src=/static/bootstrap/js/bootstrap-carousel.js></script>
     <script src=/static/bootstrap/js/bootstrap-typeahead.js></script>
+    <script src="../bootstrap/js/holder/holder.js"></script>^M
+
   </body>
 </html>

@@ -279,7 +279,7 @@ def mymilk(userid):
   return render_template('mymilk.html', user=user, userid=userid)
 
 # edit account information
-@app.route('/mymilk/edit/<userid>', methods=['GET,','POST'])
+@app.route('/mymilk/edit/<userid>', methods=['GET','POST'])
 def editaccount(userid):
   if not session.get('logged_in'):
     abort(401)

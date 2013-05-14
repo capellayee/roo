@@ -285,7 +285,7 @@ def editaccount(userid):
     abort(401)
   user = User.query.filter_by(id=userid).first()
   errorfound = False
-  if method == 'POST':
+  if request.method == 'POST':
 
     # check the validity of the input, return error messages if necessary
     if len(request.form['email']) > 40:
