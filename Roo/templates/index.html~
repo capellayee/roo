@@ -21,7 +21,7 @@ Shoppers are able to create their own network of people to join a "crate" (purch
 
 <P> <a href={{url_for('report')}}>Report</a>
 
-<P> <a href={{url_for('static', filename="presentation.pdf")}}>Presentation</a>.
+<P> <link href={{url_for('static', filename="presentation.pdf")}}>Presentation</link>.
 </blockquote>
 
 </body>
