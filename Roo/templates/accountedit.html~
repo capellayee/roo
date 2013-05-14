@@ -105,7 +105,7 @@
     <p>
       <h3>First Name:</h3>
       <!-- if the name is too long -->
-      {% with fnameerror = get_flashed_messages(category_filter=["fnameerror") %}
+      {% with fnameerror = get_flashed_messages(category_filter=["fnameerror")] %}
       {% if fnameerror %}
       {% for fnerr in fnameerror %}
         <p class=fnameerror style="color:#ff0000;font-size:14px;font-weight:bold;">
@@ -198,26 +198,28 @@
     </p>
      <button type="submit" class="btn">Save Changes</button>
 
-     <button type="button" class="btn btn-danger">Delete my Account</button>
+     <!-- Button to trigger modal -->
+     <a href="#myModal" role="button" class="btn btn-danger" data-toggle="modal">Delete my account</a>
+     
+     <!-- Modal -->
+     <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-header">
+	 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	 <h3 id="myModalLabel">Delete your account</h3>
+       </div>
+       <div class="modal-body">
+	 <p>Are you sure you want to delete your account?  Your information will be lost and unrecoverable</p>
+       </div>
+       <div class="modal-footer">
+	 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+	 <a href='{{ url_for('deleteaccount', userid=user.id) }}' class="btn btn-danger">Delete my account</a>
+       </div>
      </div>
-    </fieldset>
+  </div>
+  </fieldset>
    </form>
- </div>   
+</div>   
 </div><!--/.fluid-container-->
-
-<div class="modal hide fade">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Delete your account</h3>
-  </div>
-  <div class="modal-body">
-    <p>Are you sure you want to delete your account?  If you do, all your orders will be permanently erased.</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>    
-    <a href='{{ url_for('deleteaccount', userid=user.id) }}' class="btn btn-danger">Delete my account</a>
-  </div>
-</div>
 
  <!-- Le javascript
     ================================================== -->
