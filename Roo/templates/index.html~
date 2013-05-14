@@ -8,7 +8,7 @@ Virginia Willis,  vwillis<br>
 <P>As shipping and handling fees are one of the most significant causes of dropped purchases online (something we have all personally experienced and been frustrated by), The Milkman is mutually beneficial to both seller and shipper. By integrating through Facebook, thereby inheriting networking capabilities, The Milkman allows local friends to aggregate their online shipping purchases to meet the minimum for free shipping and avoid the shipping fee. Additionally, the service reduces shipping waste and traffic through aggregation. 
 Shoppers are able to create their own network of people to join a "crate" (purchases from the same site). In this way, users can control who they enter the free shipping with, providing a feeling of mutual trust and security. This also allows for users to have flexibility in their crates. 
 
-<P> How to access or create a running version of your system.
+<P> How to access or create a running version of your system: visit <a href="http://themilkman.herokuapp.com"> The Milkman here>/a>. For a tutorial / a web page that would induce others to use our system, visit <a href="http://themilkman.herokuapp.com/howitworks">here</a>
 
 <P> Contact the project leader, Pranav Gokhale, at pgokhale@princeton.edu if something goes wrong.
 
@@ -21,7 +21,7 @@ Shoppers are able to create their own network of people to join a "crate" (purch
 
 <P> <a href={{url_for('report')}}>Report</a>
 
-<P> <link href={{url_for('static', filename="presentation.pdf")}}>Presentation</link>.
+<P> <a href="https://www.dropbox.com/s/w75pwr9v5f2g3b7/presentation.pdf">Presentation</a>.
 </blockquote>
 
 </body>
